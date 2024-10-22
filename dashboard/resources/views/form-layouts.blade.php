@@ -2,11 +2,12 @@
 
 @section('title', 'Alternate')
 @section('css')
-	
-@endsection 
+<link href="{{ URL::asset('build/plugins/fancy-file-uploader/fancy_fileupload.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('build/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet">
+@endsection
 @section('content')
 <x-page-title title="Forms" pagetitle="Form Layouts" />
-	
+
         <div class="row">
 			<div class="col-12 col-xl-6">
 				<div class="card">
@@ -46,7 +47,7 @@
 									<option>Three</option>
 								</select>
 							</div>
-							
+
 							<div class="col-md-6">
 								<label for="input8" class="form-label">City</label>
 								<input type="text" class="form-control" id="input8" placeholder="City">
@@ -317,7 +318,7 @@
 												<option>Three</option>
 											</select>
 										</div>
-										
+
 										<div class="col-md-6">
 											<label class="form-label">City</label>
 											<input type="text" class="form-control rounded-0" placeholder="City">
@@ -574,7 +575,7 @@
 											</div>
 										</div>
 									</div>
-								</div>  
+								</div>
 					  </div>
         </div><!--end row-->
-@endsection    
+@endsection

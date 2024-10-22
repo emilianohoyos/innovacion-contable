@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -27,5 +31,12 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Define a GET route with dynamic placeholders for route parameters
+
+
+    Route::resource('client', ClientController::class);
+    Route::resource('employee', EmployeeController::class);
+    Route::resource('dashboard', DashboardController::class);
+    Route::resource('application', ApplicationController::class);
+
     Route::get('{routeName}/{name?}', [HomeController::class, 'pageView']);
 });

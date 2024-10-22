@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import { viteStaticCopy } from 'vite-plugin-static-copy'
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
     build: {
@@ -8,10 +8,21 @@ export default defineConfig({
         rtl: true,
         outDir: 'public/build/',
         cssCodeSplit: true,
-        
+        rollupOptions: {
+            input: {
+                main: 'resources/js/app.js', // Punto de entrada para el JS
+                styles: 'resources/css/app.css' // Punto de entrada para el CSS
+            }
+        },
+    },
+    optimizeDeps: {
+        include: ['axios'],
     },
     plugins: [
-        
+        laravel({
+            input: ['resources/js/app.js', 'resources/css/app.css'],
+            refresh: true,
+        }),
         viteStaticCopy({
             targets: [
                 {
@@ -39,6 +50,6 @@ export default defineConfig({
                     dest: ''
                 },
             ],
-        })
+        }),
     ],
 });
