@@ -1,33 +1,24 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 export default defineConfig({
     build: {
         manifest: true,
-        rtl: true,
         outDir: 'public/build/',
         cssCodeSplit: true,
-        rollupOptions: {
-            input: {
-                main: 'resources/js/app.js', // Punto de entrada para el JS
-                styles: 'resources/css/app.css' // Punto de entrada para el CSS
-            }
-        },
-    },
-    optimizeDeps: {
-        include: ['axios'],
+
     },
     plugins: [
-        laravel({
-            input: ['resources/js/app.js', 'resources/css/app.css'],
-            refresh: true,
-        }),
+        laravel([
+            'resources/css/main.css',
+            'resources/js/main.js', // Update the entry module here
+        ]),
         viteStaticCopy({
             targets: [
                 {
                     src: 'resources/css',
-                    dest: 'css'
+                    dest: ''
                 },
                 {
                     src: 'resources/fonts',
@@ -49,7 +40,15 @@ export default defineConfig({
                     src: 'resources/scss',
                     dest: ''
                 },
+                {
+                    src: 'resources/plugins',
+                    dest: ''
+                },
+                {
+                    src: 'resources/sass',
+                    dest: ''
+                },
             ],
-        }),
+        })
     ],
 });
