@@ -1,136 +1,213 @@
 @extends('layouts.master')
 
-@section('title', 'Alternate')
+@section('title', 'Clientes')
 @section('css')
-
+    <link href="{{ URL::asset('build/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
 @endsection
 @section('content')
-    <x-page-title title="Clientes" pagetitle="Registro de Clientes" />
+    <x-page-title title="Clientes" pagetitle="Clientes" />
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="example" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>NIT/identificacion</th>
+                            <th>Nombre/Razón social</th>
+                            <th>Tipo Persona</th>
+                            <th>Dirección</th>
+                            <th>Acciones</th>
 
-    <div class="row">
-        <div class="col-12 col-xl-12">
-            <div class="card">
-                <div class="card-body p-4">
-                    <h5 class="mb-4">Formulario Clientes</h5>
-                    <form class="row g-3">
-                        <div class="col-md-6">
-                            <label for="person_type_id" class="form-label">Tipo Persona</label>
-                            <select name="person_type_id" id="person_type_id" class="form-control">
-                                <option value="NATURAL">NATURAL</option>
-                                <option value="JURIDICA">JURIDICA</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nit" class="form-label">NIT</label>
-                            <input type="text" class="form-control" id="nit" placeholder="Ingrese Nit">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="company_name" class="form-label">Razon social</label>
-                            <input type="text" class="form-control" id="company_name" placeholder="Ingrese Razon Social">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="address" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" id="address" name="address"
-                                placeholder="Ingrese Dirección">
-                        </div>
-                        <br>
-                        <div class="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="vat_responsible" name="vat_responsible">
-                                <label class="form-check-label" for="vat_responsible">Responsable de IVA</label>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="is_selfretaining"
-                                    name="is_selfretaining">
-                                <label class="form-check-label" for="is_selfretaining">Es autorretenedor?</label>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="is_simple_taxation_regime"
-                                    name="is_simple_taxation_regime">
-                                <label class="form-check-label" for="is_simple_taxation_regime">Es Regimen Simple?</label>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="is_ica_withholding_agent"
-                                    name="is_ica_withholding_agent">
-                                <label class="form-check-label" for="is_ica_withholding_agent">Es Agente retenedor de
-                                    ICA
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="municipality_ica_withholding_agent" class="form-label">Municipio en el cual es
-                                agente retenedor</label>
-                            <input type="text" class="form-control" id="municipality_ica_withholding_agent"
-                                placeholder="Ingrese municipio">
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="is_ica_withholding_agent"
-                                    name="is_ica_withholding_agent">
-                                <label class="form-check-label" for="is_ica_withholding_agent">Es Agente Autoretenedor de
-                                    ICA
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="municipality_ica_withholding_agent" class="form-label">Municipio en el cual es
-                                agente Autoretenedor</label>
-                            <input type="text" class="form-control" id="municipality_ica_withholding_agent"
-                                placeholder="Ingrese municipio">
-                        </div>
-                        <div class="col-md-12">
-                            <label for="observation" class="form-label">Observaciones</label>
-                            <textarea class="form-control" id="observation" name="observation" placeholder="Ingrese observaciones." rows="3"></textarea>
-                        </div>
-                        <!-- Separador con hr y texto en el centro -->
-                        <div class="d-flex align-items-center my-4">
-                            <hr class="flex-grow-1">
-                            <span class="px-3">Datos de contacto</span>
-                            <hr class="flex-grow-1">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="firstname" class="form-label">Nombres</label>
-                            <input type="text" class="form-control" id="firstname" name="firstname"
-                                placeholder="Ingrese Nombres">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="lastname" class="form-label">Apellidos</label>
-                            <input type="text" class="form-control" id="lastname" name="lastname"
-                                placeholder="Ingrese Apellidos">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="job_title" class="form-label">Cargo</label>
-                            <input type="text" class="form-control" id="job_title" name="job_title"
-                                placeholder="Ingrese Cargo">
-                        </div>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tiger Nixon</td>
+                            <td>System Architect</td>
+                            <td>Edinburgh</td>
+                            <td>61</td>
+                            <td>
+                                <div class="d-inline-flex gap-0">
+                                    <!-- Button trigger modal -->
+                                    <button type="button"
+                                        class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
+                                        data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <i class="material-icons-outlined">visibility</i>
+                                    </button>
+                                    <button type="button"
+                                        class="btn btn-light raised d-inline-flex align-items-center justify-content-center"
+                                        data-bs-toggle="modal" data-bs-target="#commentsModal">
+                                        <i class="material-icons-outlined">add_comment</i>
+                                    </button>
+                                    <button type="button" onclick="confirmDelete()"
+                                        class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
+                                        <i class="material-icons-outlined">delete</i>
+                                    </button>
+                                </div>
+                            </td>
 
-                        <div class="col-md-6">
-                            <label for="email" class="form-label">Correo</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                placeholder="Ingrese Correo">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="cellphone" class="form-label">Celular</label>
-                            <input type="text" class="form-control" id="cellphone" name="cellphone"
-                                placeholder="Ingrese Celular">
-                        </div>
-                        <div class="col-md-12 mt-3">
-                            <div class="d-md-flex d-grid align-items-right justify-content-md-end gap-3">
-                                <button type="button" class="btn btn-primary px-4">guardar</button>
-                                <button type="button" class="btn btn-light px-4">Limpiar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                        </tr>
+                        <tr>
+                            <td>Garrett Winters</td>
+                            <td>Accountant</td>
+                            <td>Tokyo</td>
+                            <td>63</td>
+                            <td>
+                                <div class="d-inline-flex gap-0">
+                                    <!-- Button trigger modal -->
+                                    <button type="button"
+                                        class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
+                                        data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <i class="material-icons-outlined">visibility</i>
+                                    </button>
+                                    <button type="button"
+                                        class="btn btn-light raised d-inline-flex align-items-center justify-content-center"
+                                        data-bs-toggle="modal" data-bs-target="#commentsModal">
+                                        <i class="material-icons-outlined">add_comment</i>
+                                    </button>
+                                    <button type="button" onclick="confirmDelete()"
+                                        class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
+                                        <i class="material-icons-outlined">delete</i>
+                                    </button>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>Ashton Cox</td>
+                            <td>Junior Technical Author</td>
+                            <td>San Francisco</td>
+                            <td>66</td>
+                            <td>
+                                <div class="d-inline-flex gap-0">
+                                    <!-- Button trigger modal -->
+                                    <button type="button"
+                                        class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
+                                        data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <i class="material-icons-outlined">visibility</i>
+                                    </button>
+                                    <button type="button"
+                                        class="btn btn-light raised d-inline-flex align-items-center justify-content-center"
+                                        data-bs-toggle="modal" data-bs-target="#commentsModal">
+                                        <i class="material-icons-outlined">add_comment</i>
+                                    </button>
+                                    <button type="button" onclick="confirmDelete()"
+                                        class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
+                                        <i class="material-icons-outlined">delete</i>
+                                    </button>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>Cedric Kelly</td>
+                            <td>Senior Javascript Developer</td>
+                            <td>Edinburgh</td>
+                            <td>22</td>
+                            <td>
+                                <div class="d-inline-flex gap-0">
+                                    <!-- Button trigger modal -->
+                                    <button type="button"
+                                        class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
+                                        data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <i class="material-icons-outlined">visibility</i>
+                                    </button>
+                                    <button type="button"
+                                        class="btn btn-light raised d-inline-flex align-items-center justify-content-center"
+                                        data-bs-toggle="modal" data-bs-target="#commentsModal">
+                                        <i class="material-icons-outlined">add_comment</i>
+                                    </button>
+                                    <button type="button" onclick="confirmDelete()"
+                                        class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
+                                        <i class="material-icons-outlined">delete</i>
+                                    </button>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>Airi Satou</td>
+                            <td>Accountant</td>
+                            <td>Tokyo</td>
+                            <td>33</td>
+                            <td>
+                                <div class="d-inline-flex gap-0">
+                                    <!-- Button trigger modal -->
+                                    <button type="button"
+                                        class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
+                                        data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <i class="material-icons-outlined">visibility</i>
+                                    </button>
+                                    <button type="button"
+                                        class="btn btn-light raised d-inline-flex align-items-center justify-content-center"
+                                        data-bs-toggle="modal" data-bs-target="#commentsModal">
+                                        <i class="material-icons-outlined">add_comment</i>
+                                    </button>
+                                    <button type="button" onclick="confirmDelete()"
+                                        class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
+                                        <i class="material-icons-outlined">delete</i>
+                                    </button>
+                                </div>
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>NIT/identificacion</th>
+                            <th>Nombre/Razón social</th>
+                            <th>Tipo Persona</th>
+                            <th>Dirección</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
-    </div><!--end row-->
+    </div>
+    @include('clients.modals.edit')
+    @include('clients.modals.comments')
+@endsection
+@section('scripts')
 
+    <script src="{{ URL::asset('build/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('build/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
 
+        function confirmDelete() {
+            Swal.fire({
+                title: '¿Estás seguro de Eliminar el cliente?',
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Enviar el formulario de eliminación
+                    // document.getElementById('delete-form-' + id).submit();
+                }
+            });
+        }
+    </script>
+    {{-- <script>
+        $(document).ready(function() {
+            var table = $('#example2').DataTable({
+                lengthChange: false,
+                buttons: ['copy', 'excel', 'pdf', 'print']
+            });
+
+            table.buttons().container()
+                .appendTo('#example2_wrapper .col-md-6:eq(0)');
+        });
+    </script> --}}
 @endsection

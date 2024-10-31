@@ -43,10 +43,10 @@
                     <div class="menu-title">Empleados</div>
                 </a>
                 <ul>
-                    <li><a href="{{ route('employee.index') }}"><i
+                    <li><a href="{{ route('employee.create') }}"><i
                                 class="material-icons-outlined">arrow_right</i>Registro</a>
                     </li>
-                    <li><a href="component-cards-advance"><i
+                    <li><a href="{{ route('employee.index') }}"><i
                                 class="material-icons-outlined">arrow_right</i>Consultar</a>
                     </li>
 
@@ -60,11 +60,12 @@
                     <div class="menu-title">Clientes</div>
                 </a>
                 <ul>
-                    <li><a href="{{ route('client.index') }}"><i
+                    <li><a href="{{ route('client.create') }}"><i
                                 class="material-icons-outlined">arrow_right</i>Registrar
                         </a>
                     </li>
-                    <li><a href="ecommerce-products"><i class="material-icons-outlined">arrow_right</i>Consultar</a>
+                    <li><a href="{{ route('client.index') }}"><i
+                                class="material-icons-outlined">arrow_right</i>Consultar</a>
 
                 </ul>
             </li>

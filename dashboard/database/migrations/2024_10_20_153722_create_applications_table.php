@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('application_date');
             $table->timestamp('estimated_delevery_date');
             $table->foreignId('state_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('priority_type_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -37,6 +38,10 @@ return new class extends Migration
         Schema::table('applications', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
         });
+        Schema::table('applications', function (Blueprint $table) {
+            $table->dropForeign(['priority_type_id']);
+        });
+
         Schema::dropIfExists('applications');
     }
 };
