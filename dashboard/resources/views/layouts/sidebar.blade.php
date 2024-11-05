@@ -77,11 +77,12 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="{{ route('application.index') }}"><i
+                        <a href="{{ route('application.create') }}"><i
                                 class="material-icons-outlined">arrow_right</i>Registrar
                         </a>
                     </li>
-                    <li><a href="ecommerce-products"><i class="material-icons-outlined">arrow_right</i>Consultar</a>
+                    <li><a href="{{ route('application.index') }}"><i
+                                class="material-icons-outlined">arrow_right</i>Consultar</a>
 
                 </ul>
             </li>
