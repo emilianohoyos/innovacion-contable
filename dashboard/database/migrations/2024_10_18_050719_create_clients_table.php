@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('person_type_id')->constrained()->onDelete('cascade');
+            $table->foreignId('document_type_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('nit');
             $table->string('company_name');
             $table->string('address');
@@ -36,6 +38,12 @@ return new class extends Migration
     {
         Schema::table('clients', function (Blueprint $table) {
             $table->dropForeign(['person_type_id']);
+        });
+        Schema::table('clients', function (Blueprint $table) {
+            $table->dropForeign(['document_type_id']);
+        });
+        Schema::table('clients', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
         });
 
         Schema::dropIfExists('clients');

@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attachments', function (Blueprint $table) {
+        Schema::create('apply_types_apply_document_types', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('url');
-            $table->foreignId('application_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('apply_type_id')->constrained()->cascadeOnDelete();
             $table->foreignId('apply_document_type_id')->constrained()->cascadeOnDelete();
-            $table->string('another_document_type');
-            $table->string('attachment_type');
+            $table->boolean('is_required');
             $table->timestamps();
         });
     }
@@ -27,13 +25,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('attachments', function (Blueprint $table) {
-            $table->dropForeign(['application_id']);
-        });
-        Schema::table('attachments', function (Blueprint $table) {
+        Schema::table('apply_types_apply_document_types', function (Blueprint $table) {
             $table->dropForeign(['apply_document_type_id']);
         });
-
-        Schema::dropIfExists('attachments');
+        Schema::table('apply_types_apply_document_types', function (Blueprint $table) {
+            $table->dropForeign(['apply_type_id']);
+        });
+        Schema::dropIfExists('apply_types_apply_document_types');
     }
 };

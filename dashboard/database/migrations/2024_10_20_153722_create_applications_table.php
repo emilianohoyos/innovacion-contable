@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('application_type_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('apply_type_id')->constrained()->cascadeOnDelete();
             $table->text('observations');
             $table->timestamp('application_date');
             $table->timestamp('estimated_delevery_date');
@@ -30,13 +30,13 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('applications', function (Blueprint $table) {
-            $table->dropForeign(['application_type_id']);
+            $table->dropForeign(['apply_type_id']);
         });
         Schema::table('applications', function (Blueprint $table) {
             $table->dropForeign(['state_id']);
         });
         Schema::table('applications', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
+            $table->dropForeign(['created_by']);
         });
         Schema::table('applications', function (Blueprint $table) {
             $table->dropForeign(['priority_type_id']);

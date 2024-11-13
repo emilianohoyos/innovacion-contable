@@ -7,3 +7,13 @@
 <script src="{{ URL::asset('build/plugins/metismenu/metisMenu.min.js') }}"></script>
 <script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>
 <script src="{{ URL::asset('build/js/main.js') }}"></script>
+<script>
+    window.isLoading = function(show) {
+        const spinner = document.getElementById('loadingSpinner');
+        if (show) {
+            spinner.style.display = 'flex'; // Muestra el spinner
+        } else {
+            spinner.style.display = 'none'; // Oculta el spinner
+        }
+    };
+</script>

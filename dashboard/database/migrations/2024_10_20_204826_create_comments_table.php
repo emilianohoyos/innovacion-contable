@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('description');
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->foreignId('application_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
+            $table->dropForeign(['created_by']);
         });
         Schema::table('comments', function (Blueprint $table) {
             $table->dropForeign(['application_id']);

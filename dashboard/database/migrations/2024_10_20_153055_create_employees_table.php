@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('cellphone');
+            $table->string('email');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('document_type_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -26,6 +29,12 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('employees', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
+        Schema::table('employees', function (Blueprint $table) {
+            $table->dropForeign(['document_type_id']);
+        });
         Schema::dropIfExists('employees');
     }
 };
