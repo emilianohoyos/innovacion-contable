@@ -32,4 +32,4 @@ Route::post('create-application', [ApplicationController::class, 'create']);
 Route::post('list-applications', [ApplicationController::class, 'listApplication']);
 
 Route::get('list-apply-types', [ApplyTypeController::class, 'listApplyTypes']);
-Route::get('list-apply-types-apply-document-types', [ApplyTypesApplyDocumentTypeController::class, 'listApplyTypesApplyDocumentTypes']);
+Route::post('list-apply-types-apply-document-types', [ApplyTypesApplyDocumentTypeController::class, 'listApplyTypesApplyDocumentTypes']);

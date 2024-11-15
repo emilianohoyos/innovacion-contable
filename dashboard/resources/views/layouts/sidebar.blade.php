@@ -86,6 +86,27 @@
 
                 </ul>
             </li>
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class="material-icons-outlined">settings</i>
+                    </div>
+                    <div class="menu-title">Configuraciones</div>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('applytype.index') }}"><i class="material-icons-outlined">arrow_right</i>Tipo
+                            Solicitud
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('applydocumenttype.index') }}"><i
+                                class="material-icons-outlined">arrow_right</i>
+                            Tipo Documento Solicitud
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
 
         </ul>
         <!--end navigation-->

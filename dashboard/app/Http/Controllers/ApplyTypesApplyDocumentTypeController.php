@@ -113,6 +113,13 @@ class ApplyTypesApplyDocumentTypeController extends Controller
 
     public function listApplyTypesApplyDocumentTypes(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'apply_type_id' => 'required|numeric',
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        $validatedData = $validator->validated();
         $applyDocumentTypeIds = ApplyTypesApplyDocumentType::where('apply_type_id', $request->apply_type_id)
             ->pluck('apply_document_type_id');
 

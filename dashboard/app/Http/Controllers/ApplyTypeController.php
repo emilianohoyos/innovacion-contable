@@ -13,7 +13,8 @@ class ApplyTypeController extends Controller
      */
     public function index()
     {
-        //
+        $applyType = ApplyType::all();
+        return view('apply_types.index', compact('applyType'));
     }
 
     /**
@@ -21,7 +22,7 @@ class ApplyTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('apply_types.create');
     }
 
     /**
@@ -106,7 +107,7 @@ class ApplyTypeController extends Controller
         }
     }
 
-    public function listApplyType()
+    public function listApplyTypes()
     {
         //todo joins relations
         $applyType = ApplyType::all();

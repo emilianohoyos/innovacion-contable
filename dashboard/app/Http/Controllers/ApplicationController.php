@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\Attachment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ApplicationController extends Controller
@@ -37,14 +39,45 @@ class ApplicationController extends Controller
             'estimated_delevery_date' => 'required|date',
             'state_id' => 'required|exists:states,id',
             'priority_type_id' => 'required|exists:priority_types,id',
+            'attachments' => 'required|array'
         ]);
+
 
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
+        $validatedData = $validator->validated();
+        $attachments = $validatedData['attachments'];
+        unset($validatedData['attachments']);
 
-        Application::create($validator->validate());
 
+        $apply = Application::create($validatedData);
+        if ($request->has('attachments')) {
+            foreach ($attachments as $attach) {
+                $AtachId = Attachment::create([
+                    'application_id' => $apply->id,
+                    'apply_document_type_id' => $attach->apply_document_type_id ? $attach->apply_document_type_id : null,
+                    'another_document_type' => $attach->another_document_type ? $attach->another_document_type : null,
+                    'attachment_type' => $attach->attachment_type ? $attach->attachment_type : null,
+                ]);
+
+                $file = $this->decodeBase64($attach->base64);
+
+                // Generar un nombre único para la imagen
+                $fileName = uniqid() . '.' . $file['extension'];
+
+                // Guardar la imagen en el almacenamiento público (public/storage/property_photos)
+                $path = Storage::disk('public')->put("applications/{$apply->id}/{$fileName}", $file['file']);
+                if ($path) {
+                    // Construir la URL o ruta relativa manualmente
+                    $fullPath = Storage::url("applications/{$apply->id}/{$file}");
+                } else {
+                    return response()->json(["status" => false, 'message' => 'Error al guardar el archivo'], 500);
+                }
+                $AtachId->url = $fullPath;
+                $AtachId->save();
+            }
+        }
         return response()->json([
             "status" => true,
             'message' => 'Se ha Creado El tipo de applicacion.'
@@ -78,6 +111,7 @@ class ApplicationController extends Controller
             'estimated_delevery_date' => 'required|date',
             'state_id' => 'required|exists:states,id',
             'priority_type_id' => 'required|exists:priority_types,id',
+            'attachments' => 'required|array'
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
@@ -118,11 +152,33 @@ class ApplicationController extends Controller
 
     public function listApplication(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        $validatedData = $validator->validated();
         //todo joins relations
-        $application = Application::where('created_by', $request->user_id)->get();
+        $application = Application::where('created_by', [])->get();
         return response()->json([
             "status" => true,
             'data' => $application
         ], 200);
+    }
+
+    private function decodeBase64($base64)
+    {
+        // Dividir la cadena base64 para obtener el tipo y los datos de la imagen
+        @list($type, $fileData) = explode(';', $base64);
+        @list(, $fileData) = explode(',', $fileData);
+
+        // Obtener la extensión del archivo
+        $extension = explode('/', mime_content_type($base64))[1];
+
+        // Decodificar los datos de la imagen
+        $file = base64_decode($fileData);
+
+        return ['file' => $file, 'extension' => $extension];
     }
 }

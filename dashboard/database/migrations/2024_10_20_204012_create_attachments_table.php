@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('attachments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('url');
+            $table->string('url')->nullable();
             $table->foreignId('application_id')->constrained()->cascadeOnDelete();
             $table->foreignId('apply_document_type_id')->constrained()->cascadeOnDelete();
-            $table->string('another_document_type');
-            $table->string('attachment_type');
+            $table->string('another_document_type')->nullable();
+            $table->string('attachment_type')->nullable;
             $table->timestamps();
         });
     }
