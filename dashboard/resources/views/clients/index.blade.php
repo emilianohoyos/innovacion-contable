@@ -10,157 +10,28 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table id="example" class="table table-striped table-bordered">
+                <table id="tbl-client" class="table table-striped table-bordered">
                     <thead>
                         <tr>
+
                             <th>NIT/identificacion</th>
                             <th>Nombre/Razón social</th>
                             <th>Tipo Persona</th>
-                            <th>Dirección</th>
+                            <th>Correo</th>
                             <th>Acciones</th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>
-                                <div class="d-inline-flex gap-0">
-                                    <!-- Button trigger modal -->
-                                    <button type="button"
-                                        class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
-                                        data-bs-toggle="modal" data-bs-target="#editModal">
-                                        <i class="material-icons-outlined">visibility</i>
-                                    </button>
-                                    <button type="button"
-                                        class="btn btn-light raised d-inline-flex align-items-center justify-content-center"
-                                        data-bs-toggle="modal" data-bs-target="#commentsModal">
-                                        <i class="material-icons-outlined">add_comment</i>
-                                    </button>
-                                    <button type="button" onclick="confirmDelete()"
-                                        class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
-                                        <i class="material-icons-outlined">delete</i>
-                                    </button>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>
-                                <div class="d-inline-flex gap-0">
-                                    <!-- Button trigger modal -->
-                                    <button type="button"
-                                        class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
-                                        data-bs-toggle="modal" data-bs-target="#editModal">
-                                        <i class="material-icons-outlined">visibility</i>
-                                    </button>
-                                    <button type="button"
-                                        class="btn btn-light raised d-inline-flex align-items-center justify-content-center"
-                                        data-bs-toggle="modal" data-bs-target="#commentsModal">
-                                        <i class="material-icons-outlined">add_comment</i>
-                                    </button>
-                                    <button type="button" onclick="confirmDelete()"
-                                        class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
-                                        <i class="material-icons-outlined">delete</i>
-                                    </button>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>
-                                <div class="d-inline-flex gap-0">
-                                    <!-- Button trigger modal -->
-                                    <button type="button"
-                                        class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
-                                        data-bs-toggle="modal" data-bs-target="#editModal">
-                                        <i class="material-icons-outlined">visibility</i>
-                                    </button>
-                                    <button type="button"
-                                        class="btn btn-light raised d-inline-flex align-items-center justify-content-center"
-                                        data-bs-toggle="modal" data-bs-target="#commentsModal">
-                                        <i class="material-icons-outlined">add_comment</i>
-                                    </button>
-                                    <button type="button" onclick="confirmDelete()"
-                                        class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
-                                        <i class="material-icons-outlined">delete</i>
-                                    </button>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>
-                                <div class="d-inline-flex gap-0">
-                                    <!-- Button trigger modal -->
-                                    <button type="button"
-                                        class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
-                                        data-bs-toggle="modal" data-bs-target="#editModal">
-                                        <i class="material-icons-outlined">visibility</i>
-                                    </button>
-                                    <button type="button"
-                                        class="btn btn-light raised d-inline-flex align-items-center justify-content-center"
-                                        data-bs-toggle="modal" data-bs-target="#commentsModal">
-                                        <i class="material-icons-outlined">add_comment</i>
-                                    </button>
-                                    <button type="button" onclick="confirmDelete()"
-                                        class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
-                                        <i class="material-icons-outlined">delete</i>
-                                    </button>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Airi Satou</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>33</td>
-                            <td>
-                                <div class="d-inline-flex gap-0">
-                                    <!-- Button trigger modal -->
-                                    <button type="button"
-                                        class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
-                                        data-bs-toggle="modal" data-bs-target="#editModal">
-                                        <i class="material-icons-outlined">visibility</i>
-                                    </button>
-                                    <button type="button"
-                                        class="btn btn-light raised d-inline-flex align-items-center justify-content-center"
-                                        data-bs-toggle="modal" data-bs-target="#commentsModal">
-                                        <i class="material-icons-outlined">add_comment</i>
-                                    </button>
-                                    <button type="button" onclick="confirmDelete()"
-                                        class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
-                                        <i class="material-icons-outlined">delete</i>
-                                    </button>
-                                </div>
-                            </td>
-
-                        </tr>
-
 
                     </tbody>
                     <tfoot>
                         <tr>
+
                             <th>NIT/identificacion</th>
                             <th>Nombre/Razón social</th>
                             <th>Tipo Persona</th>
-                            <th>Dirección</th>
+                            <th>Correo</th>
                             <th>Acciones</th>
                         </tr>
                     </tfoot>
@@ -170,6 +41,7 @@
     </div>
     @include('clients.modals.edit')
     @include('clients.modals.comments')
+    @include('clients.modals.add_folder')
 @endsection
 @section('scripts')
 
@@ -178,36 +50,210 @@
     <script src="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#example').DataTable();
+            $('#tbl-client').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route('client.data') }}',
+                columns: [{
+                        data: 'nit',
+                        name: 'nit'
+                    }, {
+                        data: 'company_name',
+                        name: 'company_name'
+                    },
+                    {
+                        data: 'person_type',
+                        name: 'person_type'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+
+
+                    {
+                        data: 'acciones',
+                        name: 'acciones',
+                        orderable: false,
+                        searchable: false
+                    }
+                ]
+            });
+
+        });
+        let items = [];
+
+        function addFolder($id, $nameClient) {
+            $('#addFolderModal').modal('show');
+            document.getElementById('nameClient').textContent = `Nombre Cliente ${$nameClient}`;
+            document.getElementById('client_id').value = $id;
+        }
+
+        $('#addFolderModal').on('shown.bs.modal', function() {
+            const clientId = $('#client_id').val();
+            if (!clientId) {
+                alert('El Id del cliente no esta definido.');
+                return;
+            }
+            $.ajax({
+                    url: `/clients/${clientId}/folders`,
+                    method: 'GET',
+                    success: function(response) {
+                        $('#itemsTable tbody').empty();
+                        items = []
+
+                        response.forEach(doc => {
+                            items.push({
+                                folder_id: doc.folder_id
+                            });
+                            // Agregar fila a la tabla
+                            $('#itemsTable tbody').append(`
+                            <tr data-id="${doc.id}">
+                                <td>${doc.name}</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="eliminarItem(${doc.folder_id},${doc.id})">Eliminar</button>
+                                </td>
+                            </tr>
+                        `);
+
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error al cargar los documentos:', error);
+                        alert('No se pudieron cargar los documentos registrados.');
+                    }
+                }),
+                $('#folders').select2({
+                    theme: 'bootstrap-5',
+                    placeholder: "Seleccione una opción",
+                    allowClear: true,
+                    dropdownParent: $('#addFolderModal'),
+                    ajax: {
+                        url: "{{ route('folders') }}", // Endpoint del recurso
+                        dataType: 'json',
+                        delay: 250,
+                        data: function(params) {
+                            return {
+                                q: params.term // Parámetro de búsqueda
+                            };
+                        },
+                        processResults: function(data) {
+                            return {
+                                results: data.map(function(item) {
+                                    return {
+                                        id: item.id,
+                                        text: item.name
+                                    };
+                                })
+                            };
+                        },
+                        cache: true
+                    }
+                });
+        })
+        $('#addFolderModal').on('hidden.bs.modal', function() {
+            // Destruir Select2
+            $('#folders').select2('destroy');
+
         });
 
-        function confirmDelete() {
-            Swal.fire({
-                title: '¿Estás seguro de Eliminar el cliente?',
-                text: "Esta acción no se puede deshacer.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Enviar el formulario de eliminación
-                    // document.getElementById('delete-form-' + id).submit();
+        function agregarItems() {
+            const folder = $('#folders').val()
+            const folderText = $('#folders option:selected').text()
+
+            if (!folder) {
+                alert('Por favor seleccione una carpeta.');
+                return;
+            }
+            if (items.some(item => item.folder_id == folder)) {
+                alert('El folder ya está agregado en la tabla.');
+                return;
+            }
+            items.push({
+                folder_id: folder
+            });
+
+            $('#itemsTable tbody').append(`
+                <tr>
+                    <td>${folderText}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminarItem(${folder},null)">Eliminar</button>
+                    </td>
+                </tr>
+            `);
+            // Limpiar los campos después de agregar
+            $('#folders').val(null).trigger('change');
+
+
+        }
+
+        function eliminarItem(folderId, dbId) {
+            if (!confirm('¿Estás seguro de que deseas eliminar esta carpeta?')) {
+                return;
+            }
+            // Filtrar el array para excluir el elemento eliminado
+            items = items.filter(item => item.folder_id != folderId);
+
+            // Si el segundo parámetro (`dbId`) no es null, elimina también en la base de datos
+            if (dbId !== null) {
+                $.ajax({
+                    url: `/client-folder/${dbId}`, // Endpoint para eliminar en el backend
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Token CSRF
+                    },
+                    success: function(response) {
+                        if (response.status) {
+                            alert('Carpeta eliminada correctamente.');
+
+                            // Eliminar del array y la vista después de confirmar la eliminación en la base de datos
+                            $(`#itemsTable tbody tr:has(button[onclick='eliminarItem(${folderId},${dbId})'])`)
+                                .remove();
+                        } else {
+                            alert('No se pudo eliminar la carpeta: ' + response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error al eliminar la carpeta:', error);
+                        alert('Ocurrió un error al intentar eliminar la carpeta.');
+                    }
+                });
+            } else {
+                // Solo eliminar de la vista si no es necesario eliminar en la base de datos
+                $(`#itemsTable tbody tr:has(button[onclick='eliminarItem(${folderId},null)'])`).remove();
+            }
+        }
+
+        function guardariItems() {
+            const clientId = $('#client_id').val();
+
+            if (!clientId || items.length === 0) {
+                alert('Por favor complete los datos antes de actualizar.');
+                return;
+            }
+
+            // Enviar los datos al servidor vía AJAX
+            $.ajax({
+                url: "{{ route('client-folder.store') }}",
+                method: 'POST',
+                data: {
+                    client_id: clientId,
+                    items: items
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Token CSRF
+                },
+                success: function(response) {
+                    if (response.status) {
+                        alert('Datos guardados correctamente.');
+                        $('#addFolderModal').modal('hide');
+                        location.reload(); // Recargar la página o actualizar la tabla principal
+                    } else {
+                        alert('Hubo un problema al guardar los datos: ' + response.message);
+                    }
                 }
             });
         }
     </script>
-    {{-- <script>
-        $(document).ready(function() {
-            var table = $('#example2').DataTable({
-                lengthChange: false,
-                buttons: ['copy', 'excel', 'pdf', 'print']
-            });
 
-            table.buttons().container()
-                .appendTo('#example2_wrapper .col-md-6:eq(0)');
-        });
-    </script> --}}
 @endsection

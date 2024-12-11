@@ -22,11 +22,11 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="person_type_id" class="form-label">Seleccione Cliente</label>
-                            <select name="person_type_id" id="person_type_id" class="form-control">
-                                <option value="1216715427">1216715427- Carlos Hoyos </option>
-                                <option value="1216715427">1216715427- Carlos Hoyos </option>
-                                <option value="1216715427">1216715427- Carlos Hoyos </option>
+                            <label for="client_id" class="form-label">Seleccione Cliente</label>
+                            <select name="client_id" id="client_id" class="form-control">
+                                <option value="12345">1216715427- Carlos Hoyos </option>
+                                <option value="12">1216715427- Carlos Hoyos </option>
+                                <option value="12334556">1216715427- Carlos Hoyos </option>
                             </select>
                         </div>
                         <div class="col-md-6">
@@ -35,16 +35,16 @@
                                 name="estimated_delevery_date">
                         </div>
                         <div class="col-md-6">
-                            <label for="person_type_id" class="form-label">Seleccione Prioridad</label>
-                            <select name="person_type_id" id="person_type_id" class="form-control">
-                                <option value="1216715427">Critica</option>
-                                <option value="1216715427">Alta</option>
-                                <option value="1216715427">Normal</option>
+                            <label for="priority" class="form-label">Seleccione Prioridad</label>
+                            <select name="priority" id="priority" class="form-control">
+                                <option value="Critica">Critica</option>
+                                <option value="Alta">Alta</option>
+                                <option value="Normal">Normal</option>
                             </select>
                         </div>
                         <div class="col-md-12">
-                            <label for="person_type_id" class="form-label">Seleccione Responsable atencion</label>
-                            <select name="person_type_id" id="person_type_id" class="form-control">
+                            <label for="employee_id" class="form-label">Seleccione Responsable atencion</label>
+                            <select name="employee_id" id="employee_id" class="form-control">
                                 <option value="1">Andres Martinez</option>
                                 <option value="2">Pablo lopez</option>
                                 <option value="3">Luis Diaz</option>
@@ -94,6 +94,7 @@
     <script>
         $(document).ready(function() {
             $('#image-uploadify').imageuploadify();
+
         })
     </script>
 @endsection

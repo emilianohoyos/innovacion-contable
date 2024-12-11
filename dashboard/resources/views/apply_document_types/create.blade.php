@@ -21,28 +21,6 @@
                             <input type="text" class="form-control" id="name" name="name"
                                 placeholder="Ingrese Nombre del tipo de solicitud">
                         </div>
-                        <div class="col-md-6">
-                            <label for="apply_type_id" class="form-label">Tipo Solicitud</label>
-                            <select name="apply_type_id" id="apply_type_id" class="form-control">
-
-                                <option value="">Seleccione</option>
-                                @foreach ($applyType as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}||Dias
-                                        Estimados:{{ $item->estimated_days }}</option>
-                                @endforeach
-
-
-                            </select>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="is_required" class="form-label">Es requerido?</label>
-                            <select name="is_required" id="is_required" class="form-control">
-
-                                <option value="">Seleccione</option>
-                                <option value="1">SI</option>
-                                <option value="0">NO</option>
-                            </select>
-                        </div>
 
                         <div class="col-md-12 mt-3">
                             <div class="d-md-flex d-grid align-items-right justify-content-md-end gap-3">

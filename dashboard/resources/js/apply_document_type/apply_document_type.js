@@ -7,24 +7,12 @@ $(document).ready(function () {
         rules: {
             name: {
                 required: true
-            },
-            apply_type_id: {
-                required: true
-            },
-            is_required: {
-                required: true,
             }
         },
         messages: {
             name: {
                 required: "Por favor ingrese El nombre .",
 
-            },
-            apply_type_id: {
-                required: "Por favor Seleccione el tipo de solicitud correspondiente."
-            },
-            is_required: {
-                required: "Por favor Selecciona si es requerido",
             }
         },
         submitHandler: function (form) {

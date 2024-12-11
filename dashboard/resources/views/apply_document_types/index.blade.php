@@ -20,8 +20,6 @@
                         <tr>
                             <th>Id</th>
                             <th>Tipo Documento Solicitud</th>
-                            <th>Tipo Solicitud</th>
-                            <th>Es requerido?</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -29,9 +27,7 @@
                         @foreach ($applyDocumentType as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
-                                <td>{{ $item->document_type }}</td>
-                                <td>{{ $item->apply_type }}</td>
-                                <td>{{ $item->is_required == 1 ? 'SI' : 'NO' }}</td>
+                                <td>{{ $item->name }}</td>
                                 <td>
                                     <div class="d-inline-flex gap-0">
                                         <!-- Button trigger modal -->
@@ -58,8 +54,6 @@
                         <tr>
                             <th>Id</th>
                             <th>Tipo Documento Solicitud</th>
-                            <th>Tipo Solicitud</th>
-                            <th>Es requerido?</th>
                             <th>Acciones</th>
                         </tr>
                     </tfoot>

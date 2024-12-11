@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Models\DocumentType;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
@@ -25,7 +27,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employees.create');
+        $document_type = DocumentType::all();
+        return view('employees.create', compact('document_type'));
     }
 
     /**
@@ -36,6 +39,7 @@ class EmployeeController extends Controller
         try {
             // Validar los datos
             $validatedData = $request->validate([
+                'document_type_id' => 'required',
                 'identification' => 'required|string|max:20',
                 'firstname' => 'required|string|max:50',
                 'lastname' => 'required|string|max:50',
@@ -48,7 +52,7 @@ class EmployeeController extends Controller
             $user = $this->registerController->create([
                 'name' => "{$validatedData['firstname']} {$validatedData['lastname']}",
                 'email' => $validatedData['email'],
-                'password' => $validatedData['identification'], // Encriptar la contraseña
+                'password' => Hash::make($validatedData['identification']), // Encriptar la contraseña
             ]);
 
             // Asignar el `user_id` generado al array validado

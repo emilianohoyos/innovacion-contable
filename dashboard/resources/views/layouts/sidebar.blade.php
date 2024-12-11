@@ -104,7 +104,16 @@
                             Tipo Documento Solicitud
                         </a>
                     </li>
-
+                    <li>
+                        <a href="{{ route('folder.index') }}"><i class="material-icons-outlined">arrow_right</i>
+                            Carpeta
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('folder.index') }}"><i class="material-icons-outlined">arrow_right</i>
+                            Meses
+                        </a>
+                    </li>
                 </ul>
             </li>
 

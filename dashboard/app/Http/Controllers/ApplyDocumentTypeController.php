@@ -15,10 +15,7 @@ class ApplyDocumentTypeController extends Controller
      */
     public function index()
     {
-        $applyDocumentType = ApplyDocumentType::select('apply_document_types.id', 'apply_document_types.name as document_type', 'apply_types_apply_document_types.is_required', 'apply_types.name as apply_type')
-            ->join('apply_types_apply_document_types', 'apply_document_types.id', 'apply_types_apply_document_types.apply_document_type_id')
-            ->join('apply_types', 'apply_types_apply_document_types.apply_type_id', 'apply_types.id')
-            ->get();
+        $applyDocumentType = ApplyDocumentType::all();
 
         return view('apply_document_types.index', compact('applyDocumentType'));
     }
@@ -39,27 +36,20 @@ class ApplyDocumentTypeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'apply_type_id' => 'required|string',
-            'is_required' => 'required|boolean'
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
         $validatedData = $validator->validate();
-        $applyDocumentType = ApplyDocumentType::firstOrCreate(
+        ApplyDocumentType::firstOrCreate(
             ['name' => $validatedData['name']]
         );
 
-        ApplyTypesApplyDocumentType::create([
-            'apply_type_id' => $validatedData['apply_type_id'],
-            'apply_document_type_id' => $applyDocumentType['id'],
-            'is_required' => $validatedData['is_required']
-        ]);
 
         return response()->json([
             "status" => true,
-            'message' => 'Se ha Creado El tipo docuemnto aplicacion.'
+            'message' => 'Se ha Creado El tipo documento aplicacion.'
         ], 200); //
     }
 
@@ -121,5 +111,19 @@ class ApplyDocumentTypeController extends Controller
         } else {
             echo 'No se encontró el contacto con ID' . $id;
         }
+    }
+
+    public function getApplyDocumentTypes(Request $request)
+    {
+        $search = $request->get('q'); // Toma el parámetro de búsqueda
+        $query = ApplyDocumentType::query();
+
+        if (!empty($search)) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        $applyDocumentTypes = $query->get(['id', 'name']);
+
+        return response()->json($applyDocumentTypes);
     }
 }

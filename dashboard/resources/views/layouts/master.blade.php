@@ -4,12 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--favicon-->
     <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
     <title>@yield('title') | Laravel & Bootstrap 5 Admin Dashboard Template</title>
 
     @yield('head')
     @yield('css')
+    <link href="{{ URL::asset('build/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('build/plugins/select2/css/select2-bootstrap-5-theme.css') }}" rel="stylesheet">
     <style>
         .loading-overlay {
             position: fixed;

@@ -18,10 +18,12 @@
                     <form class="row g-3" id="formEmployee">
                         <div class="col-md-6">
                             <label for="nit" class="form-label">Tipo Documento</label>
-                            <select name="documenttype_id" class="form-control" id=documenttype_id"">
+                            <select name="document_type_id" class="form-control" id=document_type_id"">
                                 <option value="">Seleccione tipo documento</option>
-                                <option value="CEDULA">CEDULA</option>
-                                <option value="CEDULA EXTRANJERIA">CEDULA EXTRANJERIA</option>
+                                @foreach ($document_type as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+
                             </select>
                         </div>
                         <div class="col-md-6">

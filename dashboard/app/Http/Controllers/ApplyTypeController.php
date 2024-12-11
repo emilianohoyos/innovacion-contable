@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\ApplyType;
+use App\Models\ApplyTypesApplyDocumentType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
 
 class ApplyTypeController extends Controller
 {
@@ -107,13 +109,31 @@ class ApplyTypeController extends Controller
         }
     }
 
-    public function listApplyTypes()
+    public function getApplyTypeData()
     {
-        //todo joins relations
-        $applyType = ApplyType::all();
-        return response()->json([
-            "status" => true,
-            'data' => $applyType
-        ], 200);
+        $applyTypes = ApplyType::select(['id', 'name', 'estimated_days', 'created_at']);
+        return DataTables::of($applyTypes)
+            ->addColumn('acciones', function ($applyType) {
+                $btn = '<button type="button"
+                class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
+                onclick="addApplyDocumentType(' . $applyType->id . ', \'' . addslashes($applyType->name) . '\')">
+                <i class="material-icons-outlined">add</i>
+            </button>';
+
+                return  $btn;
+            })
+            ->rawColumns(['acciones'])
+            ->make(true);
+    }
+
+    public function getRegisteredDocuments($applyTypeId)
+    {
+        // Obtener los documentos registrados para este tipo de aplicación
+        $documents = ApplyTypesApplyDocumentType::where('apply_type_id', $applyTypeId)
+            ->join('apply_document_types', 'apply_types_apply_document_types.apply_document_type_id', '=', 'apply_document_types.id')
+            ->select('apply_types_apply_document_types.id', 'apply_types_apply_document_types.apply_document_type_id', 'apply_document_types.name', 'apply_types_apply_document_types.is_required')
+            ->get();
+
+        return response()->json($documents);
     }
 }

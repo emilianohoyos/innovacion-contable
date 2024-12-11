@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ApplyDocumentType;
+use App\Models\ApplyType;
 use App\Models\ApplyTypesApplyDocumentType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -31,20 +32,30 @@ class ApplyTypesApplyDocumentTypeController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'apply_type_id' => 'required|numeric',
-            'apply_document_type_id' => 'required|numeric',
-            'is_require' => 'required|boolean',
+            'apply_type_id' => 'required|exists:apply_types,id',
+            'items' => 'required|array',
+            'items.*.document_type_id' => 'required|exists:document_types,id',
+            'items.*.is_required' => 'required|boolean',
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        ApplyTypesApplyDocumentType::create($validator->validate());
+        foreach ($request->items as $item) {
+            // Guardar los datos (o actualizar las relaciones)
+            ApplyTypesApplyDocumentType::updateOrCreate(
+                [
+                    'apply_type_id' => $request->apply_type_id,
+                    'apply_document_type_id' => $item['document_type_id']
+                ],
+                ['is_required' => $item['is_required']]
+            );
+        }
 
         return response()->json([
             "status" => true,
-            'message' => 'Se ha Creado El registro
+            'message' => 'Se han asociado Los tipos documentales.
             .'
         ], 200); //
     }
@@ -97,17 +108,33 @@ class ApplyTypesApplyDocumentTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        $applyTypesApplyDocumentType = ApplyTypesApplyDocumentType::find($id);
-        if ($applyTypesApplyDocumentType) {
-            $applyTypesApplyDocumentType->delete();
+        // Buscar el registro por su ID
+        $record = ApplyTypesApplyDocumentType::find($id);
+
+        // Verificar si el registro existe
+        if (!$record) {
             return response()->json([
-                "status" => true,
-                'message' => 'Se ha Eliminado la informacion del Proveedor.'
-            ], 200); //
-        } else {
-            echo 'No se encontró el contacto con ID' . $id;
+                'success' => false,
+                'message' => 'El registro no existe.'
+            ], 404);
+        }
+
+        // Intentar eliminar el registro
+        try {
+            $record->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Registro eliminado correctamente.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Hubo un error al eliminar el registro.',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 
