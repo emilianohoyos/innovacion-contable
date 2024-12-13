@@ -4,7 +4,8 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ApplyTypeController;
 use App\Http\Controllers\ApplyTypesApplyDocumentTypeController;
 use App\Http\Controllers\Auth\AuthController;
-
+use App\Http\Controllers\ClientFolderController;
+use App\Models\ClientFolder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,8 +29,14 @@ Route::get('me', [AuthController::class, 'me']);
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-Route::post('create-application', [ApplicationController::class, 'create']);
-Route::post('list-applications', [ApplicationController::class, 'listApplication']);
+Route::middleware(['auth:api'])->group(function () {
+    Route::post('create-application', [ApplicationController::class, 'create']);
+    Route::post('list-applications', [ApplicationController::class, 'listApplication']);
 
-Route::get('list-apply-types', [ApplyTypeController::class, 'listApplyTypes']);
-Route::post('list-apply-types-apply-document-types', [ApplyTypesApplyDocumentTypeController::class, 'listApplyTypesApplyDocumentTypes']);
+    Route::get('list-apply-types', [ApplyTypeController::class, 'listApplyTypes']);
+    Route::post('list-apply-types-apply-document-types', [ApplyTypesApplyDocumentTypeController::class, 'listApplyTypesApplyDocumentTypes']);
+
+
+    //listar folders del cliente y por cada folder los documentos requeridos, indicar si tiene anexos y la fecha limita
+    Route::get('client-folder', [ClientFolderController::class, 'index']);
+});

@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Comentarios Cliente</h5>
+                <h5 class="modal-title" id="nameClient"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -11,11 +11,12 @@
                     <div class="col-md-3">
                         <form onSubmit="return false">
                             <div class="col-md-12 gap-0">
+                                <input type="hidden" name="client_id" id="client_id">
                                 <label for="comment" class="form-label">Agregar Comentario</label>
                                 <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary mt-1" onclick="addComment()">Agregar
+                                <button type="button" class="btn btn-primary mt-1" onclick="saveComment()">Agregar
                                     Comentario</button>
                             </div>
                         </form>

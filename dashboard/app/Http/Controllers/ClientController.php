@@ -7,6 +7,7 @@ use App\Http\Requests\StoreClientRequest;
 use App\Models\Client;
 use App\Models\ClientContactInfo;
 use App\Models\ClientFolder;
+use App\Models\ClientsComment;
 use App\Models\DocumentType;
 use App\Models\Employee;
 use App\Models\EmployeeClient;
@@ -144,6 +145,15 @@ class ClientController extends Controller
                 onclick="addFolder(' . $client->client_id . ', \'' . addslashes($client->company_name) . '\')">
                 <i class="material-icons-outlined">add</i>
             </button>';
+                $btn .= '<button type="button"
+            class="btn btn-info raised d-inline-flex align-items-center justify-content-center"
+            onclick="addComment(' . $client->client_id . ', \'' . addslashes($client->company_name) . '\')">
+            <i class="material-icons-outlined">comment</i>
+        </button>';
+
+                $btn .= '<a href="' . route("client.follow-up", ["client_id" => $client->client_id]) . '" class="btn btn-warning raised d-inline-flex align-items-center justify-content-center ">
+                    <i class="material-icons-outlined">visibility</i>
+                </a>';
 
                 return  $btn;
             })
@@ -160,5 +170,20 @@ class ClientController extends Controller
             ->get();
 
         return response()->json($documents);
+    }
+
+    public function storeComment(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'client_id' => 'required',
+            'comment' => 'required'
+        ]);
+
+        $validatedData = $validate->validate();
+
+        ClientsComment::create([
+            'client_id' =>  $validatedData['client_id'],
+            'comment' => $validatedData['comment'],
+        ]);
     }
 }

@@ -87,6 +87,14 @@
                 </ul>
             </li>
             <li>
+                <a href="{{ route('dashboard.index') }}">
+                    <div class="parent-icon"><i class="material-icons-outlined">account_balance</i>
+                    </div>
+                    <div class="menu-title">Contabilidad Mensual</div>
+                </a>
+            </li>
+
+            <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon"><i class="material-icons-outlined">settings</i>
                     </div>
@@ -110,7 +118,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('folder.index') }}"><i class="material-icons-outlined">arrow_right</i>
+                        <a href="{{ route('month.index') }}"><i class="material-icons-outlined">arrow_right</i>
                             Meses
                         </a>
                     </li>

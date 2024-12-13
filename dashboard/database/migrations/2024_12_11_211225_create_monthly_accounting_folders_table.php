@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('monthly_accounting_comments', function (Blueprint $table) {
+        Schema::create('monthly_accounting_folders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('monthly_accounting_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('user_type');
-            $table->string('comment');
+            $table->foreignId('folder_id')->constrained()->cascadeOnDelete();
+            $table->boolean('is_new')->default(true);
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -26,10 +26,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('monthly_accounting_comments', function (Blueprint $table) {
+        Schema::table('monthly_accounting_folders', function (Blueprint $table) {
             $table->dropForeign(['monthly_accounting_id']);
-            $table->dropForeign(['user_id']);
+            $table->dropForeign(['folder_id']);
         });
-        Schema::dropIfExists('monthly_accounting_comments');
+        Schema::dropIfExists('monthly_accounting_folders');
     }
 };

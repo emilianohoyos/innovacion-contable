@@ -7,11 +7,13 @@ use App\Http\Controllers\ApplyTypeController;
 use App\Http\Controllers\ApplyTypesApplyDocumentTypeController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientFolderController;
+use App\Http\Controllers\ClientFollowUpController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FolderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MonthConfigController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +55,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/clients-data', [ClientController::class, 'getClientData'])->name('client.data');
     Route::get('/clients/{clientId}/folders', [ClientController::class, 'getRegisteredFolders']);
 
+    Route::get('/clients-follow-up/{client_id}', [ClientFollowUpController::class, 'index'])->name('client.follow-up');
+    Route::get('/clients-follow-up/{clientId}/{year}', [ClientFollowUpController::class, 'getClientFollowData']);
 
     Route::resource('employee', EmployeeController::class);
     Route::resource('dashboard', DashboardController::class);
@@ -62,8 +66,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/folders-data', [FolderController::class, 'getFolderData'])->name('folders.data');
     Route::get('/folders/{folderId}/documents', [FolderController::class, 'getRegisteredDocuments']);
     Route::get('/folders', [FolderController::class, 'getFolders'])->name('folders');
-
     Route::resource('client-folder', ClientFolderController::class);
+
+    Route::resource('month', MonthConfigController::class);
+    Route::get('/month-by-year/{year}', [MonthConfigController::class, 'showByYear']);
 
     Route::resource('apply-document-type-folder', ApplyDocTypeFolderController::class);
 

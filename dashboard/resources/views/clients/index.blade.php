@@ -89,6 +89,85 @@
             document.getElementById('client_id').value = $id;
         }
 
+        function addComment(id, nameClient) {
+            $('#commentsModal').modal('show');
+            document.getElementById('nameClient').textContent = `Agregar comentario al Cliente ${nameClient}`;
+            document.getElementById('client_id').value = id;
+            loadComments(id)
+        }
+
+        async function saveComment() {
+            const clientId = document.getElementById('client_id').value
+            const comment = document.getElementById('comment').value
+            if (!comment.trim()) {
+                alert('El comentario No puede estar vacio')
+                return
+            }
+            try {
+                const response = await fetch('', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'applcation/json'
+                    },
+                    body: JSON.stringify({
+                        client_id: clientId,
+                        comment: comment
+                    })
+                })
+                if (!response.ok) {
+                    throw new Error('Error al guardar el comentario')
+                }
+
+                const result = await response.json()
+                alert('Comentario guardado exitosamente');
+
+                // Limpiar el campo de comentario
+                document.getElementById('comment').value = '';
+
+                // Actualizar los comentarios en la tabla
+                await loadComments(clientId);
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Hubo un problema al guardar el comentario');
+            }
+
+        }
+        async function loadComments(clientId) {
+            try {
+                // Obtener los comentarios desde la API
+                const response = await fetch(`/api/comments/${clientId}`);
+
+                if (!response.ok) {
+                    throw new Error('Error al cargar los comentarios');
+                }
+
+                const comments = await response.json();
+
+                // Referencia al cuerpo de la tabla
+                const tableBody = document.querySelector('#commentsModal table tbody');
+
+                // Limpiar las filas existentes
+                tableBody.innerHTML = '';
+
+                // Insertar las nuevas filas
+                comments.forEach(comment => {
+                    const row = document.createElement('tr');
+
+                    row.innerHTML = `
+                <td>${comment.text}</td>
+                <td>${comment.date}</td>
+                <td>${comment.author}</td>
+            `;
+
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Hubo un problema al cargar los comentarios');
+            }
+        }
+
+
         $('#addFolderModal').on('shown.bs.modal', function() {
             const clientId = $('#client_id').val();
             if (!clientId) {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClientFolder;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,7 +14,35 @@ class ClientFolderController extends Controller
      */
     public function index()
     {
-        //
+        // Usar el guard 'api' para obtener el usuario autenticado
+        $client_id =  auth()->user()->clients()->pluck('id')->first();
+        $folders = ClientFolder::with([
+            'folder.applyDocumentTypes',
+            'folder' => function ($query) use ($client_id) {
+                $query->with([
+                    'monthlyAccountingFolders' => function ($subQuery) use ($client_id) {
+                        $subQuery->whereHas('monthlyAccounting', function ($monthlyAccountingQuery) use ($client_id) {
+                            $monthlyAccountingQuery->where('year', Carbon::now()->year)
+                                ->where('month', Carbon::now()->month)->where('client_id', $client_id);
+                        })->with('monthlyAccounting');
+                    }
+                ]);
+            },
+            'folder.applyDocumentTypes',
+            'folder.ApplyDocTypeFolders.monthlyAccountingFolderApplyDocTypeFolders'
+        ])
+            ->where('client_id', $client_id)
+            ->get();
+
+        if ($client_id) {
+            return response()->json([
+                'message' => 'Usuario autenticado',
+                'client' => $client_id,
+                'folders' => $folders
+            ]);
+        }
+
+        return response()->json(['error' => 'No autenticado'], 401);
     }
 
     /**

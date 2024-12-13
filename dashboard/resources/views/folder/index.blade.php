@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
-@section('title', 'Tipo Documento Solicitud')
+@section('title', 'Carpetas')
 @section('css')
     <link href="{{ URL::asset('build/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
     <link href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
 @endsection
 @section('content')
-    <x-page-title title="Tipo Solicitud" pagetitle="Tipo Documento Solicitud" />
+    <x-page-title title="Tipo Solicitud" pagetitle="Carpetas" />
     <div class="card">
         <div class="card-body">
             <div class="d-grid">
