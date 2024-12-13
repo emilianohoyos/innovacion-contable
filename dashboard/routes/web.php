@@ -29,6 +29,11 @@ use App\Http\Controllers\MonthConfigController;
 
 Auth::routes();
 
+Route::post('/upload-onedrive', [HomeController::class, 'saveFile'])->name('upload.onedrive');
+Route::get('/upload-onedrive', [HomeController::class, 'testOneDrive']);
+Route::get('/download', [HomeController::class, 'downloadFromOneDrive']);
+
+
 
 // Define a group of routes with 'auth' middleware applied
 Route::middleware(['auth'])->group(function () {
@@ -75,4 +80,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('{routeName}/{name?}', [HomeController::class, 'pageView']);
+
+
+
+
 });
