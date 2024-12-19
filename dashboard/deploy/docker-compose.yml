@@ -7,8 +7,6 @@ services:
     build:
       context: ../
       dockerfile: ./deploy/Dockerfile
-    volumes:
-      - ./app:/var/www/html
     environment:
       APP_NAME: ${APP_NAME}
       APP_ENV: ${APP_ENV}
