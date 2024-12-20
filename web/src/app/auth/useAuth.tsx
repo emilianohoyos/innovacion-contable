@@ -16,18 +16,18 @@ type AuthProviders = {
 
 function useAuth(): AuthContextType & { signOut: () => void } {
 	const context = useContext(AuthContext);
-	const { signOut: amplifySignOut } = useAuthenticator();
+	// const { signOut: amplifySignOut } = useAuthenticator();
 	const { signOut: jwtSignOut, updateUser: jwtUpdateUser } = useJwtAuth();
-	const { signOut: firebaseSignOut, updateUser: firebaseUpdateUser } = useFirebaseAuth();
+	// const { signOut: firebaseSignOut, updateUser: firebaseUpdateUser } = useFirebaseAuth();
 
 	if (!context) {
 		throw new Error('useAuth must be used within a AuthRouteProvider');
 	}
 
 	const authProviders: AuthProviders = {
-		amplify: { signOut: amplifySignOut, updateUser: () => {} },
+		// amplify: { signOut: amplifySignOut, updateUser: () => {} },
 		jwt: { signOut: jwtSignOut, updateUser: jwtUpdateUser },
-		firebase: { signOut: firebaseSignOut, updateUser: firebaseUpdateUser }
+		// firebase: { signOut: firebaseSignOut, updateUser: firebaseUpdateUser }
 	};
 
 	const signOut = () => {
