@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--favicon-->
     <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
-    <title>@yield('title') | Laravel & Bootstrap 5 Admin Dashboard Template</title>
+    <title>@yield('title') | Innovación Contable</title>
 
     @yield('head')
     @yield('css')

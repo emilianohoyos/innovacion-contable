@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Alternate')
+@section('title', 'Dashboard')
 $@section('css')
     <link href="{{ URL::asset('build/plugins/fullcalendar/css/main.min.css') }}" rel="stylesheet">
 @endsection

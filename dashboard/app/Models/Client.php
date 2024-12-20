@@ -21,6 +21,7 @@ class Client extends Model
         'is_ica_selfretaining_agent',
         'municipality_ica_selfretaining_agent',
         'observation',
+        'email',
     ];
 
     public function contactInfo()
