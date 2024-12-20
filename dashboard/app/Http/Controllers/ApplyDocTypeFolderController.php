@@ -30,9 +30,9 @@ class ApplyDocTypeFolderController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'folder_id' => 'required|exists:apply_types,id',
+            'folder_id' => 'required|exists:folders,id',
             'items' => 'required|array',
-            'items.*.document_type_id' => 'required|exists:document_types,id',
+            'items.*.document_type_id' => 'required|exists:apply_document_types,id',
             'items.*.is_required' => 'required|boolean',
         ]);
 
