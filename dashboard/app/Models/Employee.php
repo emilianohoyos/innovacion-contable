@@ -11,6 +11,8 @@ class Employee extends Model
         'identification',
         'firstname',
         'lastname',
+        'job_title',
+        'role',
         'cellphone',
         'user_id',
         'email'

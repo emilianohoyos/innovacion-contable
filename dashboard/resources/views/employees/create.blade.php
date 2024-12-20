@@ -42,6 +42,19 @@
                                 placeholder="Ingrese Apellidos">
                         </div>
                         <div class="col-md-6">
+                            <label for="job_title" class="form-label">Cargo</label>
+                            <input type="text" class="form-control" id="job_title" name="job_title"
+                                placeholder="Ingrese Apellidos">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="role" class="form-label">Rol</label>
+                            <select name="role" class="form-control" id="role">
+                                <option value="">Seleccione Cargo</option>
+                                <option value="ADMIN">ADMINISTRADOR</option>
+                                <option value="CONTADOR">CONTADOR</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
                             <label for="cellphone" class="form-label">Celular</label>
                             <input type="text" class="form-control" id="cellphone" name="cellphone"
                                 placeholder="Ingrese Celular">

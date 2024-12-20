@@ -446,6 +446,7 @@
                         });
                     },
                     error: function(error) {
+                        isLoading(false)
                         console.error('Error al guardar el cliente:', error);
                         alert('Hubo un error al guardar el cliente');
                     }

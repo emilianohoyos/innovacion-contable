@@ -17,6 +17,13 @@ $(document).ready(function () {
                 required: true,
                 maxlength: 50
             },
+
+            job_title: {
+                required: true
+            },
+            role: {
+                required: true
+            },
             cellphone: {
                 required: true,
                 digits: true,

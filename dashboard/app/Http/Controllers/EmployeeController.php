@@ -8,6 +8,7 @@ use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
 
 class EmployeeController extends Controller
 {
@@ -45,6 +46,8 @@ class EmployeeController extends Controller
                 'lastname' => 'required|string|max:50',
                 'cellphone' => 'required|string|max:15',
                 'user_id' => 'nullable',
+                'job_title' => 'nullable|string|max:50',
+                'role' => 'nullable|string|max:50',
                 'email' => 'required|email|max:100|unique:employees,email',
             ]);
 
@@ -100,5 +103,48 @@ class EmployeeController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getEmployeesData()
+    {
+        $employees = Employee::select([
+            'document_type_id',
+            'employees.identification',
+            'employees.id as employee_id',
+            'employees.firstname',
+            'employees.lastname',
+            'employees.cellphone',
+            'employees.email',
+            'document_types.id'
+        ])
+            ->join(
+                'document_types',
+                'employees.document_type_id',
+                'document_types.id'
+            );
+        return DataTables::of($employees)
+            ->addColumn('name', function ($employees) {
+                return $employees->firstname . ' ' . $employees->lastname;
+            })
+            ->addColumn('acciones', function ($employees) {
+                $btn = '<button type="button"
+                class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
+                onclick="addFolder(' . $employees->employee_id . ', \'' . addslashes($employees->employee_id) . '\')">
+                <i class="material-icons-outlined">add</i>
+            </button>';
+                $btn .= '<button type="button"
+            class="btn btn-info raised d-inline-flex align-items-center justify-content-center"
+            onclick="addComment(' . $employees->employee_id . ', \'' . addslashes($employees->employee_id) . '\')">
+            <i class="material-icons-outlined">comment</i>
+        </button>';
+
+                $btn .= '<a href="' . route("client.follow-up", ["client_id" => $employees->employee_id]) . '" class="btn btn-warning raised d-inline-flex align-items-center justify-content-center ">
+                    <i class="material-icons-outlined">visibility</i>
+                </a>';
+
+                return  $btn;
+            })
+            ->rawColumns(['acciones'])
+            ->make(true);
     }
 }

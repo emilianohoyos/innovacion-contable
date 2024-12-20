@@ -10,7 +10,7 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table id="example" class="table table-striped table-bordered">
+                <table id="tblEmployees" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>Identificación</th>
@@ -21,118 +21,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>
-                                <div class="d-inline-flex gap-0">
-                                    <!-- Button trigger modal -->
-                                    <button type="button"
-                                        class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
-                                        data-bs-toggle="modal" data-bs-target="#editModal">
-                                        <i class="material-icons-outlined">visibility</i>
-                                    </button>
-
-                                    <button type="button" onclick="confirmDelete()"
-                                        class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
-                                        <i class="material-icons-outlined">delete</i>
-                                    </button>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>
-                                <div class="d-inline-flex gap-0">
-                                    <!-- Button trigger modal -->
-                                    <button type="button"
-                                        class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
-                                        data-bs-toggle="modal" data-bs-target="#editModal">
-                                        <i class="material-icons-outlined">visibility</i>
-                                    </button>
-
-                                    <button type="button" onclick="confirmDelete()"
-                                        class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
-                                        <i class="material-icons-outlined">delete</i>
-                                    </button>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>
-                                <div class="d-inline-flex gap-0">
-                                    <!-- Button trigger modal -->
-                                    <button type="button"
-                                        class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
-                                        data-bs-toggle="modal" data-bs-target="#editModal">
-                                        <i class="material-icons-outlined">visibility</i>
-                                    </button>
-
-                                    <button type="button" onclick="confirmDelete()"
-                                        class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
-                                        <i class="material-icons-outlined">delete</i>
-                                    </button>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>
-                                <div class="d-inline-flex gap-0">
-                                    <!-- Button trigger modal -->
-                                    <button type="button"
-                                        class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
-                                        data-bs-toggle="modal" data-bs-target="#editModal">
-                                        <i class="material-icons-outlined">visibility</i>
-                                    </button>
-
-                                    <button type="button" onclick="confirmDelete()"
-                                        class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
-                                        <i class="material-icons-outlined">delete</i>
-                                    </button>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Airi Satou</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>33</td>
-                            <td>
-                                <div class="d-inline-flex gap-0">
-                                    <!-- Button trigger modal -->
-                                    <button type="button"
-                                        class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
-                                        data-bs-toggle="modal" data-bs-target="#editModal">
-                                        <i class="material-icons-outlined">visibility</i>
-                                    </button>
-
-                                    <button type="button" onclick="confirmDelete()"
-                                        class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
-                                        <i class="material-icons-outlined">delete</i>
-                                    </button>
-                                </div>
-                            </td>
-
-                        </tr>
-
-
                     </tbody>
                     <tfoot>
                         <tr>
@@ -157,8 +45,38 @@
     <script src="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#example').DataTable();
+            $('#tblEmployees').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route('employees.data') }}',
+                columns: [{
+                        data: 'identification',
+                        name: 'identification'
+                    }, {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'cellphone',
+                        name: 'cellphone'
+                    },
+
+
+                    {
+                        data: 'acciones',
+                        name: 'acciones',
+                        orderable: false,
+                        searchable: false
+                    }
+                ]
+            });
+
         });
+
 
         function confirmDelete() {
             Swal.fire({

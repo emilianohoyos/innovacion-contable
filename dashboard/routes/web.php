@@ -64,6 +64,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/clients-follow-up/{clientId}/{year}', [ClientFollowUpController::class, 'getClientFollowData']);
 
     Route::resource('employee', EmployeeController::class);
+    Route::get('/employee-data', [EmployeeController::class, 'getEmployeesData'])->name('employees.data');
+
     Route::resource('dashboard', DashboardController::class);
     Route::resource('application', ApplicationController::class);
 
@@ -80,8 +82,4 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('{routeName}/{name?}', [HomeController::class, 'pageView']);
-
-
-
-
 });
