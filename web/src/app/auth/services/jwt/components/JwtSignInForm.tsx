@@ -47,8 +47,8 @@ function JwtSignInForm() {
 	const { isValid, dirtyFields, errors } = formState;
 
 	useEffect(() => {
-		setValue('email', 'admin@fusetheme.com', { shouldDirty: true, shouldValidate: true });
-		setValue('password', 'admin', { shouldDirty: true, shouldValidate: true });
+		setValue('email', '', { shouldDirty: true, shouldValidate: true });
+		setValue('password', '', { shouldDirty: true, shouldValidate: true });
 	}, [setValue]);
 
 	function onSubmit(formData: FormType) {
@@ -111,7 +111,7 @@ function JwtSignInForm() {
 					<TextField
 						{...field}
 						className="mb-24"
-						label="Password"
+						label="Contraseña"
 						type="password"
 						error={!!errors.password}
 						helperText={errors?.password?.message}
@@ -129,7 +129,7 @@ function JwtSignInForm() {
 					render={({ field }) => (
 						<FormControl>
 							<FormControlLabel
-								label="Remember me"
+								label="Recordarme"
 								control={
 									<Checkbox
 										size="small"
@@ -145,7 +145,7 @@ function JwtSignInForm() {
 					className="text-md font-medium"
 					to="/pages/auth/forgot-password"
 				>
-					Forgot password?
+					¿Olvidaste tu contraseña?
 				</Link>
 			</div>
 

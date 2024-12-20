@@ -35,6 +35,7 @@ services:
       GRAPH_TENANT_ID: ${GRAPH_TENANT_ID}
       GRAPH_AUTHORITY: ${GRAPH_AUTHORITY}
       GRAPH_SCOPE: ${GRAPH_SCOPE}
+      JWT_SECRET: ${JWT_SECRET}
     ports:
       - "90:80"
 
