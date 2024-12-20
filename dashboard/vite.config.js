@@ -12,7 +12,8 @@ export default defineConfig({
     plugins: [
         laravel([
             'resources/css/main.css',
-            'resources/js/main.js', // Update the entry module here
+            'resources/js/main.js',
+            'resources/js/applytype/applytype.js' // Update the entry module here
         ]),
         viteStaticCopy({
             targets: [

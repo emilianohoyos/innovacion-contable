@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build && mv public/build/.vite/manifest.json public/build/manifest.json",
+        "build-w": "vite build && move public\\build\\.vite\\manifest.json public\\build\\manifest.json"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
