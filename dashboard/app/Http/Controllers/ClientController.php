@@ -12,7 +12,9 @@ use App\Models\DocumentType;
 use App\Models\Employee;
 use App\Models\EmployeeClient;
 use App\Models\Folder;
+use App\Models\MonthConfig;
 use App\Models\PersonType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -24,7 +26,10 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function __construct(protected RegisterController $registerController) {}
+    public function __construct(
+        protected RegisterController $registerController,
+        protected MonthConfigController $monthConfigController,
+    ) {}
     public function index()
     {
         return view('clients.index');
@@ -88,6 +93,9 @@ class ClientController extends Controller
             } else {
                 $client->contactInfo()->createMany($validatedData['contacts']);
             }
+
+            $year = Carbon::now()->year();
+            $this->monthConfigController->createMonthly($year);
 
             return $client;
         });

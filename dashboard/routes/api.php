@@ -5,7 +5,10 @@ use App\Http\Controllers\ApplyTypeController;
 use App\Http\Controllers\ApplyTypesApplyDocumentTypeController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ClientFolderController;
+use App\Http\Controllers\MonthlyAccountingFolderApplyDocTypeFolderController;
+use App\Http\Controllers\MonthlyAccountingFolderController;
 use App\Models\ClientFolder;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,4 +42,8 @@ Route::middleware(['auth:api'])->group(function () {
 
     //listar folders del cliente y por cada folder los documentos requeridos, indicar si tiene anexos y la fecha limita
     Route::get('client-folder', [ClientFolderController::class, 'index']);
+
+    Route::post('monthly-accounting-folder', [MonthlyAccountingFolderController::class, 'store']);
+
+    Route::post('attachments', [MonthlyAccountingFolderApplyDocTypeFolderController::class, 'store']);
 });
