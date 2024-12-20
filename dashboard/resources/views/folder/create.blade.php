@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.all.min.css') }}">
 @endsection
 @section('content')
-    @vite('resources/js/folder/folder.js')
+    @vite('resources/js/folders/folder.js')
     <x-page-title title="Carpeta" pagetitle="Carpeta" />
     <div class="row">
         <div class="col-12 col-xl-12">
