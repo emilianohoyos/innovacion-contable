@@ -13,7 +13,10 @@ export default defineConfig({
         laravel([
             'resources/css/main.css',
             'resources/js/main.js',
-            'resources/js/applytype/applytype.js' // Update the entry module here
+            'resources/js/apply_document_type/apply_document_type.js',
+            'resources/js/applytype/applytype.js',
+            'resources/js/employees/employees.js',
+            'resources/js/folder/folder.js' // Update the entry module here
         ]),
         viteStaticCopy({
             targets: [
