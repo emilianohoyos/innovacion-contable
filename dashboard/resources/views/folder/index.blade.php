@@ -6,12 +6,12 @@
     <link href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
 @endsection
 @section('content')
-    <x-page-title title="Tipo Solicitud" pagetitle="Carpetas" />
+    <x-page-title title="Carpetas" pagetitle="Carpetas" />
     <div class="card">
         <div class="card-body">
-            <div class="d-grid">
-                <a href="{{ route('folder.create') }}" class="btn btn-primary btn-block" type="button">
-                    Crear Nuevo Carpeta
+            <div class="d-flex justify-content-start">
+                <a href="{{ route('folder.create') }}" class="btn btn-primary" type="button">
+                    Crear Nueva Carpeta
                 </a>
             </div>
             <div class="table-responsive mt-3">

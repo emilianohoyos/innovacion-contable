@@ -45,9 +45,10 @@
                         </table>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
+
+                <div class="modal-footer d-flex justify-content-start">
                     <button type="button" class="btn btn-primary" onclick="guardariItems()">Actualizar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
                 </div>
             </form>
         </div>

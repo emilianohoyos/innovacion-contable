@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="d-flex justify-content-end">
+                            <div class="d-flex justify-content-start">
                                 <button type="button" id="saveTable" class="btn btn-primary">Guardar Tabla</button>
                             </div>
                         </div>

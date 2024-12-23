@@ -9,7 +9,7 @@
     <x-page-title title="Tipo Solicitud" pagetitle="Tipo Documento Solicitud" />
     <div class="card">
         <div class="card-body">
-            <div class="d-grid">
+            <div class="d-flex justify-content-start">
                 <a href="{{ route('applydocumenttype.create') }}" class="btn btn-primary btn-block" type="button">
                     Crear Nuevo Tipo Documento Solicitud
                 </a>
@@ -31,11 +31,11 @@
                                 <td>
                                     <div class="d-inline-flex gap-0">
                                         <!-- Button trigger modal -->
-                                        <button type="button"
+                                        {{-- <button type="button"
                                             class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
                                             data-bs-toggle="modal" data-bs-target="#editModal">
                                             <i class="material-icons-outlined">visibility</i>
-                                        </button>
+                                        </button> --}}
 
                                         <button type="button" onclick="confirmDelete()"
                                             class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
@@ -61,7 +61,7 @@
             </div>
         </div>
     </div>
-    @include('employees.modals.edit')
+
 
 @endsection
 @section('scripts')

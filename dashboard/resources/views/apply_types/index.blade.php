@@ -9,8 +9,8 @@
     <x-page-title title="Tipo Solicitud" pagetitle="Tipo Solicitud" />
     <div class="card">
         <div class="card-body">
-            <div class="d-grid">
-                <a href="{{ route('applytype.create') }}" class="btn btn-primary btn-block" type="button">
+            <div class="d-flex justify-content-start">
+                <a href="{{ route('applytype.create') }}" class="btn btn-primary" type="button">
                     Crear Nuevo Tipo de Solicitud
                 </a>
             </div>
