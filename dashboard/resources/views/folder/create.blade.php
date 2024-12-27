@@ -16,10 +16,19 @@
                 <div class="card-body p-4">
                     <h5 class="mb-4">Formulario Carpeta</h5>
                     <form class="row g-3" id="formFolder">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label for="name" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 placeholder="Ingrese Nombre de la carpeta">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="person_type_id" class="form-label">Tipo Persona</label>
+                            <select name="person_type_id" id="person_type_id" class="form-control">
+                                <option value="">Seleccione...</option>
+                                @foreach ($person_type as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="col-md-12 mt-3">

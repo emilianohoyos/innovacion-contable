@@ -70,6 +70,14 @@
                 </ul>
             </li>
             <li>
+                <a href="{{ route('client-by-employee.index') }}">
+                    <div class="parent-icon"><i class="material-icons-outlined">person_outline</i>
+                    </div>
+                    <div class="menu-title">Mis Clientes</div>
+                </a>
+            </li>
+
+            <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon"><i class="material-icons-outlined">assignment</i>
                     </div>

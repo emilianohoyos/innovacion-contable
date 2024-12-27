@@ -163,6 +163,19 @@
                                             id="municipality_ica_selfretaining_agent" placeholder="Ingrese municipio">
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <label for="category" class="form-label">Categoria (prioridad)</label>
+                                    <select name="category" id="category" class="form-control">
+                                        <option value="">Seleccione...</option>
+                                        <option value="ALTA">ALTA</option>
+                                        <option value="MEDIA">MEDIA</option>
+                                        <option value="BAJA">BAJA</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="review" class="form-label">Reseña</label>
+                                    <textarea class="form-control" id="review" name="review" placeholder="Ingrese Reseña" rows="3"></textarea>
+                                </div>
 
                                 <div class="col-md-12">
                                     <label for="observation" class="form-label">Observaciones</label>
@@ -183,17 +196,22 @@
                             <p class="mb-4">Ingrese la información de contacto</p>
 
                             <div class="row g-3">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label for="firstname" class="form-label">Nombres</label>
                                     <input type="text" class="form-control" id="firstname" name="firstname"
                                         placeholder="Ingrese Nombres">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label for="lastname" class="form-label">Apellidos</label>
                                     <input type="text" class="form-control" id="lastname" name="lastname"
                                         placeholder="Ingrese Apellidos">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
+                                    <label for="birthday" class="form-label">Fecha de nacimiento</label>
+                                    <input type="date" class="form-control" id="birthday" name="birthday"
+                                        placeholder="fecha de nacimiento">
+                                </div>
+                                <div class="col-md-6">
                                     <label for="job_title" class="form-label">Cargo</label>
                                     <input type="text" class="form-control" id="job_title" name="job_title"
                                         placeholder="Ingrese Cargo">
@@ -209,6 +227,20 @@
                                     <input type="text" class="form-control" id="cellphone" name="cellphone"
                                         placeholder="Ingrese Celular">
                                 </div>
+                                <div class="col-md-6">
+                                    <label for="cellphone" class="form-label">Seleccione Medio de comunicacion
+                                        preferido</label>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="emailCheck"
+                                            name="channel_communication[]" value="email">
+                                        <label class="form-check-label" for="emailCheck">Correo</label>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="whatsappCheck"
+                                            name="channel_communication[]" value="whatsapp">
+                                        <label class="form-check-label" for="whatsappCheck">WhatsApp</label>
+                                    </div>
+                                </div>
                                 <div class="col-md-12 " id="typeJuridic" style="display:none">
                                     <button id="add-row" class="btn btn-primary px-4 w-100">Agregar</button>
 
@@ -218,7 +250,9 @@
                                                 <tr>
                                                     <th>Nombres</th>
                                                     <th>Apellidos</th>
+                                                    <th>Fecha de nacimiento</th>
                                                     <th>Cargo</th>
+                                                    <th>Medio de contacto</th>
                                                     <th>Correo</th>
                                                     <th>Celular</th>
                                                     <th>Eliminar</th>
@@ -253,7 +287,7 @@
                             <div class="row g-3">
                                 <div class="col-md-12">
                                     <label for="employee_id" class="form-label">Empleado que atiende</label>
-                                    <select name="employee_id[]" multiple id="employee_id" class="form-control">
+                                    <select name="employee_id" id="employee_id" class="form-control">
                                         <option value="">Seleccione...</option>
                                         @foreach ($employees as $item)
                                             <option value="{{ $item->id }}">{{ $item->firstname }}
@@ -355,6 +389,11 @@
                 const jobTitle = $('#job_title').val();
                 const email = $('#email').val();
                 const cellphone = $('#cellphone').val();
+                const birthday = $('#birthday').val();
+                const channelCommunication = [];
+                $('input[name="channel_communication[]"]:checked').each(function() {
+                    channelCommunication.push($(this).val());
+                });
 
                 if (firstname && lastname && email && cellphone) {
                     // Agregar fila a la tabla
@@ -362,15 +401,19 @@
                         <tr>
                             <td>${firstname}</td>
                             <td>${lastname}</td>
+                            <td>${birthday}</td>
                             <td>${jobTitle}</td>
                             <td>${email}</td>
                             <td>${cellphone}</td>
+                            <td>${channelCommunication.join(', ')}</td>
                             <td><button class="btn btn-danger btn-sm remove-row">Eliminar</button></td>
                         </tr>
                     `);
 
                     // Limpiar campos
-                    $('#firstname, #lastname, #job_title, #email, #cellphone').val('');
+                    $('#firstname, #lastname, #job_title, #email, #cellphone,#birthday')
+                        .val('');
+                    $('input[name="channel_communication[]"]').prop('checked', false);
                 } else {
                     alert('Por favor, complete todos los campos requeridos.');
                 }
@@ -382,16 +425,20 @@
             $('#saveClient').on('click', function(e) {
                 e.preventDefault();
                 isLoading(true)
-                const personType = $('#person_type_id').val();
+
                 const form = document.getElementById('formClient'); // Obtener el formulario
                 const formData = new FormData(form); // Crear el objeto FormData
 
                 const data = {};
-                formData.delete('employee_id[]');
-                formData.delete('employee_id[]');
+
                 // Procesar los valores del formulario
                 formData.forEach((value, key) => {
-                    if (value === "on") {
+                    if (key === 'channel_communication[]') {
+                        if (!data['channel_communication']) {
+                            data['channel_communication'] = [];
+                        }
+                        data['channel_communication'].push(value); // Agregar valores seleccionados
+                    } else if (value === "on") {
                         data[key] = true; // Convertir checkboxes marcados a booleano true
                     } else if (!formData.has(key) && $(`[name="${key}"]`).attr('type') ===
                         'checkbox') {
@@ -400,14 +447,8 @@
                         data[key] = value; // Otros valores
                     }
                 });
-
-                // Manejar valores múltiples del <select>
-                const employeeSelect = document.getElementById('employee_id');
-                const selectedValues = Array.from(employeeSelect.selectedOptions).map(option => option
-                    .value);
-
-                data.employee_id = selectedValues; // Agregar valores múltiples al objeto data
-
+                // Agregar valores múltiples al objeto data
+                const personType = $('#person_type_id').val();
                 // Agregar contactos si el tipo de persona es jurídica
                 if (personType === "2") {
                     data.contacts = [];
@@ -416,9 +457,11 @@
                         const contact = {
                             firstname: row.eq(0).text(),
                             lastname: row.eq(1).text(),
-                            job_title: row.eq(2).text(),
-                            email: row.eq(3).text(),
-                            cellphone: row.eq(4).text()
+                            birthday: row.eq(2).text(),
+                            job_title: row.eq(3).text(),
+                            email: row.eq(4).text(),
+                            cellphone: row.eq(5).text(),
+                            channel_communication: row.eq(6).text(),
                         };
                         data.contacts.push(contact);
                     });

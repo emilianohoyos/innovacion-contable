@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Folder extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'person_type_id'];
 
     public function ApplyDocTypeFolders(): HasMany
     {

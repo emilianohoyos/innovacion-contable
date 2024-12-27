@@ -13,6 +13,8 @@ use App\Models\Employee;
 use App\Models\EmployeeClient;
 use App\Models\Folder;
 use App\Models\MonthConfig;
+use App\Models\MonthlyAccounting;
+use App\Models\MonthlyAccountingFolder;
 use App\Models\PersonType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -55,16 +57,10 @@ class ClientController extends Controller
         $validatedData = $request->validated();
 
         $client = DB::transaction(function () use ($validatedData) {
-            $user = $this->registerController->create([
-                'name' => $validatedData['company_name'],
-                'email' => $validatedData['email_company'],
-                'password' => Hash::make($validatedData['nit']),
-            ]);
 
             $client = Client::create([
                 'person_type_id' => $validatedData['person_type_id'],
                 'document_type_id' => $validatedData['document_type_id'],
-                'user_id' => $user->id,
                 'nit' => $validatedData['nit'],
                 'company_name' => $validatedData['company_name'],
                 'address' => $validatedData['address'],
@@ -76,25 +72,64 @@ class ClientController extends Controller
                 'is_ica_selfretaining_agent' => $validatedData['is_ica_selfretaining_agent'] ?? false,
                 'municipality_ica_selfretaining_agent' => $validatedData['municipality_ica_selfretaining_agent'] ?? null,
                 'observation' => $validatedData['observation'] ?? null,
-                'email' => $validatedData['email_company']
+                'email' => $validatedData['email_company'],
+                'category' => $validatedData['category'],
+                'review' => $validatedData['review'],
             ]);
-            if (isset($validatedData['employee_id']) && is_array($validatedData['employee_id'])) {
-                $employees = array_map(fn($id) => ['employee_id' => $id], $validatedData['employee_id']);
-                $client->employees()->createMany($employees);
-            }
+
+
+            EmployeeClient::create([
+                'client_id' => $client->id,
+                'employee_id' => $validatedData['employee_id'],
+            ]);
+
+
+
             if ($validatedData['person_type_id'] == 1) {
+                $user = $this->registerController->create([
+                    'name' => $validatedData['firstname'] . $validatedData['lastname'],
+                    'email' => $validatedData['email'],
+                    'password' => Hash::make('Innovacion' . Carbon::now()->year),
+                ]);
                 $client->contactInfo()->create([
                     'firstname' => $validatedData['firstname'],
                     'lastname' => $validatedData['lastname'],
                     'job_title' => $validatedData['job_title'],
                     'email' => $validatedData['email'],
                     'cellphone' => $validatedData['cellphone'],
+                    'user_id' => $user->id,
+                    'birthday' => $validatedData['birthday'],
+                    'channel_communication' => json_encode($validatedData['channel_communication']),
                 ]);
+                $folders = Folder::where('person_type_id', 1)->get();
+                foreach ($folders as $folder) {
+                    ClientFolder::firstOrCreate([
+                        'client_id' => $client->id,
+                        'folder_id' => $folder->id,
+                    ]);
+                }
             } else {
-                $client->contactInfo()->createMany($validatedData['contacts']);
+                foreach ($validatedData['contacts'] as $contact) {
+                    $user = $this->registerController->create([
+                        'name' => $contact['firstname'] . $contact['lastname'],
+                        'email' => $contact['email'],
+                        'password' => Hash::make('Innovacion' . Carbon::now()->year),
+                    ]);
+                    $client->contactInfo()->create([
+                        'firstname' => $contact['firstname'],
+                        'lastname' => $contact['lastname'],
+                        'job_title' => $contact['job_title'],
+                        'email' => $contact['email'],
+                        'cellphone' => $contact['cellphone'],
+                        'user_id' => $user->id,
+                        'channel_communication' => json_encode($contact['channel_communication']),
+                        'birthday' => $contact['birthday'],
+
+                    ]);
+                }
             }
 
-            $year = Carbon::now()->year();
+            $year = Carbon::now()->year;
             $this->monthConfigController->createMonthly($year);
 
             return $client;
@@ -167,6 +202,58 @@ class ClientController extends Controller
             })
             ->rawColumns(['acciones'])
             ->make(true);
+    }
+
+    public function indexMyClients()
+    {
+        return view('my_clients.index');
+    }
+
+
+    public function getClientByEmployeeData()
+    {
+        $clients = Client::select(['clients.id as client_id', 'nit', 'company_name', 'email', 'person_types.name as person_type'])
+            ->join(
+                'person_types',
+                'clients.person_type_id',
+                'person_types.id'
+            )->join('employee_clients', 'clients.id', '=', 'employee_clients.client_id')
+            ->where('employee_clients.employee_id', auth()->user()->employee->id);
+        return DataTables::of($clients)
+            ->addColumn('acciones', function ($client) {
+                $date = Carbon::now();
+                $btn = '<a href="' . route("client-monthly-folders", ["clientId" => $client->client_id]) . '" class="btn btn-warning raised d-inline-flex align-items-center justify-content-center ">
+                    <i class="material-icons-outlined">folder</i>
+                </a>';
+
+                return  $btn;
+            })
+            ->rawColumns(['acciones'])
+            ->make(true);
+    }
+
+    public function getMonthFolders($clientId)
+    {
+        $folders = ClientFolder::with([
+            'folder.applyDocumentTypes',
+            'folder' => function ($query) use ($clientId) {
+                $query->with([
+                    'monthlyAccountingFolders' => function ($subQuery) use ($clientId) {
+                        $subQuery->whereHas('monthlyAccounting', function ($monthlyAccountingQuery) use ($clientId) {
+                            $monthlyAccountingQuery->where('year', Carbon::now()->year)
+                                ->where('month', Carbon::now()->month)->where('client_id', $clientId);
+                        })->with('monthlyAccounting');
+                    }
+                ]);
+            },
+            'folder.applyDocumentTypes',
+            'folder.ApplyDocTypeFolders.monthlyAccountingFolderApplyDocTypeFolders'
+        ])
+            ->where('client_id', $clientId)
+            ->get();
+
+        // dd($folders);
+        return view('my_clients.month_folders', compact('folders'));
     }
 
     public function getRegisteredFolders($clientId)

@@ -15,7 +15,7 @@ class ClientFolderController extends Controller
     public function index()
     {
         // Usar el guard 'api' para obtener el usuario autenticado
-        $client_id =  auth()->user()->clients()->pluck('id')->first();
+        $client_id =  auth()->user()->contactInfo()->pluck('client_id');
         $folders = ClientFolder::with([
             'folder.applyDocumentTypes',
             'folder' => function ($query) use ($client_id) {

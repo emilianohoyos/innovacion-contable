@@ -11,7 +11,8 @@ class MonthlyAccountingFolderApplyDocTypeFolder extends Model
         'apply_doc_type_folder_id',
         'is_new',
         'path',
-        'status'
+        'status',
+        'user_id'
     ];
 
     public function monthlyAccountingFolder()

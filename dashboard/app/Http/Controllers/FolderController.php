@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ApplyDocTypeFolder;
 use App\Models\Folder;
+use App\Models\PersonType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -24,8 +25,9 @@ class FolderController extends Controller
      */
     public function create()
     {
+        $person_type = PersonType::all();
 
-        return view('folder.create');
+        return view('folder.create', compact('person_type'));
     }
 
     /**
@@ -35,6 +37,7 @@ class FolderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
+            'person_type_id' => 'required',
         ]);
 
         if ($validator->fails()) {

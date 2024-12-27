@@ -15,7 +15,6 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->foreignId('person_type_id')->constrained()->onDelete('cascade');
             $table->foreignId('document_type_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('nit');
             $table->string('email');
             $table->string('company_name');
@@ -28,6 +27,8 @@ return new class extends Migration
             $table->boolean('is_ica_selfretaining_agent')->default(false);
             $table->string('municipality_ica_selfretaining_agent')->nullable();
             $table->string('observation');
+            $table->string('category');
+            $table->string('review');
             $table->timestamps();
         });
     }

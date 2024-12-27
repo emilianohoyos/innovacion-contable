@@ -81,7 +81,8 @@ class MonthlyAccountingFolderApplyDocTypeFolderController extends Controller
                     'monthly_accounting_folder_id' => $validatedData['monthly_accounting_folder_id'],
                     'apply_doc_type_folder_id' => $attachment['apply_doc_type_folder_id'],
                     'is_new' => true,
-                    'status' => "PENDIENTE"
+                    'status' => "PENDIENTE",
+                    'user_id' => auth()->id()
                 ]);
 
                 $fileData = $attachment["fileBase64"];
@@ -133,6 +134,40 @@ class MonthlyAccountingFolderApplyDocTypeFolderController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function detectMimeType($fileName)
+    {
+        $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+        $mimeTypes = [
+            'pdf' => 'application/pdf',
+            'doc' => 'application/msword',
+            'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'jpg' => 'image/jpeg',
+            'png' => 'image/png',
+            'zip' => 'application/zip',
+        ];
+        return $mimeTypes[$extension] ?? 'application/octet-stream';
+    }
+
+    public function downloadFromOneDrive(Request $request)
+    {
+        $file = MonthlyAccountingFolderApplyDocTypeFolder::find($request->id);
+
+        if (!$file) {
+            return response()->json(['error' => 'Archivo no encontrado'], 404);
+        }
+
+        if (!$this->disk->exists($file->path)) {
+            return response()->json(['error' => 'Archivo no encontrado en OneDrive'], 404);
+        }
+
+        $fileContent = $this->disk->get($file->path);
+        $mimeType = $this->detectMimeType($file->path);
+
+        return response($fileContent)
+            ->header('Content-Type', $mimeType)
+            ->header('Content-Disposition', 'attachment; filename="' . basename($file->path) . '"');
     }
 
 

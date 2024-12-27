@@ -12,6 +12,19 @@ class ClientContactInfo extends Model
         'lastname',
         'job_title',
         'email',
-        'cellphone'
+        'cellphone',
+        'user_id',
+        'channel_communication',
+        'birthday',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id');
+    }
 }

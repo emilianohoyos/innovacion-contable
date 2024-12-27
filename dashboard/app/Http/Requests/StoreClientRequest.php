@@ -36,12 +36,16 @@ class StoreClientRequest extends FormRequest
             'is_ica_selfretaining_agent' => 'nullable|boolean',
             'municipality_ica_selfretaining_agent' => 'nullable|string',
             'observation' => 'nullable|string',
+            'category' => 'required',
+            'review' => 'required',
             'firstname' => 'required_if:person_type_id,1',
             'lastname' => 'required_if:person_type_id,1',
+            'birthday' => 'required_if:person_type_id,1',
+            'channel_communication' => 'required_if:person_type_id,1',
             'job_title' => 'required_if:person_type_id,1',
             'email' => 'required_if:person_type_id,1',
             'cellphone' => 'required_if:person_type_id,1',
-            'employee_id' => 'required|array',
+            'employee_id' => 'required',
             'contacts' => 'required_if:person_type_id,2|array',
 
         ];

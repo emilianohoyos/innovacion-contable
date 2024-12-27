@@ -9,7 +9,6 @@ class Client extends Model
     protected $fillable = [
         'person_type_id',
         'document_type_id',
-        'user_id',
         'nit',
         'company_name',
         'address',
@@ -22,6 +21,9 @@ class Client extends Model
         'municipality_ica_selfretaining_agent',
         'observation',
         'email',
+        'category',
+        'review'
+
     ];
 
     public function contactInfo()
