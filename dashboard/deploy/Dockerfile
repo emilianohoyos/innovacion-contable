@@ -14,10 +14,10 @@ RUN apk add --no-cache \
     nodejs \
     npm \
     && docker-php-ext-configure zip \
-    && docker-php-ext-install zip pdo pdo_mysql \
+    && docker-php-ext-install zip pdo pdo_mysql pcntl  \
     && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-enable gd
+    && docker-php-ext-enable gd pcntl
 
 # Instalar Composer
 COPY --from=composer:2.7.6 /usr/bin/composer /usr/bin/composer
