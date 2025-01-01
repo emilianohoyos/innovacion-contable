@@ -1,9 +1,7 @@
-# deploy/Dockerfile
-
-# stage 1: build stage
+# Etapa 1: Construcción
 FROM php:8.3-cli-alpine as build
 
-# Installing system dependencies and PHP extensions
+# Instalar dependencias del sistema y extensiones de PHP
 RUN apk add --no-cache \
     zip \
     libzip-dev \
@@ -21,18 +19,21 @@ RUN apk add --no-cache \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-enable gd
 
-# Install composer
+# Instalar Composer
 COPY --from=composer:2.7.6 /usr/bin/composer /usr/bin/composer
 
+# Establecer el directorio de trabajo
 WORKDIR /var/www/html
 
-# Copy necessary files and change permissions
+# Copiar archivos del proyecto
 COPY . .
+
+# Configurar permisos para Laravel
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
     && chmod -R 775 /var/www/html/bootstrap/cache
 
-# Install PHP and Node.js dependencies
+# Instalar dependencias de PHP y Node.js
 RUN composer install --no-dev --prefer-dist \
     && npm install \
     && npm run build
@@ -43,25 +44,27 @@ RUN chown -R www-data:www-data /var/www/html/vendor \
 RUN chmod -R 755 /var/www/html/public/build \
     && chown -R www-data:www-data /var/www/html/public/build
 
-# stage 2: production stage
+# Instalar Laravel Octane y configurar FrankenPHP
+RUN composer require laravel/octane \
+    && php artisan octane:install --server=frankenphp \
+    && php artisan optimize
+
+# Etapa 2: Producción
 FROM dunglas/frankenphp
 
-# Copy files from the build stage
+# Copiar archivos desde la etapa de construcción
 COPY --from=build /var/www/html /var/www/html
 
-# Set working directory
+# Establecer el directorio de trabajo
 WORKDIR /var/www/html
 
-# Set permissions
+# Configurar permisos
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
     && chmod -R 775 /var/www/html/bootstrap/cache
 
-# Add custom FrankenPHP configuration
+# Agregar configuración personalizada de FrankenPHP
 COPY ./deploy/frankenphp.yaml /etc/frankenphp.yaml
 
-# Optimize Laravel app
-RUN php artisan optimize
-
-# Run FrankenPHP
-CMD ["frankenphp", "-config", "/etc/frankenphp.yaml"]
+# Comando para iniciar Laravel Octane con FrankenPHP
+CMD ["php", "artisan", "octane:frankenphp", "--host=0.0.0.0", "--port=90"]
