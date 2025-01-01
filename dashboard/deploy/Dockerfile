@@ -41,14 +41,6 @@ RUN composer install --no-dev --prefer-dist \
 RUN chown -R www-data:www-data /var/www/html/vendor \
     && chmod -R 775 /var/www/html/vendor
 
-RUN chmod -R 755 /var/www/html/public/build \
-    && chown -R www-data:www-data /var/www/html/public/build
-
-# Instalar Laravel Octane y configurar FrankenPHP
-RUN composer require laravel/octane \
-    && php artisan octane:install --server=frankenphp \
-    && php artisan optimize
-
 # Etapa 2: Producción
 FROM dunglas/frankenphp
 
@@ -58,13 +50,13 @@ COPY --from=build /var/www/html /var/www/html
 # Establecer el directorio de trabajo
 WORKDIR /var/www/html
 
+RUN php artisan octane:install --server=frankenphp \
+    && php artisan optimize
+
 # Configurar permisos
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
     && chmod -R 775 /var/www/html/bootstrap/cache
-
-# Agregar configuración personalizada de FrankenPHP
-COPY ./deploy/frankenphp.yaml /etc/frankenphp.yaml
 
 # Comando para iniciar Laravel Octane con FrankenPHP
 CMD ["php", "artisan", "octane:frankenphp", "--host=0.0.0.0", "--port=90"]
