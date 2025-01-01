@@ -64,4 +64,4 @@ COPY ./deploy/frankenphp.yaml /etc/frankenphp.yaml
 RUN php artisan optimize
 
 # Run FrankenPHP
-CMD ["frankenphp", "-c", "/etc/frankenphp.yaml"]
+CMD ["frankenphp", "-config", "/etc/frankenphp.yaml"]
