@@ -44,7 +44,7 @@ RUN chmod -R 755 /var/www/html/public/build \
     && chown -R www-data:www-data /var/www/html/public/build
 
 # stage 2: production stage
-FROM dunglas/frankenphp:1.7.0-alpine
+FROM dunglas/frankenphp
 
 # Copy files from the build stage
 COPY --from=build /var/www/html /var/www/html
