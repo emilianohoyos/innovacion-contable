@@ -2,8 +2,8 @@
 
 @section('title', 'Alternate')
 @section('css')
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/build/css/select2.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/build/select2-bootstrap-5-theme.min.css">
 @endsection
 @section('content')
 <x-page-title title="Forms" pagetitle="Select2" />
@@ -1027,6 +1027,6 @@
 @endsection
 @section('scripts')
 
-  	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-	<script src="{{ URL::asset('dist/plugins/select2/js/select2-custom.js') }}"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/build/js/select2.min.js"></script>
+	<script src="{{ URL::asset('build/plugins/select2/js/select2-custom.js') }}"></script>
 @endsection

@@ -2,7 +2,7 @@
 
 @section('title', 'Wizard')
 @section('css')
-	<link href="{{ URL::asset('dist/plugins/bs-stepper/css/bs-stepper.css') }}" rel="stylesheet">
+	<link href="{{ URL::asset('build/plugins/bs-stepper/css/bs-stepper.css') }}" rel="stylesheet">
 @endsection
 @section('content')
 <x-page-title title="Forms" pagetitle="Wizard" />
@@ -646,7 +646,7 @@
 			<!--end stepper three-->
 @endsection
 @section('scripts')
-  		<script src="{{ URL::asset('dist/plugins/bs-stepper/js/bs-stepper.min.js') }}"></script>
-		<script src="{{ URL::asset('dist/plugins/bs-stepper/js/main.js') }}"></script>
+  		<script src="{{ URL::asset('build/plugins/bs-stepper/js/bs-stepper.min.js') }}"></script>
+		<script src="{{ URL::asset('build/plugins/bs-stepper/js/main.js') }}"></script>
 
 @endsection

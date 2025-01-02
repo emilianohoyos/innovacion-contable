@@ -100,7 +100,7 @@
           <!-- Repeater End -->
 @endsection
 @section('scripts')
-  <script src="{{ URL::asset('dist/plugins/form-repeater/repeater.js') }}"></script>
+  <script src="{{ URL::asset('build/plugins/form-repeater/repeater.js') }}"></script>
 	<script>
         /* Create Repeater */
         $("#repeater").createRepeater({

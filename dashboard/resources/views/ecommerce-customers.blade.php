@@ -95,7 +95,7 @@
                        <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('dist/images/avatars/01.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('build/images/avatars/01.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -116,7 +116,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('dist/images/avatars/02.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('build/images/avatars/02.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -137,7 +137,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('dist/images/avatars/03.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('build/images/avatars/03.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -158,7 +158,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('dist/images/avatars/04.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('build/images/avatars/04.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -179,7 +179,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('dist/images/avatars/05.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('build/images/avatars/05.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -200,7 +200,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('dist/images/avatars/06.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('build/images/avatars/06.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -221,7 +221,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('dist/images/avatars/07.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('build/images/avatars/07.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -242,7 +242,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('dist/images/avatars/08.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('build/images/avatars/08.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -263,7 +263,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('dist/images/avatars/09.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('build/images/avatars/09.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -284,7 +284,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('dist/images/avatars/10.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('build/images/avatars/10.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>

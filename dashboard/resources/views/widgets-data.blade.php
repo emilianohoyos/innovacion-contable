@@ -16,7 +16,7 @@
                   <div class="card shadow-none border rounded-3 mb-0">
                     <div class="card-body">
                       <div class="d-flex align-items-center justify-content-between">
-                        <img src="{{ URL::asset('dist/images/apps/05.png') }}" width="35" alt="">
+                        <img src="{{ URL::asset('build/images/apps/05.png') }}" width="35" alt="">
                         <div class="dropdown">
                           <a href="javascript:;" class="dropdown-toggle-nocaret options dropdown-toggle"
                             data-bs-toggle="dropdown">
@@ -44,7 +44,7 @@
                   <div class="card shadow-none border rounded-3 mb-0">
                     <div class="card-body">
                       <div class="d-flex align-items-center justify-content-between">
-                        <img src="{{ URL::asset('dist/images/apps/18.png') }}" width="35" alt="">
+                        <img src="{{ URL::asset('build/images/apps/18.png') }}" width="35" alt="">
                         <div class="dropdown">
                           <a href="javascript:;" class="dropdown-toggle-nocaret options dropdown-toggle"
                             data-bs-toggle="dropdown">
@@ -72,7 +72,7 @@
                   <div class="card shadow-none border rounded-3 mb-0">
                     <div class="card-body">
                       <div class="d-flex align-items-center justify-content-between">
-                        <img src="{{ URL::asset('dist/images/apps/17.png') }}" width="35" alt="">
+                        <img src="{{ URL::asset('build/images/apps/17.png') }}" width="35" alt="">
                         <div class="dropdown">
                           <a href="javascript:;" class="dropdown-toggle-nocaret options dropdown-toggle"
                             data-bs-toggle="dropdown">
@@ -100,7 +100,7 @@
                   <div class="card shadow-none border rounded-3 mb-0">
                     <div class="card-body">
                       <div class="d-flex align-items-center justify-content-between">
-                        <img src="{{ URL::asset('dist/images/apps/19.png') }}" width="35" alt="">
+                        <img src="{{ URL::asset('build/images/apps/19.png') }}" width="35" alt="">
                         <div class="dropdown">
                           <a href="javascript:;" class="dropdown-toggle-nocaret options dropdown-toggle"
                             data-bs-toggle="dropdown">
@@ -773,7 +773,7 @@
 @endsection
 @section('scripts')
 
-  <script src="{{ URL::asset('dist/plugins/apexchart/apexcharts.min.js') }}"></script>
-  <script src="{{ URL::asset('dist/plugins/apexchart/data-cards.js') }}"></script>
+  <script src="{{ URL::asset('build/plugins/apexchart/apexcharts.min.js') }}"></script>
+  <script src="{{ URL::asset('build/plugins/apexchart/data-cards.js') }}"></script>
 
 @endsection

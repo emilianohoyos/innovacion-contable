@@ -14,7 +14,7 @@
            <div class="col-12 col-md-8 col-lg-6 col-xl-5 col-xxl-5 mx-auto">
             <div class="card rounded-4">
               <div class="card-body p-5">
-                  <img src="{{ URL::asset('dist/images/logo1.png') }}" class="mb-4" width="145" alt="">
+                  <img src="{{ URL::asset('build/images/logo1.png') }}" class="mb-4" width="145" alt="">
                   <h4 class="fw-bold">Get Started Now</h4>
                   <p class="mb-0">Enter your credentials to create your account</p>
 
@@ -63,13 +63,13 @@
 
                   <div class="d-flex gap-3 justify-content-center mt-4">
                     <a href="javascript:;" class="wh-48 d-flex align-items-center justify-content-center rounded-circle border">
-                      <img src="{{ URL::asset('dist/images/apps/05.png') }}" width="30" alt="">
+                      <img src="{{ URL::asset('build/images/apps/05.png') }}" width="30" alt="">
                     </a>
                     <a href="javascript:;" class="wh-48 d-flex align-items-center justify-content-center rounded-circle border">
-                      <img src="{{ URL::asset('dist/images/apps/17.png') }}" width="30" alt="">
+                      <img src="{{ URL::asset('build/images/apps/17.png') }}" width="30" alt="">
                     </a>
                     <a href="javascript:;" class="wh-48 d-flex align-items-center justify-content-center rounded-circle border">
-                      <img src="{{ URL::asset('dist/images/apps/18.png') }}" width="30" alt="">
+                      <img src="{{ URL::asset('build/images/apps/18.png') }}" width="30" alt="">
                     </a>
                   </div>
 

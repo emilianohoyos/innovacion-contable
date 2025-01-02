@@ -2,7 +2,7 @@
 
 @section('title', 'Form Elements')
 @section('css')
-	<link href="{{ URL::asset('dist/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet">
+	<link href="{{ URL::asset('build/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet">
 @endsection
 @section('content')
 <x-page-title title="Forms" pagetitle="Form Elements" />
@@ -279,5 +279,5 @@
 
 @endsection
 @section('scripts')
-  <script src="{{ URL::asset('dist/plugins/input-tags/js/tagsinput.js') }}"></script>
+  <script src="{{ URL::asset('build/plugins/input-tags/js/tagsinput.js') }}"></script>
 @endsection

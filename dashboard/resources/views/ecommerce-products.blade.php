@@ -104,7 +104,7 @@
                     <td>
                       <div class="d-flex align-items-center gap-3">
                         <div class="product-box">
-                          <img src="{{ URL::asset('dist/images/orders/01.png') }}" width="70" class="rounded-3" alt="">
+                          <img src="{{ URL::asset('build/images/orders/01.png') }}" width="70" class="rounded-3" alt="">
                         </div>
                         <div class="product-info">
                           <a href="javascript:;" class="product-title">Women Pink Floral Printed</a>
@@ -155,7 +155,7 @@
                     <td>
                       <div class="d-flex align-items-center gap-3">
                         <div class="product-box">
-                          <img src="{{ URL::asset('dist/images/orders/02.png') }}" width="70" class="rounded-3" alt="">
+                          <img src="{{ URL::asset('build/images/orders/02.png') }}" width="70" class="rounded-3" alt="">
                         </div>
                         <div class="product-info">
                           <a href="javascript:;" class="product-title">Women Pink Floral Printed</a>
@@ -206,7 +206,7 @@
                     <td>
                       <div class="d-flex align-items-center gap-3">
                         <div class="product-box">
-                          <img src="{{ URL::asset('dist/images/orders/03.png') }}" width="70" class="rounded-3" alt="">
+                          <img src="{{ URL::asset('build/images/orders/03.png') }}" width="70" class="rounded-3" alt="">
                         </div>
                         <div class="product-info">
                           <a href="javascript:;" class="product-title">Women Pink Floral Printed</a>
@@ -257,7 +257,7 @@
                     <td>
                       <div class="d-flex align-items-center gap-3">
                         <div class="product-box">
-                          <img src="{{ URL::asset('dist/images/orders/04.png') }}" width="70" class="rounded-3" alt="">
+                          <img src="{{ URL::asset('build/images/orders/04.png') }}" width="70" class="rounded-3" alt="">
                         </div>
                         <div class="product-info">
                           <a href="javascript:;" class="product-title">Women Pink Floral Printed</a>
@@ -308,7 +308,7 @@
                     <td>
                       <div class="d-flex align-items-center gap-3">
                         <div class="product-box">
-                          <img src="{{ URL::asset('dist/images/orders/05.png') }}" width="70" class="rounded-3" alt="">
+                          <img src="{{ URL::asset('build/images/orders/05.png') }}" width="70" class="rounded-3" alt="">
                         </div>
                         <div class="product-info">
                           <a href="javascript:;" class="product-title">Women Pink Floral Printed</a>
@@ -359,7 +359,7 @@
                     <td>
                       <div class="d-flex align-items-center gap-3">
                         <div class="product-box">
-                          <img src="{{ URL::asset('dist/images/orders/06.png') }}" width="70" class="rounded-3" alt="">
+                          <img src="{{ URL::asset('build/images/orders/06.png') }}" width="70" class="rounded-3" alt="">
                         </div>
                         <div class="product-info">
                           <a href="javascript:;" class="product-title">Women Pink Floral Printed</a>
@@ -410,7 +410,7 @@
                     <td>
                       <div class="d-flex align-items-center gap-3">
                         <div class="product-box">
-                          <img src="{{ URL::asset('dist/images/orders/07.png') }}" width="70" class="rounded-3" alt="">
+                          <img src="{{ URL::asset('build/images/orders/07.png') }}" width="70" class="rounded-3" alt="">
                         </div>
                         <div class="product-info">
                           <a href="javascript:;" class="product-title">Women Pink Floral Printed</a>
@@ -461,7 +461,7 @@
                     <td>
                       <div class="d-flex align-items-center gap-3">
                         <div class="product-box">
-                          <img src="{{ URL::asset('dist/images/orders/08.png') }}" width="70" class="rounded-3" alt="">
+                          <img src="{{ URL::asset('build/images/orders/08.png') }}" width="70" class="rounded-3" alt="">
                         </div>
                         <div class="product-info">
                           <a href="javascript:;" class="product-title">Women Pink Floral Printed</a>
@@ -512,7 +512,7 @@
                     <td>
                       <div class="d-flex align-items-center gap-3">
                         <div class="product-box">
-                          <img src="{{ URL::asset('dist/images/orders/09.png') }}" width="70" class="rounded-3" alt="">
+                          <img src="{{ URL::asset('build/images/orders/09.png') }}" width="70" class="rounded-3" alt="">
                         </div>
                         <div class="product-info">
                           <a href="javascript:;" class="product-title">Women Pink Floral Printed</a>

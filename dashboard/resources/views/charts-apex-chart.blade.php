@@ -168,6 +168,6 @@
 
 @endsection
 @section('scripts')
-  <script src="{{ URL::asset('dist/plugins/apexchart/apexcharts.min.js') }}"></script>
-  <script src="{{ URL::asset('dist/plugins/apexchart/apex-custom-chart.js') }}"></script>
+  <script src="{{ URL::asset('build/plugins/apexchart/apexcharts.min.js') }}"></script>
+  <script src="{{ URL::asset('build/plugins/apexchart/apex-custom-chart.js') }}"></script>
 @endsection

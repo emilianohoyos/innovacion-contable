@@ -237,7 +237,7 @@
 
 @endsection
 @section('scripts')
-  <script src="{{ URL::asset('dist/plugins/chartjs/js/chart.js') }}"></script>
-	<script src="{{ URL::asset('dist/plugins/chartjs/js/chartjs-custom.js') }}"></script>
+  <script src="{{ URL::asset('build/plugins/chartjs/js/chart.js') }}"></script>
+	<script src="{{ URL::asset('build/plugins/chartjs/js/chartjs-custom.js') }}"></script>
 
 @endsection

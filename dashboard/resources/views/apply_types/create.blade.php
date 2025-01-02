@@ -5,7 +5,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{ URL::asset('dist/plugins/sweetalert2/sweetalert2.all.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.all.min.css') }}">
 @endsection
 @section('content')
     @vite('resources/js/applytype/applytype.js')
@@ -54,8 +54,8 @@
     </div><!--end row-->
 @endsection
 @section('scripts')
-    <script src="{{ URL::asset('dist/plugins/validation/jquery.validate.min.js') }}"></script>
-    <script src="{{ URL::asset('dist/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ URL::asset('build/plugins/validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script>
         let pathCreate = "{{ route('applytype.store') }}"
         let pathlist = "{{ route('applytype.index') }}"

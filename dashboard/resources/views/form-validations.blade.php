@@ -225,8 +225,8 @@
 		<!--end row-->
 @endsection
 @section('scripts')
-  	<script src="{{ URL::asset('dist/plugins/validation/jquery.validate.min.js') }}"></script>
-	<script src="{{ URL::asset('dist/plugins/validation/validation-script.js') }}"></script>
+  	<script src="{{ URL::asset('build/plugins/validation/jquery.validate.min.js') }}"></script>
+	<script src="{{ URL::asset('build/plugins/validation/validation-script.js') }}"></script>
 	<script>
 		// Example starter JavaScript for disabling form submissions if there are invalid fields
 			(function () {

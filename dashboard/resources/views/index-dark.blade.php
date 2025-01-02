@@ -234,7 +234,7 @@
                      <div class="d-flex align-items-center gap-4">
                        <div class="d-flex align-items-center gap-3 flex-grow-1 flex-shrink-0">
                         <div class="wh-48 d-flex align-items-center justify-content-center rounded-3 border">
-                          <img src="{{ URL::asset('dist/images/projects/angular.png') }}" width="30" alt="">
+                          <img src="{{ URL::asset('build/images/projects/angular.png') }}" width="30" alt="">
                         </div>
                           <div class="">
                             <h6 class="mb-0 fw-bold">Angular 12</h6>
@@ -251,7 +251,7 @@
                      <div class="d-flex align-items-center gap-4">
                       <div class="d-flex align-items-center gap-3 flex-grow-1 flex-shrink-0">
                        <div class="wh-48 d-flex align-items-center justify-content-center rounded-3 border">
-                         <img src="{{ URL::asset('dist/images/projects/react.png') }}" width="30" alt="">
+                         <img src="{{ URL::asset('build/images/projects/react.png') }}" width="30" alt="">
                        </div>
                          <div class="">
                            <h6 class="mb-0 fw-bold">React Js</h6>
@@ -268,7 +268,7 @@
                     <div class="d-flex align-items-center gap-4">
                       <div class="d-flex align-items-center gap-3 flex-grow-1 flex-shrink-0">
                        <div class="wh-48 d-flex align-items-center justify-content-center rounded-3 border">
-                         <img src="{{ URL::asset('dist/images/projects/vue.png') }}" width="30" alt="">
+                         <img src="{{ URL::asset('build/images/projects/vue.png') }}" width="30" alt="">
                        </div>
                          <div class="">
                            <h6 class="mb-0 fw-bold">Vue Js</h6>
@@ -285,7 +285,7 @@
                     <div class="d-flex align-items-center gap-4">
                       <div class="d-flex align-items-center gap-3 flex-grow-1 flex-shrink-0">
                        <div class="wh-48 d-flex align-items-center justify-content-center rounded-3 border">
-                         <img src="{{ URL::asset('dist/images/projects/bootstrap.png') }}" width="30" alt="">
+                         <img src="{{ URL::asset('build/images/projects/bootstrap.png') }}" width="30" alt="">
                        </div>
                          <div class="">
                            <h6 class="mb-0 fw-bold">Bootstrap 5</h6>
@@ -302,7 +302,7 @@
                     <div class="d-flex align-items-center gap-4">
                       <div class="d-flex align-items-center gap-3 flex-grow-1 flex-shrink-0">
                        <div class="wh-48 d-flex align-items-center justify-content-center rounded-3 border">
-                         <img src="{{ URL::asset('dist/images/projects/magento.png') }}" width="30" alt="">
+                         <img src="{{ URL::asset('build/images/projects/magento.png') }}" width="30" alt="">
                        </div>
                          <div class="">
                            <h6 class="mb-0 fw-bold">Magento</h6>
@@ -319,7 +319,7 @@
                     <div class="d-flex align-items-center gap-4">
                       <div class="d-flex align-items-center gap-3 flex-grow-1 flex-shrink-0">
                        <div class="wh-48 d-flex align-items-center justify-content-center rounded-3 border">
-                         <img src="{{ URL::asset('dist/images/projects/django.png') }}" width="30" alt="">
+                         <img src="{{ URL::asset('build/images/projects/django.png') }}" width="30" alt="">
                        </div>
                          <div class="">
                            <h6 class="mb-0 fw-bold">Django</h6>
@@ -336,7 +336,7 @@
                     <div class="d-flex align-items-center gap-4">
                       <div class="d-flex align-items-center gap-3 flex-grow-1 flex-shrink-0">
                        <div class="wh-48 d-flex align-items-center justify-content-center rounded-3 border">
-                         <img src="{{ URL::asset('dist/images/projects/python.png') }}" width="30" alt="">
+                         <img src="{{ URL::asset('build/images/projects/python.png') }}" width="30" alt="">
                        </div>
                          <div class="">
                            <h6 class="mb-0 fw-bold">Python</h6>
@@ -377,7 +377,7 @@
                 <div class="d-flex flex-column justify-content-between gap-4">
                   <div class="d-flex align-items-center gap-4">
                     <div class="d-flex align-items-center gap-3 flex-grow-1">
-                      <img src="{{ URL::asset('dist/images/apps/17.png') }}" width="32" alt="">
+                      <img src="{{ URL::asset('build/images/apps/17.png') }}" width="32" alt="">
                       <p class="mb-0">Facebook</p>
                     </div>
                     <div class="">
@@ -392,7 +392,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-4">
                     <div class="d-flex align-items-center gap-3 flex-grow-1">
-                      <img src="{{ URL::asset('dist/images/apps/18.png') }}" width="32" alt="">
+                      <img src="{{ URL::asset('build/images/apps/18.png') }}" width="32" alt="">
                       <p class="mb-0">LinkedIn</p>
                     </div>
                     <div class="">
@@ -407,7 +407,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-4">
                     <div class="d-flex align-items-center gap-3 flex-grow-1">
-                      <img src="{{ URL::asset('dist/images/apps/19.png') }}" width="32" alt="">
+                      <img src="{{ URL::asset('build/images/apps/19.png') }}" width="32" alt="">
                       <p class="mb-0">Instagram</p>
                     </div>
                     <div class="">
@@ -422,7 +422,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-4">
                     <div class="d-flex align-items-center gap-3 flex-grow-1">
-                      <img src="{{ URL::asset('dist/images/apps/20.png') }}" width="32" alt="">
+                      <img src="{{ URL::asset('build/images/apps/20.png') }}" width="32" alt="">
                       <p class="mb-0">Snapchat</p>
                     </div>
                     <div class="">
@@ -437,7 +437,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-4">
                     <div class="d-flex align-items-center gap-3 flex-grow-1">
-                      <img src="{{ URL::asset('dist/images/apps/05.png') }}" width="32" alt="">
+                      <img src="{{ URL::asset('build/images/apps/05.png') }}" width="32" alt="">
                       <p class="mb-0">Google</p>
                     </div>
                     <div class="">
@@ -452,7 +452,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-4">
                     <div class="d-flex align-items-center gap-3 flex-grow-1">
-                      <img src="{{ URL::asset('dist/images/apps/08.png') }}" width="32" alt="">
+                      <img src="{{ URL::asset('build/images/apps/08.png') }}" width="32" alt="">
                       <p class="mb-0">Altaba</p>
                     </div>
                     <div class="">
@@ -467,7 +467,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-4">
                     <div class="d-flex align-items-center gap-3 flex-grow-1">
-                      <img src="{{ URL::asset('dist/images/apps/07.png') }}" width="32" alt="">
+                      <img src="{{ URL::asset('build/images/apps/07.png') }}" width="32" alt="">
                       <p class="mb-0">Spotify</p>
                     </div>
                     <div class="">
@@ -482,7 +482,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-4">
                     <div class="d-flex align-items-center gap-3 flex-grow-1">
-                      <img src="{{ URL::asset('dist/images/apps/12.png') }}" width="32" alt="">
+                      <img src="{{ URL::asset('build/images/apps/12.png') }}" width="32" alt="">
                       <p class="mb-0">Photoes</p>
                     </div>
                     <div class="">
@@ -633,7 +633,7 @@
                </div>
               <div class="d-flex flex-column gap-4">
                 <div class="d-flex align-items-center gap-3">
-                  <img src="{{ URL::asset('dist/images/orders/01.png') }}" width="78" class="rounded-3" alt="">
+                  <img src="{{ URL::asset('build/images/orders/01.png') }}" width="78" class="rounded-3" alt="">
                   <div class="flex-grow-1">
                     <h6 class="mb-0 fw-bold">Apple Hand Watch</h6>
                     <p class="mb-0">Sale: 258</p>
@@ -643,7 +643,7 @@
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                  <img src="{{ URL::asset('dist/images/orders/08.png') }}" width="78" class="rounded-3" alt="">
+                  <img src="{{ URL::asset('build/images/orders/08.png') }}" width="78" class="rounded-3" alt="">
                   <div class="flex-grow-1">
                     <h6 class="mb-0 fw-bold">Mobile Phone Set</h6>
                     <p class="mb-0">Sale: 169</p>
@@ -653,7 +653,7 @@
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                  <img src="{{ URL::asset('dist/images/orders/03.png') }}" width="78" class="rounded-3" alt="">
+                  <img src="{{ URL::asset('build/images/orders/03.png') }}" width="78" class="rounded-3" alt="">
                   <div class="flex-grow-1">
                     <h6 class="mb-0 fw-bold">Fancy Chair</h6>
                     <p class="mb-0">Sale: 268</p>
@@ -663,7 +663,7 @@
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                  <img src="{{ URL::asset('dist/images/orders/04.png') }}" width="78" class="rounded-3" alt="">
+                  <img src="{{ URL::asset('build/images/orders/04.png') }}" width="78" class="rounded-3" alt="">
                   <div class="flex-grow-1">
                     <h6 class="mb-0 fw-bold">Blue Shoes Pair</h6>
                     <p class="mb-0">Sale: 859</p>
@@ -673,7 +673,7 @@
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                  <img src="{{ URL::asset('dist/images/orders/05.png') }}" width="78" class="rounded-3" alt="">
+                  <img src="{{ URL::asset('build/images/orders/05.png') }}" width="78" class="rounded-3" alt="">
                   <div class="flex-grow-1">
                     <h6 class="mb-0 fw-bold">Blue Yoga Mat</h6>
                     <p class="mb-0">Sale: 328</p>
@@ -683,7 +683,7 @@
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                  <img src="{{ URL::asset('dist/images/orders/06.png') }}" width="75" class="rounded-3" alt="">
+                  <img src="{{ URL::asset('build/images/orders/06.png') }}" width="75" class="rounded-3" alt="">
                   <div class="flex-grow-1">
                     <h6 class="mb-0 fw-bold">White water Bottle</h6>
                     <p class="mb-0">Sale: 992</p>
@@ -693,7 +693,7 @@
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                  <img src="{{ URL::asset('dist/images/orders/07.png') }}" width="78" class="rounded-3" alt="">
+                  <img src="{{ URL::asset('build/images/orders/07.png') }}" width="78" class="rounded-3" alt="">
                   <div class="flex-grow-1">
                     <h6 class="mb-0 fw-bold">Laptop Full HD</h6>
                     <p class="mb-0">Sale: 489</p>
@@ -711,9 +711,9 @@
 @endsection
 @section('scripts')
 
-  <script src="{{ URL::asset('dist/plugins/apexchart/apexcharts.min.js') }}"></script>
+  <script src="{{ URL::asset('build/plugins/apexchart/apexcharts.min.js') }}"></script>
   <script src="{{ URL::asset('build/js/index.js') }}"></script>
-  <script src="{{ URL::asset('dist/plugins/peity/jquery.peity.min.js') }}"></script>
+  <script src="{{ URL::asset('build/plugins/peity/jquery.peity.min.js') }}"></script>
   <script>
     $(".data-attributes span").peity("donut")
   </script>

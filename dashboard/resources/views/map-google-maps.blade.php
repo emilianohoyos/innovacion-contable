@@ -51,6 +51,6 @@
 @section('scripts')
 
   	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKXKdHQdtqgPVl2HI2RnUa_1bjCxRCQo4&callback=initMap" async defer></script>
-	<script src="{{ URL::asset('dist/plugins/gmaps/map-custom-script.js') }}"></script>
+	<script src="{{ URL::asset('build/plugins/gmaps/map-custom-script.js') }}"></script>
 
 @endsection

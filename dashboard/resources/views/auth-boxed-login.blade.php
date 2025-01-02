@@ -13,23 +13,23 @@
     <div class="row g-4">
       <div class="col-lg-6 d-flex">
         <div class="card-body">
-          <img src="{{ URL::asset('dist/images/logo1.png') }}" class="mb-4" width="145" alt="">
+          <img src="{{ URL::asset('build/images/logo1.png') }}" class="mb-4" width="145" alt="">
           <h4 class="fw-bold">Get Started Now</h4>
           <p class="mb-0">Enter your credentials to login your account</p>
           <div class="row gy-2 gx-0 my-4">
             <div class="col-12 col-lg-12">
               <button class="btn btn-filter py-2 px-4 font-text1 fw-bold d-flex align-items-center justify-content-center w-100">
-                <span class="auth-social-login"><img src="{{ URL::asset('dist/images/apps/05.png') }}" width="20" class="me-2" alt="">Google</span>
+                <span class="auth-social-login"><img src="{{ URL::asset('build/images/apps/05.png') }}" width="20" class="me-2" alt="">Google</span>
               </button>
             </div>
             <div class="col-12 col-lg-12">
               <button class="btn btn-filter py-2 px-4 font-text1 fw-bold d-flex align-items-center justify-content-center w-100">
-                <span class="auth-social-login"><img src="{{ URL::asset('dist/images/apps/17.png') }}" width="20" class="me-2" alt="">Facebook</span>
+                <span class="auth-social-login"><img src="{{ URL::asset('build/images/apps/17.png') }}" width="20" class="me-2" alt="">Facebook</span>
               </button>
             </div>
             <div class="col-12 col-lg-12">
               <button class="btn btn-filter py-2 px-4 font-text1 fw-bold d-flex align-items-center justify-content-center w-100">
-                <span class="auth-social-login"><img src="{{ URL::asset('dist/images/apps/18.png') }}" width="20" class="me-2" alt="">LinkedIn</span>
+                <span class="auth-social-login"><img src="{{ URL::asset('build/images/apps/18.png') }}" width="20" class="me-2" alt="">LinkedIn</span>
               </button>
             </div>
           </div>
@@ -79,7 +79,7 @@
       </div>
       <div class="col-lg-6 d-lg-flex d-none">
         <div class="p-3 rounded-4 w-100 d-flex align-items-center justify-content-center bg-light">
-          <img src="{{ URL::asset('dist/images/auth/login1.png') }}" class="img-fluid" alt="">
+          <img src="{{ URL::asset('build/images/auth/login1.png') }}" class="img-fluid" alt="">
         </div>
       </div>
 

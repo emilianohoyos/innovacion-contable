@@ -2,7 +2,7 @@
 
 @section('title', 'Data Table')
 @section('css')
-	<link href="{{ URL::asset('dist/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+	<link href="{{ URL::asset('build/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
 @endsection
 @section('content')
 <x-page-title title="Tables" pagetitle="Data Table" />
@@ -986,8 +986,8 @@
 @endsection
 @section('scripts')
 
-  <script src="{{ URL::asset('dist/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-	<script src="{{ URL::asset('dist/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+  <script src="{{ URL::asset('build/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ URL::asset('build/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
 	<script>
 		$(document).ready(function() {
 			$('#example').DataTable();

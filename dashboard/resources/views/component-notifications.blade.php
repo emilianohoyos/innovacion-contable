@@ -2,7 +2,7 @@
 
 @section('title', 'Notifications')
 @section('css')
-	<link rel="stylesheet" href="{{ URL::asset('dist/plugins/notifications/css/lobibox.min.css') }}">
+	<link rel="stylesheet" href="{{ URL::asset('build/plugins/notifications/css/lobibox.min.css') }}">
 
 @endsection
 @section('content')
@@ -106,7 +106,7 @@
 @endsection
 @section('scripts')
   <!--notification js -->
-	<script src="{{ URL::asset('dist/plugins/notifications/js/lobibox.min.js') }}"></script>
-	<script src="{{ URL::asset('dist/plugins/notifications/js/notifications.min.js') }}"></script>
-	<script src="{{ URL::asset('dist/plugins/notifications/js/notification-custom-script.js') }}"></script>
+	<script src="{{ URL::asset('build/plugins/notifications/js/lobibox.min.js') }}"></script>
+	<script src="{{ URL::asset('build/plugins/notifications/js/notifications.min.js') }}"></script>
+	<script src="{{ URL::asset('build/plugins/notifications/js/notification-custom-script.js') }}"></script>
 @endsection

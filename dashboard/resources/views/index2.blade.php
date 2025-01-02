@@ -234,7 +234,7 @@
                 <div class="d-flex flex-column gap-4">
                    <div class="d-flex align-items-center gap-3">
                      <div class="d-flex align-items-center gap-3 flex-grow-1 flex-shrink-0">
-                         <img src="{{ URL::asset('dist/images/county/01.png') }}" width="40" alt="">
+                         <img src="{{ URL::asset('build/images/county/01.png') }}" width="40" alt="">
                          <div class="">
                             <h5 class="mb-0">$95,256</h5>
                             <p class="mb-0">Canada</p>
@@ -249,7 +249,7 @@
                    </div>
                    <div class="d-flex align-items-center gap-3">
                     <div class="d-flex align-items-center gap-3 flex-grow-1 flex-shrink-0">
-                        <img src="{{ URL::asset('dist/images/county/02.png') }}" width="40" alt="">
+                        <img src="{{ URL::asset('build/images/county/02.png') }}" width="40" alt="">
                         <div class="">
                            <h5 class="mb-0">$75M</h5>
                            <p class="mb-0">United Kingdom</p>
@@ -264,7 +264,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-3">
                     <div class="d-flex align-items-center gap-3 flex-grow-1 flex-shrink-0">
-                        <img src="{{ URL::asset('dist/images/county/03.png') }}" width="40" alt="">
+                        <img src="{{ URL::asset('build/images/county/03.png') }}" width="40" alt="">
                         <div class="">
                            <h5 class="mb-0">$958K</h5>
                            <p class="mb-0">France</p>
@@ -279,7 +279,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-3">
                     <div class="d-flex align-items-center gap-3 flex-grow-1 flex-shrink-0">
-                        <img src="{{ URL::asset('dist/images/county/04.png') }}" width="40" alt="">
+                        <img src="{{ URL::asset('build/images/county/04.png') }}" width="40" alt="">
                         <div class="">
                            <h5 class="mb-0">$568K</h5>
                            <p class="mb-0">Brazil</p>
@@ -294,7 +294,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-3">
                     <div class="d-flex align-items-center gap-3 flex-grow-1 flex-shrink-0">
-                        <img src="{{ URL::asset('dist/images/county/05.png') }}" width="40" alt="">
+                        <img src="{{ URL::asset('build/images/county/05.png') }}" width="40" alt="">
                         <div class="">
                            <h5 class="mb-0">$855K</h5>
                            <p class="mb-0">United Kingdom</p>
@@ -309,7 +309,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-3">
                     <div class="d-flex align-items-center gap-3 flex-grow-1 flex-shrink-0">
-                        <img src="{{ URL::asset('dist/images/county/06.png') }}" width="40" alt="">
+                        <img src="{{ URL::asset('build/images/county/06.png') }}" width="40" alt="">
                         <div class="">
                            <h5 class="mb-0">$983K</h5>
                            <p class="mb-0">United States</p>
@@ -324,7 +324,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-3">
                     <div class="d-flex align-items-center gap-3 flex-grow-1 flex-shrink-0">
-                        <img src="{{ URL::asset('dist/images/county/07.png') }}" width="40" alt="">
+                        <img src="{{ URL::asset('build/images/county/07.png') }}" width="40" alt="">
                         <div class="">
                            <h5 class="mb-0">$724K</h5>
                            <p class="mb-0">China</p>
@@ -365,7 +365,7 @@
                 <div class="d-flex flex-column gap-4">
                   <div class="d-flex align-items-center gap-3">
                     <div class="wh-48 d-flex align-items-center justify-content-center rounded-circle border">
-                      <img src="{{ URL::asset('dist/images/apps/11.png') }}" width="30" alt="">
+                      <img src="{{ URL::asset('build/images/apps/11.png') }}" width="30" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <h5 class="mb-0">$4856</h5>
@@ -379,7 +379,7 @@
 
                   <div class="d-flex align-items-center gap-3">
                     <div class="wh-48 d-flex align-items-center justify-content-center rounded-circle border">
-                      <img src="{{ URL::asset('dist/images/apps/10.png') }}" width="30" alt="">
+                      <img src="{{ URL::asset('build/images/apps/10.png') }}" width="30" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <h5 class="mb-0">$1286</h5>
@@ -392,7 +392,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-3">
                     <div class="wh-48 d-flex align-items-center justify-content-center rounded-circle border">
-                      <img src="{{ URL::asset('dist/images/apps/13.png') }}" width="30" alt="">
+                      <img src="{{ URL::asset('build/images/apps/13.png') }}" width="30" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <h5 class="mb-0">$9946</h5>
@@ -405,7 +405,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-3">
                     <div class="wh-48 d-flex align-items-center justify-content-center rounded-circle border">
-                      <img src="{{ URL::asset('dist/images/apps/01.png') }}" width="30" alt="">
+                      <img src="{{ URL::asset('build/images/apps/01.png') }}" width="30" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <h5 class="mb-0">$4376</h5>
@@ -418,7 +418,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-3">
                     <div class="wh-48 d-flex align-items-center justify-content-center rounded-circle border">
-                      <img src="{{ URL::asset('dist/images/apps/02.png') }}" width="30" alt="">
+                      <img src="{{ URL::asset('build/images/apps/02.png') }}" width="30" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <h5 class="mb-0">$6674</h5>
@@ -431,7 +431,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-3">
                     <div class="wh-48 d-flex align-items-center justify-content-center rounded-circle border">
-                      <img src="{{ URL::asset('dist/images/apps/06.png') }}" width="30" alt="">
+                      <img src="{{ URL::asset('build/images/apps/06.png') }}" width="30" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <h5 class="mb-0">$3489</h5>
@@ -444,7 +444,7 @@
                   </div>
                   <div class="d-flex align-items-center gap-3">
                     <div class="wh-48 d-flex align-items-center justify-content-center rounded-circle border">
-                      <img src="{{ URL::asset('dist/images/apps/04.png') }}" width="30" alt="">
+                      <img src="{{ URL::asset('build/images/apps/04.png') }}" width="30" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <h5 class="mb-0">$5578</h5>
@@ -482,7 +482,7 @@
             <div class="card-body">
               <div class="d-flex flex-column gap-3">
                 <div class="d-flex align-items-center gap-3">
-                  <img src="{{ URL::asset('dist/images/top-products/01.png') }}" width="55" alt="">
+                  <img src="{{ URL::asset('build/images/top-products/01.png') }}" width="55" alt="">
                   <div class="flex-grow-1">
                     <h6 class="mb-0">Apple Hand Watch</h6>
                     <p class="mb-0">Sale: 258</p>
@@ -492,7 +492,7 @@
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                  <img src="{{ URL::asset('dist/images/top-products/02.png') }}" width="55" alt="">
+                  <img src="{{ URL::asset('build/images/top-products/02.png') }}" width="55" alt="">
                   <div class="flex-grow-1">
                     <h6 class="mb-0">Mobile Phone Set</h6>
                     <p class="mb-0">Sale: 169</p>
@@ -502,7 +502,7 @@
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                  <img src="{{ URL::asset('dist/images/top-products/03.png') }}" width="55" alt="">
+                  <img src="{{ URL::asset('build/images/top-products/03.png') }}" width="55" alt="">
                   <div class="flex-grow-1">
                     <h6 class="mb-0">Fancy Chair</h6>
                     <p class="mb-0">Sale: 268</p>
@@ -512,7 +512,7 @@
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                  <img src="{{ URL::asset('dist/images/top-products/04.png') }}" width="55" alt="">
+                  <img src="{{ URL::asset('build/images/top-products/04.png') }}" width="55" alt="">
                   <div class="flex-grow-1">
                     <h6 class="mb-0">Blue Shoes Pair</h6>
                     <p class="mb-0">Sale: 859</p>
@@ -522,7 +522,7 @@
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                  <img src="{{ URL::asset('dist/images/top-products/05.png') }}" width="55" alt="">
+                  <img src="{{ URL::asset('build/images/top-products/05.png') }}" width="55" alt="">
                   <div class="flex-grow-1">
                     <h6 class="mb-0">Blue Yoga Mat</h6>
                     <p class="mb-0">Sale: 328</p>
@@ -532,7 +532,7 @@
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                  <img src="{{ URL::asset('dist/images/top-products/06.png') }}" width="55" alt="">
+                  <img src="{{ URL::asset('build/images/top-products/06.png') }}" width="55" alt="">
                   <div class="flex-grow-1">
                     <h6 class="mb-0">White water Bottle</h6>
                     <p class="mb-0">Sale: 992</p>
@@ -542,7 +542,7 @@
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                  <img src="{{ URL::asset('dist/images/top-products/07.png') }}" width="55" alt="">
+                  <img src="{{ URL::asset('build/images/top-products/07.png') }}" width="55" alt="">
                   <div class="flex-grow-1">
                     <h6 class="mb-0">Laptop Full HD</h6>
                     <p class="mb-0">Sale: 489</p>
@@ -561,6 +561,6 @@
 @endsection
 @section('scripts')
 
-  <script src="{{ URL::asset('dist/plugins/apexchart/apexcharts.min.js') }}"></script>
+  <script src="{{ URL::asset('build/plugins/apexchart/apexcharts.min.js') }}"></script>
   <script src="{{ URL::asset('build/js/index2.js') }}"></script>
 @endsection

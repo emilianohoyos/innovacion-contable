@@ -12,7 +12,7 @@
                     <div class="card rounded-4">
                         <div class="card-body p-5">
                             <div class="mb-4 text-center">
-                                <img src="{{ URL::asset('dist/images/logo-text.png') }}" width="300" alt="">
+                                <img src="{{ URL::asset('build/images/logo-text.png') }}" width="300" alt="">
                             </div>
 
                             <h4 class="fw-bold">Ingresar</h4>

@@ -2,7 +2,7 @@
 
 @section('title', 'Boxicons')
 @section('css')
-	<link rel="stylesheet" href="{{ URL::asset('dist/css/extra-icons.css') }}">
+	<link rel="stylesheet" href="{{ URL::asset('build/css/extra-icons.css') }}">
 @endsection
 @section('content')
 <x-page-title title="Icons" pagetitle="Boxicons" />

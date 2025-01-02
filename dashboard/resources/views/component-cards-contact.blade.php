@@ -12,9 +12,9 @@
           <div class="card mb-0">
             <div class="card-body">
               <div class="position-relative">
-                <img src="{{ URL::asset('dist/images/gallery/14.png') }}" class="img-fluid rounded" alt="">
+                <img src="{{ URL::asset('build/images/gallery/14.png') }}" class="img-fluid rounded" alt="">
                 <div class="position-absolute top-100 start-50 translate-middle">
-                  <img src="{{ URL::asset('dist/images/avatars/05.png') }}" width="100" height="100"
+                  <img src="{{ URL::asset('build/images/avatars/05.png') }}" width="100" height="100"
                     class="rounded-circle raised p-1 bg-primary" alt="">
                 </div>
               </div>
@@ -49,9 +49,9 @@
           <div class="card mb-0">
             <div class="card-body">
               <div class="position-relative">
-                <img src="{{ URL::asset('dist/images/gallery/18.png') }}" class="img-fluid rounded" alt="">
+                <img src="{{ URL::asset('build/images/gallery/18.png') }}" class="img-fluid rounded" alt="">
                 <div class="position-absolute top-100 start-50 translate-middle">
-                  <img src="{{ URL::asset('dist/images/avatars/02.png') }}" width="100" height="100"
+                  <img src="{{ URL::asset('build/images/avatars/02.png') }}" width="100" height="100"
                     class="rounded-circle raised p-1 bg-white" alt="">
                 </div>
               </div>
@@ -85,9 +85,9 @@
           <div class="card mb-0">
             <div class="card-body">
               <div class="position-relative">
-                <img src="{{ URL::asset('dist/images/gallery/19.png') }}" class="img-fluid rounded" alt="">
+                <img src="{{ URL::asset('build/images/gallery/19.png') }}" class="img-fluid rounded" alt="">
                 <div class="position-absolute top-100 start-50 translate-middle">
-                  <img src="{{ URL::asset('dist/images/avatars/04.png') }}" width="100" height="100"
+                  <img src="{{ URL::asset('build/images/avatars/04.png') }}" width="100" height="100"
                     class="rounded-circle raised p-1 bg-danger" alt="">
                 </div>
               </div>
@@ -125,7 +125,7 @@
                   <div class="card shadow-none border mb-0">
                     <div class="card-body">
                       <div class="text-center">
-                        <img src="{{ URL::asset('dist/images/avatars/07.png') }}" width="100" height="100"
+                        <img src="{{ URL::asset('build/images/avatars/07.png') }}" width="100" height="100"
                           class="rounded-circle raised bg-white" alt="">
                       </div>
                       <div class="text-center mt-4">
@@ -165,7 +165,7 @@
                   <div class="card shadow-none border mb-0">
                     <div class="card-body">
                       <div class="text-center">
-                        <img src="{{ URL::asset('dist/images/avatars/08.png') }}" width="100" height="100"
+                        <img src="{{ URL::asset('build/images/avatars/08.png') }}" width="100" height="100"
                           class="rounded-circle raised bg-white" alt="">
                       </div>
                       <div class="text-center mt-4">
@@ -215,7 +215,7 @@
                   <div class="card shadow-none border mb-0 bg-success">
                     <div class="card-body">
                       <div class="text-center">
-                        <img src="{{ URL::asset('dist/images/avatars/10.png') }}" width="100" height="100"
+                        <img src="{{ URL::asset('build/images/avatars/10.png') }}" width="100" height="100"
                           class="rounded-circle raised bg-white p-1" alt="">
                       </div>
                       <div class="text-center mt-4">
@@ -255,7 +255,7 @@
                   <div class="card shadow-none border mb-0 bg-purple">
                     <div class="card-body">
                       <div class="text-center">
-                        <img src="{{ URL::asset('dist/images/avatars/10.png') }}" width="100" height="100"
+                        <img src="{{ URL::asset('build/images/avatars/10.png') }}" width="100" height="100"
                           class="rounded-circle raised bg-white p-1" alt="">
                       </div>
                       <div class="text-center mt-4">
