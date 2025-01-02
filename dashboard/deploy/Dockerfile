@@ -1,43 +1,80 @@
-FROM dunglas/frankenphp
+# stage 1: build stage
+FROM php:8.3-fpm-alpine as build
 
-RUN apt-get update && apt-get install -y \
+# installing system dependencies and php extensions
+RUN apk add --no-cache \
+    zip \
+    libzip-dev \
+    freetype \
+    libjpeg-turbo \
+    libpng \
+    freetype-dev \
+    libjpeg-turbo-dev \
     libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libwebp-dev \
-    libxpm-dev \
-    libvpx-dev \
     nodejs \
     npm \
-    libzip-dev
+    && docker-php-ext-configure zip \
+    && docker-php-ext-install zip pdo pdo_mysql \
+    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-enable gd
 
-RUN install-php-extensions \
-    zip \
-    pdo \
-    pdo_mysql \
-    pcntl \
-    gd
-
+# install composer
 COPY --from=composer:2.7.6 /usr/bin/composer /usr/bin/composer
 
-# Establecer el directorio de trabajo
-WORKDIR /app
+WORKDIR /var/www/html
 
-# Copiar archivos del proyecto
+# copy necessary files and change permissions
 COPY . .
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 /var/www/html/storage \
+    && chmod -R 775 /var/www/html/bootstrap/cache
 
-# Configurar permisos para Laravel
-RUN chown -R www-data:www-data /app \
-    && chmod -R 775 /app/storage \
-    && chmod -R 775 /app/bootstrap/cache
-
-# Instalar dependencias de PHP y Node.js
+# install php and node.js dependencies
 RUN composer install --no-dev --prefer-dist \
     && npm install \
     && npm run build
 
-RUN php artisan octane:install --server=frankenphp \
-    && php artisan optimize
+RUN chown -R www-data:www-data /var/www/html/vendor \
+    && chmod -R 775 /var/www/html/vendor
 
-# Comando para iniciar Laravel Octane con FrankenPHP
-CMD ["php", "artisan", "octane:frankenphp", "--host=0.0.0.0", "--port=8080"]
+# stage 2: production stage
+FROM php:8.3-fpm-alpine
+
+# install nginx
+RUN apk add --no-cache \
+    zip \
+    libzip-dev \
+    freetype \
+    libjpeg-turbo \
+    libpng \
+    freetype-dev \
+    libjpeg-turbo-dev \
+    libpng-dev \
+    oniguruma-dev \
+    gettext-dev \
+    freetype-dev \
+    nginx \
+    && docker-php-ext-configure zip \
+    && docker-php-ext-install zip pdo pdo_mysql \
+    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-enable gd \
+    && docker-php-ext-install bcmath \
+    && docker-php-ext-enable bcmath \
+    && docker-php-ext-install exif \
+    && docker-php-ext-enable exif \
+    && docker-php-ext-install gettext \
+    && docker-php-ext-enable gettext \
+    && docker-php-ext-install opcache \
+    && docker-php-ext-enable opcache \
+    && rm -rf /var/cache/apk/*
+
+# copy files from the build stage
+COPY --from=build /var/www/html /var/www/html
+COPY ./deploy/nginx.conf /etc/nginx/http.d/default.conf
+COPY ./deploy/php.ini "$PHP_INI_DIR/conf.d/app.ini"
+
+WORKDIR /var/www/html
+
+CMD ["sh", "-c", "nginx && php-fpm"]
