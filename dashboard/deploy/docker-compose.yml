@@ -37,7 +37,7 @@ services:
       GRAPH_SCOPE: ${GRAPH_SCOPE}
       JWT_SECRET: ${JWT_SECRET}
     ports:
-      - "90:80"
+      - "8080:8080"
 
   database:
     restart: unless-stopped
