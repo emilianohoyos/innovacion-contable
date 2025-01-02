@@ -2,8 +2,8 @@
 
 @section('title', 'Avtars Chips')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Components" pagetitle="Avtars Chips" />
 
@@ -14,21 +14,21 @@
 				</div>
 				<hr>
 				<div class="chip">
-					<img src="{{ URL::asset('build/images/avatars/01.png') }}" alt="Contact Person">John Doe</div>
+					<img src="{{ URL::asset('dist/images/avatars/01.png') }}" alt="Contact Person">John Doe</div>
 				<div class="chip">
-					<img src="{{ URL::asset('build/images/avatars/02.png') }}" alt="Contact Person">Jessica Doe</div>
+					<img src="{{ URL::asset('dist/images/avatars/02.png') }}" alt="Contact Person">Jessica Doe</div>
 				<div class="chip">
-					<img src="{{ URL::asset('build/images/avatars/03.png') }}" alt="Contact Person">Michele Powa</div>
+					<img src="{{ URL::asset('dist/images/avatars/03.png') }}" alt="Contact Person">Michele Powa</div>
 				<div class="chip">
-					<img src="{{ URL::asset('build/images/avatars/04.png') }}" alt="Contact Person">Clark Natela</div>
+					<img src="{{ URL::asset('dist/images/avatars/04.png') }}" alt="Contact Person">Clark Natela</div>
 				<div class="chip">
-					<img src="{{ URL::asset('build/images/avatars/05.png') }}" alt="Contact Person">Anantu Painda <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
+					<img src="{{ URL::asset('dist/images/avatars/05.png') }}" alt="Contact Person">Anantu Painda <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
 				</div>
 				<div class="chip">
-					<img src="{{ URL::asset('build/images/avatars/06.png') }}" alt="Contact Person">Tiger Xink <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
+					<img src="{{ URL::asset('dist/images/avatars/06.png') }}" alt="Contact Person">Tiger Xink <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
 				</div>
 				<div class="chip">
-					<img src="{{ URL::asset('build/images/avatars/07.png') }}" alt="Contact Person">Salena Chain <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
+					<img src="{{ URL::asset('dist/images/avatars/07.png') }}" alt="Contact Person">Salena Chain <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
 				</div>
 				<hr>
 				<div class="chip">John Doe <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
@@ -54,24 +54,24 @@
 				</div>
 				<hr>
 				<div class="chip chip-md">
-					<img src="{{ URL::asset('build/images/avatars/01.png') }}" alt="Contact Person">John Doe</div>
+					<img src="{{ URL::asset('dist/images/avatars/01.png') }}" alt="Contact Person">John Doe</div>
 				<div class="chip chip-md bg-light text-dark">
-					<img src="{{ URL::asset('build/images/avatars/02.png') }}" alt="Contact Person">Jessica Doe</div>
+					<img src="{{ URL::asset('dist/images/avatars/02.png') }}" alt="Contact Person">Jessica Doe</div>
 				<div class="chip chip-md bg-dark text-white">
-					<img src="{{ URL::asset('build/images/avatars/03.png') }}" alt="Contact Person">Michele Powa <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
+					<img src="{{ URL::asset('dist/images/avatars/03.png') }}" alt="Contact Person">Michele Powa <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
 				</div>
 				<div class="chip chip-md bg-danger text-white">
-					<img src="{{ URL::asset('build/images/avatars/04.png') }}" alt="Contact Person">Clark Natela <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
+					<img src="{{ URL::asset('dist/images/avatars/04.png') }}" alt="Contact Person">Clark Natela <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
 				</div>
 				<hr>
 				<div class="chip chip-lg">
-					<img src="{{ URL::asset('build/images/avatars/05.png') }}" alt="Contact Person">Anantu Painda <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
+					<img src="{{ URL::asset('dist/images/avatars/05.png') }}" alt="Contact Person">Anantu Painda <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
 				</div>
 				<div class="chip chip-lg bg-primary text-white">
-					<img src="{{ URL::asset('build/images/avatars/06.png') }}" alt="Contact Person">Tiger Xink <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
+					<img src="{{ URL::asset('dist/images/avatars/06.png') }}" alt="Contact Person">Tiger Xink <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
 				</div>
 				<div class="chip chip-lg bg-warning text-white">
-					<img src="{{ URL::asset('build/images/avatars/07.png') }}" alt="Contact Person">Salena Chain <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
+					<img src="{{ URL::asset('dist/images/avatars/07.png') }}" alt="Contact Person">Salena Chain <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
 				</div>
 				<hr>
 				<div class="chip chip-md">John Doe <span class="closebtn" onclick="this.parentElement.style.display='none'">×</span>
@@ -91,4 +91,4 @@
 				</div>
 			</div>
 		</div>
-@endsection 
+@endsection

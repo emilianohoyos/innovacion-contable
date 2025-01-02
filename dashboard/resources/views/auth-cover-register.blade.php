@@ -15,7 +15,7 @@
 
           <div class="card rounded-0 mb-0 border-0 shadow-none bg-transparent">
             <div class="card-body">
-              <img src="{{ URL::asset('build/images/auth/register1.png') }}" class="img-fluid auth-img-cover-login" width="650"
+              <img src="{{ URL::asset('dist/images/auth/register1.png') }}" class="img-fluid auth-img-cover-login" width="650"
                 alt="">
             </div>
           </div>
@@ -25,16 +25,16 @@
         <div class="col-12 col-xl-5 col-xxl-4 auth-cover-right align-items-center justify-content-center">
           <div class="card rounded-0 m-3 border-0 shadow-none">
             <div class="card-body p-sm-5">
-              <img src="{{ URL::asset('build/images/logo1.png') }}" class="mb-4" width="145" alt="">
+              <img src="{{ URL::asset('dist/images/logo1.png') }}" class="mb-4" width="145" alt="">
               <h4 class="fw-bold">Get Started Now</h4>
               <p class="mb-0">Enter your credentials to create your account</p>
 
               <div class="row g-3 my-4">
                 <div class="col-12 col-lg-6">
-                  <button class="btn btn-filter py-2 font-text1 fw-bold d-flex align-items-center justify-content-center w-100"><img src="{{ URL::asset('build/images/apps/05.png') }}" width="20" class="me-2" alt="">Google</button>
+                  <button class="btn btn-filter py-2 font-text1 fw-bold d-flex align-items-center justify-content-center w-100"><img src="{{ URL::asset('dist/images/apps/05.png') }}" width="20" class="me-2" alt="">Google</button>
                 </div>
                 <div class="col col-lg-6">
-                  <button class="btn btn-filter py-2 font-text1 fw-bold d-flex align-items-center justify-content-center w-100"><img src="{{ URL::asset('build/images/apps/17.png') }}" width="20" class="me-2" alt="">Facebook</button>
+                  <button class="btn btn-filter py-2 font-text1 fw-bold d-flex align-items-center justify-content-center w-100"><img src="{{ URL::asset('dist/images/apps/17.png') }}" width="20" class="me-2" alt="">Facebook</button>
                 </div>
               </div>
 

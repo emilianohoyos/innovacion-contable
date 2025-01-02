@@ -2,11 +2,11 @@
 
 @section('title', 'Repeater')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Forms" pagetitle="Repeater" />
-				
+
         <!-- Repeater Html Start -->
         <div id="repeater">
           <!-- Repeater Heading -->
@@ -95,12 +95,12 @@
                   </div>
                 </div>
               </div>
-          
+
         </div>
           <!-- Repeater End -->
-@endsection 
-@section('scripts') 
-  <script src="{{ URL::asset('build/plugins/form-repeater/repeater.js') }}"></script>
+@endsection
+@section('scripts')
+  <script src="{{ URL::asset('dist/plugins/form-repeater/repeater.js') }}"></script>
 	<script>
         /* Create Repeater */
         $("#repeater").createRepeater({
@@ -108,4 +108,4 @@
         });
     </script>
 
-@endsection 
+@endsection

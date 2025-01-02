@@ -2,11 +2,11 @@
 
 @section('title', 'Customers')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="eCommerce" pagetitle="Customers" />
-				
+
         <div class="product-count d-flex align-items-center gap-3 gap-lg-4 mb-4 fw-bold flex-wrap font-text1">
           <a href="javascript:;"><span class="me-1">All</span><span class="text-secondary">(85472)</span></a>
           <a href="javascript:;"><span class="me-1">New</span><span class="text-secondary">(145)</span></a>
@@ -58,7 +58,7 @@
                   <li><a class="dropdown-item" href="javascript:;">Something else here</a></li>
                 </ul>
               </div>
-            </div>  
+            </div>
           </div>
           <div class="col-auto">
             <div class="d-flex align-items-center gap-2 justify-content-lg-end">
@@ -73,7 +73,7 @@
             <div class="customer-table">
               <div class="table-responsive white-space-nowrap">
                  <table class="table align-middle">
-                  <thead class="table-light">     
+                  <thead class="table-light">
                     <tr>
                       <th>
                         <input class="form-check-input" type="checkbox">
@@ -95,7 +95,7 @@
                        <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('build/images/avatars/01.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('dist/images/avatars/01.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -116,7 +116,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('build/images/avatars/02.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('dist/images/avatars/02.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -137,7 +137,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('build/images/avatars/03.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('dist/images/avatars/03.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -158,7 +158,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('build/images/avatars/04.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('dist/images/avatars/04.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -179,7 +179,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('build/images/avatars/05.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('dist/images/avatars/05.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -200,7 +200,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('build/images/avatars/06.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('dist/images/avatars/06.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -221,7 +221,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('build/images/avatars/07.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('dist/images/avatars/07.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -242,7 +242,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('build/images/avatars/08.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('dist/images/avatars/08.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -263,7 +263,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('build/images/avatars/09.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('dist/images/avatars/09.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -284,7 +284,7 @@
                       <td>
                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                           <div class="customer-pic">
-                            <img src="{{ URL::asset('build/images/avatars/10.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                            <img src="{{ URL::asset('dist/images/avatars/10.png') }}" class="rounded-circle" width="40" height="40" alt="">
                           </div>
                           <p class="mb-0 customer-name fw-bold">Andrew Carry</p>
                         </a>
@@ -298,11 +298,11 @@
                       <td>24 min ago</td>
                       <td>Nov 12, 10:45 PM</td>
                     </tr>
-                    
+
                    </tbody>
                  </table>
               </div>
             </div>
           </div>
         </div>
-@endsection 
+@endsection

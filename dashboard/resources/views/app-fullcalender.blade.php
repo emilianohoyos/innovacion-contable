@@ -2,8 +2,8 @@
 
 @section('title', 'Calender')
 @section('css')
-	<link href="{{ URL::asset('build/plugins/fullcalendar/css/main.min.css') }}" rel="stylesheet">
-@endsection 
+	<link href="{{ URL::asset('dist/plugins/fullcalendar/css/main.min.css') }}" rel="stylesheet">
+@endsection
 @section('content')
 
     <x-page-title title="Applications" pagetitle="Calender" />
@@ -15,10 +15,10 @@
 				</div>
 			</div>
 		</div>
-@endsection 
+@endsection
 @section('scripts')
 
-  	<script src="{{ URL::asset('build/plugins/fullcalendar/js/main.min.js') }}"></script>
+  	<script src="{{ URL::asset('dist/plugins/fullcalendar/js/main.min.js') }}"></script>
    	<script>
 		document.addEventListener('DOMContentLoaded', function () {
 			var calendarEl = document.getElementById('calendar');
@@ -85,4 +85,4 @@
 			calendar.render();
 		});
 	</script>
-@endsection 
+@endsection

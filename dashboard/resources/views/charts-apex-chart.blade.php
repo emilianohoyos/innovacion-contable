@@ -2,8 +2,8 @@
 
 @section('title', 'Apex Chart')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Charts" pagetitle="Apex Chart" />
 
@@ -162,12 +162,12 @@
               </div>
             </div>
           </div>
-        
-        
+
+
         </div><!--end row-->
 
-@endsection 
+@endsection
 @section('scripts')
-  <script src="{{ URL::asset('build/plugins/apexchart/apexcharts.min.js') }}"></script>
-  <script src="{{ URL::asset('build/plugins/apexchart/apex-custom-chart.js') }}"></script>
-@endsection 
+  <script src="{{ URL::asset('dist/plugins/apexchart/apexcharts.min.js') }}"></script>
+  <script src="{{ URL::asset('dist/plugins/apexchart/apex-custom-chart.js') }}"></script>
+@endsection

@@ -1,7 +1,7 @@
 <aside class="sidebar-wrapper">
     <div class="sidebar-header">
         <div class="logo-icon">
-            <img src="{{ URL::asset('build/images/logo-icon.png') }}" class="logo-img" alt="">
+            <img src="{{ URL::asset('dist/images/logo-icon.png') }}" class="logo-img" alt="">
         </div>
         <div class="logo-name flex-grow-1">
             <h5 class="mb-0">Innovación Contable</h5>

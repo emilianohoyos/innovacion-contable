@@ -2,8 +2,8 @@
 
 @section('title', 'Advance')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Cards" pagetitle="Advance" />
 
@@ -13,7 +13,7 @@
             <div class="row g-0">
               <div class="col-md-4 border-end">
                 <div class="p-3">
-                  <img src="{{ URL::asset('build/images/gallery/09.png') }}" class="w-100 rounded-start" alt="...">
+                  <img src="{{ URL::asset('dist/images/gallery/09.png') }}" class="w-100 rounded-start" alt="...">
                 </div>
               </div>
               <div class="col-md-8">
@@ -63,7 +63,7 @@
             <div class="row g-0">
               <div class="col-md-4 border-end">
                 <div class="p-3">
-                  <img src="{{ URL::asset('build/images/gallery/11.png') }}" class="w-100 rounded-start" alt="...">
+                  <img src="{{ URL::asset('dist/images/gallery/11.png') }}" class="w-100 rounded-start" alt="...">
                 </div>
               </div>
               <div class="col-md-8">
@@ -113,7 +113,7 @@
             <div class="row g-0">
               <div class="col-md-4 border-end">
                 <div class="p-3">
-                  <img src="{{ URL::asset('build/images/gallery/12.png') }}" class="w-100 rounded h-100" alt="...">
+                  <img src="{{ URL::asset('dist/images/gallery/12.png') }}" class="w-100 rounded h-100" alt="...">
                 </div>
               </div>
               <div class="col-md-8">
@@ -212,7 +212,7 @@
             <div class="row g-0">
               <div class="col-md-4 border-end">
                 <div class="p-3">
-                  <img src="{{ URL::asset('build/images/gallery/10.png') }}" class="w-100 rounded h-100" alt="...">
+                  <img src="{{ URL::asset('dist/images/gallery/10.png') }}" class="w-100 rounded h-100" alt="...">
                 </div>
               </div>
               <div class="col-md-8">
@@ -248,7 +248,7 @@
 
         <div class="col">
           <div class="card">
-            <img src="{{ URL::asset('build/images/gallery/13.png') }}" class="img-fluid card-img-top" alt="">
+            <img src="{{ URL::asset('dist/images/gallery/13.png') }}" class="img-fluid card-img-top" alt="">
             <div class="card-body p-4">
               <h3 class="">Welcome to Company</h3>
               <p>Contrary to popular belief, Lorem Ipsum is not simply random text.
@@ -271,37 +271,37 @@
                 <div class="row row-cols-1 row-cols-lg-2 g-4">
                   <div class="col">
                     <div class="text-center">
-                      <img src="{{ URL::asset('build/images/orders/01.png') }}" class="img-fluid rounded" alt="">
+                      <img src="{{ URL::asset('dist/images/orders/01.png') }}" class="img-fluid rounded" alt="">
                       <h5 class="mb-0 mt-3">Logo Design</h5>
                     </div>
                   </div>
                   <div class="col">
                     <div class="text-center">
-                      <img src="{{ URL::asset('build/images/orders/02.png') }}" class="img-fluid rounded" alt="">
+                      <img src="{{ URL::asset('dist/images/orders/02.png') }}" class="img-fluid rounded" alt="">
                       <h5 class="mb-0 mt-3">Whiteboard & Animated</h5>
                     </div>
                   </div>
                   <div class="col">
                     <div class="text-center">
-                      <img src="{{ URL::asset('build/images/orders/03.png') }}" class="img-fluid rounded" alt="">
+                      <img src="{{ URL::asset('dist/images/orders/03.png') }}" class="img-fluid rounded" alt="">
                       <h5 class="mb-0 mt-3">Voice Over</h5>
                     </div>
                   </div>
                   <div class="col">
                     <div class="text-center">
-                      <img src="{{ URL::asset('build/images/orders/04.png') }}" class="img-fluid rounded" alt="">
+                      <img src="{{ URL::asset('dist/images/orders/04.png') }}" class="img-fluid rounded" alt="">
                       <h5 class="mb-0 mt-3">Wordpress</h5>
                     </div>
                   </div>
                   <div class="col">
                     <div class="text-center">
-                      <img src="{{ URL::asset('build/images/orders/05.png') }}" class="img-fluid rounded" alt="">
+                      <img src="{{ URL::asset('dist/images/orders/05.png') }}" class="img-fluid rounded" alt="">
                       <h5 class="mb-0 mt-3">Articles & Blog Posts</h5>
                     </div>
                   </div>
                   <div class="col">
                     <div class="text-center">
-                      <img src="{{ URL::asset('build/images/orders/06.png') }}" class="img-fluid rounded" alt="">
+                      <img src="{{ URL::asset('dist/images/orders/06.png') }}" class="img-fluid rounded" alt="">
                       <h5 class="mb-0 mt-3">Website Design</h5>
                     </div>
                   </div>
@@ -319,7 +319,7 @@
                   <div class="card shadow-none bg-voilet mb-0" style="height: 160px;">
                     <div class="card-body">
                       <h5 class="mb-0 text-white">Women Clothes</h5>
-                      <img src="{{ URL::asset('build/images/cat/01.png') }}" class="position-absolute end-0 bottom-0" width="140" alt="">
+                      <img src="{{ URL::asset('dist/images/cat/01.png') }}" class="position-absolute end-0 bottom-0" width="140" alt="">
                     </div>
                   </div>
                 </div>
@@ -327,7 +327,7 @@
                   <div class="card shadow-none bg-success mb-0" style="height: 160px;">
                     <div class="card-body">
                       <h5 class="mb-0 text-white">Men Clothes</h5>
-                      <img src="{{ URL::asset('build/images/cat/02.png') }}" class="position-absolute end-0 bottom-0" width="90" alt="">
+                      <img src="{{ URL::asset('dist/images/cat/02.png') }}" class="position-absolute end-0 bottom-0" width="90" alt="">
                     </div>
                   </div>
                 </div>
@@ -335,7 +335,7 @@
                   <div class="card shadow-none bg-dark-blue mb-0" style="height: 160px;">
                     <div class="card-body">
                       <h5 class="mb-0 text-white">Airpods</h5>
-                      <img src="{{ URL::asset('build/images/cat/03.png') }}" class="position-absolute end-0 bottom-0" width="120" alt="">
+                      <img src="{{ URL::asset('dist/images/cat/03.png') }}" class="position-absolute end-0 bottom-0" width="120" alt="">
                     </div>
                   </div>
                 </div>
@@ -343,7 +343,7 @@
                   <div class="card shadow-none bg-danger mb-0" style="height: 160px;">
                     <div class="card-body">
                       <h5 class="mb-0 text-white">Furniture</h5>
-                      <img src="{{ URL::asset('build/images/cat/04.png') }}" class="position-absolute end-0 bottom-0 m-2" width="160"
+                      <img src="{{ URL::asset('dist/images/cat/04.png') }}" class="position-absolute end-0 bottom-0 m-2" width="160"
                         alt="">
                     </div>
                   </div>
@@ -352,7 +352,7 @@
                   <div class="card shadow-none bg-orange mb-0" style="height: 160px;">
                     <div class="card-body">
                       <h5 class="mb-0 text-white">Hand Watch</h5>
-                      <img src="{{ URL::asset('build/images/cat/05.png') }}" class="position-absolute end-0 bottom-0" width="130" alt="">
+                      <img src="{{ URL::asset('dist/images/cat/05.png') }}" class="position-absolute end-0 bottom-0" width="130" alt="">
                     </div>
                   </div>
                 </div>
@@ -360,7 +360,7 @@
                   <div class="card shadow-none bg-indigo mb-0" style="height: 160px;">
                     <div class="card-body">
                       <h5 class="mb-0 text-white">Shoes  Pair</h5>
-                      <img src="{{ URL::asset('build/images/cat/06.png') }}" class="position-absolute end-0 bottom-0 m-2" width="200"
+                      <img src="{{ URL::asset('dist/images/cat/06.png') }}" class="position-absolute end-0 bottom-0 m-2" width="200"
                         alt="">
                     </div>
                   </div>
@@ -371,7 +371,7 @@
           </div>
 
           <div class="card">
-            <img src="{{ URL::asset('build/images/gallery/15.png') }}" class="card-img" alt="...">
+            <img src="{{ URL::asset('dist/images/gallery/15.png') }}" class="card-img" alt="...">
             <div class="card-img-overlay">
               <p class="mb-4 text-white text-uppercase">Travel</p>
               <h3 class="card-title text-white">Various versions evolved</h3>
@@ -387,7 +387,7 @@
 
           <div class="d-flex align-items-center gap-3">
             <div class="card rounded-4">
-              <img src="{{ URL::asset('build/images/gallery/16.png') }}" class="card-img rounded-4" alt="...">
+              <img src="{{ URL::asset('dist/images/gallery/16.png') }}" class="card-img rounded-4" alt="...">
               <div class="card-img-overlay">
                 <p class="mb-4 text-white text-uppercase">Corporate</p>
                 <h3 class="card-title text-white">Various versions evolved</h3>
@@ -399,7 +399,7 @@
               </div>
             </div>
             <div class="card rounded-4">
-              <img src="{{ URL::asset('build/images/gallery/17.png') }}" class="card-img rounded-4" alt="...">
+              <img src="{{ URL::asset('dist/images/gallery/17.png') }}" class="card-img rounded-4" alt="...">
               <div class="card-img-overlay">
                 <p class="mb-4 text-white text-uppercase">Fitness</p>
                 <h3 class="card-title text-white">Various versions evolved</h3>
@@ -411,4 +411,4 @@
           </div>
         </div>
       </div><!--end row-->
-@endsection 
+@endsection

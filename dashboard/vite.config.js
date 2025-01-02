@@ -5,7 +5,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 export default defineConfig({
     build: {
         manifest: true,
-        outDir: 'public/build/',
+        outDir: 'public/dist/',
         cssCodeSplit: true,
 
     },

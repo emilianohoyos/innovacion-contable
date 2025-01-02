@@ -2,7 +2,7 @@
 
 @section('title', 'Dashboard')
 $@section('css')
-    <link href="{{ URL::asset('build/plugins/fullcalendar/css/main.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('dist/plugins/fullcalendar/css/main.min.css') }}" rel="stylesheet">
 @endsection
 @section('content')
 
@@ -224,9 +224,9 @@ $@section('css')
 @endsection
 @section('scripts')
 
-    <script src="{{ URL::asset('build/plugins/apexchart/apexcharts.min.js') }}"></script>
+    <script src="{{ URL::asset('dist/plugins/apexchart/apexcharts.min.js') }}"></script>
     <script src="{{ URL::asset('build/js/index2.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/fullcalendar/js/main.min.js') }}"></script>
+    <script src="{{ URL::asset('dist/plugins/fullcalendar/js/main.min.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');

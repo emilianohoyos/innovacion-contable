@@ -2,8 +2,8 @@
 
 @section('title', 'Chart Js')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Charts" pagetitle="Chart Js" />
 
@@ -234,10 +234,10 @@
           </div>
 
         </div><!--end row-->
-    
-@endsection 
-@section('scripts')
-  <script src="{{ URL::asset('build/plugins/chartjs/js/chart.js') }}"></script>
-	<script src="{{ URL::asset('build/plugins/chartjs/js/chartjs-custom.js') }}"></script>
 
-@endsection 
+@endsection
+@section('scripts')
+  <script src="{{ URL::asset('dist/plugins/chartjs/js/chart.js') }}"></script>
+	<script src="{{ URL::asset('dist/plugins/chartjs/js/chartjs-custom.js') }}"></script>
+
+@endsection

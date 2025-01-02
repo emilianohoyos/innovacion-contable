@@ -9,7 +9,7 @@
       <div class="order-list">
         <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
           <div class="order-img">
-            <img src="{{ URL::asset('build/images/orders/01.png') }}" class="img-fluid rounded-3" width="75" alt="">
+            <img src="{{ URL::asset('dist/images/orders/01.png') }}" class="img-fluid rounded-3" width="75" alt="">
           </div>
           <div class="order-info flex-grow-1">
             <h5 class="mb-1 order-title">White Men Shoes</h5>
@@ -23,7 +23,7 @@
 
         <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
           <div class="order-img">
-            <img src="{{ URL::asset('build/images/orders/02.png') }}" class="img-fluid rounded-3" width="75" alt="">
+            <img src="{{ URL::asset('dist/images/orders/02.png') }}" class="img-fluid rounded-3" width="75" alt="">
           </div>
           <div class="order-info flex-grow-1">
             <h5 class="mb-1 order-title">Red Airpods</h5>
@@ -37,7 +37,7 @@
 
         <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
           <div class="order-img">
-            <img src="{{ URL::asset('build/images/orders/03.png') }}" class="img-fluid rounded-3" width="75" alt="">
+            <img src="{{ URL::asset('dist/images/orders/03.png') }}" class="img-fluid rounded-3" width="75" alt="">
           </div>
           <div class="order-info flex-grow-1">
             <h5 class="mb-1 order-title">Men Polo Tshirt</h5>
@@ -51,7 +51,7 @@
 
         <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
           <div class="order-img">
-            <img src="{{ URL::asset('build/images/orders/04.png') }}" class="img-fluid rounded-3" width="75" alt="">
+            <img src="{{ URL::asset('dist/images/orders/04.png') }}" class="img-fluid rounded-3" width="75" alt="">
           </div>
           <div class="order-info flex-grow-1">
             <h5 class="mb-1 order-title">Blue Jeans Casual</h5>
@@ -65,7 +65,7 @@
 
         <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
           <div class="order-img">
-            <img src="{{ URL::asset('build/images/orders/05.png') }}" class="img-fluid rounded-3" width="75" alt="">
+            <img src="{{ URL::asset('dist/images/orders/05.png') }}" class="img-fluid rounded-3" width="75" alt="">
           </div>
           <div class="order-info flex-grow-1">
             <h5 class="mb-1 order-title">Fancy Shirts</h5>
@@ -79,7 +79,7 @@
 
         <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
           <div class="order-img">
-            <img src="{{ URL::asset('build/images/orders/06.png') }}" class="img-fluid rounded-3" width="75" alt="">
+            <img src="{{ URL::asset('dist/images/orders/06.png') }}" class="img-fluid rounded-3" width="75" alt="">
           </div>
           <div class="order-info flex-grow-1">
             <h5 class="mb-1 order-title">Home Sofa Set </h5>
@@ -93,7 +93,7 @@
 
         <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
           <div class="order-img">
-            <img src="{{ URL::asset('build/images/orders/07.png') }}" class="img-fluid rounded-3" width="75" alt="">
+            <img src="{{ URL::asset('dist/images/orders/07.png') }}" class="img-fluid rounded-3" width="75" alt="">
           </div>
           <div class="order-info flex-grow-1">
             <h5 class="mb-1 order-title">Black iPhone</h5>
@@ -107,7 +107,7 @@
 
         <div class="order-item d-flex align-items-center gap-3 p-3 border-bottom">
           <div class="order-img">
-            <img src="{{ URL::asset('build/images/orders/08.png') }}" class="img-fluid rounded-3" width="75" alt="">
+            <img src="{{ URL::asset('dist/images/orders/08.png') }}" class="img-fluid rounded-3" width="75" alt="">
           </div>
           <div class="order-info flex-grow-1">
             <h5 class="mb-1 order-title">Goldan Watch</h5>

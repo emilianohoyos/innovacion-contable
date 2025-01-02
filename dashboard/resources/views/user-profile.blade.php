@@ -2,8 +2,8 @@
 
 @section('title', 'User Profile')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Pages" pagetitle="User Profile" />
 
@@ -12,9 +12,9 @@
             <div class="card overflow-hidden">
               <div class="card-body">
                 <div class="position-relative">
-                  <img src="{{ URL::asset('build/images/carousels/22.png') }}" class="img-fluid rounded" alt="">
+                  <img src="{{ URL::asset('dist/images/carousels/22.png') }}" class="img-fluid rounded" alt="">
                   <div class="position-absolute top-100 start-50 translate-middle">
-                    <img src="{{ URL::asset('build/images/avatars/06.png') }}" width="110" height="110" class="rounded-circle raised p-1 bg-white" alt="">
+                    <img src="{{ URL::asset('dist/images/avatars/06.png') }}" width="110" height="110" class="rounded-circle raised p-1 bg-white" alt="">
                   </div>
                 </div>
                 <div class="mt-5 d-flex align-items-start justify-content-between">
@@ -100,4 +100,4 @@
 
           </div>
         </div>
-@endsection  
+@endsection

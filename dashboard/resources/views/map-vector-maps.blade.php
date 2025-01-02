@@ -2,8 +2,8 @@
 
 @section('title', 'Vector Map')
 @section('css')
-	<link href="{{ URL::asset('build/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet">
-@endsection 
+	<link href="{{ URL::asset('dist/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet">
+@endsection
 @section('content')
 <x-page-title title="Maps" pagetitle="Vector Map" />
 
@@ -54,15 +54,15 @@
 						</div>
           </div>
         </div><!--end row-->
-@endsection 
-@section('scripts')     
+@endsection
+@section('scripts')
 
   <!-- Vector map JavaScript -->
-	<script src="{{ URL::asset('build/plugins/vectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>
-	<script src="{{ URL::asset('build/plugins/vectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
-	<script src="{{ URL::asset('build/plugins/vectormap/jquery-jvectormap-in-mill.js') }}"></script>
-	<script src="{{ URL::asset('build/plugins/vectormap/jquery-jvectormap-us-aea-en.js') }}"></script>
-	<script src="{{ URL::asset('build/plugins/vectormap/jquery-jvectormap-uk-mill-en.js') }}"></script>
-	<script src="{{ URL::asset('build/plugins/vectormap/jquery-jvectormap-au-mill.js') }}"></script>
-	<script src="{{ URL::asset('build/plugins/vectormap/jvectormap.custom.js') }}"></script>
-@endsection 
+	<script src="{{ URL::asset('dist/plugins/vectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>
+	<script src="{{ URL::asset('dist/plugins/vectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+	<script src="{{ URL::asset('dist/plugins/vectormap/jquery-jvectormap-in-mill.js') }}"></script>
+	<script src="{{ URL::asset('dist/plugins/vectormap/jquery-jvectormap-us-aea-en.js') }}"></script>
+	<script src="{{ URL::asset('dist/plugins/vectormap/jquery-jvectormap-uk-mill-en.js') }}"></script>
+	<script src="{{ URL::asset('dist/plugins/vectormap/jquery-jvectormap-au-mill.js') }}"></script>
+	<script src="{{ URL::asset('dist/plugins/vectormap/jvectormap.custom.js') }}"></script>
+@endsection

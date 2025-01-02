@@ -2,8 +2,8 @@
 
 @section('title', 'Carousels')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Components" pagetitle="Carousels" />
 
@@ -16,13 +16,13 @@
 						<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
 							<div class="carousel-inner">
 								<div class="carousel-item active">
-									<img src="{{ URL::asset('build/images/carousels/01.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/01.png') }}" class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img src="{{ URL::asset('build/images/carousels/02.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/02.png') }}" class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img src="{{ URL::asset('build/images/carousels/03.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/03.png') }}" class="d-block w-100" alt="...">
 								</div>
 							</div>
 						</div>
@@ -37,13 +37,13 @@
 						<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 							<div class="carousel-inner">
 								<div class="carousel-item active">
-									<img src="{{ URL::asset('build/images/carousels/04.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/04.png') }}" class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img src="{{ URL::asset('build/images/carousels/05.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/05.png') }}" class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img src="{{ URL::asset('build/images/carousels/06.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/06.png') }}" class="d-block w-100" alt="...">
 								</div>
 							</div>
 							<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -69,13 +69,13 @@
 							</ol>
 							<div class="carousel-inner">
 								<div class="carousel-item active">
-									<img src="{{ URL::asset('build/images/carousels/07.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/07.png') }}" class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img src="{{ URL::asset('build/images/carousels/08.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/08.png') }}" class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img src="{{ URL::asset('build/images/carousels/09.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/09.png') }}" class="d-block w-100" alt="...">
 								</div>
 							</div>
 							<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -101,21 +101,21 @@
 							</ol>
 							<div class="carousel-inner">
 								<div class="carousel-item active">
-									<img src="{{ URL::asset('build/images/carousels/10.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/10.png') }}" class="d-block w-100" alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<h5>First slide label</h5>
 										<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 									</div>
 								</div>
 								<div class="carousel-item">
-									<img src="{{ URL::asset('build/images/carousels/11.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/11.png') }}" class="d-block w-100" alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<h5>Second slide label</h5>
 										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 									</div>
 								</div>
 								<div class="carousel-item">
-									<img src="{{ URL::asset('build/images/carousels/12.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/12.png') }}" class="d-block w-100" alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<h5>Third slide label</h5>
 										<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
@@ -140,13 +140,13 @@
 						<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
 							<div class="carousel-inner">
 								<div class="carousel-item active">
-									<img src="{{ URL::asset('build/images/carousels/13.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/13.png') }}" class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img src="{{ URL::asset('build/images/carousels/14.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/14.png') }}" class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img src="{{ URL::asset('build/images/carousels/15.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/15.png') }}" class="d-block w-100" alt="...">
 								</div>
 							</div>
 							<a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-bs-slide="prev">	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -167,13 +167,13 @@
 						<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
 							<div class="carousel-inner">
 								<div class="carousel-item active" data-bs-interval="10000">
-									<img src="{{ URL::asset('build/images/carousels/16.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/16.png') }}" class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item" data-bs-interval="2000">
-									<img src="{{ URL::asset('build/images/carousels/17.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/17.png') }}" class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img src="{{ URL::asset('build/images/carousels/18.png') }}" class="d-block w-100" alt="...">
+									<img src="{{ URL::asset('dist/images/carousels/18.png') }}" class="d-block w-100" alt="...">
 								</div>
 							</div>
 							<a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-bs-slide="prev">	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -200,21 +200,21 @@
 					</ol>
 					<div class="carousel-inner">
 						<div class="carousel-item active" data-bs-interval="10000">
-							<img src="{{ URL::asset('build/images/carousels/19.png') }}" class="d-block w-100" alt="...">
+							<img src="{{ URL::asset('dist/images/carousels/19.png') }}" class="d-block w-100" alt="...">
 							<div class="carousel-caption d-none d-md-block">
 								<h5>First slide label</h5>
 								<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 							</div>
 						</div>
 						<div class="carousel-item" data-bs-interval="2000">
-							<img src="{{ URL::asset('build/images/carousels/20.png') }}" class="d-block w-100" alt="...">
+							<img src="{{ URL::asset('dist/images/carousels/20.png') }}" class="d-block w-100" alt="...">
 							<div class="carousel-caption d-none d-md-block">
 								<h5>Second slide label</h5>
 								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 							</div>
 						</div>
 						<div class="carousel-item">
-							<img src="{{ URL::asset('build/images/carousels/21.png') }}" class="d-block w-100" alt="...">
+							<img src="{{ URL::asset('dist/images/carousels/21.png') }}" class="d-block w-100" alt="...">
 							<div class="carousel-caption d-none d-md-block">
 								<h5>Third slide label</h5>
 								<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
@@ -230,5 +230,5 @@
 				</div>
 			</div>
 		</div>
- 
-@endsection 		
+
+@endsection

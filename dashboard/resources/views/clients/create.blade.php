@@ -2,10 +2,10 @@
 
 @section('title', 'Alternate')
 @section('css')
-    <link href="{{ URL::asset('build/plugins/bs-stepper/css/bs-stepper.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('build/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('build/plugins/select2/css/select2-bootstrap-5-theme.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('dist/plugins/bs-stepper/css/bs-stepper.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('dist/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('dist/plugins/select2/css/select2-bootstrap-5-theme.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('dist/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
 
 
 @endsection
@@ -319,10 +319,10 @@
     <!--end stepper one-->
 @endsection
 @section('scripts')
-    <script src="{{ URL::asset('build/plugins/bs-stepper/js/bs-stepper.min.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/bs-stepper/js/main.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/select2/js/select2.full.min.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ URL::asset('dist/plugins/bs-stepper/js/bs-stepper.min.js') }}"></script>
+    <script src="{{ URL::asset('dist/plugins/bs-stepper/js/main.js') }}"></script>
+    <script src="{{ URL::asset('dist/plugins/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ URL::asset('dist/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script>
         var stepper1
         document.addEventListener('DOMContentLoaded', function() {

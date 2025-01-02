@@ -4,7 +4,7 @@
 @section('css')
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
-@endsection 
+@endsection
 @section('content')
 <x-page-title title="Forms" pagetitle="Select2" />
 
@@ -19,7 +19,7 @@
 						<div class="mb-4">
 							<label for="single-select-field" class="form-label">Basic single select</label>
 							<select class="form-select" id="single-select-field" data-placeholder="Choose one thing">
-								
+
 								<option>Reactive</option>
 								<option>Solution</option>
 								<option>Conglomeration</option>
@@ -31,7 +31,7 @@
 						<div class="mb-4">
 							<label for="single-select-optgroup-field" class="form-label">Single select w/ optgroup</label>
 							<select class="form-select" id="single-select-optgroup-field" data-placeholder="Choose one thing">
-								
+
 								<optgroup label="Group 1">
 									<option>Reactive</option>
 									<option>Solution</option>
@@ -47,7 +47,7 @@
 						<div class="mb-4">
 							<label for="single-select-clear-field" class="form-label">Single select w/ allow clear</label>
 								<select class="form-select" id="single-select-clear-field" data-placeholder="Choose one thing">
-									
+
 									<option>Reactive</option>
 									<option>Solution</option>
 									<option>Conglomeration</option>
@@ -59,7 +59,7 @@
 							<div class="mb-0">
 							<label for="single-select-disabled-field" class="form-label">Disabled single select</label>
 							<select class="form-select" id="single-select-disabled-field" data-placeholder="Choose one thing" disabled>
-								
+
 								<option>Reactive</option>
 								<option>Solution</option>
 								<option>Conglomeration</option>
@@ -76,7 +76,7 @@
 					<hr>
 				<div class="card">
 					<div class="card-body">
-						
+
 					<div class="mb-4">
 						<label for="multiple-select-field" class="form-label">Basic multiple select</label>
 						<select class="form-select" id="multiple-select-field" data-placeholder="Choose anything" multiple>
@@ -223,7 +223,7 @@
 					<hr>
 				<div class="card">
 					<div class="card-body">
-					
+
 					<div class="card shadow-none border">
 						<div class="card-header bg-light">
 							<h6 class="mb-0">Select with Prepend</h6>
@@ -232,7 +232,7 @@
 							<div class="input-group mb-3">
 								<div class="input-group-text">Prepend</div>
 								<select class="form-select" id="prepend-text-single-field" data-placeholder="Choose one thing">
-									
+
 									<option>Reactive</option>
 									<option>Solution</option>
 									<option>Conglomeration</option>
@@ -240,7 +240,7 @@
 									<option>Holistic</option>
 								</select>
 							</div>
-							
+
 							<div class="input-group">
 								<div class="input-group-text">Prepend</div>
 								<select class="form-select" data-placeholder="Choose anything" id="prepend-text-multiple-field" multiple>
@@ -278,7 +278,7 @@
 							<div class="input-group mb-3">
 								<button class="btn btn-outline-secondary" type="button">Prepend</button>
 								<select class="form-select" id="prepend-button-single-field" data-placeholder="Choose one thing">
-									
+
 									<option>Reactive</option>
 									<option>Solution</option>
 									<option>Conglomeration</option>
@@ -286,7 +286,7 @@
 									<option>Holistic</option>
 								</select>
 							</div>
-							
+
 							<div class="input-group">
 								<button class="btn btn-outline-secondary" type="button">Prepend</button>
 								<select class="form-select" data-placeholder="Choose anything" id="prepend-button-multiple-field" multiple>
@@ -331,7 +331,7 @@
 									<li><a class="dropdown-item" href="#">Separated link</a></li>
 								</ul>
 								<select class="form-select" id="prepend-dropdown-single-field" data-placeholder="Choose one thing">
-									
+
 									<option>Reactive</option>
 									<option>Solution</option>
 									<option>Conglomeration</option>
@@ -339,7 +339,7 @@
 									<option>Holistic</option>
 								</select>
 							</div>
-							
+
 							<div class="input-group mb-0">
 								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Prepend</button>
 								<ul class="dropdown-menu">
@@ -371,7 +371,7 @@
 									<option>Czech Republic</option>
 									<option>Russia</option>
 								</select>
-							</div>									
+							</div>
 						</div>
 					</div>
 
@@ -394,7 +394,7 @@
 									<li><a class="dropdown-item" href="#">Separated link</a></li>
 								</ul>
 								<select class="form-select" id="prepend-toggle-single-field" data-placeholder="Choose one thing">
-									
+
 									<option>Reactive</option>
 									<option>Solution</option>
 									<option>Conglomeration</option>
@@ -402,7 +402,7 @@
 									<option>Holistic</option>
 								</select>
 							</div>
-							
+
 							<div class="input-group mb-0">
 								<button class="btn btn-outline-secondary">Prepend</button>
 								<button class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -437,12 +437,12 @@
 									<option>Czech Republic</option>
 									<option>Russia</option>
 								</select>
-							</div>			
+							</div>
 						</div>
 					</div>
 
 
-					
+
 					<div class="card shadow-none border">
 						<div class="card-header bg-light">
 							<h6 class="mb-0">Select with Append</h6>
@@ -450,7 +450,7 @@
 						<div class="card-body">
 							<div class="input-group mb-3">
 								<select class="form-select" id="append-text-single-field" data-placeholder="Choose one thing">
-									
+
 									<option>Reactive</option>
 									<option>Solution</option>
 									<option>Conglomeration</option>
@@ -459,7 +459,7 @@
 								</select>
 								<div class="input-group-text">Append</div>
 							</div>
-							
+
 							<div class="input-group mb-0">
 								<select class="form-select" data-placeholder="Choose anything" id="append-text-multiple-field" multiple>
 									<option>Christmas Island</option>
@@ -496,7 +496,7 @@
 						<div class="card-body">
 							<div class="input-group mb-3">
 								<select class="form-select" id="append-button-single-field" data-placeholder="Choose one thing">
-									
+
 									<option>Reactive</option>
 									<option>Solution</option>
 									<option>Conglomeration</option>
@@ -505,7 +505,7 @@
 								</select>
 								<button class="btn btn-outline-secondary" type="button">Append</button>
 							</div>
-							
+
 							<div class="input-group mb-0">
 								<select class="form-select" data-placeholder="Choose anything" id="append-button-multiple-field" multiple>
 									<option>Christmas Island</option>
@@ -537,12 +537,12 @@
 
 					<div class="card shadow-none border">
 						<div class="card-header bg-light">
-							<h6 class="mb-0">Select Append with Dropdown</h6>	
+							<h6 class="mb-0">Select Append with Dropdown</h6>
 						</div>
 						<div class="card-body">
 							<div class="input-group mb-3">
 								<select class="form-select" id="append-dropdown-single-field" data-placeholder="Choose one thing">
-									
+
 									<option>Reactive</option>
 									<option>Solution</option>
 									<option>Conglomeration</option>
@@ -558,7 +558,7 @@
 									<li><a class="dropdown-item" href="#">Separated link</a></li>
 								</ul>
 							</div>
-							
+
 							<div class="input-group mb-0">
 								<select class="form-select" data-placeholder="Choose anything" id="append-dropdown-multiple-field" multiple>
 									<option>Christmas Island</option>
@@ -602,7 +602,7 @@
 						<div class="card-body">
 							<div class="input-group mb-3">
 								<select class="form-select" id="append-toggle-single-field" data-placeholder="Choose one thing">
-									
+
 									<option>Reactive</option>
 									<option>Solution</option>
 									<option>Conglomeration</option>
@@ -621,7 +621,7 @@
 									<li><a class="dropdown-item" href="#">Separated link</a></li>
 								</ul>
 							</div>
-							
+
 							<div class="input-group mb-0">
 								<select class="form-select" data-placeholder="Choose anything" id="append-toggle-multiple-field" multiple>
 									<option>Christmas Island</option>
@@ -669,7 +669,7 @@
 							<div class="input-group mb-3">
 								<div class="input-group-text">Prepend</div>
 								<select class="form-select" id="prepend-append-text-single-field" data-placeholder="Choose one thing">
-									
+
 									<option>Reactive</option>
 									<option>Solution</option>
 									<option>Conglomeration</option>
@@ -678,7 +678,7 @@
 								</select>
 								<div class="input-group-text">Append</div>
 							</div>
-							
+
 							<div class="input-group mb-0">
 								<div class="input-group-text">Prepend</div>
 								<select class="form-select" data-placeholder="Choose anything" id="prepend-append-text-multiple-field" multiple>
@@ -718,7 +718,7 @@
 							<div class="input-group mb-3">
 								<button class="btn btn-outline-secondary" type="button">Prepend</button>
 								<select class="form-select" id="prepend-append-button-single-field" data-placeholder="Choose one thing">
-									
+
 									<option>Reactive</option>
 									<option>Solution</option>
 									<option>Conglomeration</option>
@@ -727,7 +727,7 @@
 								</select>
 								<button class="btn btn-outline-secondary" type="button">Append</button>
 							</div>
-							
+
 							<div class="input-group mb-0">
 								<button class="btn btn-outline-secondary" type="button">Prepend</button>
 								<select class="form-select" data-placeholder="Choose anything" id="prepend-append-button-multiple-field" multiple>
@@ -774,7 +774,7 @@
 									<li><a class="dropdown-item" href="#">Separated link</a></li>
 								</ul>
 								<select class="form-select" id="prepend-append-dropdown-single-field" data-placeholder="Choose one thing">
-									
+
 									<option>Reactive</option>
 									<option>Solution</option>
 									<option>Conglomeration</option>
@@ -790,7 +790,7 @@
 									<li><a class="dropdown-item" href="#">Separated link</a></li>
 								</ul>
 							</div>
-							
+
 							<div class="input-group mb-0">
 								<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Prepend</button>
 								<ul class="dropdown-menu">
@@ -853,7 +853,7 @@
 									<li><a class="dropdown-item" href="#">Separated link</a></li>
 								</ul>
 								<select class="form-select" id="prepend-append-toggle-single-field" data-placeholder="Choose one thing">
-									
+
 									<option>Reactive</option>
 									<option>Solution</option>
 									<option>Conglomeration</option>
@@ -872,7 +872,7 @@
 									<li><a class="dropdown-item" href="#">Separated link</a></li>
 								</ul>
 							</div>
-							
+
 							<div class="input-group mb-0">
 								<button class="btn btn-outline-secondary">Prepend</button>
 								<button class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -940,7 +940,7 @@
 						<div class="card-body">
 							<div class="mb-3">
 								<select class="form-select form-select-sm" id="small-bootstrap-class-single-field" data-placeholder="Choose one thing">
-									
+
 									<option>Reactive</option>
 									<option>Solution</option>
 									<option>Conglomeration</option>
@@ -948,7 +948,7 @@
 									<option>Holistic</option>
 								</select>
 							</div>
-							
+
 							<div class="mb-0">
 								<select class="form-select form-select-sm" data-placeholder="Choose anything" id="small-bootstrap-class-multiple-field" multiple>
 									<option>Christmas Island</option>
@@ -984,7 +984,7 @@
 						<div class="card-body">
 							<div class="mb-3">
 								<select class="form-select form-select-lg" id="large-bootstrap-class-single-field" data-placeholder="Choose one thing">
-									
+
 									<option>Reactive</option>
 									<option>Solution</option>
 									<option>Conglomeration</option>
@@ -992,7 +992,7 @@
 									<option>Holistic</option>
 								</select>
 							</div>
-							
+
 							<div class="mb-0">
 								<select class="form-select form-select-lg" data-placeholder="Choose anything" id="large-bootstrap-class-multiple-field" multiple>
 									<option>Christmas Island</option>
@@ -1024,9 +1024,9 @@
 			</div>
 		</div>
 		<!--end row-->
-@endsection 
-@section('scripts')  
+@endsection
+@section('scripts')
 
   	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-	<script src="{{ URL::asset('build/plugins/select2/js/select2-custom.js') }}"></script>
+	<script src="{{ URL::asset('dist/plugins/select2/js/select2-custom.js') }}"></script>
 @endsection

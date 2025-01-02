@@ -2,8 +2,8 @@
 
 @section('title', 'Alternate')
 @section('css')
-    <link href="{{ URL::asset('build/plugins/fancy-file-uploader/fancy_fileupload.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('build/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('dist/plugins/fancy-file-uploader/fancy_fileupload.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('dist/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet">
 @endsection
 @section('content')
     <x-page-title title="Solicitudes" pagetitle="Registro de Solicitudes" />
@@ -78,11 +78,11 @@
 @endsection
 @section('scripts')
 
-    <script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.ui.widget.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.fileupload.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.iframe-transport.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.fancy-fileupload.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
+    <script src="{{ URL::asset('dist/plugins/fancy-file-uploader/jquery.ui.widget.js') }}"></script>
+    <script src="{{ URL::asset('dist/plugins/fancy-file-uploader/jquery.fileupload.js') }}"></script>
+    <script src="{{ URL::asset('dist/plugins/fancy-file-uploader/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ URL::asset('dist/plugins/fancy-file-uploader/jquery.fancy-fileupload.js') }}"></script>
+    <script src="{{ URL::asset('dist/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
     <script>
         $('#fancy-file-upload').FancyFileUpload({
             params: {
