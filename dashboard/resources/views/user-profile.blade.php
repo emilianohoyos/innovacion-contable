@@ -2,8 +2,8 @@
 
 @section('title', 'User Profile')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Pages" pagetitle="User Profile" />
 
@@ -100,4 +100,4 @@
 
           </div>
         </div>
-@endsection  
+@endsection

@@ -2,11 +2,11 @@
 
 @section('title', 'Customers')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="eCommerce" pagetitle="Customers" />
-				
+
         <div class="product-count d-flex align-items-center gap-3 gap-lg-4 mb-4 fw-bold flex-wrap font-text1">
           <a href="javascript:;"><span class="me-1">All</span><span class="text-secondary">(85472)</span></a>
           <a href="javascript:;"><span class="me-1">New</span><span class="text-secondary">(145)</span></a>
@@ -58,7 +58,7 @@
                   <li><a class="dropdown-item" href="javascript:;">Something else here</a></li>
                 </ul>
               </div>
-            </div>  
+            </div>
           </div>
           <div class="col-auto">
             <div class="d-flex align-items-center gap-2 justify-content-lg-end">
@@ -73,7 +73,7 @@
             <div class="customer-table">
               <div class="table-responsive white-space-nowrap">
                  <table class="table align-middle">
-                  <thead class="table-light">     
+                  <thead class="table-light">
                     <tr>
                       <th>
                         <input class="form-check-input" type="checkbox">
@@ -298,11 +298,11 @@
                       <td>24 min ago</td>
                       <td>Nov 12, 10:45 PM</td>
                     </tr>
-                    
+
                    </tbody>
                  </table>
               </div>
             </div>
           </div>
         </div>
-@endsection 
+@endsection

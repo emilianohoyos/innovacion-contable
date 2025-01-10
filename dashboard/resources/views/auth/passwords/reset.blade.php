@@ -43,7 +43,7 @@
               <div class="col-12">
                 <label class="form-label" for="ConfirmPassword">Confirm Password</label>
                 <input type="password" class="form-control" name="password_confirmation" id="ConfirmPassword" placeholder="Confirm password">
-                
+
               </div>
               <div class="col-12">
                 <div class="d-grid gap-2">

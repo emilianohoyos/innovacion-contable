@@ -2,8 +2,8 @@
 
 @section('title', 'Carousels')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Components" pagetitle="Carousels" />
 
@@ -230,5 +230,5 @@
 				</div>
 			</div>
 		</div>
- 
-@endsection 		
+
+@endsection

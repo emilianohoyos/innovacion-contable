@@ -2,8 +2,8 @@
 
 @section('title', 'Customer Details')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="eCommerce" pagetitle="Customer Details" />
 
@@ -641,9 +641,9 @@
           </div>
         </div>
       </div>
-@endsection 
+@endsection
 @section('scripts')
   <script>
     new PerfectScrollbar(".customer-notes")
   </script>
-@endsection 
+@endsection

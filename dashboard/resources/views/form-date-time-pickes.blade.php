@@ -2,7 +2,7 @@
 
 @section('title', 'Date Time Pickers')
 @section('css')
-	<link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/flatpickr/build/flatpickr.min.css" rel="stylesheet">
 @endsection 
 @section('content')
 <x-page-title title="Forms" pagetitle="Date Time Pickers" />

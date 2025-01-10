@@ -3,10 +3,10 @@
 @section('title', 'Form Elements')
 @section('css')
 	<link href="{{ URL::asset('build/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet">
-@endsection 
+@endsection
 @section('content')
 <x-page-title title="Forms" pagetitle="Form Elements" />
-		
+
         <div class="row">
 			<div class="col-xl-12 mx-auto">
 				<h6 class="mb-0 text-uppercase">Text Inputs</h6>
@@ -277,7 +277,7 @@
 		</div>
 		<!--end row-->
 
-@endsection 
-@section('scripts')  
+@endsection
+@section('scripts')
   <script src="{{ URL::asset('build/plugins/input-tags/js/tagsinput.js') }}"></script>
-@endsection 
+@endsection

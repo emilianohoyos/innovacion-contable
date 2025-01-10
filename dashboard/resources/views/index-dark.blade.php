@@ -2,8 +2,8 @@
 
 @section('title', 'eCommerce')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Dashboard" pagetitle="eCommerce" />
 
@@ -52,7 +52,7 @@
                     <p class="mb-0">Notifications</p>
                   </div>
                   <div class="vr"></div>
-                  
+
                   <div class="d-flex flex-column align-items-center justify-content-center gap-2">
                     <a href="javascript:;" class="mb-2 wh-48 bg-info bg-opacity-10 text-info rounded-circle d-flex align-items-center justify-content-center">
                       <i class="material-icons-outlined">payment</i>
@@ -65,7 +65,7 @@
             </div>
           </div>
         </div><!--end row-->
-        
+
         <div class="row">
           <div class="col-12 col-xl-5 col-xxl-4 d-flex">
             <div class="card rounded-4 w-100 shadow-none bg-transparent border-0">
@@ -147,15 +147,15 @@
                               <div class="progress-bar bg-primary" style="width: 65%"></div>
                             </div>
                           </div>
-                          
+
                       </div>
                     </div>
                   </div>
 
                  </div><!--end row-->
                </div>
-            </div>  
-          </div> 
+            </div>
+          </div>
           <div class="col-12 col-xl-7 col-xxl-8 d-flex">
             <div class="card w-100 rounded-4">
                <div class="card-body">
@@ -206,8 +206,8 @@
                     </div>
                   </div>
                </div>
-            </div>  
-          </div> 
+            </div>
+          </div>
         </div><!--end row-->
 
         <div class="row">
@@ -495,10 +495,10 @@
                       </p>
                     </div>
                   </div>
-                  
+
                 </div>
               </div>
-            </div>  
+            </div>
           </div>
 
            <div class="col-12 col-xl-4 d-flex">
@@ -702,14 +702,14 @@
                     <h6 class="mb-0">$398</h6>
                   </div>
                 </div>
-                
+
               </div>
             </div>
           </div>
         </div>
       </div><!--end row-->
-@endsection 
-@section('scripts')  
+@endsection
+@section('scripts')
 
   <script src="{{ URL::asset('build/plugins/apexchart/apexcharts.min.js') }}"></script>
   <script src="{{ URL::asset('build/js/index.js') }}"></script>
@@ -718,4 +718,4 @@
     $(".data-attributes span").peity("donut")
   </script>
 
-@endsection 
+@endsection

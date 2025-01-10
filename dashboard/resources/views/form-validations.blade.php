@@ -2,11 +2,11 @@
 
 @section('title', 'Validations')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Forms" pagetitle="Validations" />
-		
+
         <div class="row">
 			<div class="col-xl-6 mx-auto">
 				<div class="card">
@@ -81,7 +81,7 @@
 									Please select a valid country.
 								</div>
 							</div>
-							
+
 							<div class="col-md-6">
 								<label for="bsValidation10" class="form-label">City</label>
 								<input type="text" class="form-control" id="bsValidation10" placeholder="City" required>
@@ -223,18 +223,18 @@
 			</div>
 		</div>
 		<!--end row-->
-@endsection  
-@section('scripts') 
+@endsection
+@section('scripts')
   	<script src="{{ URL::asset('build/plugins/validation/jquery.validate.min.js') }}"></script>
 	<script src="{{ URL::asset('build/plugins/validation/validation-script.js') }}"></script>
 	<script>
 		// Example starter JavaScript for disabling form submissions if there are invalid fields
 			(function () {
 			  'use strict'
-	
+
 			  // Fetch all the forms we want to apply custom Bootstrap validation styles to
 			  var forms = document.querySelectorAll('.needs-validation')
-	
+
 			  // Loop over them and prevent submission
 			  Array.prototype.slice.call(forms)
 				.forEach(function (form) {
@@ -243,7 +243,7 @@
 					  event.preventDefault()
 					  event.stopPropagation()
 					}
-	
+
 					form.classList.add('was-validated')
 				  }, false)
 				})

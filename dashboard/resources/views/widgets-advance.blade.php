@@ -2,8 +2,8 @@
 
 @section('title', 'Data')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Widgets" pagetitle="Data" />
 
@@ -702,11 +702,11 @@
         </div>
 
       </div><!--end row-->
-@endsection 
-@section('scripts')  
+@endsection
+@section('scripts')
   <script src="{{ URL::asset('build/plugins/peity/jquery.peity.min.js') }}"></script>
   <script>
     $(".data-attributes span").peity("donut")
 	new PerfectScrollbar(".user-list")
   </script>
-@endsection 
+@endsection

@@ -2,8 +2,8 @@
 
 @section('title', 'Order Details')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="eCommerce" pagetitle="Order Details" />
 
@@ -43,7 +43,7 @@
                         <li><a class="dropdown-item" href="javascript:;">Something else here</a></li>
                       </ul>
                     </div>
-                  </div>  
+                  </div>
                 </div>
               </div>
           </div>
@@ -238,7 +238,7 @@
                   </div>
                 </div>
               </div>
-              
+
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title mb-4 fw-bold">Order Status</h4>
@@ -350,4 +350,4 @@
               </div><!--end row-->
             </div>
          </div>
-@endsection 
+@endsection

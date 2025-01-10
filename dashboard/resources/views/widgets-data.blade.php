@@ -2,8 +2,8 @@
 
 @section('title', 'Data')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Widgets" pagetitle="Data" />
 
@@ -635,7 +635,7 @@
                   <span class="material-icons-outlined">signal_cellular_alt</span>
                 </div>
               </div>
-            
+
               <div class="d-flex align-items-center align-self-end text-success mb-1">
                 <p class="mb-0">25.6%</p>
                 <span class="material-icons-outlined">arrow_drop_up</span>
@@ -769,11 +769,11 @@
           </div>
         </div>
       </div><!--end row-->
-  
-@endsection 
-@section('scripts')  
+
+@endsection
+@section('scripts')
 
   <script src="{{ URL::asset('build/plugins/apexchart/apexcharts.min.js') }}"></script>
   <script src="{{ URL::asset('build/plugins/apexchart/data-cards.js') }}"></script>
 
-@endsection 
+@endsection

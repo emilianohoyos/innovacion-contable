@@ -35,7 +35,7 @@
                            <a href="javascript:;" class="input-group-text bg-transparent"><i class="bi bi-eye-slash-fill"></i></a>
 												</div>
 											</div>
-											
+
 											<div class="col-12">
 												<div class="form-check form-switch">
 													<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
@@ -78,6 +78,6 @@
            </div>
         </div><!--end row-->
      </div>
-      
+
     <!--authentication-->
 @endsection

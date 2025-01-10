@@ -3,7 +3,7 @@
 @section('title', 'Calender')
 @section('css')
 	<link href="{{ URL::asset('build/plugins/fullcalendar/css/main.min.css') }}" rel="stylesheet">
-@endsection 
+@endsection
 @section('content')
 
     <x-page-title title="Applications" pagetitle="Calender" />
@@ -15,7 +15,7 @@
 				</div>
 			</div>
 		</div>
-@endsection 
+@endsection
 @section('scripts')
 
   	<script src="{{ URL::asset('build/plugins/fullcalendar/js/main.min.js') }}"></script>
@@ -85,4 +85,4 @@
 			calendar.render();
 		});
 	</script>
-@endsection 
+@endsection

@@ -54,7 +54,7 @@
                       <h5 class="mb-0 search-list-title">eCommerce Website Tutorials</h5>
                     </div>
                   </div>
-  
+
                   <div class="search-list-item d-flex align-items-center gap-3">
                     <div class="list-icon">
                       <i class="material-icons-outlined fs-5">laptop</i>
@@ -64,10 +64,10 @@
                     </div>
                   </div>
                 </div>
-  
+
                 <hr>
                 <p class="search-title">Members</p>
-  
+
                 <div class="search-list d-flex flex-column gap-2">
                   <div class="search-list-item d-flex align-items-center gap-3">
                     <div class="memmber-img">
@@ -77,7 +77,7 @@
                       <h5 class="mb-0 search-list-title ">Andrew Stark</h5>
                     </div>
                   </div>
-  
+
                   <div class="search-list-item d-flex align-items-center gap-3">
                     <div class="memmber-img">
                       <img src="{{ URL::asset('build/images/avatars/02.png') }}" width="32" height="32" class="rounded-circle" alt="">
@@ -86,7 +86,7 @@
                       <h5 class="mb-0 search-list-title ">Snetro Jhonia</h5>
                     </div>
                   </div>
-  
+
                   <div class="search-list-item d-flex align-items-center gap-3">
                     <div class="memmber-img">
                       <img src="{{ URL::asset('build/images/avatars/03.png') }}" width="32" height="32" class="rounded-circle" alt="">
@@ -95,7 +95,7 @@
                       <h5 class="mb-0 search-list-title">Michle Clark</h5>
                     </div>
                   </div>
-  
+
                 </div>
               </div>
               <div class="card-footer text-center bg-transparent">

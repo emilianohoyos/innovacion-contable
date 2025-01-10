@@ -2,8 +2,8 @@
 
 @section('title', 'Orders')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="eCommerce" pagetitle="Orders" />
 
@@ -58,7 +58,7 @@
                   <li><a class="dropdown-item" href="javascript:;">Something else here</a></li>
                 </ul>
               </div>
-            </div>  
+            </div>
           </div>
           <div class="col-auto">
             <div class="d-flex align-items-center gap-2 justify-content-lg-end">
@@ -236,11 +236,11 @@
                       <td>Nov 12, 10:45 PM</td>
                     </tr>
 
-                    
+
                    </tbody>
                  </table>
               </div>
             </div>
           </div>
         </div>
-@endsection 
+@endsection

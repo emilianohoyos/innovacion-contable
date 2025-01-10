@@ -2,8 +2,8 @@
 
 @section('title', 'Avtars Chips')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Components" pagetitle="Avtars Chips" />
 
@@ -91,4 +91,4 @@
 				</div>
 			</div>
 		</div>
-@endsection 
+@endsection

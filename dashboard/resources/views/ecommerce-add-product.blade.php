@@ -3,7 +3,7 @@
 @section('title', 'Add Product')
 @section('css')
 	<link href="{{ URL::asset('build/plugins/fancy-file-uploader/fancy_fileupload.css') }}" rel="stylesheet">
-@endsection 
+@endsection
 @section('content')
 <x-page-title title="eCommerce" pagetitle="Add Product" />
 
@@ -25,7 +25,7 @@
                   </div>
                   <div class="mb-4">
                     <h5 class="mb-3">Inventory</h5>
-                    
+
                     <div class="row g-3">
                       <div class="col-12 col-lg-3">
                         <div class="nav flex-column nav-pills border rounded vertical-pills overflow-hidden">
@@ -189,10 +189,10 @@
                         </div>
                       </div>
                      </div>
-                   </div> 
+                   </div>
                  </div>
               </div>
-          </div> 
+          </div>
           <div class="col-12 col-lg-4">
              <div class="card">
                 <div class="card-body">
@@ -268,11 +268,11 @@
                   </div>
                  </div>
 
-              </div>                
-          
+              </div>
+
         </div><!--end row-->
-@endsection 
-@section('scripts')    
+@endsection
+@section('scripts')
   <script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.ui.widget.js') }}"></script>
 	<script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.fileupload.js') }}"></script>
 	<script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.iframe-transport.js') }}"></script>
@@ -286,4 +286,4 @@
 		});
 	</script>
 
-@endsection 
+@endsection

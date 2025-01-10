@@ -2,8 +2,8 @@
 
 @section('title', 'Products')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="eCommerce" pagetitle="Products" />
 
@@ -564,4 +564,4 @@
         </div>
       </div>
 
-@endsection   
+@endsection

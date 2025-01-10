@@ -2,8 +2,8 @@
 
 @section('title', 'Basic')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Cards" pagetitle="Basic" />
 
@@ -17,7 +17,7 @@
                   eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas
                   assumenda est, omnis dolor repellendus Temporibus autem
                   quibusdam et aut officiis debitis aut rerum necessitatibus saepe.</p>
-  
+
               </div>
             </div>
           </div>
@@ -30,7 +30,7 @@
                   eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas
                   assumenda est, omnis dolor repellendus Temporibus autem
                   quibusdam et aut officiis debitis aut rerum necessitatibus saepe.</p>
-  
+
               </div>
             </div>
           </div>
@@ -43,7 +43,7 @@
                   eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas
                   assumenda est, omnis dolor repellendus Temporibus autem
                   quibusdam et aut officiis debitis aut rerum necessitatibus saepe.</p>
-  
+
               </div>
             </div>
           </div>
@@ -56,11 +56,11 @@
                   eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas
                   assumenda est, omnis dolor repellendus Temporibus autem
                   quibusdam et aut officiis debitis aut rerum necessitatibus saepe.</p>
-  
+
               </div>
             </div>
           </div>
-  
+
           <div class="col">
             <div class="card">
               <div class="card-body">
@@ -102,4 +102,4 @@
             </div>
           </div>
         </div><!--end row-->
-@endsection 
+@endsection

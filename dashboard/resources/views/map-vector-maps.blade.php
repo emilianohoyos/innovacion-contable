@@ -3,7 +3,7 @@
 @section('title', 'Vector Map')
 @section('css')
 	<link href="{{ URL::asset('build/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet">
-@endsection 
+@endsection
 @section('content')
 <x-page-title title="Maps" pagetitle="Vector Map" />
 
@@ -54,8 +54,8 @@
 						</div>
           </div>
         </div><!--end row-->
-@endsection 
-@section('scripts')     
+@endsection
+@section('scripts')
 
   <!-- Vector map JavaScript -->
 	<script src="{{ URL::asset('build/plugins/vectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>
@@ -65,4 +65,4 @@
 	<script src="{{ URL::asset('build/plugins/vectormap/jquery-jvectormap-uk-mill-en.js') }}"></script>
 	<script src="{{ URL::asset('build/plugins/vectormap/jquery-jvectormap-au-mill.js') }}"></script>
 	<script src="{{ URL::asset('build/plugins/vectormap/jvectormap.custom.js') }}"></script>
-@endsection 
+@endsection

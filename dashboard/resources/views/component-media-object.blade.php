@@ -2,11 +2,11 @@
 
 @section('title', 'Media')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Components" pagetitle="Media" />
-				
+
         <div class="row">
 			<div class="col-12">
 				<h6 class="mb-0 text-uppercase">Basic Media Object</h6>
@@ -111,4 +111,4 @@
 			</div>
 		</div>
 
-@endsection 		
+@endsection

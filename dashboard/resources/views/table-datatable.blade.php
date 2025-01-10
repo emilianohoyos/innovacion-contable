@@ -3,10 +3,10 @@
 @section('title', 'Data Table')
 @section('css')
 	<link href="{{ URL::asset('build/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
-@endsection 
+@endsection
 @section('content')
 <x-page-title title="Tables" pagetitle="Data Table" />
-      
+
         <h6 class="mb-0 text-uppercase">DataTable Example</h6>
 		<hr>
 		<div class="card">
@@ -983,8 +983,8 @@
 				</div>
 			</div>
 		</div>
-@endsection 
-@section('scripts')  
+@endsection
+@section('scripts')
 
   <script src="{{ URL::asset('build/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ URL::asset('build/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
@@ -999,9 +999,9 @@
 				lengthChange: false,
 				buttons: [ 'copy', 'excel', 'pdf', 'print']
 			} );
-		 
+
 			table.buttons().container()
 				.appendTo( '#example2_wrapper .col-md-6:eq(0)' );
 		} );
 	</script>
-@endsection 
+@endsection

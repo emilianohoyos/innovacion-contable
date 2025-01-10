@@ -3,10 +3,10 @@
 @section('title', 'Line Icons')
 @section('css')
 	<link rel="stylesheet" href="{{ URL::asset('build/css/extra-icons.css') }}">
-@endsection 
+@endsection
 @section('content')
 <x-page-title title="Icons" pagetitle="Line Icons" />
-  	
+
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-xl-6 g-3">
 			<div class="col">
 				<div class="d-flex align-items-center flex-column gap-3 theme-icons p-2 cursor-pointer rounded border">
@@ -4089,4 +4089,4 @@
 				</div>
 			</div>
 		</div>
-@endsection     
+@endsection

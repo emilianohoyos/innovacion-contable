@@ -3,11 +3,11 @@
 @section('title', 'File Upload')
 @section('css')
 	<link href="{{ URL::asset('build/plugins/fancy-file-uploader/fancy_fileupload.css') }}" rel="stylesheet">
-	<link href="{{ URL::asset('build/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet">
-@endsection 
+	<link href="{{ URL::asset('build/plugins/Drag-And-Drop/build/imageuploadify.min.css') }}" rel="stylesheet">
+@endsection
 @section('content')
 <x-page-title title="Forms" pagetitle="File Upload" />
-				
+
         <div class="row">
 			<div class="col-xl-9 mx-auto">
 				<h6 class="mb-0 text-uppercase">Fancy File Upload</h6>
@@ -34,14 +34,14 @@
 			</div>
 		</div>
 		<!--end row-->
-@endsection 
-@section('scripts')  
-   
+@endsection
+@section('scripts')
+
   	<script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.ui.widget.js') }}"></script>
 	<script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.fileupload.js') }}"></script>
 	<script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.iframe-transport.js') }}"></script>
 	<script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.fancy-fileupload.js') }}"></script>
-	<script src="{{ URL::asset('build/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
+	<script src="{{ URL::asset('build/plugins/Drag-And-Drop/build/imageuploadify.min.js') }}"></script>
 	<script>
 		$('#fancy-file-upload').FancyFileUpload({
 			params: {
@@ -55,4 +55,4 @@
 			$('#image-uploadify').imageuploadify();
 		})
 	</script>
-@endsection 
+@endsection

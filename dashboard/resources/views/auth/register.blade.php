@@ -63,7 +63,7 @@
               <div class="col-12">
                 <label for="inputChoosePassword" class="form-label">Password</label>
                 <div class="input-group" id="show_hide_password">
-                  <input type="password" class="form-control border-end-0 @error('password') is-invalid @enderror" name="password" id="inputChoosePassword" placeholder="Enter Password"> 
+                  <input type="password" class="form-control border-end-0 @error('password') is-invalid @enderror" name="password" id="inputChoosePassword" placeholder="Enter Password">
                   <a href="javascript:;" class="input-group-text bg-transparent"><i class="bi bi-eye-slash-fill"></i></a>
                 @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -75,7 +75,7 @@
               <div class="col-12">
                 <label for="inputChoosePassword" class="form-label">Confirm Password</label>
                 <div class="input-group" id="show_hide_password">
-                  <input type="password" class="form-control border-end-0" name="password_confirmation" id="inputChoosePassword" placeholder="Enter Confirm Password"> 
+                  <input type="password" class="form-control border-end-0" name="password_confirmation" id="inputChoosePassword" placeholder="Enter Confirm Password">
                   <a href="javascript:;" class="input-group-text bg-transparent"><i class="bi bi-eye-slash-fill"></i></a>
                 @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -84,7 +84,7 @@
                 @enderror
                 </div>
               </div>
-              
+
               <div class="col-12">
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">

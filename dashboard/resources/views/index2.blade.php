@@ -558,7 +558,7 @@
 
       </div><!--end row-->
 
-@endsection 
+@endsection
 @section('scripts')
 
   <script src="{{ URL::asset('build/plugins/apexchart/apexcharts.min.js') }}"></script>

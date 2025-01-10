@@ -8,6 +8,16 @@ i18next.addResourceBundle("en", "navigation", en);
 i18next.addResourceBundle("es", "navigation", es);
 
 const navigationConfig: FuseNavItemType[] = [
+ 
+  {
+    id: "monthlyaccounting",
+    title: "Contabilidad Mensual",
+    subtitle: "Unique dashboard designs",
+    type: "item",
+    icon: 'heroicons-outline:calendar',
+    translate: "MONTHLYACCOUNTING",
+    url: "",
+  },
   {
     id: "applications",
     title: "Solicitudes",
@@ -16,15 +26,6 @@ const navigationConfig: FuseNavItemType[] = [
     icon: "heroicons-outline:menu-alt-2",
     translate: "APPLICATIONS",
     url: "/dashboards/project",
-  },
-  {
-    id: "newapplication",
-    title: "Nueva solicitud",
-    subtitle: "Unique dashboard designs",
-    type: "item",
-    icon: "heroicons-outline:pencil-alt",
-    translate: "NEWAPPLICATION",
-    url: "",
   },
 ];
 

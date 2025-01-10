@@ -2,11 +2,11 @@
 
 @section('title', 'Alternate')
 @section('css')
-	
-@endsection 
+
+@endsection
 @section('content')
 <x-page-title title="Maps" pagetitle="Google Maps" />
-				
+
         <div class="row">
 			<div class="col-xl-12">
 				<h6 class="text-uppercase">Simple Basic Map</h6>
@@ -47,10 +47,10 @@
 			</div>
 		</div>
 		<!--end row-->
-@endsection 
-@section('scripts')  
+@endsection
+@section('scripts')
 
   	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKXKdHQdtqgPVl2HI2RnUa_1bjCxRCQo4&callback=initMap" async defer></script>
 	<script src="{{ URL::asset('build/plugins/gmaps/map-custom-script.js') }}"></script>
 
-@endsection 
+@endsection
