@@ -10,6 +10,7 @@
 
 
     <div class="row row-cols-1 row-cols-xl-2">
+        @dd($folders)
         @foreach ($folders as $item)
             <div class="col">
                 <div class="card">
@@ -64,13 +65,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card">
-                    <div class="row g-0">
-
-                    </div>
-                </div>
-            </div>
         @endforeach
 
     </div>
@@ -103,7 +97,7 @@
                     // Crea un enlace para descargar el archivo
                     const link = document.createElement('a');
                     link.href = window.URL.createObjectURL(blob);
-                    link.download = fileName; // Nombre del archivo descargado
+                    link.download = id; // Nombre del archivo descargado
                     link.click();
                 })
                 .catch(error => {

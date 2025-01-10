@@ -44,7 +44,7 @@
                         <div class="col-md-6">
                             <label for="job_title" class="form-label">Cargo</label>
                             <input type="text" class="form-control" id="job_title" name="job_title"
-                                placeholder="Ingrese Apellidos">
+                                placeholder="Ingrese Cargo">
                         </div>
                         <div class="col-md-6">
                             <label for="role" class="form-label">Rol</label>

@@ -31,8 +31,22 @@ class Client extends Model
         return $this->hasMany(ClientContactInfo::class);
     }
 
+    public function commentsClient()
+    {
+        return $this->hasMany(ClientsComment::class);
+    }
+
     public function employees()
     {
         return $this->hasMany(EmployeeClient::class, 'client_id');
+    }
+    public function documentType()
+    {
+        return $this->belongsTo(DocumentType::class);
+    }
+
+    public function personType()
+    {
+        return $this->belongsTo(PersonType::class);
     }
 }

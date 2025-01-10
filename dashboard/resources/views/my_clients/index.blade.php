@@ -13,11 +13,12 @@
                 <table id="tbl-client" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-
-                            <th>NIT/identificacion</th>
-                            <th>Nombre/Razón social</th>
                             <th>Tipo Persona</th>
-                            <th>Correo</th>
+                            <th>Tipo Documento</th>
+                            <th>Identificación</th>
+                            <th>Razón social</th>
+                            {{-- <th>Correo Corporativo</th>
+                            <th>Dirección Corporativa</th> --}}
                             <th>Acciones</th>
 
                         </tr>
@@ -27,11 +28,12 @@
                     </tbody>
                     <tfoot>
                         <tr>
-
-                            <th>NIT/identificacion</th>
-                            <th>Nombre/Razón social</th>
                             <th>Tipo Persona</th>
-                            <th>Correo</th>
+                            <th>Tipo Documento</th>
+                            <th>Identificación</th>
+                            <th>Razón social</th>
+                            {{-- <th>Correo Corporativo</th>
+                            <th>Dirección Corporativa</th> --}}
                             <th>Acciones</th>
                         </tr>
                     </tfoot>
@@ -39,9 +41,8 @@
             </div>
         </div>
     </div>
-    @include('clients.modals.edit')
-    @include('clients.modals.comments')
-    @include('clients.modals.add_folder')
+    @include('my_clients.modals.see-client')
+
 @endsection
 @section('scripts')
 
@@ -55,21 +56,30 @@
                 serverSide: true,
                 ajax: '{{ route('client-by-employee.data') }}',
                 columns: [{
-                        data: 'nit',
-                        name: 'nit'
-                    }, {
-                        data: 'company_name',
-                        name: 'company_name'
-                    },
-                    {
                         data: 'person_type',
                         name: 'person_type'
                     },
                     {
-                        data: 'email',
-                        name: 'email'
+                        data: 'document_type',
+                        name: 'document_type'
+                    },
+                    {
+                        data: 'nit',
+                        name: 'nit'
+                    },
+                    {
+                        data: 'company_name',
+                        name: 'company_name'
                     },
 
+                    // {
+                    //     data: 'email',
+                    //     name: 'email'
+                    // },
+                    // {
+                    //     data: 'address',
+                    //     name: 'address'
+                    // },
 
                     {
                         data: 'acciones',
@@ -332,6 +342,91 @@
                     }
                 }
             });
+        }
+
+        function seeClient(id) {
+            const url = `/client/all/${id}`;
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al obtener los datos del cliente');
+                    }
+                    return response.json();
+                })
+                .then(clientData => {
+                    console.log(clientData)
+                    // Asigna los datos al modal
+                    document.getElementById('clientType').textContent = clientData.person_type.name;
+                    document.getElementById('documentType').textContent = clientData.document_type.name;
+                    document.getElementById('clientName').textContent = clientData.company_name;
+                    document.getElementById('clientId').textContent = clientData.nit;
+                    document.getElementById('clientAddress').textContent = clientData.address;
+                    document.getElementById('clientEmail').textContent = clientData.email;
+                    document.getElementById('clientCategory').textContent = clientData.category;
+                    document.getElementById('clientAgent').textContent = clientData.employees[0].employee.firstname +
+                        ' ' + clientData.employees[0].employee.lastname;
+                    document.getElementById('clientReview').textContent = clientData.review ?? 'No hay review';
+                    document.getElementById('clientObservation').textContent = clientData.observation ??
+                        'No hay Observaciones';
+                    document.getElementById('fiscalIva').textContent = clientData.observation == 1 ? 'Si' : 'No';
+                    document.getElementById('fiscalSelfRetention').textContent = clientData.observation == 1 ? 'Si' :
+                        'No';
+                    document.getElementById('fiscalSimpleRegime').textContent = clientData.observation == 1 ? 'Si' :
+                        'No';
+                    document.getElementById('icaWithholdingAgent').textContent = clientData.observation == 1 ? 'Si' :
+                        'No';
+                    document.getElementById('icaWithholdingMunicipality').textContent = clientData
+                        .municipality_ica_withholding_agent ?? 'No aplica';
+                    document.getElementById('icaSelfRetentionAgent').textContent = clientData.observation == 1 ? 'Si' :
+                        'No';
+                    document.getElementById('icaSelfRetentionMunicipality').textContent = clientData
+                        .municipality_ica_selfretaining_agent ?? 'No aplica';
+                    // Actualiza la tabla de contactos
+                    const contactTableBody = document.getElementById('contactTableBody');
+                    contactTableBody.innerHTML = ''; // Limpia la tabla
+                    clientData.contact_info.forEach(contact => {
+                        const row = `
+                    <tr>
+                        <td>${contact.firstname}</td>
+                        <td>${contact.lastname}</td>
+                        <td>${contact.birthday}</td>
+                        <td>${contact.job_title}</td>
+                        <td>${contact.channel_communication}</td>
+                        <td>${contact.email}</td>
+                        <td>${contact.cellphone}</td>
+                        <td>${contact.observation}</td>
+                    </tr>`;
+                        contactTableBody.insertAdjacentHTML('beforeend', row);
+                    });
+
+                    // Actualiza la tabla de comentarios
+                    if (Array.isArray(clientData.comments) && clientData.comments.length > 0) {
+                        clientData.comments_client.forEach(comment => {
+                            const row = `
+                            <tr>
+                                <td>${comment.description}</td>
+                                <td>${new Date(comment.date).toLocaleString()}</td>
+                                <td>${comment.author}</td>
+                            </tr>`;
+                            commentsTableBody.insertAdjacentHTML('beforeend', row);
+                        });
+                    } else {
+                        // Si no hay comentarios, agrega una fila indicando que no hay datos
+                        commentsTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="3" class="text-center">No hay comentarios disponibles</td>
+                        </tr>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('No se pudo cargar la información del cliente.');
+                });
+
+            var myModal = new bootstrap.Modal(document.getElementById('seeClientModal'));
+            // Mostrar el modal
+            myModal.show();
+
         }
     </script>
 

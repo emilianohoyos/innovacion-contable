@@ -4,6 +4,7 @@
 @section('css')
     <link href="{{ URL::asset('build/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
     <link href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
+    @vite('resources/js/employees/employees.js')
 @endsection
 @section('content')
     <x-page-title title="Empleados" pagetitle="Empleados" />
@@ -96,15 +97,4 @@
             });
         }
     </script>
-    {{-- <script>
-        $(document).ready(function() {
-            var table = $('#example2').DataTable({
-                lengthChange: false,
-                buttons: ['copy', 'excel', 'pdf', 'print']
-            });
-
-            table.buttons().container()
-                .appendTo('#example2_wrapper .col-md-6:eq(0)');
-        });
-    </script> --}}
 @endsection

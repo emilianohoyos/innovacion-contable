@@ -73,7 +73,7 @@
                 <a href="{{ route('client-by-employee.index') }}">
                     <div class="parent-icon"><i class="material-icons-outlined">person_outline</i>
                     </div>
-                    <div class="menu-title">Mis Clientes</div>
+                    <div class="menu-title">Contabilidad Mensual</div>
                 </a>
             </li>
 
@@ -98,7 +98,7 @@
                 <a href="{{ route('dashboard.index') }}">
                     <div class="parent-icon"><i class="material-icons-outlined">account_balance</i>
                     </div>
-                    <div class="menu-title">Contabilidad Mensual</div>
+                    <div class="menu-title">Contabilidad Mensual Dash</div>
                 </a>
             </li>
 

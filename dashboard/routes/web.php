@@ -62,6 +62,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('apply-types-apply-document-type', ApplyTypesApplyDocumentTypeController::class);
 
     Route::resource('client', ClientController::class);
+
+    Route::get('client/all/{id}', [ClientController::class, 'seeClientData']);
+
+    Route::get('client/comment/{id}', [ClientController::class, 'getClientComments']);
+    Route::post('client/comment/{id}', [ClientController::class, 'saveClientComment']);
+
     Route::get('/clients-data', [ClientController::class, 'getClientData'])->name('client.data');
     Route::get('/clients-by-employee', [ClientController::class, 'indexMyClients'])->name('client-by-employee.index');
     Route::get('/clients-by-employee-data', [ClientController::class, 'getClientByEmployeeData'])->name('client-by-employee.data');
@@ -74,6 +80,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/clients-follow-up/{clientId}/{year}', [ClientFollowUpController::class, 'getClientFollowData']);
 
     Route::resource('employee', EmployeeController::class);
+    Route::post('employee/disable/{id}', [EmployeeController::class, 'disableEmployee']);
+    Route::post('employee/active/{id}', [EmployeeController::class, 'activeEmployee']);
     Route::get('/employee-data', [EmployeeController::class, 'getEmployeesData'])->name('employees.data');
 
     Route::resource('dashboard', DashboardController::class);

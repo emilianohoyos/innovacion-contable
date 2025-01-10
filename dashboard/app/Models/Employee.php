@@ -15,6 +15,7 @@ class Employee extends Model
         'role',
         'cellphone',
         'user_id',
-        'email'
+        'email',
+        'active'
     ];
 }

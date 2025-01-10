@@ -6,20 +6,25 @@
                 <h5 class="modal-title">Detalle Empleado</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form onSubmit="return false">
+            <form id="formEditEmployee">
                 <div class="modal-body">
                     <div class="row g-3">
+                        @csrf
+                        @method('PUT')
                         <div class="col-md-6">
                             <label for="nit" class="form-label">Tipo Documento</label>
-                            <select name="" class="form-control" id="">
-                                <option value="">Seleccione tipo documento</option>
-                                <option value="CEDULA">CEDULA</option>
-                                <option value="CEDULA EXTRANJERIA">CEDULA EXTRANJERIA</option>
+                            <select name="document_type_id" class="form-control" id="document_type_id">
+
+                                @foreach ($document_type as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
                             </select>
+                            <input type="hidden" name="id" id="id">
                         </div>
                         <div class="col-md-6">
                             <label for="nit" class="form-label">Identificación</label>
-                            <input type="text" class="form-control" id="nit" placeholder="Ingrese Nit">
+                            <input type="text" class="form-control" id="nit" name="nit"
+                                placeholder="Ingrese Nit">
                         </div>
                         <div class="col-md-6">
                             <label for="firstname" class="form-label">Nombres</label>
@@ -37,9 +42,21 @@
                                 placeholder="Ingrese Celular">
                         </div>
                         <div class="col-md-6">
-                            <label for="cellphone" class="form-label">Correo</label>
-                            <input type="text" class="form-control" id="cellphone" name="cellphone"
-                                placeholder="Ingrese Celular">
+                            <label for="email" class="form-label">Correo</label>
+                            <input type="text" class="form-control" id="email" name="email"
+                                placeholder="Ingrese Correo">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="job_title" class="form-label">Cargo</label>
+                            <input type="text" class="form-control" id="job_title" name="job_title"
+                                placeholder="Ingrese Cargo">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="role" class="form-label">Rol</label>
+                            <select name="role" class="form-control" id="role">
+                                <option value="ADMIN">ADMINISTRADOR</option>
+                                <option value="CONTADOR">CONTADOR</option>
+                            </select>
                         </div>
                     </div>
 
@@ -47,7 +64,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
-                    <button type="button" class="btn btn-primary">Actualizar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
                 </div>
             </form>
         </div>

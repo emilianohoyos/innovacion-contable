@@ -7,6 +7,41 @@
     <link href="{{ URL::asset('build/plugins/select2/css/select2-bootstrap-5-theme.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
 
+    <style>
+        /* Puntos de color */
+        .select2-results__option span.color-dot,
+        .select2-selection__rendered span.color-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            /* Hace que el punto sea redondo */
+            margin-right: 8px;
+            /* Espacio entre el punto y el texto */
+            vertical-align: middle;
+            /* Alinea el punto con el texto */
+        }
+
+        /* Colores específicos para las opciones */
+        .select2-results__option--alta span.color-dot,
+        .select2-selection__rendered--alta span.color-dot {
+            background-color: #dc3545;
+            /* Rojo */
+        }
+
+        .select2-results__option--media span.color-dot,
+        .select2-selection__rendered--media span.color-dot {
+            background-color: #ffc107;
+            /* Amarillo */
+        }
+
+        .select2-results__option--baja span.color-dot,
+        .select2-selection__rendered--baja span.color-dot {
+            background-color: #28a745;
+            /* Verde */
+        }
+    </style>
+
 
 @endsection
 @section('content')
@@ -89,12 +124,12 @@
                                         placeholder="Ingrese Razon Social">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="address" class="form-label">Dirección</label>
+                                    <label for="address" class="form-label">Dirección Empresa</label>
                                     <input type="text" class="form-control" id="address" name="address"
                                         placeholder="Ingrese Dirección">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="email_company" class="form-label">Email</label>
+                                    <label for="email_company" class="form-label">Email Corporativo</label>
                                     <input type="email_company" class="form-control" id="email_company"
                                         name="email_company" placeholder="Ingrese Dirección">
                                 </div>
@@ -121,7 +156,7 @@
                                             Simple?</label>
                                     </div>
                                 </div>
-                                <div class="col-md-12 row g-3">
+                                <div class="col-md-12 g-3">
                                     <div class="col-md-3">
                                         <div class="form-check form-switch form-check-info">
                                             <input class="form-check-input" type="checkbox" role="switch"
@@ -142,7 +177,7 @@
                                             id="municipality_ica_withholding_agent" placeholder="Ingrese municipio">
                                     </div>
                                 </div>
-                                <div class="col-md-12 row g-4">
+                                <div class="col-md-12  g-4">
                                     <div class="col-md-3">
                                         <div class="form-check form-switch form-check-info">
                                             <input class="form-check-input" type="checkbox" role="switch"
@@ -164,7 +199,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="category" class="form-label">Categoria (prioridad)</label>
+                                    <label for="category" class="form-label">Prioridad</label>
                                     <select name="category" id="category" class="form-control">
                                         <option value="">Seleccione...</option>
                                         <option value="ALTA">ALTA</option>
@@ -241,6 +276,10 @@
                                         <label class="form-check-label" for="whatsappCheck">WhatsApp</label>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <label for="observationContact" class="form-label">Observación</label>
+                                    <textarea type="text" class="form-control" id="observationContact" name="observationContact"></textarea>
+                                </div>
                                 <div class="col-md-12 " id="typeJuridic" style="display:none">
                                     <button id="add-row" class="btn btn-primary px-4 w-100">Agregar</button>
 
@@ -255,6 +294,7 @@
                                                     <th>Medio de contacto</th>
                                                     <th>Correo</th>
                                                     <th>Celular</th>
+                                                    <th>Observacion</th>
                                                     <th>Eliminar</th>
 
                                                 </tr>
@@ -326,6 +366,29 @@
     <script>
         var stepper1
         document.addEventListener('DOMContentLoaded', function() {
+
+            const withholdingSwitch = document.getElementById('is_ica_withholding_agent');
+            const withholdingMunicipality = document.getElementById('municipality_ica_withholding_agent');
+
+            // Inicialmente, desactiva el campo
+            withholdingMunicipality.disabled = !withholdingSwitch.checked;
+
+            // Agrega un evento al switch
+            withholdingSwitch.addEventListener('change', function() {
+                withholdingMunicipality.disabled = !this
+                    .checked; // Activa o desactiva según el estado del switch
+            });
+
+            const switchInput = document.getElementById('is_ica_selfretaining_agent');
+            const municipalityInput = document.getElementById('municipality_ica_selfretaining_agent');
+
+            // Inicialmente, desactiva el campo
+            municipalityInput.disabled = !switchInput.checked;
+
+            // Agrega un evento al switch
+            switchInput.addEventListener('change', function() {
+                municipalityInput.disabled = !this.checked; // Activa o desactiva según el estado del switch
+            });
             // Inicializar el Stepper principal
             stepper1 = new Stepper(document.querySelector('#stepper1'));
 
@@ -390,10 +453,13 @@
                 const email = $('#email').val();
                 const cellphone = $('#cellphone').val();
                 const birthday = $('#birthday').val();
+                const observationContact = $('#observationContact').val();
+                console.log(observationContact)
                 const channelCommunication = [];
                 $('input[name="channel_communication[]"]:checked').each(function() {
                     channelCommunication.push($(this).val());
                 });
+
 
                 if (firstname && lastname && email && cellphone) {
                     // Agregar fila a la tabla
@@ -406,12 +472,13 @@
                             <td>${email}</td>
                             <td>${cellphone}</td>
                             <td>${channelCommunication.join(', ')}</td>
+                            <td>${observationContact}</td>
                             <td><button class="btn btn-danger btn-sm remove-row">Eliminar</button></td>
                         </tr>
                     `);
 
                     // Limpiar campos
-                    $('#firstname, #lastname, #job_title, #email, #cellphone,#birthday')
+                    $('#firstname, #lastname, #job_title, #email, #cellphone,#birthday,#observationContact')
                         .val('');
                     $('input[name="channel_communication[]"]').prop('checked', false);
                 } else {
@@ -462,6 +529,7 @@
                             email: row.eq(4).text(),
                             cellphone: row.eq(5).text(),
                             channel_communication: row.eq(6).text(),
+                            observationContact: row.eq(7).text(),
                         };
                         data.contacts.push(contact);
                     });
@@ -498,6 +566,53 @@
 
 
 
+        });
+
+        $(document).ready(function() {
+            $('#category').select2({
+                theme: 'bootstrap-5', // Aplica el tema Bootstrap 5
+                // width: '100%',
+                templateResult: formatCategory, // Personaliza las opciones desplegables
+                templateSelection: formatSelectedCategory // Personaliza la opción seleccionada
+            });
+
+            // Función para las opciones del menú desplegable
+            function formatCategory(category) {
+                if (!category.id) {
+                    return category.text; // Retorna la opción predeterminada ("Seleccione...")
+                }
+
+                const colorClass = {
+                    'ALTA': 'select2-results__option--alta',
+                    'MEDIA': 'select2-results__option--media',
+                    'BAJA': 'select2-results__option--baja'
+                } [category.id] || '';
+
+                return $(
+                    `<span class="${colorClass}">
+                <span class="color-dot"></span> ${category.text}
+            </span>`
+                );
+            }
+
+            // Función para la opción seleccionada
+            function formatSelectedCategory(category) {
+                if (!category.id) {
+                    return category.text; // Retorna la opción predeterminada ("Seleccione...")
+                }
+
+                const colorClass = {
+                    'ALTA': 'select2-selection__rendered--alta',
+                    'MEDIA': 'select2-selection__rendered--media',
+                    'BAJA': 'select2-selection__rendered--baja'
+                } [category.id] || '';
+
+                return $(
+                    `<span class="${colorClass}">
+                <span class="color-dot"></span> ${category.text}
+            </span>`
+                );
+            }
         });
     </script>
 @endsection

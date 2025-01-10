@@ -16,6 +16,7 @@ class ClientContactInfo extends Model
         'user_id',
         'channel_communication',
         'birthday',
+        'observation'
     ];
 
     public function user()

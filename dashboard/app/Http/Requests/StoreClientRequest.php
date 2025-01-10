@@ -44,6 +44,7 @@ class StoreClientRequest extends FormRequest
             'channel_communication' => 'required_if:person_type_id,1',
             'job_title' => 'required_if:person_type_id,1',
             'email' => 'required_if:person_type_id,1',
+            'observationContact' => 'required_if:person_type_id,1',
             'cellphone' => 'required_if:person_type_id,1',
             'employee_id' => 'required',
             'contacts' => 'required_if:person_type_id,2|array',

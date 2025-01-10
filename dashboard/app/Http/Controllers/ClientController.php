@@ -99,6 +99,7 @@ class ClientController extends Controller
                     'cellphone' => $validatedData['cellphone'],
                     'user_id' => $user->id,
                     'birthday' => $validatedData['birthday'],
+                    'observation' => $validatedData['observationContact'],
                     'channel_communication' => json_encode($validatedData['channel_communication']),
                 ]);
                 $folders = Folder::where('person_type_id', 1)->get();
@@ -123,6 +124,7 @@ class ClientController extends Controller
                         'cellphone' => $contact['cellphone'],
                         'user_id' => $user->id,
                         'channel_communication' => json_encode($contact['channel_communication']),
+                        'observation' => $contact['observationContact'],
                         'birthday' => $contact['birthday'],
 
                     ]);
@@ -175,12 +177,22 @@ class ClientController extends Controller
 
     public function getClientData()
     {
-        $clients = Client::select(['clients.id as client_id', 'nit', 'company_name', 'email', 'person_types.name as person_type'])
+        $clients = Client::select([
+            'clients.id as client_id',
+            'nit',
+            'company_name',
+            'email',
+            'address',
+            'person_types.name as person_type',
+            'document_types.name as document_type'
+        ])
             ->join(
                 'person_types',
                 'clients.person_type_id',
                 'person_types.id'
-            );
+            )
+            ->join('employee_clients', 'clients.id', 'employee_clients.client_id')
+            ->join('document_types', 'clients.document_type_id', 'document_types.id');
         return DataTables::of($clients)
             ->addColumn('acciones', function ($client) {
                 $btn = '<button type="button"
@@ -212,12 +224,22 @@ class ClientController extends Controller
 
     public function getClientByEmployeeData()
     {
-        $clients = Client::select(['clients.id as client_id', 'nit', 'company_name', 'email', 'person_types.name as person_type'])
+        $clients = Client::select([
+            'clients.id as client_id',
+            'nit',
+            'company_name',
+            'email',
+            'address',
+            'person_types.name as person_type',
+            'document_types.name as document_type'
+        ])
             ->join(
                 'person_types',
                 'clients.person_type_id',
                 'person_types.id'
-            )->join('employee_clients', 'clients.id', '=', 'employee_clients.client_id')
+            )
+            ->join('employee_clients', 'clients.id', 'employee_clients.client_id')
+            ->join('document_types', 'clients.document_type_id', 'document_types.id')
             ->where('employee_clients.employee_id', auth()->user()->employee->id);
         return DataTables::of($clients)
             ->addColumn('acciones', function ($client) {
@@ -225,6 +247,11 @@ class ClientController extends Controller
                 $btn = '<a href="' . route("client-monthly-folders", ["clientId" => $client->client_id]) . '" class="btn btn-warning raised d-inline-flex align-items-center justify-content-center ">
                     <i class="material-icons-outlined">folder</i>
                 </a>';
+                $btn .= '<button type="button"
+                class="btn btn-info raised d-inline-flex align-items-center justify-content-center"
+                onclick="seeClient(' . $client->client_id . ')">
+                <i class="material-icons-outlined">visibility</i>
+            </button>';
 
                 return  $btn;
             })
@@ -280,5 +307,45 @@ class ClientController extends Controller
             'client_id' =>  $validatedData['client_id'],
             'comment' => $validatedData['comment'],
         ]);
+    }
+
+    public function getClientComments($clientId)
+    {
+        $comments = ClientsComment::where('client_id', $clientId)
+            ->with('createdBy:id,name') // Incluye solo el ID y nombre del autor
+            ->get();
+
+        // Formatea los datos para incluir "author"
+        $formattedComments = $comments->map(function ($comment) {
+            return [
+                'id' => $comment->id,
+                'description' => $comment->description,
+                'created_at' => $comment->created_at,
+                'author' => $comment->createdBy ? $comment->createdBy->name : null, // Obtén el nombre del autor
+            ];
+        });
+
+        return response()->json($formattedComments);
+    }
+
+    public function saveClientComment($clientId)
+    {
+
+        $comments = ClientsComment::create([
+            'client_id' => $clientId,
+            'description' => request('comment'),
+            'created_by' => auth()->user()->id,
+        ]);
+
+
+        return response()->json([
+            'status' => 'true',
+            'message' => 'Comentario guardado exitosamente',
+        ], 200);
+    }
+    public function seeClientData(String $id)
+    {
+        $client = Client::with(['contactInfo', 'commentsClient', 'documentType', 'personType', 'employees.employee'])->find($id);
+        return response()->json($client);
     }
 }

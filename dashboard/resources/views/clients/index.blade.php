@@ -13,11 +13,12 @@
                 <table id="tbl-client" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-
-                            <th>NIT/identificacion</th>
-                            <th>Nombre/Razón social</th>
                             <th>Tipo Persona</th>
-                            <th>Correo</th>
+                            <th>Tipo Documento</th>
+                            <th>Identificación</th>
+                            <th>Razón social</th>
+                            <th>Correo Corporativo</th>
+                            <th>Dirección Corporativa</th>
                             <th>Acciones</th>
 
                         </tr>
@@ -27,11 +28,12 @@
                     </tbody>
                     <tfoot>
                         <tr>
-
-                            <th>NIT/identificacion</th>
-                            <th>Nombre/Razón social</th>
                             <th>Tipo Persona</th>
-                            <th>Correo</th>
+                            <th>Tipo Documento</th>
+                            <th>Identificación</th>
+                            <th>Razón social</th>
+                            <th>Correo Corporativo</th>
+                            <th>Dirección Corporativa</th>
                             <th>Acciones</th>
                         </tr>
                     </tfoot>
@@ -55,22 +57,30 @@
                 serverSide: true,
                 ajax: '{{ route('client.data') }}',
                 columns: [{
-                        data: 'nit',
-                        name: 'nit'
-                    }, {
-                        data: 'company_name',
-                        name: 'company_name'
-                    },
-                    {
                         data: 'person_type',
                         name: 'person_type'
                     },
                     {
+                        data: 'document_type',
+                        name: 'document_type'
+                    },
+                    {
+                        data: 'nit',
+                        name: 'nit'
+                    },
+                    {
+                        data: 'company_name',
+                        name: 'company_name'
+                    },
+
+                    {
                         data: 'email',
                         name: 'email'
                     },
-
-
+                    {
+                        data: 'address',
+                        name: 'address'
+                    },
                     {
                         data: 'acciones',
                         name: 'acciones',
@@ -104,10 +114,12 @@
                 return
             }
             try {
-                const response = await fetch('', {
+                const response = await fetch(`client/comment/${clientId}`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'applcation/json'
+                        'Content-Type': 'applcation/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content'),
                     },
                     body: JSON.stringify({
                         client_id: clientId,
@@ -135,7 +147,7 @@
         async function loadComments(clientId) {
             try {
                 // Obtener los comentarios desde la API
-                const response = await fetch(`/api/comments/${clientId}`);
+                const response = await fetch(`client/comment/${clientId}`);
 
                 if (!response.ok) {
                     throw new Error('Error al cargar los comentarios');
@@ -154,8 +166,8 @@
                     const row = document.createElement('tr');
 
                     row.innerHTML = `
-                <td>${comment.text}</td>
-                <td>${comment.date}</td>
+                <td>${comment.description}</td>
+                <td>${new Date(comment.created_at).toLocaleString()}</td>
                 <td>${comment.author}</td>
             `;
 

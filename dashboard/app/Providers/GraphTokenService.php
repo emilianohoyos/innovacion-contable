@@ -15,7 +15,7 @@ class GraphTokenService
             'scope' => 'https://graph.microsoft.com/.default',
         ]);
 
-        dd(env('GRAPH_TENANT_ID'), env('GRAPH_CLIENT_ID'), env('GRAPH_CLIENT_SECRET'));
+        // dd(env('GRAPH_TENANT_ID'), env('GRAPH_CLIENT_ID'), env('GRAPH_CLIENT_SECRET'));
         if ($response->successful()) {
             return $response->json()['access_token'];
         }
