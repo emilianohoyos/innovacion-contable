@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApplyDocTypeFolder;
 use App\Models\ClientFolder;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -33,6 +34,25 @@ class ClientFolderController extends Controller
         ])
             ->where('client_id', $client_id)
             ->get();
+
+
+        $results = [];
+        // foreach ($folders as $folder) {
+        //     $documents = ApplyDocTypeFolder::join(
+        //         'apply_document_types',
+        //         'apply_doc_type_folders.apply_document_type_id',
+        //         '=',
+        //         'apply_document_types.id'
+        //     )
+        //         ->where('folder_id', $folder->id)
+        //         ->get();
+        //     $results[] = [
+        //         'folder' => $folder,
+        //         'documents' => $documents
+        //     ];
+        // }
+
+
 
         if ($client_id) {
             return response()->json([

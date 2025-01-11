@@ -10,7 +10,7 @@
 
 
     <div class="row row-cols-1 row-cols-xl-2">
-        @dd($folders)
+        @dump($folders)
         @foreach ($folders as $item)
             <div class="col">
                 <div class="card">
@@ -38,6 +38,7 @@
                                             @foreach ($item->folder->ApplyDocTypeFolders as $applyDocTypeFolder)
                                                 @foreach ($applyDocTypeFolder->monthlyAccountingFolderApplyDocTypeFolders as $archive)
                                                     <tr>
+                                                        <th>tipodocumento</th>
                                                         <th>{{ $archive->is_new == true ? 'SI' : 'NO' }}</th>
                                                         <th>{{ $archive->status }}</th>
                                                         <th> <button type="button"

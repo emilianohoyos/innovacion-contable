@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Requests\StoreClientRequest;
+use App\Models\ApplyDocTypeFolder;
 use App\Models\Client;
 use App\Models\ClientContactInfo;
 use App\Models\ClientFolder;
@@ -15,6 +16,7 @@ use App\Models\Folder;
 use App\Models\MonthConfig;
 use App\Models\MonthlyAccounting;
 use App\Models\MonthlyAccountingFolder;
+use App\Models\MonthlyAccountingFolderApplyDocTypeFolder;
 use App\Models\PersonType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -261,25 +263,79 @@ class ClientController extends Controller
 
     public function getMonthFolders($clientId)
     {
-        $folders = ClientFolder::with([
-            'folder.applyDocumentTypes',
-            'folder' => function ($query) use ($clientId) {
-                $query->with([
-                    'monthlyAccountingFolders' => function ($subQuery) use ($clientId) {
-                        $subQuery->whereHas('monthlyAccounting', function ($monthlyAccountingQuery) use ($clientId) {
-                            $monthlyAccountingQuery->where('year', Carbon::now()->year)
-                                ->where('month', Carbon::now()->month)->where('client_id', $clientId);
-                        })->with('monthlyAccounting');
-                    }
-                ]);
-            },
-            'folder.applyDocumentTypes',
-            'folder.ApplyDocTypeFolders.monthlyAccountingFolderApplyDocTypeFolders'
-        ])
-            ->where('client_id', $clientId)
+        // $folders = ClientFolder::with([
+        //     'folder.applyDocumentTypes',
+        //     'folder' => function ($query) use ($clientId) {
+        //         $query->with([
+        //             'monthlyAccountingFolders' => function ($subQuery) use ($clientId) {
+        //                 $subQuery->whereHas('monthlyAccounting', function ($monthlyAccountingQuery) use ($clientId) {
+        //                     $monthlyAccountingQuery->where('year', Carbon::now()->year)
+        //                         ->where('month', Carbon::now()->month)->where('client_id', $clientId);
+        //                 })->with('monthlyAccounting');
+        //             }
+        //         ]);
+        //     },
+        //     'folder.applyDocumentTypes',
+        //     'folder.ApplyDocTypeFolders.monthlyAccountingFolderApplyDocTypeFolders'
+        // ])
+        //     ->where('client_id', $clientId)
+        //     ->get();
+        $folders = ClientFolder::select(
+            'folders.id',
+            'folders.name',
+            'monthly_accountings.id as monthly_accounting_id',
+            'monthly_accountings.state',
+            'monthly_accountings.end_date',
+            'monthly_accounting_folders.id as monthly_accounting_folder_id',
+            'monthly_accounting_folders.status',
+            'monthly_accounting_folders.is_new'
+        )
+            ->join('folders', 'client_folders.folder_id', '=', 'folders.id')
+            ->join('monthly_accountings', function ($join) {
+                $join->on('monthly_accountings.client_id', '=', 'client_folders.client_id')
+                    ->where('monthly_accountings.year', Carbon::now()->year)
+                    ->where('monthly_accountings.month', Carbon::now()->month);
+            })
+            ->leftJoin('monthly_accounting_folders', function ($join) {
+                $join->on('monthly_accounting_folders.folder_id', '=', 'folders.id')
+                    ->on('monthly_accounting_folders.monthly_accounting_id', '=', 'monthly_accountings.id');
+            })
+            ->where('client_folders.client_id', $clientId)
             ->get();
 
-        // dd($folders);
+        $results = [];
+        foreach ($folders as $folder) {
+            $result = $folder;
+
+            $documents = ApplyDocTypeFolder::select('apply_doc_type_folders.id as apply_doc_type_folders_id', 'apply_document_types.*')
+                ->join(
+                    'apply_document_types',
+                    'apply_doc_type_folders.apply_document_type_id',
+                    '=',
+                    'apply_document_types.id'
+                )
+                ->where('folder_id', $folder->id)
+                ->get();
+
+            $result['documents'] = $documents;
+
+            foreach ($documents as $key => $document) {
+                $attachDoc = MonthlyAccountingFolderApplyDocTypeFolder::leftJoin(
+                    'users',
+                    'monthly_accounting_folder_apply_doc_type_folders.user_id',
+                    '=',
+                    'users.id'
+                )
+                    ->where(
+                        'monthly_accounting_folder_id',
+                        $folder->monthly_accounting_folder_id
+                    )
+                    ->where('apply_doc_type_folder_id', $document->apply_doc_type_folders_id)->get();
+                $result['documents'][$key]['attachments'] = $attachDoc;
+            }
+            $results[] = $result;
+        }
+        dd($folders);
         return view('my_clients.month_folders', compact('folders'));
     }
 
