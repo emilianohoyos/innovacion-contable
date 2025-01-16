@@ -208,9 +208,14 @@ class ClientController extends Controller
             <i class="material-icons-outlined">comment</i>
         </button>';
 
-                $btn .= '<a href="' . route("client.follow-up", ["client_id" => $client->client_id]) . '" class="btn btn-warning raised d-inline-flex align-items-center justify-content-center ">
-                    <i class="material-icons-outlined">visibility</i>
-                </a>';
+                // $btn .= '<a href="' . route("client.follow-up", ["client_id" => $client->client_id]) . '" class="btn btn-warning raised d-inline-flex align-items-center justify-content-center ">
+                //     <i class="material-icons-outlined">visibility</i>
+                // </a>';
+                $btn .= '<button type="button"
+                class="btn btn-warning raised d-inline-flex align-items-center justify-content-center"
+                onclick="seeClient(' . $client->client_id . ')">
+                <i class="material-icons-outlined">visibility</i>
+            </button>';
 
                 return  $btn;
             })
@@ -284,6 +289,8 @@ class ClientController extends Controller
             'folders.id',
             'folders.name',
             'monthly_accountings.id as monthly_accounting_id',
+            'monthly_accountings.year',
+            'monthly_accountings.month',
             'monthly_accountings.state',
             'monthly_accountings.end_date',
             'monthly_accounting_folders.id as monthly_accounting_folder_id',
@@ -335,7 +342,7 @@ class ClientController extends Controller
             }
             $results[] = $result;
         }
-        dd($folders);
+        // dd($folders);
         return view('my_clients.month_folders', compact('folders'));
     }
 

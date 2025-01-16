@@ -10,7 +10,7 @@
 
 
     <div class="row row-cols-1 row-cols-xl-2">
-        @dump($folders)
+        {{-- @dump($folders) --}}
         @foreach ($folders as $item)
             <div class="col">
                 <div class="card">
@@ -20,7 +20,15 @@
                                 style="height: 100%;">
                                 <i class="material-icons-outlined rounded-start p-1 border"
                                     style="font-size: 90px; color: #ffcc00;">folder</i>
-                                <h5 class="card-title mt-2">{{ $item->folder->name }}</h5>
+                                <h5 class="card-title mt-2">{{ $item->name }}</h5>
+                                <h6><strong>Año:</strong>{{ $item->year }}</h6>
+                                <h6><strong>Mes:</strong>{{ \Carbon\Carbon::create()->month($item->month)->locale('es')->monthName }}
+                                </h6>
+                                <button type="button"
+                                    class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
+                                    onclick="addCommentFolder({{ $item->id }})">
+                                    <i class="material-icons-outlined">message</i> Agregar comentario
+                                </button>
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -29,21 +37,22 @@
                                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                                         <thead>
                                             <tr>
+                                                <th>Tipo documento</th>
                                                 <th>Es nuevo</th>
                                                 <th>Estado</th>
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($item->folder->ApplyDocTypeFolders as $applyDocTypeFolder)
-                                                @foreach ($applyDocTypeFolder->monthlyAccountingFolderApplyDocTypeFolders as $archive)
+                                            @foreach ($item->documents as $document)
+                                                @foreach ($document->attachments as $attachtment)
                                                     <tr>
-                                                        <th>tipodocumento</th>
-                                                        <th>{{ $archive->is_new == true ? 'SI' : 'NO' }}</th>
-                                                        <th>{{ $archive->status }}</th>
+                                                        <th>{{ $document->name }}</th>
+                                                        <th>{{ $attachtment->is_new == true ? 'SI' : 'NO' }}</th>
+                                                        <th>{{ $attachtment->status }}</th>
                                                         <th> <button type="button"
                                                                 class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
-                                                                onclick="downloadFile({{ $archive->id }})">
+                                                                onclick="downloadFile({{ $attachtment->id }})">
                                                                 <i class="material-icons-outlined">visibility</i>
                                                             </button> </th>
                                                     </tr>
@@ -52,6 +61,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
+                                                <th>Tipo documento</th>
                                                 <th>Es nuevo</th>
                                                 <th>Estado</th>
                                                 <th>Acciones</th>
