@@ -13,8 +13,8 @@ class DocumentTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        DocumentType::create(['name' => 'CEDULA DE CIUDADANIA']);
-        DocumentType::create(['name' => 'CEDULA DE EXTRANJERIA']);
         DocumentType::create(['name' => 'NIT']);
+        DocumentType::create(['name' => 'CÉDULA DE CIUDADANÍA']);
+        DocumentType::create(['name' => 'CÉDULA DE EXTRANJERÍA']);
     }
 }

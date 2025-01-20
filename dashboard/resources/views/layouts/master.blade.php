@@ -62,9 +62,9 @@
 
     @include('layouts.footer')
 
-    @include('layouts.cart')
+    <!-- @include('layouts.cart') -->
 
-    @include('layouts.right-sidebar')
+    <!-- @include('layouts.right-sidebar') -->
 
     @include('layouts.vendor-scripts')
 
