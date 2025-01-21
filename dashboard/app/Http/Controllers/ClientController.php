@@ -247,7 +247,11 @@ class ClientController extends Controller
             )
             ->join('employee_clients', 'clients.id', 'employee_clients.client_id')
             ->join('document_types', 'clients.document_type_id', 'document_types.id')
-            ->where('employee_clients.employee_id', auth()->user()->employee->id);
+            ->where(function ($query) {
+                if (!auth()->user()->rol == 'ADMIN') {
+                    $query->where('employee_clients.employee_id', auth()->user()->employee->id);
+                }
+            });
         return DataTables::of($clients)
             ->addColumn('acciones', function ($client) {
                 $date = Carbon::now();

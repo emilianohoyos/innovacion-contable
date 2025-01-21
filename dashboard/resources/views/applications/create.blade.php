@@ -62,7 +62,7 @@
 
                         <div class="col-md-12 mt-3">
                             <div class="d-md-flex d-grid align-items-left gap-3">
-                                <button type="button" class="btn btn-primary px-4">Guardar</button>
+                                <button type="submit" class="btn btn-primary px-4">Guardar</button>
                                 <button type="button" class="btn btn-light px-4">Limpiar</button>
                             </div>
                         </div>
