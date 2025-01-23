@@ -30,6 +30,12 @@
             display: none;
             /* Oculto por defecto */
         }
+
+        .error-asterisk {
+            color: red;
+            font-size: 1.2em;
+            margin-left: 5px;
+        }
     </style>
 
     @include('layouts.head-css')
@@ -62,9 +68,9 @@
 
     @include('layouts.footer')
 
-    <!-- @include('layouts.cart') -->
+    {{-- @include('layouts.cart')
 
-    <!-- @include('layouts.right-sidebar') -->
+    @include('layouts.right-sidebar') --}}
 
     @include('layouts.vendor-scripts')
 

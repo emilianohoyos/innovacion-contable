@@ -3,7 +3,7 @@ $(document).ready(function () {
     if ($('#formEmployee').length) {
         $('#formEmployee').validate({
             rules: {
-                documenttype_id: {
+                document_type_id: {
                     required: true
                 },
                 identification: {
@@ -36,6 +36,10 @@ $(document).ready(function () {
                 }
             },
             messages: {
+                document_type_id: {
+                    required: "Por favor Seleccione el tipo de documento."
+                },
+
                 identification: {
                     required: "Por favor ingrese la identificación.",
                     maxlength: "La identificación no debe exceder los 20 caracteres."
@@ -48,6 +52,12 @@ $(document).ready(function () {
                     required: "Por favor ingrese el apellido.",
                     maxlength: "El apellido no debe exceder los 50 caracteres."
                 },
+                job_title: {
+                    required: "Por favor ingrese el cargo"
+                },
+                role: {
+                    required: "Por favor ingrese el rol"
+                },
                 cellphone: {
                     required: "Por favor ingrese el número de celular.",
                     digits: "Solo se permiten números.",
@@ -59,11 +69,29 @@ $(document).ready(function () {
                     maxlength: "El correo electrónico no debe exceder los 100 caracteres."
                 }
             },
+            errorPlacement: function (error, element) {
+                // Inserta el mensaje de error debajo del campo
+                error.insertAfter(element);
+
+                // Agrega el asterisco al label si no está ya
+                const label = $(`label[for="${element.attr('id')}"]`);
+                if (!label.find('.error-asterisk').length) {
+                    label.append('<span class="error-asterisk" style="color: red;"> *</span>');
+                }
+            },
+            success: function (label, element) {
+                // Elimina el asterisco si el campo ya no tiene errores
+                const labelElement = $(`label[for="${element.id}"] .error-asterisk`);
+                if (labelElement.length) {
+                    labelElement.remove();
+                }
+            },
             submitHandler: function (form) {
-                // Llama a tu función de guardado si el formulario es válido
+                // Llama a tu función de guardado
                 saveEmployee(event);
             }
         });
+
     } else {
         console.log("El formulario no existe en el DOM.");
     }
@@ -129,6 +157,9 @@ window.isLoading = function (show) {
 
 window.editEmployee = function (id) {
     // Obtener los datos del empleado
+    document.getElementById('formEditEmployee').reset();
+    $('#job_title').val('').trigger('change');
+    $('#role').val('').trigger('change');
     fetch('/employee' + '/' + id)
         .then(response => response.json())
         .then(data => {
@@ -137,8 +168,10 @@ window.editEmployee = function (id) {
             document.getElementById('nit').value = data.data.identification;
             document.getElementById('firstname').value = data.data.firstname;
             document.getElementById('lastname').value = data.data.lastname;
-            document.getElementById('job_title').value = data.data.job_title;
-            document.getElementById('role').value = data.data.role;
+            $('#job_title').val(data.data.job_title).trigger('change');
+            $('#role').val(data.data.role).trigger('change');
+            // document.getElementById('job_title').value = data.data.job_title;
+            // document.getElementById('role').value = data.data.role;
             document.getElementById('cellphone').value = data.data.cellphone;
             document.getElementById('email').value = data.data.email;
         })

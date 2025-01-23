@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('folder_id')->constrained()->cascadeOnDelete();
             $table->boolean('is_required');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

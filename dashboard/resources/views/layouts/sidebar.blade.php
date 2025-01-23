@@ -82,13 +82,6 @@
 
                 </ul>
             </li>
-            <li>
-                <a href="{{ route('dashboard.index') }}">
-                    <div class="parent-icon"><i class="material-icons-outlined">account_balance</i>
-                    </div>
-                    <div class="menu-title">Contabilidad Mensual Dash</div>
-                </a>
-            </li>
 
             <li>
                 <a href="javascript:;" class="has-arrow">
@@ -105,7 +98,7 @@
                     <li>
                         <a href="{{ route('applydocumenttype.index') }}"><i
                                 class="material-icons-outlined">arrow_right</i>
-                            Tipo Documento Solicitud
+                            Tipo Documento
                         </a>
                     </li>
                     <li>

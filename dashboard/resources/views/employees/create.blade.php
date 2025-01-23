@@ -14,11 +14,10 @@
         <div class="col-12 col-xl-12">
             <div class="card">
                 <div class="card-body p-4">
-                    <h5 class="mb-4">Formulario Empleados</h5>
                     <form class="row g-3" id="formEmployee">
                         <div class="col-md-6">
-                            <label for="nit" class="form-label">Tipo Documento</label>
-                            <select name="document_type_id" class="form-control" id=document_type_id"">
+                            <label for="document_type_id" class="form-label">Tipo Documento</label>
+                            <select name="document_type_id" class="form-control" id="document_type_id">
                                 <option value="">Seleccione tipo documento</option>
                                 @foreach ($document_type as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -43,15 +42,21 @@
                         </div>
                         <div class="col-md-6">
                             <label for="job_title" class="form-label">Cargo</label>
-                            <input type="text" class="form-control" id="job_title" name="job_title"
-                                placeholder="Ingrese Cargo">
+                            <select name="job_title" class="form-control" id="job_title">
+                                <option value="">Seleccione Cargo</option>
+                                <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+                                <option value="CONTADOR">CONTADOR</option>
+                                <option value="AUXILIAR">AUXILIAR</option>
+                                <option value="AUXILIAR ADMINISTRATIVO">AUXILIAR ADMINISTRATIVO</option>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <label for="role" class="form-label">Rol</label>
                             <select name="role" class="form-control" id="role">
                                 <option value="">Seleccione Cargo</option>
-                                <option value="ADMIN">ADMINISTRADOR</option>
+                                <option value="ADMINISTRADOR">ADMINISTRADOR</option>
                                 <option value="CONTADOR">CONTADOR</option>
+                                <option value="AUXILIAR">AUXILIAR</option>
                             </select>
                         </div>
                         <div class="col-md-6">
@@ -67,7 +72,6 @@
                         <div class="col-md-12 mt-3">
                             <div class="d-md-flex d-grid align-items-left  gap-3">
                                 <button type="submit" class="btn btn-primary px-4">Guardar</button>
-                                <button type="button" class="btn btn-light px-4">Limpiar</button>
                             </div>
                         </div>
 

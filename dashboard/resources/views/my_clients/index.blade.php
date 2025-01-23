@@ -6,7 +6,10 @@
     <link href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
 @endsection
 @section('content')
-    <x-page-title title="Clientes" pagetitle="Clientes" />
+    <x-page-title title="Clientes" pagetitle="Clientes"> <a href="{{ route('client.create') }}" class="btn btn-primary"
+            type="button">
+            Nuevo
+        </a></x-page-title>
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
@@ -26,17 +29,7 @@
                     <tbody>
 
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Tipo Persona</th>
-                            <th>Tipo Documento</th>
-                            <th>Identificación</th>
-                            <th>Razón social</th>
-                            {{-- <th>Correo Corporativo</th>
-                            <th>Dirección Corporativa</th> --}}
-                            <th>Acciones</th>
-                        </tr>
-                    </tfoot>
+
                 </table>
             </div>
         </div>
@@ -52,6 +45,9 @@
     <script>
         $(document).ready(function() {
             $('#tbl-client').DataTable({
+                language: {
+                    url: "{{ URL::asset('build/plugins/datatable/js/es.json') }}"
+                },
                 processing: true,
                 serverSide: true,
                 ajax: '{{ route('client-by-employee.data') }}',

@@ -7,7 +7,10 @@
     @vite('resources/js/employees/employees.js')
 @endsection
 @section('content')
-    <x-page-title title="Empleados" pagetitle="Empleados" />
+    <x-page-title title="Empleados" pagetitle="Empleados"> <a href="{{ route('employee.create') }}" class="btn btn-primary"
+            type="button">
+            Nuevo
+        </a></x-page-title>
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
@@ -23,15 +26,7 @@
                     </thead>
                     <tbody>
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Identificación</th>
-                            <th>Nombres</th>
-                            <th>Correo</th>
-                            <th>Celular</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </tfoot>
+
                 </table>
             </div>
         </div>
@@ -47,6 +42,9 @@
     <script>
         $(document).ready(function() {
             $('#tblEmployees').DataTable({
+                language: {
+                    url: "{{ URL::asset('build/plugins/datatable/js/es.json') }}"
+                },
                 processing: true,
                 serverSide: true,
                 ajax: '{{ route('employees.data') }}',

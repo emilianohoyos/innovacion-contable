@@ -6,19 +6,20 @@
     <link href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
 @endsection
 @section('content')
-    <x-page-title title="Carpetas" pagetitle="Carpetas" />
+    <x-page-title title="Carpetas" pagetitle="Carpetas"><a href="{{ route('folder.create') }}" class="btn btn-primary"
+            type="button">
+            Nueva
+        </a></x-page-title>
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-start">
-                <a href="{{ route('folder.create') }}" class="btn btn-primary" type="button">
-                    Crear Nueva Carpeta
-                </a>
+
             </div>
             <div class="table-responsive mt-3">
                 <table id="tbl-folder" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>Código</th>
                             <th>Nombre Carpeta</th>
                             <th>Fecha de creación</th>
                             <th>Acciones</th>
@@ -27,14 +28,6 @@
                     <tbody>
 
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre Carpeta</th>
-                            <th>Fecha de creación</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
         </div>
@@ -50,6 +43,9 @@
     <script>
         $(document).ready(function() {
             $('#tbl-folder').DataTable({
+                language: {
+                    url: "{{ URL::asset('build/plugins/datatable/js/es.json') }}"
+                },
                 processing: true,
                 serverSide: true,
                 ajax: '{{ route('folders.data') }}',
@@ -104,7 +100,12 @@
             const folderId = $('#folder_id').val();
 
             if (!folderId) {
-                alert('El ID de la carpeta no está definido.');
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "El ID de la carpeta no está definido.",
+
+                });
                 return;
             }
 
@@ -130,15 +131,19 @@
                                 <td>${doc.name}</td>
                                 <td>${doc.is_required === 1 ? 'Sí' : 'No'}</td>
                                 <td>
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="eliminarItem(${doc.apply_document_type_id},${doc.id})">Eliminar</button>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="eliminarItem(${doc.apply_document_type_id},${doc.id})">Desvincular</button>
                                 </td>
                             </tr>
                         `);
                     });
                 },
                 error: function(xhr, status, error) {
-                    console.error('Error al cargar los documentos:', error);
-                    alert('No se pudieron cargar los documentos registrados.');
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "No se pudieron cargar los documentos registrados.",
+
+                    });
                 }
             });
             // Inicializar Select2 con AJAX
@@ -188,11 +193,22 @@
 
             // Validar que haya seleccionado un tipo de documento
             if (!documentType) {
-                alert('Por favor seleccione un tipo de documento.');
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Por favor seleccione un tipo de documento.",
+
+                });
+
                 return;
             }
             if (items.some(item => item.document_type_id == documentType)) {
-                alert('El tipo de documento ya está agregado en la tabla.');
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "El tipo de documento ya está agregado en la tabla.",
+
+                });
                 return;
             }
 
@@ -208,7 +224,7 @@
                     <td>${documentTypeText}</td>
                     <td>${isRequiredText}</td>
                     <td>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminarItem(${documentType},null)">Eliminar</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminarItem(${documentType},null)">Desvincular</button>
                     </td>
                 </tr>
             `);
@@ -219,47 +235,71 @@
         }
         // Función para eliminar un ítem de la tabla y del array
         function eliminarItem(typeId, dbId) {
-            if (!confirm('¿Estás seguro de que deseas eliminar este documento?')) {
-                return;
-            }
-            // Filtrar el array para excluir el elemento eliminado
-            items = items.filter(item => item.document_type_id != typeId);
+            Swal.fire({
+                title: `¿Estás seguro de que deseas eliminar este documento?`,
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Filtrar el array para excluir el elemento eliminado
+                    items = items.filter(item => item.document_type_id != typeId);
 
-            // Si el segundo parámetro (`dbId`) no es null, elimina también en la base de datos
-            if (dbId !== null) {
-                $.ajax({
-                    url: `/apply-document-type-folder/${dbId}`, // Endpoint para eliminar en el backend
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Token CSRF
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            alert('Documento eliminado correctamente.');
+                    // Si el segundo parámetro (`dbId`) no es null, elimina también en la base de datos
+                    if (dbId !== null) {
+                        $.ajax({
+                            url: `/apply-document-type-folder/${dbId}`, // Endpoint para eliminar en el backend
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Token CSRF
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    Swal.fire({
+                                        title: "Documento eliminado correctamente.",
+                                        icon: "success",
+                                        draggable: true
+                                    });
 
-                            // Eliminar del array y la vista después de confirmar la eliminación en la base de datos
-                            $(`#itemsTable tbody tr:has(button[onclick='eliminarItem(${typeId},${dbId})'])`)
-                                .remove();
-                        } else {
-                            alert('No se pudo eliminar el documento: ' + response.message);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error al eliminar el documento:', error);
-                        alert('Ocurrió un error al intentar eliminar el documento.');
+                                    // Eliminar del array y la vista después de confirmar la eliminación en la base de datos
+                                    $(`#itemsTable tbody tr:has(button[onclick='eliminarItem(${typeId},${dbId})'])`)
+                                        .remove();
+                                } else {
+                                    alert('No se pudo eliminar el documento: ' + response.message);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('Error al eliminar el documento:', error);
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: 'Ocurrió un error al intentar eliminar el documento.',
+
+                                });
+                            }
+                        });
+                    } else {
+                        // Solo eliminar de la vista si no es necesario eliminar en la base de datos
+                        $(`#itemsTable tbody tr:has(button[onclick='eliminarItem(${typeId},null)'])`).remove();
                     }
-                });
-            } else {
-                // Solo eliminar de la vista si no es necesario eliminar en la base de datos
-                $(`#itemsTable tbody tr:has(button[onclick='eliminarItem(${typeId},null)'])`).remove();
-            }
+                }
+            });
         }
 
         function guardariItems() {
             const folderId = $('#folder_id').val();
 
             if (!folderId || items.length === 0) {
-                alert('Por favor complete los datos antes de actualizar.');
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Por favor complete los datos antes de actualizar.",
+
+                });
                 return;
             }
 
@@ -276,11 +316,21 @@
                 },
                 success: function(response) {
                     if (response.status) {
-                        alert('Datos guardados correctamente.');
+                        Swal.fire({
+                            title: "Datos guardados correctamente.",
+                            icon: "success",
+                            draggable: true
+                        });
                         $('#addDocumentModal').modal('hide');
                         location.reload(); // Recargar la página o actualizar la tabla principal
                     } else {
-                        alert('Hubo un problema al guardar los datos: ' + response.message);
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "Hubo un problema al guardar los datos: " + response.message,
+
+                        });
+
                     }
                 }
             });

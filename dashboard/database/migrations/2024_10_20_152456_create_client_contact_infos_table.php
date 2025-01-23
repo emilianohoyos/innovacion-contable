@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('cellphone');
             $table->json('channel_communication');
             $table->date('birthday');
+            $table->text('observation');
             $table->timestamps();
         });
     }

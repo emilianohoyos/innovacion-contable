@@ -97,7 +97,7 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="person_type_id" class="form-label">Tipo Persona</label>
-                                    <select name="person_type_id" id="person_type_id" class="form-control">
+                                    <select name="person_type_id" id="person_type_id" class="form-control" required>
                                         <option value="">Seleccione...</option>
                                         @foreach ($person_type as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="document_type_id" class="form-label">Tipo documento</label>
-                                    <select name="document_type_id" id="document_type_id" class="form-control">
+                                    <select name="document_type_id" id="document_type_id" class="form-control" required>
                                         <option value="">Seleccione...</option>
                                         @foreach ($document_type as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -116,22 +116,22 @@
                                 <div class="col-md-6">
                                     <label for="nit" class="form-label">NIT/Identificacion</label>
                                     <input type="text" class="form-control" id="nit" name="nit"
-                                        placeholder="Ingrese Nit">
+                                        placeholder="Ingrese Nit" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="company_name" class="form-label">Razon social/Nombre</label>
                                     <input type="text" class="form-control" id="company_name" name="company_name"
-                                        placeholder="Ingrese Razon Social">
+                                        placeholder="Ingrese Razon Social" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="address" class="form-label">Dirección Empresa</label>
                                     <input type="text" class="form-control" id="address" name="address"
-                                        placeholder="Ingrese Dirección">
+                                        placeholder="Ingrese Dirección" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="email_company" class="form-label">Email Corporativo</label>
                                     <input type="email_company" class="form-control" id="email_company"
-                                        name="email_company" placeholder="Ingrese Dirección">
+                                        name="email_company" placeholder="Ingrese Dirección" required>
                                 </div>
                                 <br>
                                 <div class="col-md-12">
@@ -200,7 +200,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label for="category" class="form-label">Prioridad</label>
-                                    <select name="category" id="category" class="form-control">
+                                    <select name="category" id="category" class="form-control" required>
                                         <option value="">Seleccione...</option>
                                         <option value="ALTA">ALTA</option>
                                         <option value="MEDIA">MEDIA</option>
@@ -209,13 +209,13 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label for="review" class="form-label">Reseña</label>
-                                    <textarea class="form-control" id="review" name="review" placeholder="Ingrese Reseña" rows="3"></textarea>
+                                    <textarea class="form-control" id="review" name="review" placeholder="Ingrese Reseña" rows="3" required></textarea>
                                 </div>
 
                                 <div class="col-md-12">
                                     <label for="observation" class="form-label">Observaciones</label>
                                     <textarea class="form-control" id="observation" name="observation" placeholder="Ingrese observaciones."
-                                        rows="3"></textarea>
+                                        rows="3" required></textarea>
                                 </div>
                                 <div class="col-12 col-lg-12 text-end">
                                     <button class="btn btn-primary px-4" onclick="stepper1.next()">
@@ -360,7 +360,7 @@
 @endsection
 @section('scripts')
     <script src="{{ URL::asset('build/plugins/bs-stepper/js/bs-stepper.min.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/bs-stepper/js/main.js') }}"></script>
+    {{-- <script src="{{ URL::asset('build/plugins/bs-stepper/js/main.js') }}"></script> --}}
     <script src="{{ URL::asset('build/plugins/select2/js/select2.full.min.js') }}"></script>
     <script src="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script>
@@ -401,36 +401,66 @@
             var stepperPanList = [].slice.call(stepperFormEl.querySelectorAll('.bs-stepper-pane'));
             var form = stepperFormEl.querySelector('.bs-stepper-content form');
 
+            document.querySelector('#stepper1').addEventListener('show.bs-stepper', function(event) {
+                const currentStepIndex = stepper1._currentIndex;
+                const nextStepIndex = event.detail.indexStep;
 
-            // Avanzar al siguiente paso del wizard
-            btnNextList.forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    stepperForm.next();
+                console.log(
+                    `Intentando avanzar del paso ${currentStepIndex + 1} al paso ${nextStepIndex + 1}`);
+
+                const currentPane = document.querySelectorAll('.bs-stepper-pane')[currentStepIndex];
+                const inputs = currentPane.querySelectorAll('input, select, textarea');
+
+                // Validar los campos
+                let isValid = true;
+                inputs.forEach(input => {
+                    if (!input.checkValidity()) {
+                        isValid = false;
+                        input.classList.add('is-invalid'); // Agregar clase de error
+                    } else {
+                        input.classList.remove('is-invalid'); // Quitar clase de error
+                    }
                 });
-            });
 
-            // Evento que se ejecuta al mostrar un nuevo paso
-            stepperFormEl.addEventListener('show.bs-stepper', function(event) {
-                form.classList.remove('was-validated');
-                var nextStep = event.detail.indexStep;
-                var currentStep = nextStep;
-
-                if (currentStep > 0) {
-                    currentStep--;
-
+                if (!isValid) {
+                    console.log('Hay errores en el formulario. No se puede avanzar.');
+                    event.preventDefault(); // Evita avanzar al siguiente paso
+                } else {
+                    console.log('Validación exitosa. Avanzando al siguiente paso.');
                 }
-
-                var stepperPan = stepperPanList[currentStep];
-
-                // Actualizar el dropdownParent de Select2 al contenedor del paso visible
-                // $('#employee_id').select2({
-                //     theme: 'bootstrap-5',
-                //     placeholder: "Selecciona opciones",
-                //     allowClear: true,
-                //     closeOnSelect: false, // No cierra el menú al seleccionar una opción
-                //     // Contenedor del paso actual
-                // });
             });
+            //Avanzar al siguiente paso del wizard
+            // btnNextList.forEach(function(btn) {
+            //     btn.addEventListener('click', function() {
+
+            //         stepperForm.next();
+            //     });
+            // });
+
+            // // Evento que se ejecuta al mostrar un nuevo paso
+            // stepperFormEl.addEventListener('show.bs-stepper', function(event) {
+            //     console.log(event)
+            //     form.classList.remove('was-validated');
+            //     var nextStep = event.detail.indexStep;
+
+            //     var currentStep = nextStep;
+
+            //     if (currentStep > 0) {
+            //         currentStep--;
+
+            //     }
+
+            //     var stepperPan = stepperPanList[currentStep];
+
+            //     // Actualizar el dropdownParent de Select2 al contenedor del paso visible
+            //     // $('#employee_id').select2({
+            //     //     theme: 'bootstrap-5',
+            //     //     placeholder: "Selecciona opciones",
+            //     //     allowClear: true,
+            //     //     closeOnSelect: false, // No cierra el menú al seleccionar una opción
+            //     //     // Contenedor del paso actual
+            //     // });
+            // });
             $('#person_type_id').select2();
             // Captura el evento de cambio
             $('#person_type_id').on('change', function() {

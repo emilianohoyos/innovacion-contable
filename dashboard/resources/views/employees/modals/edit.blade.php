@@ -46,16 +46,24 @@
                             <input type="text" class="form-control" id="email" name="email"
                                 placeholder="Ingrese Correo">
                         </div>
+
                         <div class="col-md-6">
                             <label for="job_title" class="form-label">Cargo</label>
-                            <input type="text" class="form-control" id="job_title" name="job_title"
-                                placeholder="Ingrese Cargo">
+                            <select name="job_title" class="form-control" id="job_title">
+                                <option value="">Seleccione Cargo</option>
+                                <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+                                <option value="CONTADOR">CONTADOR</option>
+                                <option value="AUXILIAR">AUXILIAR</option>
+                                <option value="AUXILIAR ADMINISTRATIVO">AUXILIAR ADMINISTRATIVO</option>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <label for="role" class="form-label">Rol</label>
                             <select name="role" class="form-control" id="role">
-                                <option value="ADMIN">ADMINISTRADOR</option>
+                                <option value="">Seleccione Cargo</option>
+                                <option value="ADMINISTRADOR">ADMINISTRADOR</option>
                                 <option value="CONTADOR">CONTADOR</option>
+                                <option value="AUXILIAR">AUXILIAR</option>
                             </select>
                         </div>
                     </div>

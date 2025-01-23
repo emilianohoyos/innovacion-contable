@@ -1,15 +1,7 @@
-<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-    <div class="breadcrumb-title pe-3">{{ $attributes['title'] }}</div>
-    <div class="ps-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0 p-0">
-                <li class="breadcrumb-item"><a href="javascript:;"></a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">{{ $attributes['pagetitle'] }}</li>
-            </ol>
-        </nav>
+<div class="page-breadcrumb d-none d-sm-flex align-items-center justify-content-between mb-3">
+    <div class="pe-3">
+        <h5>{{ $attributes['title'] }}</h5>
     </div>
-    <div class="ms-auto">
+    {{ $slot }}
 
-    </div>
 </div>

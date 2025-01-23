@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Tipo Documento Solicitud')
+@section('title', 'Tipo Documento')
 @section('head')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
@@ -9,17 +9,17 @@
 @endsection
 @section('content')
     @vite('resources/js/apply_document_type/apply_document_type.js')
-    <x-page-title title="Tipo documento Solicitud" pagetitle="Registro de Tipo Documento Solicitud" />
+    <x-page-title title="Tipo documento" />
     <div class="row">
         <div class="col-12 col-xl-12">
             <div class="card">
                 <div class="card-body p-4">
-                    <h5 class="mb-4">Formulario Tipo Documento Solicitud</h5>
+                    <h5 class="mb-4">Nuevo Tipo Documento</h5>
                     <form class="row g-3" id="formApplyDocumentType">
                         <div class="col-md-6">
                             <label for="name" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Ingrese Nombre del tipo de solicitud">
+                                placeholder="Ingrese Nombre">
                         </div>
 
                         <div class="col-md-12 mt-3">

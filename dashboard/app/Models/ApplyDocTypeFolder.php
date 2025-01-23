@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ApplyDocTypeFolder extends Model
 {
+    use SoftDeletes;
     protected $fillable = ['folder_id', 'apply_document_type_id', 'is_required'];
 
     public function folder(): BelongsTo

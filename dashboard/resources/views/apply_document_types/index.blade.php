@@ -1,25 +1,27 @@
 @extends('layouts.master')
 
-@section('title', 'Tipo Documento Solicitud')
+@section('title', 'Tipo Documento')
 @section('css')
     <link href="{{ URL::asset('build/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
     <link href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
 @endsection
+@section('head')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('content')
-    <x-page-title title="Tipo Solicitud" pagetitle="Tipo Documento Solicitud" />
+    <x-page-title title="Tipo Documento"><a href="{{ route('applydocumenttype.create') }}" class="btn btn-primary btn-block"
+            type="button">
+            Nuevo
+        </a>
+    </x-page-title>
     <div class="card">
         <div class="card-body">
-            <div class="d-flex justify-content-start">
-                <a href="{{ route('applydocumenttype.create') }}" class="btn btn-primary btn-block" type="button">
-                    Crear Nuevo Tipo Documento Solicitud
-                </a>
-            </div>
             <div class="table-responsive mt-3">
                 <table id="example" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Tipo Documento Solicitud</th>
+                            <th>Código</th>
+                            <th>Tipo Documento</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -37,7 +39,8 @@
                                             <i class="material-icons-outlined">visibility</i>
                                         </button> --}}
 
-                                        <button type="button" onclick="confirmDelete()"
+                                        <button type="button"
+                                            onclick="confirmDelete({{ $item->id }},'{{ $item->name }}')"
                                             class="btn btn-danger raised d-inline-flex align-items-center justify-content-center">
                                             <i class="material-icons-outlined">delete</i>
                                         </button>
@@ -46,17 +49,7 @@
 
                             </tr>
                         @endforeach
-
-
-
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Tipo Documento Solicitud</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
         </div>
@@ -71,12 +64,16 @@
     <script src="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#example').DataTable();
+            $('#example').DataTable({
+                language: {
+                    url: "{{ URL::asset('build/plugins/datatable/js/es.json') }}"
+                },
+            });
         });
 
-        function confirmDelete() {
+        function confirmDelete(document_type_id, document_type_name) {
             Swal.fire({
-                title: '¿Estás seguro de Eliminar el cliente?',
+                title: `¿Estás seguro de Eliminar el tipo de documento: ${document_type_name}?`,
                 text: "Esta acción no se puede deshacer.",
                 icon: 'warning',
                 showCancelButton: true,
@@ -86,21 +83,48 @@
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Enviar el formulario de eliminación
-                    // document.getElementById('delete-form-' + id).submit();
+                    fetch(`/applydocumenttype/${document_type_id}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                    'content'),
+                                'Accept': 'application/json'
+                            }
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                return response.json().then(err => {
+                                    throw err;
+                                });
+                            }
+                            return response.json();
+                        })
+                        .then(result => {
+                            isLoading(false)
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Se ha eliminado el tipo de solicitud',
+                                text: 'El tipo de solicitud se ha eliminado exitosamente.',
+                                confirmButtonText: 'Aceptar'
+                            }).then(() => {
+                                // Redirigir a la página de creación de empleado
+                                window.location.href = '/applydocumenttype';
+
+                            });
+                        })
+                        .catch(error => {
+                            isLoading(false)
+                            if (error.errors) {
+                                // Muestra los errores de validación al usuario
+                                console.error('Errores de validación:', error.errors);
+                                alert('Errores de validación: ' + JSON.stringify(error.errors));
+                            } else {
+                                alert('Error al registrar tipo de solicitud');
+                            }
+                        });
                 }
             });
         }
     </script>
-    {{-- <script>
-        $(document).ready(function() {
-            var table = $('#example2').DataTable({
-                lengthChange: false,
-                buttons: ['copy', 'excel', 'pdf', 'print']
-            });
 
-            table.buttons().container()
-                .appendTo('#example2_wrapper .col-md-6:eq(0)');
-        });
-    </script> --}}
 @endsection

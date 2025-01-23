@@ -6,20 +6,18 @@
     <link href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
 @endsection
 @section('content')
-    <x-page-title title="Tipo Solicitud" pagetitle="Tipo Solicitud" />
+    <x-page-title title="Tipo Solicitud" pagetitle="Tipo Solicitud"> <a href="{{ route('applytype.create') }}"
+            class="btn btn-primary" type="button">
+            Crear Nuevo Tipo de Solicitud
+        </a></x-page-title>
     <div class="card">
         <div class="card-body">
-            <div class="d-flex justify-content-start">
-                <a href="{{ route('applytype.create') }}" class="btn btn-primary" type="button">
-                    Crear Nuevo Tipo de Solicitud
-                </a>
-            </div>
             @if (!empty($applyType))
                 <div class="table-responsive mt-3">
                     <table id="apply-type-table" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Id</th>
+                                <th>Código</th>
                                 <th>Tipo Solicitud</th>
                                 <th>Dias Estimados </th>
                                 <th>Fecha Creacion </th>
@@ -29,15 +27,6 @@
                         <tbody>
 
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Id</th>
-                                <th>Tipo Solicitud</th>
-                                <th>Dias Estimados </th>
-                                <th>Fecha Creacion </th>
-                                <th>Acciones</th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
             @else
@@ -57,6 +46,9 @@
     <script>
         $(document).ready(function() {
             $('#apply-type-table').DataTable({
+                language: {
+                    url: "{{ URL::asset('build/plugins/datatable/js/es.json') }}"
+                },
                 processing: true,
                 serverSide: true,
                 ajax: '{{ route('applytype.data') }}',
@@ -134,7 +126,7 @@
                     <td>${doc.name}</td>
                     <td>${doc.is_required === 1 ? 'Sí' : 'No'}</td>
                     <td>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminarItem(${doc.apply_document_type_id},${doc.id})">Eliminar</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminarItem(${doc.apply_document_type_id},${doc.id})">Desvincular</button>
                     </td>
                 </tr>
             `);
@@ -219,7 +211,7 @@
                     <td>${documentTypeText}</td>
                     <td>${isRequiredText}</td>
                     <td>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminarItem(${documentType},null)">Eliminar</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminarItem(${documentType},null)">Desvincular</button>
                     </td>
                 </tr>
         `);

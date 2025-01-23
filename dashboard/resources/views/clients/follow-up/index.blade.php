@@ -78,6 +78,9 @@
                     table.ajax.url(`/clients-follow-up/${clientId}/${selectedYear}`).load();
                 } else {
                     table = $('#tbl-client-follow-up').DataTable({
+                        language: {
+                            url: "{{ URL::asset('build/plugins/datatable/js/es.json') }}"
+                        },
                         processing: true,
                         serverSide: true,
                         ajax: `/clients-follow-up/${clientId}/${selectedYear}`,

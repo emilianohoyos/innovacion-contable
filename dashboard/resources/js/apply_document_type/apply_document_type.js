@@ -50,8 +50,8 @@ window.save = function (e) {
             isLoading(false)
             Swal.fire({
                 icon: 'success',
-                title: 'Se ha creado el tipo de solicitud',
-                text: 'El tipo de solicitud se ha registrado exitosamente.',
+                title: 'Se ha creado el tipo de documento',
+                text: 'El tipo de documento se ha registrado exitosamente.',
                 confirmButtonText: 'Aceptar'
             }).then(() => {
                 // Redirigir a la página de creación de empleado

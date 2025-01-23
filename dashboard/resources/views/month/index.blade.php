@@ -6,13 +6,13 @@
     <link href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
 @endsection
 @section('content')
-    <x-page-title title="Configuracion Mes" pagetitle="Configuracion Mes" />
+    <x-page-title title="Configuración de fechas por mes" />
 
     <div class="row">
         <div class="col-12 col-xl-12">
             <div class="card">
                 <div class="card-body p-4">
-                    <h5 class="mb-4">Configuracion Mes</h5>
+                    {{-- <h5 class="mb-4"></h5> --}}
                     <form class="row g-3">
                         @csrf
                         <div class="col-md-5">
@@ -38,14 +38,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        <tr>
+                                            <td colspan="3" style="text-align:center;">Seleccionar año</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="d-flex justify-content-start">
-                                <button type="button" id="saveTable" class="btn btn-primary">Guardar Tabla</button>
+                                <button type="button" id="saveTable" class="btn btn-primary">Guardar</button>
                             </div>
                         </div>
                     </form>
@@ -64,6 +66,7 @@
     <script>
         $(document).ready(function() {
             const tableBody = $("#tbl-month tbody");
+            document.getElementById("saveTable").disabled = true;
 
             $('#year').on('change', function() {
                 const selectedYear = $(this).val();
@@ -122,6 +125,7 @@
                                     tableBody.append(tr);
                                 }
                             }
+                            document.getElementById("saveTable").disabled = false;
                         })
                         .catch(error => console.error('Error al cargar datos:', error));
                 } else {
@@ -132,6 +136,7 @@
 
             // Guardar toda la tabla
             $('#saveTable').on('click', function() {
+                isLoading(true);
                 const rows = tableBody.find("tr");
                 const tableData = [];
 
@@ -159,9 +164,16 @@
                         table: tableData
                     }),
                     success: function(response) {
-                        alert(response.message);
+                        isLoading(false);
+                        Swal.fire({
+                            title: response.message,
+                            icon: "success",
+                            draggable: true
+                        });
+
                     },
                     error: function(error) {
+                        isLoading(false);
                         console.error("Error al guardar datos:", error);
                     }
                 });
@@ -177,5 +189,15 @@
             }
 
         });
+
+
+        function isLoading(show) {
+            const spinner = document.getElementById('loadingSpinner');
+            if (show) {
+                spinner.style.display = 'flex'; // Muestra el spinner
+            } else {
+                spinner.style.display = 'none'; // Oculta el spinner
+            }
+        };
     </script>
 @endsection
