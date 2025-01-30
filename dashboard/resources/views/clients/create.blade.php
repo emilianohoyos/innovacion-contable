@@ -588,8 +588,16 @@
                     },
                     error: function(error) {
                         isLoading(false)
-                        console.error('Error al guardar el cliente:', error);
-                        alert('Hubo un error al guardar el cliente');
+                        console.error('Error al guardar el cliente:', error.responseJSON
+                            .message);
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'No ha creado el Cliente',
+                            text: 'Error al crear el cliente:' + error.responseJSON
+                                .message,
+                            confirmButtonText: 'Aceptar'
+                        });
                     }
                 });
             });

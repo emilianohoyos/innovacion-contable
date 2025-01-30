@@ -147,10 +147,10 @@ class ApplyTypesApplyDocumentTypeController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
         $validatedData = $validator->validated();
-        $applyDocumentTypeIds = ApplyTypesApplyDocumentType::where('apply_type_id', $request->apply_type_id)
+        $applyDocumentTypeIds = ApplyTypesApplyDocumentType::where('apply_type_id', $validatedData['apply_type_id'])
             ->pluck('apply_document_type_id');
-
         $applyDocumentTypes = ApplyDocumentType::whereIn('id', $applyDocumentTypeIds)->get();
+        dd($applyDocumentTypes);
         return response()->json([
             "status" => true,
             'data' => $applyDocumentTypes

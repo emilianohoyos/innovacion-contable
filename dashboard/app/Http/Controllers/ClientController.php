@@ -56,7 +56,16 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
+        if ($request->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Error en los datos enviados',
+                'data' => $request->errors()
+            ], 400);
+        }
         $validatedData = $request->validated();
+
+
 
         $client = DB::transaction(function () use ($validatedData) {
 
@@ -272,23 +281,16 @@ class ClientController extends Controller
 
     public function getMonthFolders($clientId)
     {
-        // $folders = ClientFolder::with([
-        //     'folder.applyDocumentTypes',
-        //     'folder' => function ($query) use ($clientId) {
-        //         $query->with([
-        //             'monthlyAccountingFolders' => function ($subQuery) use ($clientId) {
-        //                 $subQuery->whereHas('monthlyAccounting', function ($monthlyAccountingQuery) use ($clientId) {
-        //                     $monthlyAccountingQuery->where('year', Carbon::now()->year)
-        //                         ->where('month', Carbon::now()->month)->where('client_id', $clientId);
-        //                 })->with('monthlyAccounting');
-        //             }
-        //         ]);
-        //     },
-        //     'folder.applyDocumentTypes',
-        //     'folder.ApplyDocTypeFolders.monthlyAccountingFolderApplyDocTypeFolders'
-        // ])
-        //     ->where('client_id', $clientId)
-        //     ->get();
+
+        $current_date = Carbon::now();
+        $current_year = $current_date->year;
+        $current_month = $current_date->month;
+
+        if ($current_month == 1) {
+            $current_month = 12;
+            $current_year -= 1;
+        }
+
         $folders = ClientFolder::select(
             'folders.id',
             'folders.name',
@@ -302,10 +304,10 @@ class ClientController extends Controller
             'monthly_accounting_folders.is_new'
         )
             ->join('folders', 'client_folders.folder_id', '=', 'folders.id')
-            ->join('monthly_accountings', function ($join) {
+            ->join('monthly_accountings', function ($join) use ($current_year, $current_month) {
                 $join->on('monthly_accountings.client_id', '=', 'client_folders.client_id')
-                    ->where('monthly_accountings.year', Carbon::now()->year)
-                    ->where('monthly_accountings.month', Carbon::now()->month);
+                    ->where('monthly_accountings.year', $current_year)
+                    ->where('monthly_accountings.month', $current_month);
             })
             ->leftJoin('monthly_accounting_folders', function ($join) {
                 $join->on('monthly_accounting_folders.folder_id', '=', 'folders.id')

@@ -27,7 +27,7 @@ class StoreClientRequest extends FormRequest
             'nit' => 'required',
             'company_name' => 'required',
             'address' => 'required',
-            'email_company' => 'required|email',
+            'email_company' => 'required|email|unique:clients,email',
             'vat_responsible' => 'nullable',
             'is_selfretaining' => 'nullable|boolean',
             'is_simple_taxation_regime' => 'nullable|boolean',
@@ -57,6 +57,7 @@ class StoreClientRequest extends FormRequest
             'firstname.required_if' => 'El nombre es obligatorio para personas naturales.',
             'lastname.required_if' => 'El apellido es obligatorio para personas naturales.',
             'email.required_if' => 'El correo electrónico es obligatorio para personas naturales.',
+            'email_company.unique' => 'El correo electrónico ya se encuentra registrado.',
             'contacts.required_if' => 'Los contactos son obligatorios para personas jurídicas.',
         ];
     }

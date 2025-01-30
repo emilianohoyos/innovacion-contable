@@ -153,7 +153,7 @@ class ApplicationController extends Controller
     public function listApplication(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|string',
+            'user_id' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);

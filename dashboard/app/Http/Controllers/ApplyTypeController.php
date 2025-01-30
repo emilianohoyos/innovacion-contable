@@ -136,4 +136,10 @@ class ApplyTypeController extends Controller
 
         return response()->json($documents);
     }
+
+    public function listApplyTypes()
+    {
+        $applyTypes = ApplyType::all();
+        return response()->json($applyTypes);
+    }
 }
