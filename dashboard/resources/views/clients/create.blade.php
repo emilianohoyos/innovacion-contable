@@ -62,9 +62,19 @@
                         </div>
                     </div>
                     <div class="bs-stepper-line"></div>
-                    <div class="step" data-target="#test-l-2">
+                    <div class="step" data-target="#test-l-4">
                         <div class="step-trigger" role="tab" id="stepper1trigger2" aria-controls="test-l-2">
                             <div class="bs-stepper-circle">2</div>
+                            <div class="">
+                                <h5 class="mb-0 steper-title">Responsabilidades Fiscales</h5>
+                                <p class="mb-0 steper-sub-title">Agrega las responsabilidades del cliente</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bs-stepper-line"></div>
+                    <div class="step" data-target="#test-l-2">
+                        <div class="step-trigger" role="tab" id="stepper1trigger2" aria-controls="test-l-2">
+                            <div class="bs-stepper-circle">3</div>
                             <div class="">
                                 <h5 class="mb-0 steper-title">Datos de contacto</h5>
                                 <p class="mb-0 steper-sub-title">Agrega los datos de contacto</p>
@@ -72,10 +82,11 @@
                         </div>
                     </div>
 
+
                     <div class="bs-stepper-line"></div>
                     <div class="step" data-target="#test-l-3">
                         <div class="step-trigger" role="tab" id="stepper1trigger3" aria-controls="test-l-2">
-                            <div class="bs-stepper-circle">3</div>
+                            <div class="bs-stepper-circle">4</div>
                             <div class="">
                                 <h5 class="mb-0 steper-title">Asociar Empleado que atiende</h5>
                                 <p class="mb-0 steper-sub-title">Agrega los empleados que atienden</p>
@@ -97,7 +108,7 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="person_type_id" class="form-label">Tipo Persona</label>
-                                    <select name="person_type_id" id="person_type_id" class="form-control" required>
+                                    <select name="person_type_id" id="person_type_id" class="form-control">
                                         <option value="">Seleccione...</option>
                                         @foreach ($person_type as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -106,7 +117,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="document_type_id" class="form-label">Tipo documento</label>
-                                    <select name="document_type_id" id="document_type_id" class="form-control" required>
+                                    <select name="document_type_id" id="document_type_id" class="form-control">
                                         <option value="">Seleccione...</option>
                                         @foreach ($document_type as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -116,91 +127,28 @@
                                 <div class="col-md-6">
                                     <label for="nit" class="form-label">NIT/Identificacion</label>
                                     <input type="text" class="form-control" id="nit" name="nit"
-                                        placeholder="Ingrese Nit" required>
+                                        placeholder="Ingrese Nit">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="company_name" class="form-label">Razon social/Nombre</label>
                                     <input type="text" class="form-control" id="company_name" name="company_name"
-                                        placeholder="Ingrese Razon Social" required>
+                                        placeholder="Ingrese Razon Social">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="address" class="form-label">Dirección Empresa</label>
                                     <input type="text" class="form-control" id="address" name="address"
-                                        placeholder="Ingrese Dirección" required>
+                                        placeholder="Ingrese Dirección">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="email_company" class="form-label">Email Corporativo</label>
                                     <input type="email_company" class="form-control" id="email_company"
-                                        name="email_company" placeholder="Ingrese Dirección" required>
+                                        name="email_company" placeholder="Ingrese Dirección">
                                 </div>
                                 <br>
-                                <div class="col-md-12">
-                                    <div class="form-check form-switch form-check-info">
-                                        <input class="form-check-input" type="checkbox" role="switch"
-                                            id="vat_responsible" name="vat_responsible">
-                                        <label class="form-check-label" for="vat_responsible">Responsable de IVA</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-check form-switch form-check-info">
-                                        <input class="form-check-input" type="checkbox" role="switch"
-                                            id="is_selfretaining" name="is_selfretaining">
-                                        <label class="form-check-label" for="is_selfretaining">Es autorretenedor?</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-check form-switch form-check-info">
-                                        <input class="form-check-input" type="checkbox" role="switch"
-                                            id="is_simple_taxation_regime" name="is_simple_taxation_regime">
-                                        <label class="form-check-label" for="is_simple_taxation_regime">Es Regimen
-                                            Simple?</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 g-3">
-                                    <div class="col-md-3">
-                                        <div class="form-check form-switch form-check-info">
-                                            <input class="form-check-input" type="checkbox" role="switch"
-                                                id="is_ica_withholding_agent" name="is_ica_withholding_agent">
-                                            <label class="form-check-label" for="is_ica_withholding_agent">Es Agente
-                                                retenedor
-                                                de
-                                                ICA
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label for="municipality_ica_withholding_agent" class="form-label">Municipio en el
-                                            cual es
-                                            agente retenedor</label>
-                                        <input type="text" class="form-control"
-                                            name="municipality_ica_withholding_agent"
-                                            id="municipality_ica_withholding_agent" placeholder="Ingrese municipio">
-                                    </div>
-                                </div>
-                                <div class="col-md-12  g-4">
-                                    <div class="col-md-3">
-                                        <div class="form-check form-switch form-check-info">
-                                            <input class="form-check-input" type="checkbox" role="switch"
-                                                id="is_ica_selfretaining_agent" name="is_ica_selfretaining_agent">
-                                            <label class="form-check-label" for="is_ica_selfretaining_agent">Es Agente
-                                                Autoretenedor de
-                                                ICA
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label for="municipality_ica_selfretaining_agent" class="form-label">Municipio en
-                                            el
-                                            cual es
-                                            agente Autoretenedor</label>
-                                        <input type="text" class="form-control"
-                                            name="municipality_ica_selfretaining_agent"
-                                            id="municipality_ica_selfretaining_agent" placeholder="Ingrese municipio">
-                                    </div>
-                                </div>
+
                                 <div class="col-md-12">
                                     <label for="category" class="form-label">Prioridad</label>
-                                    <select name="category" id="category" class="form-control" required>
+                                    <select name="category" id="category" class="form-control">
                                         <option value="">Seleccione...</option>
                                         <option value="ALTA">ALTA</option>
                                         <option value="MEDIA">MEDIA</option>
@@ -209,13 +157,13 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label for="review" class="form-label">Reseña</label>
-                                    <textarea class="form-control" id="review" name="review" placeholder="Ingrese Reseña" rows="3" required></textarea>
+                                    <textarea class="form-control" id="review" name="review" placeholder="Ingrese Reseña" rows="3"></textarea>
                                 </div>
 
                                 <div class="col-md-12">
                                     <label for="observation" class="form-label">Observaciones</label>
                                     <textarea class="form-control" id="observation" name="observation" placeholder="Ingrese observaciones."
-                                        rows="3" required></textarea>
+                                        rows="3"></textarea>
                                 </div>
                                 <div class="col-12 col-lg-12 text-end">
                                     <button class="btn btn-primary px-4" onclick="stepper1.next()">
@@ -224,6 +172,806 @@
                                 </div>
                             </div><!---end row-->
 
+                        </div>
+                        <div id="test-l-4" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger4">
+
+                            <h5 class="mb-1">Responsabilidades del cliente</h5>
+                            <p class="mb-4">Seleccione las responsabilidades</p>
+                            <div class="row g-3">
+                                <br>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-4">
+                                        <label for="is_simple_taxation_regime" class="form-label">Regimen Simple de
+                                            Tributación</label>
+                                        <select name="is_simple_taxation_regime" id="is_simple_taxation_regime"
+                                            class="form-control">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="simple_taxation_regime_advances"
+                                            id="simple_taxation_regime_advances_lbl" class="form-label"
+                                            style="display: none">Anticipo</label>
+                                        <select name="simple_taxation_regime_advances"
+                                            id="simple_taxation_regime_advances" class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="simple_taxation_regime_consolidated_annual"
+                                            id="simple_taxation_regime_consolidated_annual_lbl" class="form-label"
+                                            style="display: none">Anual
+                                            Consolidada</label>
+                                        <select name="simple_taxation_regime_consolidated_annual" style="display: none"
+                                            id="simple_taxation_regime_consolidated_annual" class="form-control">
+                                            <option value="IVA">IVA</option>
+                                            <option value="IRS">IRS</option>
+                                            <option value="IVA E IRS">IVA E IRS</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_industry_commerce" class="form-label">Industria y Comercio</label>
+                                        <select name="is_industry_commerce" id="is_industry_commerce"
+                                            class="form-control" style="display: none">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="industry_commerce_periodicity" class="form-label"
+                                            id="industry_commerce_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="industry_commerce_periodicity" id="industry_commerce_periodicity"
+                                            style="display: none" class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-12 row">
+                                        <div class="col-md-2 mt-3">
+                                            <label for="industry_commerce_department" style="display: none"
+                                                id="industry_commerce_department_lbl"
+                                                class="form-label">Departamento</label>
+                                            <select name="industry_commerce_department" id="industry_commerce_department"
+                                                class="form-control" style="display: none">
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 mt-3">
+                                            <label for="industry_commerce_city" class="form-label"
+                                                id="industry_commerce_city_lbl" style="display: none">Municipio</label>
+                                            <select name="industry_commerce_city" id="industry_commerce_city"
+                                                class="form-control">
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-1">
+                                            <button id="industry_commerce_places_add-row" style="display: none"
+                                                class="btn btn-primary px-4 w-100 mt-5">Agregar</button>
+                                        </div>
+                                        <div class="col-md-7 mt-3">
+                                            <div class="table-responsive mt-4">
+                                                <table class="table table-bordered table-striped"
+                                                    id="industry_commerce_places_table" style="display: none">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Departamento</th>
+                                                            <th>Municipio</th>
+                                                            <th>Eliminar</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_industry_commerce_retainer" class="form-label">Retenedor Industria
+                                            y Comercio</label>
+                                        <select name="is_industry_commerce_retainer" id="is_industry_commerce_retainer"
+                                            class="form-control" style="display: none">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="industry_commerce_retainer_periodicity" class="form-label"
+                                            id="industry_commerce_retainer_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="industry_commerce_retainer_periodicity"
+                                            id="industry_commerce_retainer_periodicity" style="display: none"
+                                            class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-12 row">
+                                        <div class="col-md-2 mt-3">
+                                            <label for="industry_commerce_retainer_department" style="display: none"
+                                                id="industry_commerce_retainer_department_lbl"
+                                                class="form-label">Departamento</label>
+                                            <select name="industry_commerce_retainer_department"
+                                                id="industry_commerce_retainer_department" class="form-control"
+                                                style="display: none">
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 mt-3">
+                                            <label for="industry_commerce_retainer_city" class="form-label"
+                                                id="industry_commerce_retainer_city_lbl"
+                                                style="display: none">Municipio</label>
+                                            <select name="industry_commerce_retainer_city"
+                                                id="industry_commerce_retainer_city" class="form-control">
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-1 ">
+                                            <button id="industry_commerce_retainer_places_add-row" style="display: none"
+                                                class="btn btn-primary px-4 w-100 mt-5">Agregar</button>
+                                        </div>
+                                        <div class="col-md-7 mt-3">
+                                            <div class="table-responsive mt-4">
+                                                <table class="table table-bordered table-striped"
+                                                    id="industry_commerce_retainer_places_table" style="display: none">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Departamento</th>
+                                                            <th>Municipio</th>
+                                                            <th>Eliminar</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_industry_commerce_selfretaining" class="form-label">Autrretenedor
+                                            Industria
+                                            y Comercio</label>
+                                        <select name="is_industry_commerce_selfretaining"
+                                            id="is_industry_commerce_selfretaining" class="form-control"
+                                            style="display: none">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="industry_commerce_selfretaining_periodicity" class="form-label"
+                                            id="industry_commerce_selfretaining_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="industry_commerce_selfretaining_periodicity"
+                                            id="industry_commerce_selfretaining_periodicity" style="display: none"
+                                            class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-12 row">
+                                        <div class="col-md-2 mt-3">
+                                            <label for="industry_commerce_selfretaining_department" style="display: none"
+                                                id="industry_commerce_selfretaining_department_lbl"
+                                                class="form-label">Departamento</label>
+                                            <select name="industry_commerce_selfretaining_department"
+                                                id="industry_commerce_selfretaining_department" class="form-control"
+                                                style="display: none">
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 mt-3">
+                                            <label for="industry_commerce_selfretaining_city" class="form-label"
+                                                id="industry_commerce_selfretaining_city_lbl"
+                                                style="display: none">Municipio</label>
+                                            <select name="industry_commerce_selfretaining_city"
+                                                id="industry_commerce_selfretaining_city" class="form-control">
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-1 ">
+                                            <button id="industry_commerce_selfretaining_places_add-row"
+                                                style="display: none"
+                                                class="btn btn-primary px-4 w-100 mt-5">Agregar</button>
+                                        </div>
+                                        <div class="col-md-7 mt-3">
+                                            <div class="table-responsive mt-4">
+                                                <table class="table table-bordered table-striped"
+                                                    id="industry_commerce_selfretaining_places_table"
+                                                    style="display: none">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Departamento</th>
+                                                            <th>Municipio</th>
+                                                            <th>Eliminar</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="vat_responsible" class="form-label">IVA</label>
+                                        <select name="vat_responsible" id="vat_responsible" class="form-control">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="vat_responsible_periodicity" class="form-label"
+                                            id="vat_responsible_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="vat_responsible_periodicity" id="vat_responsible_periodicity"
+                                            style="display: none" class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <label for="vat_responsible_observation" id="vat_responsible_observation_lbl"
+                                            class="form-label" style="display: none">Observaciones</label>
+                                        <textarea class="form-control" id="vat_responsible_observation" name="vat_responsible_observation"
+                                            style="display: none" placeholder="Ingrese observaciones." rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_rent" class="form-label">Renta</label>
+                                        <select name="is_rent" id="is_rent" class="form-control">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="rent_periodicity" class="form-label" id="rent_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="rent_periodicity" id="rent_periodicity" style="display: none"
+                                            class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_supersociety" class="form-label">Supersociedades</label>
+                                        <select name="is_supersociety" id="is_supersociety" class="form-control">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="supersociety_periodicity" class="form-label"
+                                            id="supersociety_periodicity_lbl" style="display: none">Periocididad</label>
+                                        <select name="supersociety_periodicity" id="supersociety_periodicity"
+                                            style="display: none" class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_supertransport" class="form-label">Supertransportes</label>
+                                        <select name="is_supertransport" id="is_supertransport" class="form-control">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="supertransport_periodicity" class="form-label"
+                                            id="supertransport_periodicity_lbl" style="display: none">Periocididad</label>
+                                        <select name="supertransport_periodicity" id="supertransport_periodicity"
+                                            style="display: none" class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_superfinancial" class="form-label">Superfinanciera</label>
+                                        <select name="is_superfinancial" id="is_superfinancial" class="form-control">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="superfinancial_periodicity" class="form-label"
+                                            id="superfinancial_periodicity_lbl" style="display: none">Periocididad</label>
+                                        <select name="superfinancial_periodicity" id="superfinancial_periodicity"
+                                            style="display: none" class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_source_retention" class="form-label">Retención en la fuente</label>
+                                        <select name="is_source_retention" id="is_source_retention" class="form-control">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="source_retention_periodicity" class="form-label"
+                                            id="source_retention_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="source_retention_periodicity" id="source_retention_periodicity"
+                                            style="display: none" class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_dian_exogenous_information" class="form-label">Información exógena
+                                            DIAN</label>
+                                        <select name="is_dian_exogenous_information" id="is_dian_exogenous_information"
+                                            class="form-control">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="dian_exogenous_information_periodicity" class="form-label"
+                                            id="dian_exogenous_information_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="dian_exogenous_information_periodicity"
+                                            id="dian_exogenous_information_periodicity" style="display: none"
+                                            class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_municipal_exogenous_information" class="form-label">Información
+                                            Exógena Municipal</label>
+                                        <select name="is_municipal_exogenous_information"
+                                            id="is_municipal_exogenous_information" class="form-control">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="industry_commerce_selfretaining_periodicity" class="form-label"
+                                            id="municipal_exogenous_information_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="municipal_exogenous_information_periodicity"
+                                            id="municipal_exogenous_information_periodicity" style="display: none"
+                                            class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-12 row">
+                                        <div class="col-md-2 mt-3">
+                                            <label for="municipal_exogenous_information_department" style="display: none"
+                                                id="municipal_exogenous_information_department_lbl"
+                                                class="form-label">Departamento</label>
+                                            <select name="municipal_exogenous_information_department"
+                                                id="municipal_exogenous_information_department" class="form-control"
+                                                style="display: none">
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 mt-3">
+                                            <label for="municipal_exogenous_information_city" class="form-label"
+                                                id="municipal_exogenous_information_city_lbl"
+                                                style="display: none">Municipio</label>
+                                            <select name="municipal_exogenous_information_city"
+                                                id="municipal_exogenous_information_city" class="form-control">
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-1 ">
+                                            <button id="municipal_exogenous_information_places_add-row"
+                                                style="display: none"
+                                                class="btn btn-primary px-4 w-100 mt-5">Agregar</button>
+                                        </div>
+                                        <div class="col-md-7 mt-3">
+                                            <div class="table-responsive mt-4">
+                                                <table class="table table-bordered table-striped"
+                                                    id="municipal_exogenous_information_places_table"
+                                                    style="display: none">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Departamento</th>
+                                                            <th>Municipio</th>
+                                                            <th>Eliminar</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_wealth_tax" class="form-label">Impuesto al patrimonio</label>
+                                        <select name="is_wealth_tax" id="is_wealth_tax" class="form-control">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="wealth_tax_periodicity" class="form-label"
+                                            id="wealth_tax_periodicity_lbl" style="display: none">Periocididad</label>
+                                        <select name="wealth_tax_periodicity" id="wealth_tax_periodicity"
+                                            style="display: none" class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_radian" class="form-label">Radian</label>
+                                        <select name="is_radian" id="is_radian" class="form-control">
+                                            <option value="">Seleccione...</option>
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="radian_periodicity" class="form-label" id="radian_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="radian_periodicity" id="radian_periodicity" style="display: none"
+                                            class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_e_payroll" class="form-label">Nómina electroníca</label>
+                                        <select name="is_e_payroll" id="is_e_payroll" class="form-control">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="e_payroll_periodicity" class="form-label"
+                                            id="e_payroll_periodicity_lbl" style="display: none">Periocididad</label>
+                                        <select name="e_payroll_periodicity" id="e_payroll_periodicity"
+                                            style="display: none" class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_single_registry_final_benefeciaries" class="form-label">Registro
+                                            único de beneficiarios finales</label>
+                                        <select name="is_single_registry_final_benefeciaries"
+                                            id="is_single_registry_final_benefeciaries" class="form-control">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="single_registry_final_benefeciaries_periodicity" class="form-label"
+                                            id="single_registry_final_benefeciaries_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="single_registry_final_benefeciaries_periodicity"
+                                            id="single_registry_final_benefeciaries_periodicity" style="display: none"
+                                            class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_renovacion_esal" class="form-label">Renovación ESAL</label>
+                                        <select name="is_renovacion_esal" id="is_renovacion_esal" class="form-control">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="renovacion_esal_periodicity" class="form-label"
+                                            id="renovacion_esal_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="renovacion_esal_periodicity" id="renovacion_esal_periodicity"
+                                            style="display: none" class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_assets_abroad" class="form-label">Activos en el exterior</label>
+                                        <select name="is_assets_abroad" id="is_assets_abroad" class="form-control">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="assets_abroad_periodicity" class="form-label"
+                                            id="assets_abroad_periodicity_lbl" style="display: none">Periocididad</label>
+                                        <select name="assets_abroad_periodicity" id="assets_abroad_periodicity"
+                                            style="display: none" class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_single_registry_proposers" class="form-label">Registro único de
+                                            proponentes</label>
+                                        <select name="is_single_registry_proposers" id="is_single_registry_proposers"
+                                            class="form-control" style="display: none">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="single_registry_proposers_periodicity" class="form-label"
+                                            id="single_registry_proposers_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="single_registry_proposers_periodicity"
+                                            id="single_registry_proposers_periodicity" style="display: none"
+                                            class="form-control">
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-12 row">
+                                        <div class="col-md-2 mt-3">
+                                            <label for="single_registry_proposers_department" style="display: none"
+                                                id="single_registry_proposers_department_lbl"
+                                                class="form-label">Departamento</label>
+                                            <select name="single_registry_proposers_department"
+                                                id="single_registry_proposers_department" class="form-control"
+                                                style="display: none">
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 mt-3">
+                                            <label for="single_registry_proposers_city" class="form-label"
+                                                id="single_registry_proposers_city_lbl"
+                                                style="display: none">Municipio</label>
+                                            <select name="single_registry_proposers_city"
+                                                id="single_registry_proposers_city" class="form-control">
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-1 ">
+                                            <button id="single_registry_proposers_places_add-row" style="display: none"
+                                                class="btn btn-primary px-4 w-100 mt-5">Agregar</button>
+                                        </div>
+                                        <div class="col-md-7 mt-3">
+                                            <div class="table-responsive mt-4">
+                                                <table class="table table-bordered table-striped"
+                                                    id="single_registry_proposers_places_table" style="display: none">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Departamento</th>
+                                                            <th>Municipio</th>
+                                                            <th>Eliminar</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_renewal_commercial_registration" class="form-label">Renovación de
+                                            registro mercantil</label>
+                                        <select name="is_renewal_commercial_registration"
+                                            id="is_renewal_commercial_registration" class="form-control">
+
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="renewal_commercial_registration_periodicity" class="form-label"
+                                            id="renewal_commercial_registration_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="renewal_commercial_registration_periodicity"
+                                            id="renewal_commercial_registration_periodicity" style="display: none"
+                                            class="form-control">
+
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_national_tourism_fund" class="form-label">Fondo nacional de
+                                            turismo</label>
+                                        <select name="is_national_tourism_fund" id="is_national_tourism_fund"
+                                            class="form-control">
+
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="national_tourism_fund_periodicity" class="form-label"
+                                            id="national_tourism_fund_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="national_tourism_fund_periodicity"
+                                            id="national_tourism_fund_periodicity" style="display: none"
+                                            class="form-control">
+
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_special_tax_regime" class="form-label">Regimen tributario
+                                            especial</label>
+                                        <select name="is_special_tax_regime" id="is_special_tax_regime"
+                                            class="form-control">
+
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    {{-- <div class="col-md-6">
+                                        <label for="special_tax_regime_periodicity" class="form-label"
+                                            id="special_tax_regime_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="special_tax_regime_periodicity" id="special_tax_regime_periodicity"
+                                            style="display: none" class="form-control">
+
+                                            <option value="MENSUAL">MENSUAL</option>
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div> --}}
+                                </div>
+                                <hr>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label for="is_national_tourism_registry" class="form-label">Registro nacional de
+                                            turismo</label>
+                                        <select name="is_national_tourism_registry" id="is_national_tourism_registry"
+                                            class="form-control">
+                                            <option value="FALSE">NO</option>
+                                            <option value="TRUE">SI</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="national_tourism_registry_periodicity" class="form-label"
+                                            id="national_tourism_registry_periodicity_lbl"
+                                            style="display: none">Periocididad</label>
+                                        <select name="national_tourism_registry_periodicity"
+                                            id="national_tourism_registry_periodicity" style="display: none"
+                                            class="form-control">
+                                            <option value="BIMESTRAL">BIMESTRAL</option>
+                                            <option value="CUATRIMESTRAL">CUATRIMESTRAL</option>
+                                            <option value="ANUAL">ANUAL</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <!-- Botón Anterior alineado a la izquierda -->
+                                        <button class="btn btn-primary px-4" onclick="stepper1.previous()">
+                                            <i class='bx bx-left-arrow-alt me-2'></i>Anterior
+                                        </button>
+
+                                        <!-- Botón Guardar o Siguiente alineado a la derecha -->
+                                        <button class="btn btn-success px-4" onclick="stepper1.next()">Siguiente</button>
+                                    </div>
+
+                                </div>
+                            </div><!---end row-->
                         </div>
                         <div id="test-l-2" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger2">
 
@@ -367,28 +1115,7 @@
         var stepper1
         document.addEventListener('DOMContentLoaded', function() {
 
-            const withholdingSwitch = document.getElementById('is_ica_withholding_agent');
-            const withholdingMunicipality = document.getElementById('municipality_ica_withholding_agent');
 
-            // Inicialmente, desactiva el campo
-            withholdingMunicipality.disabled = !withholdingSwitch.checked;
-
-            // Agrega un evento al switch
-            withholdingSwitch.addEventListener('change', function() {
-                withholdingMunicipality.disabled = !this
-                    .checked; // Activa o desactiva según el estado del switch
-            });
-
-            const switchInput = document.getElementById('is_ica_selfretaining_agent');
-            const municipalityInput = document.getElementById('municipality_ica_selfretaining_agent');
-
-            // Inicialmente, desactiva el campo
-            municipalityInput.disabled = !switchInput.checked;
-
-            // Agrega un evento al switch
-            switchInput.addEventListener('change', function() {
-                municipalityInput.disabled = !this.checked; // Activa o desactiva según el estado del switch
-            });
             // Inicializar el Stepper principal
             stepper1 = new Stepper(document.querySelector('#stepper1'));
 
@@ -401,34 +1128,34 @@
             var stepperPanList = [].slice.call(stepperFormEl.querySelectorAll('.bs-stepper-pane'));
             var form = stepperFormEl.querySelector('.bs-stepper-content form');
 
-            document.querySelector('#stepper1').addEventListener('show.bs-stepper', function(event) {
-                const currentStepIndex = stepper1._currentIndex;
-                const nextStepIndex = event.detail.indexStep;
+            // document.querySelector('#stepper1').addEventListener('show.bs-stepper', function(event) {
+            //     const currentStepIndex = stepper1._currentIndex;
+            //     const nextStepIndex = event.detail.indexStep;
 
-                console.log(
-                    `Intentando avanzar del paso ${currentStepIndex + 1} al paso ${nextStepIndex + 1}`);
+            //     console.log(
+            //         `Intentando avanzar del paso ${currentStepIndex + 1} al paso ${nextStepIndex + 1}`);
 
-                const currentPane = document.querySelectorAll('.bs-stepper-pane')[currentStepIndex];
-                const inputs = currentPane.querySelectorAll('input, select, textarea');
+            //     const currentPane = document.querySelectorAll('.bs-stepper-pane')[currentStepIndex];
+            //     // const inputs = currentPane.querySelectorAll('input, select, textarea');
 
-                // Validar los campos
-                let isValid = true;
-                inputs.forEach(input => {
-                    if (!input.checkValidity()) {
-                        isValid = false;
-                        input.classList.add('is-invalid'); // Agregar clase de error
-                    } else {
-                        input.classList.remove('is-invalid'); // Quitar clase de error
-                    }
-                });
+            //     // // Validar los campos
+            //     // let isValid = true;
+            //     // inputs.forEach(input => {
+            //     //     if (!input.checkValidity()) {
+            //     //         isValid = false;
+            //     //         input.classList.add('is-invalid'); // Agregar clase de error
+            //     //     } else {
+            //     //         input.classList.remove('is-invalid'); // Quitar clase de error
+            //     //     }
+            //     // });
 
-                if (!isValid) {
-                    console.log('Hay errores en el formulario. No se puede avanzar.');
-                    event.preventDefault(); // Evita avanzar al siguiente paso
-                } else {
-                    console.log('Validación exitosa. Avanzando al siguiente paso.');
-                }
-            });
+            //     // if (!isValid) {
+            //     //     console.log('Hay errores en el formulario. No se puede avanzar.');
+            //     //     event.preventDefault(); // Evita avanzar al siguiente paso
+            //     // } else {
+            //     //     console.log('Validación exitosa. Avanzando al siguiente paso.');
+            //     // }
+            // });
             //Avanzar al siguiente paso del wizard
             // btnNextList.forEach(function(btn) {
             //     btn.addEventListener('click', function() {
@@ -472,6 +1199,924 @@
                     typeJuridic.style.display = 'none'; // Ocultar el elemento
                 }
             });
+
+            // $('#is_simple_taxation_regime').select2();
+            // Captura el evento de cambio
+            $('#simple_taxation_regime_advances').parent().hide();
+            $('#simple_taxation_regime_consolidated_annual').parent().hide();
+            $('#is_simple_taxation_regime').on('change', function() {
+                const is_simple_taxation_regime = $(this).val();
+                const anticipo = document.getElementById('simple_taxation_regime_advances');
+                const anticipoLbl = document.getElementById('simple_taxation_regime_advances_lbl');
+                const annualConsolidada = document.getElementById(
+                    'simple_taxation_regime_consolidated_annual');
+                const annualConsolidadaLbl = document.getElementById(
+                    'simple_taxation_regime_consolidated_annual_lbl');
+                if (is_simple_taxation_regime === "TRUE") { // Jurídica
+                    $('#simple_taxation_regime_advances').parent().show();
+                    $('#simple_taxation_regime_consolidated_annual').parent().show();
+                    anticipoLbl.style.display = 'block'
+                    annualConsolidadaLbl.style.display = 'block'
+                } else {
+                    $('#simple_taxation_regime_advances').parent().hide();
+                    $('#simple_taxation_regime_consolidated_annual').parent().hide();
+                    anticipoLbl.style.display = 'none'
+                    annualConsolidadaLbl.style.display = 'none'
+                }
+            });
+
+            $('#industry_commerce_department').select2();
+            $('#industry_commerce_city').select2();
+            $('#industry_commerce_periodicity').parent().hide();
+            $('#industry_commerce_department').parent().hide();
+            $('#industry_commerce_city').parent().hide();
+            $('#is_industry_commerce').on('change', function() {
+                const is_industry_commerce = $(this).val();
+                const industry_commerce_periocidad = document.getElementById(
+                    'industry_commerce_periodicity');
+                const industry_commerce_periocidadLbl = document.getElementById(
+                    'industry_commerce_periodicity_lbl');
+                const industry_commerce_department = document.getElementById(
+                    'industry_commerce_department');
+                const industry_commerce_departmentLbl = document.getElementById(
+                    'industry_commerce_department_lbl');
+                const industry_commerce_city = document.getElementById('industry_commerce_city');
+                const industry_commerce_cityLbl = document.getElementById('industry_commerce_city_lbl');
+                const industry_commerce_places_btn = document.getElementById(
+                    'industry_commerce_places_add-row');
+                const industry_commerce_places_table = document.getElementById(
+                    'industry_commerce_places_table');
+
+
+                if (is_industry_commerce === "TRUE") { // Jurídica
+                    var deparments = [];
+                    var repet = [];
+
+                    fetch("{{ URL::asset('/build/js/deparmentsandcities.json') }}").then(data => data
+                        .json()).then(
+                        data => {
+                            deparments = data;
+                            document.querySelector("#industry_commerce_department").innerHTML =
+                                '<option value="">Seleccione</option>';
+                            deparments?.map(e => {
+                                if (!repet.find(i => i.departamento == e.departamento)) {
+                                    document.querySelector("#industry_commerce_department")
+                                        .insertAdjacentHTML(
+                                            'beforeend',
+                                            `<option value="${e.departamento}">${e.departamento}</"option">`
+                                        );
+                                    repet.push(e);
+                                }
+                            });
+                        });
+                    $('#industry_commerce_department').on('change', function() {
+                        selectDeparment(); // Llamar la función al cambiar el departamento
+                    });
+
+
+
+                    function selectDeparment() {
+                        document.querySelector("#industry_commerce_city").innerHTML =
+                            '<option value="">Seleccione</option>';
+                        deparments?.map(e => {
+                            if (e.departamento == document.querySelector(
+                                    "#industry_commerce_department").value) {
+                                document.querySelector("#industry_commerce_city")
+                                    .insertAdjacentHTML('beforeend',
+                                        `<option value="${e.municipio}">${e.municipio}</"option">`);
+                            }
+                        });
+                    }
+                    industry_commerce_periocidadLbl.style.display = 'block'
+                    $('#industry_commerce_periodicity').parent().show();
+
+                    industry_commerce_departmentLbl.style.display = 'block'
+                    $('#industry_commerce_department').parent().show();
+
+                    industry_commerce_cityLbl.style.display = 'block'
+                    $('#industry_commerce_city').parent().show();
+
+                    industry_commerce_places_btn.style.display = 'block'
+                    industry_commerce_places_table.style.display = 'table'
+
+                } else {
+                    industry_commerce_periocidadLbl.style.display = 'none'
+                    $('#industry_commerce_periodicity').parent().hide();
+
+                    industry_commerce_departmentLbl.style.display = 'none'
+                    $('#industry_commerce_department').parent().hide();
+
+                    industry_commerce_cityLbl.style.display = 'none'
+                    $('#industry_commerce_city').parent().hide();
+
+                    industry_commerce_places_btn.style.display = 'none'
+                    industry_commerce_places_table.style.display = 'none'
+
+                }
+            });
+            $('#industry_commerce_places_add-row').on('click', function(e) {
+                e.preventDefault();
+
+                // Obtener valores de los campos
+                const industry_commerce_department = $('#industry_commerce_department').val();
+                const industry_commerce_city = $('#industry_commerce_city').val();
+
+                if (industry_commerce_department && industry_commerce_city && email && cellphone) {
+                    // Agregar fila a la tabla
+                    $('#industry_commerce_places_table tbody').append(`
+                        <tr>
+                            <td>${industry_commerce_department}</td>
+                            <td>${industry_commerce_city}</td>
+                            <td><button class="btn btn-danger btn-sm remove-row">Eliminar</button></td>
+                        </tr>
+                    `);
+
+                    // Limpiar campos
+                    $('#industry_commerce_department').val(null).trigger('change');
+                    $('#industry_commerce_city').val(null).trigger('change');
+                } else {
+                    alert('Por favor, complete todos los campos requeridos.');
+                }
+            });
+            $('#industry_commerce_places_table').on('click', '.remove-row', function() {
+                $(this).closest('tr').remove();
+            });
+
+            $('#industry_commerce_retainer_department').select2();
+            $('#industry_commerce_retainer_city').select2();
+            $('#industry_commerce_retainer_periodicity').parent().hide();
+            $('#industry_commerce_retainer_department').parent().hide();
+            $('#industry_commerce_retainer_city').parent().hide();
+            $('#is_industry_commerce_retainer').on('change', function() {
+                const is_industry_commerce_retainer = $(this).val();
+
+                const industry_commerce_retainer_periocidad = document.getElementById(
+                    'industry_commerce_periodicity');
+
+                const industry_commerce_retainer_periocidadLbl = document.getElementById(
+                    'industry_commerce_retainer_periodicity_lbl');
+                const industry_commerce_retainer_department = document.getElementById(
+                    'industry_commerce_retainer_department');
+                const industry_commerce_retainer_departmentLbl = document.getElementById(
+                    'industry_commerce_retainer_department_lbl');
+                const industry_commerce_retainer_city = document.getElementById(
+                    'industry_commerce_retainer_city');
+                const industry_commerce_retainer_cityLbl = document.getElementById(
+                    'industry_commerce_retainer_city_lbl');
+                const industry_commerce_retainer_places_btn = document.getElementById(
+                    'industry_commerce_retainer_places_add-row');
+                const industry_commerce_retainer_places_table = document.getElementById(
+                    'industry_commerce_retainer_places_table');
+
+
+                if (is_industry_commerce_retainer === "TRUE") { // Jurídica
+                    var deparments = [];
+                    var repet = [];
+
+                    fetch("{{ URL::asset('/build/js/deparmentsandcities.json') }}").then(data => data
+                        .json()).then(
+                        data => {
+                            deparments = data;
+                            document.querySelector("#industry_commerce_retainer_department").innerHTML =
+                                '<option value="">Seleccione</option>';
+                            deparments?.map(e => {
+                                if (!repet.find(i => i.departamento == e.departamento)) {
+                                    document.querySelector(
+                                            "#industry_commerce_retainer_department")
+                                        .insertAdjacentHTML(
+                                            'beforeend',
+                                            `<option value="${e.departamento}">${e.departamento}</"option">`
+                                        );
+                                    repet.push(e);
+                                }
+                            });
+                        });
+                    $('#industry_commerce_retainer_department').on('change', function() {
+                        selectDeparment(); // Llamar la función al cambiar el departamento
+                    });
+
+
+
+                    function selectDeparment() {
+                        document.querySelector("#industry_commerce_retainer_city").innerHTML =
+                            '<option value="">Seleccione</option>';
+                        deparments?.map(e => {
+                            if (e.departamento == document.querySelector(
+                                    "#industry_commerce_retainer_department").value) {
+                                document.querySelector("#industry_commerce_retainer_city")
+                                    .insertAdjacentHTML('beforeend',
+                                        `<option value="${e.municipio}">${e.municipio}</"option">`);
+                            }
+                        });
+                    }
+                    industry_commerce_retainer_periocidadLbl.style.display = 'block'
+                    $('#industry_commerce_retainer_periodicity').parent().show();
+
+                    industry_commerce_retainer_departmentLbl.style.display = 'block'
+                    $('#industry_commerce_retainer_department').parent().show();
+
+                    industry_commerce_retainer_cityLbl.style.display = 'block'
+                    $('#industry_commerce_retainer_city').parent().show();
+
+                    industry_commerce_retainer_places_btn.style.display = 'block'
+                    industry_commerce_retainer_places_table.style.display = 'table'
+
+                } else {
+                    industry_commerce_retainer_periocidadLbl.style.display = 'none'
+                    $('#industry_commerce_retainer_periodicity').parent().hide();
+
+                    industry_commerce_retainer_departmentLbl.style.display = 'none'
+                    $('#industry_commerce_retainer_department').parent().hide();
+
+                    industry_commerce_retainer_cityLbl.style.display = 'none'
+                    $('#industry_commerce_retainer_city').parent().hide();
+
+                    industry_commerce_retainer_places_btn.style.display = 'none'
+                    industry_commerce_retainer_places_table.style.display = 'none'
+
+                }
+            });
+            $('#industry_commerce_retainer_places_add-row').on('click', function(e) {
+                e.preventDefault();
+
+                // Obtener valores de los campos
+                const industry_commerce_retainer_department = $('#industry_commerce_retainer_department')
+                    .val();
+                const industry_commerce_retainer_city = $('#industry_commerce_retainer_city').val();
+
+                if (industry_commerce_retainer_department && industry_commerce_retainer_city) {
+                    // Agregar fila a la tabla
+                    $('#industry_commerce_retainer_places_table tbody').append(`
+                        <tr>
+                            <td>${industry_commerce_retainer_department}</td>
+                            <td>${industry_commerce_retainer_city}</td>
+                            <td><button class="btn btn-danger btn-sm remove-row">Eliminar</button></td>
+                        </tr>
+                    `);
+
+                    // Limpiar campos
+                    $('#industry_commerce_retainer_department').val(null).trigger('change');
+                    $('#industry_commerce_retainer_city').val(null).trigger('change');
+                } else {
+                    alert('Por favor, complete todos los campos requeridos.');
+                }
+            });
+            $('#industry_commerce_retainer_places_table').on('click', '.remove-row', function() {
+                $(this).closest('tr').remove();
+            });
+
+            $('#industry_commerce_selfretaining_department').select2();
+            $('#industry_commerce_selfretaining_city').select2();
+            $('#industry_commerce_selfretaining_periodicity').parent().hide();
+            $('#industry_commerce_selfretaining_department').parent().hide();
+            $('#industry_commerce_selfretaining_city').parent().hide();
+            $('#is_industry_commerce_selfretaining').on('change', function() {
+                const is_industry_commerce_selfretaining = $(this).val();
+
+                const industry_commerce_selfretaining_periocidad = document.getElementById(
+                    'industry_commerce_selfretaining_periodicity');
+
+                const industry_commerce_selfretaining_periocidadLbl = document.getElementById(
+                    'industry_commerce_selfretaining_periodicity_lbl');
+                const industry_commerce_selfretaining_department = document.getElementById(
+                    'industry_commerce_selfretaining_department');
+                const industry_commerce_selfretaining_departmentLbl = document.getElementById(
+                    'industry_commerce_selfretaining_department_lbl');
+                const industry_commerce_selfretaining_city = document.getElementById(
+                    'industry_commerce_selfretaining_city');
+                const industry_commerce_selfretaining_cityLbl = document.getElementById(
+                    'industry_commerce_selfretaining_city_lbl');
+                const industry_commerce_selfretaining_places_btn = document.getElementById(
+                    'industry_commerce_selfretaining_places_add-row');
+                const industry_commerce_selfretaining_places_table = document.getElementById(
+                    'industry_commerce_selfretaining_places_table');
+
+
+                if (is_industry_commerce_selfretaining === "TRUE") { // Jurídica
+                    var deparments = [];
+                    var repet = [];
+
+                    fetch("{{ URL::asset('/build/js/deparmentsandcities.json') }}").then(data => data
+                        .json()).then(
+                        data => {
+                            deparments = data;
+                            document.querySelector("#industry_commerce_selfretaining_department")
+                                .innerHTML =
+                                '<option value="">Seleccione</option>';
+                            deparments?.map(e => {
+                                if (!repet.find(i => i.departamento == e.departamento)) {
+                                    document.querySelector(
+                                            "#industry_commerce_selfretaining_department")
+                                        .insertAdjacentHTML(
+                                            'beforeend',
+                                            `<option value="${e.departamento}">${e.departamento}</"option">`
+                                        );
+                                    repet.push(e);
+                                }
+                            });
+                        });
+                    $('#industry_commerce_selfretaining_department').on('change', function() {
+                        selectDeparment(); // Llamar la función al cambiar el departamento
+                    });
+
+
+
+                    function selectDeparment() {
+                        document.querySelector("#industry_commerce_selfretaining_city").innerHTML =
+                            '<option value="">Seleccione</option>';
+                        deparments?.map(e => {
+                            if (e.departamento == document.querySelector(
+                                    "#industry_commerce_selfretaining_department").value) {
+                                document.querySelector("#industry_commerce_selfretaining_city")
+                                    .insertAdjacentHTML('beforeend',
+                                        `<option value="${e.municipio}">${e.municipio}</"option">`);
+                            }
+                        });
+                    }
+                    industry_commerce_selfretaining_periocidadLbl.style.display = 'block'
+                    $('#industry_commerce_selfretaining_periodicity').parent().show();
+
+                    industry_commerce_selfretaining_departmentLbl.style.display = 'block'
+                    $('#industry_commerce_selfretaining_department').parent().show();
+
+                    industry_commerce_selfretaining_cityLbl.style.display = 'block'
+                    $('#industry_commerce_selfretaining_city').parent().show();
+
+                    industry_commerce_selfretaining_places_btn.style.display = 'block'
+                    industry_commerce_selfretaining_places_table.style.display = 'table'
+
+                } else {
+                    industry_commerce_selfretaining_periocidadLbl.style.display = 'none'
+                    $('#industry_commerce_selfretaining_periodicity').parent().hide();
+
+                    industry_commerce_selfretaining_departmentLbl.style.display = 'none'
+                    $('#industry_commerce_selfretaining_department').parent().hide();
+
+                    industry_commerce_selfretaining_cityLbl.style.display = 'none'
+                    $('#industry_commerce_selfretaining_city').parent().hide();
+
+                    industry_commerce_selfretaining_places_btn.style.display = 'none'
+                    industry_commerce_selfretaining_places_table.style.display = 'none'
+
+                }
+            });
+            $('#industry_commerce_selfretaining_places_add-row').on('click', function(e) {
+                e.preventDefault();
+
+                // Obtener valores de los campos
+                const industry_commerce_selfretaining_department = $(
+                        '#industry_commerce_selfretaining_department')
+                    .val();
+                const industry_commerce_selfretaining_city = $('#industry_commerce_selfretaining_city')
+                    .val();
+
+                if (industry_commerce_selfretaining_department && industry_commerce_selfretaining_city) {
+                    // Agregar fila a la tabla
+                    $('#industry_commerce_selfretaining_places_table tbody').append(`
+                        <tr>
+                            <td>${industry_commerce_selfretaining_department}</td>
+                            <td>${industry_commerce_selfretaining_city}</td>
+                            <td><button class="btn btn-danger btn-sm remove-row">Eliminar</button></td>
+                        </tr>
+                    `);
+
+                    // Limpiar campos
+                    $('#industry_commerce_selfretaining_department').val(null).trigger('change');
+                    $('#industry_commerce_selfretainings_city').val(null).trigger('change');
+                } else {
+                    alert('Por favor, complete todos los campos requeridos.');
+                }
+            });
+            $('#industry_commerce_selfretaining_places_table').on('click', '.remove-row', function() {
+                $(this).closest('tr').remove();
+            });
+
+            $('#vat_responsible_periodicity').parent().hide();
+            $('#vat_responsible').on('change', function() {
+                const vat_responsible = $(this).val();
+                const vat_responsible_periodicity = document.getElementById('vat_responsible_periodicity');
+                const vat_responsible_periodicityLbl = document.getElementById(
+                    'vat_responsible_periodicity_lbl');
+                const vat_responsible_observation = document.getElementById(
+                    'vat_responsible_observation');
+                const vat_responsible_observationLbl = document.getElementById(
+                    'vat_responsible_observation_lbl');
+                if (vat_responsible === "TRUE") { // Jurídica
+                    $('#vat_responsible_periodicity').parent().show();
+                    vat_responsible_periodicityLbl.style.display = 'block'
+                    vat_responsible_observation.style.display = 'block'
+                    vat_responsible_observationLbl.style.display = 'block'
+                } else {
+                    $('#vat_responsible_periodicity').parent().hide();
+                    vat_responsible_periodicityLbl.style.display = 'none'
+                    vat_responsible_observation.style.display = 'none'
+                    vat_responsible_observationLbl.style.display = 'none'
+                }
+            });
+
+            $('#rent_periodicity').parent().hide();
+            $('#is_rent').on('change', function() {
+                const is_rent = $(this).val();
+                const rent_periodicity = document.getElementById('rent_periodicity');
+                const rent_periodicityLbl = document.getElementById(
+                    'rent_periodicity_lbl');
+                if (is_rent === "TRUE") { // Jurídica
+                    $('#rent_periodicity').parent().show();
+                    rent_periodicityLbl.style.display = 'block'
+                } else {
+                    $('#rent_periodicity').parent().hide();
+                    rent_periodicityLbl.style.display = 'none'
+                }
+            });
+
+            $('#supersociety_periodicity').parent().hide();
+            $('#is_supersociety').on('change', function() {
+                const is_supersociety = $(this).val();
+                const supersociety_periodicity = document.getElementById('supersociety_periodicity');
+                const supersociety_periodicityLbl = document.getElementById('supersociety_periodicity_lbl');
+                if (is_supersociety === "TRUE") { // Jurídica
+                    $('#supersociety_periodicity').parent().show();
+                    supersociety_periodicityLbl.style.display = 'block';
+                } else {
+                    $('#supersociety_periodicity').parent().hide();
+                    supersociety_periodicity.style.display = 'none';
+                }
+            });
+
+            $('#supertransport_periodicity').parent().hide();
+            $('#is_supertransport').on('change', function() {
+                const is_supertransport = $(this).val();
+                const supertransport_periodicity = document.getElementById('supertransport_periodicity');
+                const supertransport_periodicityLbl = document.getElementById(
+                    'supertransport_periodicity_lbl');
+                if (is_supertransport === "TRUE") { // Jurídica
+                    $('#supertransport_periodicity').parent().show();
+                    supertransport_periodicityLbl.style.display = 'block';
+                } else {
+                    $('#supertransport_periodicity').parent().hide();
+                    supertransport_periodicity.style.display = 'none';
+                }
+            });
+
+            $('#superfinancial_periodicity').parent().hide();
+            $('#is_superfinancial').on('change', function() {
+                const is_superfinancial = $(this).val();
+                const superfinancial_periodicity = document.getElementById('superfinancial_periodicity');
+                const superfinancial_periodicityLbl = document.getElementById(
+                    'superfinancial_periodicity_lbl');
+                if (is_superfinancial === "TRUE") { // Jurídica
+                    $('#superfinancial_periodicity').parent().show();
+                    superfinancial_periodicityLbl.style.display = 'block';
+                } else {
+                    $('#superfinancial_periodicity').parent().hide();
+                    superfinancial_periodicity.style.display = 'none';
+                }
+            });
+
+            $('#source_retention_periodicity').parent().hide();
+            $('#is_source_retention').on('change', function() {
+                const is_source_retention = $(this).val();
+                const source_retention_periodicity = document.getElementById(
+                    'source_retention_periodicity');
+                const source_retention_periodicityLbl = document.getElementById(
+                    'source_retention_periodicity_lbl');
+                if (is_source_retention === "TRUE") { // Jurídica
+                    $('#source_retention_periodicity').parent().show();
+                    source_retention_periodicityLbl.style.display = 'block';
+                } else {
+                    $('#source_retention_periodicity').parent().hide();
+                    source_retention_periodicity.style.display = 'none';
+                }
+            });
+
+            $('#dian_exogenous_information_periodicity').parent().hide();
+            $('#is_dian_exogenous_information').on('change', function() {
+                const is_dian_exogenous_information = $(this).val();
+                const dian_exogenous_information_periodicity = document.getElementById(
+                    'dian_exogenous_information_periodicity');
+                const dian_exogenous_information_periodicityLbl = document.getElementById(
+                    'dian_exogenous_information_periodicity_lbl');
+                if (is_dian_exogenous_information === "TRUE") { // Jurídica
+                    $('#dian_exogenous_information_periodicity').parent().show();
+                    dian_exogenous_information_periodicityLbl.style.display = 'block';
+                } else {
+                    $('#dian_exogenous_information_periodicity').parent().hide();
+                    dian_exogenous_information_periodicity.style.display = 'none';
+                }
+            });
+
+            $('#municipal_exogenous_information_department').select2();
+            $('#municipal_exogenous_information_city').select2();
+            $('#municipal_exogenous_information_periodicity').parent().hide();
+            $('#municipal_exogenous_information_department').parent().hide();
+            $('#municipal_exogenous_information_city').parent().hide();
+            $('#is_municipal_exogenous_information').on('change', function() {
+                const is_municipal_exogenous_information = $(this).val();
+
+                const municipal_exogenous_information_periocidad = document.getElementById(
+                    'municipal_exogenous_information_periodicity');
+
+                const municipal_exogenous_information_periocidadLbl = document.getElementById(
+                    'municipal_exogenous_information_periodicity_lbl');
+                const municipal_exogenous_information_department = document.getElementById(
+                    'municipal_exogenous_information_department');
+                const municipal_exogenous_information_departmentLbl = document.getElementById(
+                    'municipal_exogenous_information_department_lbl');
+                const municipal_exogenous_information_city = document.getElementById(
+                    'municipal_exogenous_information_city');
+                const municipal_exogenous_information_cityLbl = document.getElementById(
+                    'municipal_exogenous_information_city_lbl');
+                const municipal_exogenous_information_places_btn = document.getElementById(
+                    'municipal_exogenous_information_places_add-row');
+                const municipal_exogenous_information_places_table = document.getElementById(
+                    'municipal_exogenous_information_places_table');
+
+
+                if (is_municipal_exogenous_information === "TRUE") { // Jurídica
+                    var deparments = [];
+                    var repet = [];
+
+                    fetch("{{ URL::asset('/build/js/deparmentsandcities.json') }}").then(data => data
+                        .json()).then(
+                        data => {
+                            deparments = data;
+                            document.querySelector("#municipal_exogenous_information_department")
+                                .innerHTML =
+                                '<option value="">Seleccione</option>';
+                            deparments?.map(e => {
+                                if (!repet.find(i => i.departamento == e.departamento)) {
+                                    document.querySelector(
+                                            "#municipal_exogenous_information_department")
+                                        .insertAdjacentHTML(
+                                            'beforeend',
+                                            `<option value="${e.departamento}">${e.departamento}</"option">`
+                                        );
+                                    repet.push(e);
+                                }
+                            });
+                        });
+                    $('#municipal_exogenous_information_department').on('change', function() {
+                        selectDeparment(); // Llamar la función al cambiar el departamento
+                    });
+
+
+
+                    function selectDeparment() {
+                        document.querySelector("#municipal_exogenous_information_city").innerHTML =
+                            '<option value="">Seleccione</option>';
+                        deparments?.map(e => {
+                            if (e.departamento == document.querySelector(
+                                    "#municipal_exogenous_information_department").value) {
+                                document.querySelector("#municipal_exogenous_information_city")
+                                    .insertAdjacentHTML('beforeend',
+                                        `<option value="${e.municipio}">${e.municipio}</"option">`);
+                            }
+                        });
+                    }
+                    municipal_exogenous_information_periocidadLbl.style.display = 'block'
+                    $('#municipal_exogenous_information_periodicity').parent().show();
+
+                    municipal_exogenous_information_departmentLbl.style.display = 'block'
+                    $('#municipal_exogenous_information_department').parent().show();
+
+                    municipal_exogenous_information_cityLbl.style.display = 'block'
+                    $('#municipal_exogenous_information_city').parent().show();
+
+                    municipal_exogenous_information_places_btn.style.display = 'block'
+                    municipal_exogenous_information_places_table.style.display = 'table'
+
+                } else {
+                    municipal_exogenous_information_periocidadLbl.style.display = 'none'
+                    $('#municipal_exogenous_information_periodicity').parent().hide();
+
+                    municipal_exogenous_information_departmentLbl.style.display = 'none'
+                    $('#municipal_exogenous_information_department').parent().hide();
+
+                    municipal_exogenous_information_cityLbl.style.display = 'none'
+                    $('#municipal_exogenous_information_city').parent().hide();
+
+                    municipal_exogenous_information_places_btn.style.display = 'none'
+                    municipal_exogenous_information_places_table.style.display = 'none'
+
+                }
+            });
+            $('#municipal_exogenous_information_places_add-row').on('click', function(e) {
+                e.preventDefault();
+
+                // Obtener valores de los campos
+                const municipal_exogenous_information_department = $(
+                        '#municipal_exogenous_information_department')
+                    .val();
+                const municipal_exogenous_information_city = $('#municipal_exogenous_information_city')
+                    .val();
+
+                if (municipal_exogenous_information_department && municipal_exogenous_information_city) {
+                    // Agregar fila a la tabla
+                    $('#municipal_exogenous_information_places_table tbody').append(`
+                        <tr>
+                            <td>${municipal_exogenous_information_department}</td>
+                            <td>${municipal_exogenous_information_city}</td>
+                            <td><button class="btn btn-danger btn-sm remove-row">Eliminar</button></td>
+                        </tr>
+                    `);
+
+                    // Limpiar campos
+                    $('#municipal_exogenous_information_department').val(null).trigger('change');
+                    $('#municipal_exogenous_informations_city').val(null).trigger('change');
+                } else {
+                    alert('Por favor, complete todos los campos requeridos.');
+                }
+            });
+            $('#municipal_exogenous_information_places_table').on('click', '.remove-row', function() {
+                $(this).closest('tr').remove();
+            });
+
+            $('#wealth_tax_periodicity').parent().hide();
+            $('#is_wealth_tax').on('change', function() {
+                const is_wealth_tax = $(this).val();
+                const wealth_tax_periodicity = document.getElementById(
+                    'wealth_tax_periodicity');
+                const wealth_tax_periodicityLbl = document.getElementById(
+                    'wealth_tax_periodicity_lbl');
+                if (is_wealth_tax === "TRUE") { // Jurídica
+                    $('#wealth_tax_periodicity').parent().show();
+                    wealth_tax_periodicityLbl.style.display = 'block';
+                } else {
+                    $('#wealth_tax_periodicity').parent().hide();
+                    wealth_tax_periodicity.style.display = 'none';
+                }
+            });
+
+            $('#radian_periodicity').parent().hide();
+            $('#is_radian').on('change', function() {
+                const is_radian = $(this).val();
+                const radian_periodicity = document.getElementById(
+                    'radian_periodicity');
+                const radian_periodicityLbl = document.getElementById(
+                    'radian_periodicity_lbl');
+                if (is_radian === "TRUE") { // Jurídica
+                    $('#radian_periodicity').parent().show();
+                    radian_periodicityLbl.style.display = 'block';
+                } else {
+                    $('#radian_periodicity').parent().hide();
+                    radian_periodicity.style.display = 'none';
+                }
+            });
+
+            $('#e_payroll_periodicity').parent().hide();
+            $('#is_e_payroll').on('change', function() {
+                const is_e_payroll = $(this).val();
+                const e_payroll_periodicity = document.getElementById(
+                    'e_payroll_periodicity');
+                const e_payroll_periodicityLbl = document.getElementById(
+                    'e_payroll_periodicity_lbl');
+                if (is_e_payroll === "TRUE") { // Jurídica
+                    $('#e_payroll_periodicity').parent().show();
+                    e_payroll_periodicityLbl.style.display = 'block';
+                } else {
+                    $('#e_payroll_periodicity').parent().hide();
+                    e_payroll_periodicity.style.display = 'none';
+                }
+            });
+
+            $('#single_registry_final_benefeciaries_periodicity').parent().hide();
+            $('#is_single_registry_final_benefeciaries').on('change', function() {
+                const is_single_registry_final_benefeciaries = $(this).val();
+                const single_registry_final_benefeciaries_periodicity = document.getElementById(
+                    'single_registry_final_benefeciaries_periodicity');
+                const single_registry_final_benefeciaries_periodicityLbl = document.getElementById(
+                    'single_registry_final_benefeciaries_periodicity_lbl');
+                if (is_single_registry_final_benefeciaries === "TRUE") { // Jurídica
+                    $('#single_registry_final_benefeciaries_periodicity').parent().show();
+                    single_registry_final_benefeciaries_periodicityLbl.style.display = 'block';
+                } else {
+                    $('#single_registry_final_benefeciaries_periodicity').parent().hide();
+                    single_registry_final_benefeciaries_periodicity.style.display = 'none';
+                }
+            });
+
+            $('#renovacion_esal_periodicity').parent().hide();
+            $('#is_renovacion_esal').on('change', function() {
+                const is_renovacion_esal = $(this).val();
+                const renovacion_esal_periodicity = document.getElementById(
+                    'renovacion_esal_periodicity');
+                const renovacion_esal_periodicityLbl = document.getElementById(
+                    'renovacion_esal_periodicity_lbl');
+                if (is_renovacion_esal === "TRUE") { // Jurídica
+                    $('#renovacion_esal_periodicity').parent().show();
+                    renovacion_esal_periodicityLbl.style.display = 'block';
+                } else {
+                    $('#renovacion_esal_periodicity').parent().hide();
+                    renovacion_esal_periodicity.style.display = 'none';
+                }
+            });
+
+            $('#assets_abroad_periodicity').parent().hide();
+            $('#is_assets_abroad').on('change', function() {
+                const is_assets_abroad = $(this).val();
+                const assets_abroad_periodicity = document.getElementById(
+                    'assets_abroad_periodicity');
+                const assets_abroad_periodicityLbl = document.getElementById(
+                    'assets_abroad_periodicity_lbl');
+                if (is_assets_abroad === "TRUE") { // Jurídica
+                    $('#assets_abroad_periodicity').parent().show();
+                    assets_abroad_periodicityLbl.style.display = 'block';
+                } else {
+                    $('#assets_abroad_periodicity').parent().hide();
+                    assets_abroad_periodicity.style.display = 'none';
+                }
+            });
+
+            $('#single_registry_proposers_department').select2();
+            $('#single_registry_proposers_city').select2();
+            $('#single_registry_proposers_periodicity').parent().hide();
+            $('#single_registry_proposers_department').parent().hide();
+            $('#single_registry_proposers_city').parent().hide();
+            $('#is_single_registry_proposers').on('change', function() {
+                const is_single_registry_proposers = $(this).val();
+
+                const single_registry_proposers_periocidad = document.getElementById(
+                    'single_registry_proposers_periodicity');
+
+                const single_registry_proposers_periocidadLbl = document.getElementById(
+                    'single_registry_proposers_periodicity_lbl');
+                const single_registry_proposers_department = document.getElementById(
+                    'single_registry_proposers_department');
+                const single_registry_proposers_departmentLbl = document.getElementById(
+                    'single_registry_proposers_department_lbl');
+                const single_registry_proposers_city = document.getElementById(
+                    'single_registry_proposers_city');
+                const single_registry_proposers_cityLbl = document.getElementById(
+                    'single_registry_proposers_city_lbl');
+                const single_registry_proposers_places_btn = document.getElementById(
+                    'single_registry_proposers_places_add-row');
+                const single_registry_proposers_places_table = document.getElementById(
+                    'single_registry_proposers_places_table');
+
+
+                if (is_single_registry_proposers === "TRUE") { // Jurídica
+                    var deparments = [];
+                    var repet = [];
+
+                    fetch("{{ URL::asset('/build/js/deparmentsandcities.json') }}").then(data => data
+                        .json()).then(
+                        data => {
+                            deparments = data;
+                            document.querySelector("#single_registry_proposers_department")
+                                .innerHTML =
+                                '<option value="">Seleccione</option>';
+                            deparments?.map(e => {
+                                if (!repet.find(i => i.departamento == e.departamento)) {
+                                    document.querySelector(
+                                            "#single_registry_proposers_department")
+                                        .insertAdjacentHTML(
+                                            'beforeend',
+                                            `<option value="${e.departamento}">${e.departamento}</"option">`
+                                        );
+                                    repet.push(e);
+                                }
+                            });
+                        });
+                    $('#single_registry_proposers_department').on('change', function() {
+                        selectDeparment(); // Llamar la función al cambiar el departamento
+                    });
+
+
+
+                    function selectDeparment() {
+                        document.querySelector("#single_registry_proposers_city").innerHTML =
+                            '<option value="">Seleccione</option>';
+                        deparments?.map(e => {
+                            if (e.departamento == document.querySelector(
+                                    "#single_registry_proposers_department").value) {
+                                document.querySelector("#single_registry_proposers_city")
+                                    .insertAdjacentHTML('beforeend',
+                                        `<option value="${e.municipio}">${e.municipio}</"option">`);
+                            }
+                        });
+                    }
+                    single_registry_proposers_periocidadLbl.style.display = 'block'
+                    $('#single_registry_proposers_periodicity').parent().show();
+
+                    single_registry_proposers_departmentLbl.style.display = 'block'
+                    $('#single_registry_proposers_department').parent().show();
+
+                    single_registry_proposers_cityLbl.style.display = 'block'
+                    $('#single_registry_proposers_city').parent().show();
+
+                    single_registry_proposers_places_btn.style.display = 'block'
+                    single_registry_proposers_places_table.style.display = 'table'
+
+                } else {
+                    single_registry_proposers_periocidadLbl.style.display = 'none'
+                    $('#single_registry_proposers_periodicity').parent().hide();
+
+                    single_registry_proposers_departmentLbl.style.display = 'none'
+                    $('#single_registry_proposers_department').parent().hide();
+
+                    single_registry_proposers_cityLbl.style.display = 'none'
+                    $('#single_registry_proposers_city').parent().hide();
+
+                    single_registry_proposers_places_btn.style.display = 'none'
+                    single_registry_proposers_places_table.style.display = 'none'
+
+                }
+            });
+            $('#single_registry_proposers_places_add-row').on('click', function(e) {
+                e.preventDefault();
+
+                // Obtener valores de los campos
+                const single_registry_proposers_department = $(
+                        '#single_registry_proposers_department')
+                    .val();
+                const single_registry_proposers_city = $('#single_registry_proposers_city')
+                    .val();
+
+                if (single_registry_proposers_department && single_registry_proposers_city) {
+                    // Agregar fila a la tabla
+                    $('#single_registry_proposers_places_table tbody').append(`
+                        <tr>
+                            <td>${single_registry_proposers_department}</td>
+                            <td>${single_registry_proposers_city}</td>
+                            <td><button class="btn btn-danger btn-sm remove-row">Eliminar</button></td>
+                        </tr>
+                    `);
+
+                    // Limpiar campos
+                    $('#single_registry_proposers_department').val(null).trigger('change');
+                    $('#single_registry_proposerss_city').val(null).trigger('change');
+                } else {
+                    alert('Por favor, complete todos los campos requeridos.');
+                }
+            });
+            $('#single_registry_proposers_places_table').on('click', '.remove-row', function() {
+                $(this).closest('tr').remove();
+            });
+
+            $('#renewal_commercial_registration_periodicity').parent().hide();
+            $('#is_renewal_commercial_registration').on('change', function() {
+                const is_renewal_commercial_registration = $(this).val();
+                const renewal_commercial_registration_periodicity = document.getElementById(
+                    'renewal_commercial_registration_periodicity');
+                const renewal_commercial_registration_periodicityLbl = document.getElementById(
+                    'renewal_commercial_registration_periodicity_lbl');
+                if (is_renewal_commercial_registration === "TRUE") { // Jurídica
+                    $('#renewal_commercial_registration_periodicity').parent().show();
+                    renewal_commercial_registration_periodicityLbl.style.display = 'block';
+                } else {
+                    $('#renewal_commercial_registration_periodicity').parent().hide();
+                    renewal_commercial_registration_periodicity.style.display = 'none';
+                }
+            });
+
+            $('#national_tourism_fund_periodicity').parent().hide();
+            $('#is_national_tourism_fund').on('change', function() {
+                const is_national_tourism_fund = $(this).val();
+                const national_tourism_fund_periodicity = document.getElementById(
+                    'national_tourism_fund_periodicity');
+                const national_tourism_fund_periodicityLbl = document.getElementById(
+                    'national_tourism_fund_periodicity_lbl');
+                if (is_national_tourism_fund === "TRUE") { // Jurídica
+                    $('#national_tourism_fund_periodicity').parent().show();
+                    national_tourism_fund_periodicityLbl.style.display = 'block';
+                } else {
+                    $('#national_tourism_fund_periodicity').parent().hide();
+                    national_tourism_fund_periodicity.style.display = 'none';
+                }
+            });
+
+            // $('#special_tax_regime_periodicity').parent().hide();
+            // $('#is_special_tax_regime').on('change', function() {
+            //     const is_special_tax_regime = $(this).val();
+            //     const special_tax_regime_periodicity = document.getElementById(
+            //         'special_tax_regime_periodicity');
+            //     const special_tax_regime_periodicityLbl = document.getElementById(
+            //         'special_tax_regime_periodicity_lbl');
+            //     if (is_special_tax_regime === "TRUE") { // Jurídica
+            //         $('#special_tax_regime_periodicity').parent().show();
+            //         special_tax_regime_periodicityLbl.style.display = 'block';
+            //     } else {
+            //         $('#special_tax_regime_periodicity').parent().hide();
+            //         special_tax_regime_periodicity.style.display = 'none';
+            //     }
+            // });
+
+            $('#national_tourism_registry_periodicity').parent().hide();
+            $('#is_national_tourism_registry').on('change', function() {
+                const is_national_tourism_registry = $(this).val();
+                const national_tourism_registry_periodicity = document.getElementById(
+                    'national_tourism_registry_periodicity');
+                const national_tourism_registry_periodicityLbl = document.getElementById(
+                    'national_tourism_registry_periodicity_lbl');
+                if (is_national_tourism_registry === "TRUE") { // Jurídica
+                    $('#national_tourism_registry_periodicity').parent().show();
+                    national_tourism_registry_periodicityLbl.style.display = 'block';
+                } else {
+                    $('#national_tourism_registry_periodicity').parent().hide();
+                    national_tourism_registry_periodicity.style.display = 'none';
+                }
+            });
+
 
             $('#add-row').on('click', function(e) {
                 e.preventDefault();
@@ -564,6 +2209,71 @@
                         data.contacts.push(contact);
                     });
                 }
+                const industryCommerce = $('#is_industry_commerce').val();
+                if (industryCommerce == "TRUE") {
+                    data.industry_commerce_places = [];
+                    $('#industry_commerce_places_table tbody tr ').each(function() {
+                        const row = $(this).find('td');
+                        const places = {
+                            deparment: row.eq(0).text(),
+                            city: row.eq(1).text(),
+                        }
+                        data.industry_commerce_places.push(places);
+                    })
+                }
+
+                const industryCommerceRetainer = $('#is_industry_commerce_retainer').val();
+                if (industryCommerceRetainer == "TRUE") {
+                    data.industry_commerce_retainer_places = [];
+                    $('#industry_commerce_retainer_places_table tbody tr ').each(function() {
+                        const row = $(this).find('td');
+                        const places = {
+                            deparment: row.eq(0).text(),
+                            city: row.eq(1).text(),
+                        }
+                        data.industry_commerce_retainer_places.push(places);
+                    })
+                }
+
+                const industryCommerceSelfretaining = $('#is_industry_commerce_selfretaining').val();
+                if (industryCommerceSelfretaining == "TRUE") {
+                    data.industry_commerce_selfretaining_places = [];
+                    $('#industry_commerce_selfretaining_places_table tbody tr ').each(function() {
+                        const row = $(this).find('td');
+                        const places = {
+                            deparment: row.eq(0).text(),
+                            city: row.eq(1).text(),
+                        }
+                        data.industry_commerce_selfretaining_places.push(places);
+                    })
+                }
+
+                const municipalExogenousInformation = $('#is_municipal_exogenous_information').val();
+                if (municipalExogenousInformation == "TRUE") {
+                    data.municipal_exogenous_information_places = [];
+                    $('#municipal_exogenous_information_places_table tbody tr ').each(function() {
+                        const row = $(this).find('td');
+                        const places = {
+                            deparment: row.eq(0).text(),
+                            city: row.eq(1).text(),
+                        }
+                        data.municipal_exogenous_information_places.push(places);
+                    })
+                }
+
+                const singleRegistryProposers = $('#is_single_registry_proposers').val();
+                if (singleRegistryProposers == "TRUE") {
+                    data.single_registry_proposers_places = [];
+                    $('#single_registry_proposers_places_table tbody tr ').each(function() {
+                        const row = $(this).find('td');
+                        const places = {
+                            deparment: row.eq(0).text(),
+                            city: row.eq(1).text(),
+                        }
+                        data.single_registry_proposers_places.push(places);
+                    })
+                }
+
 
                 console.log('Datos a enviar:', data);
 

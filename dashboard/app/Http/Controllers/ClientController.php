@@ -8,6 +8,7 @@ use App\Models\ApplyDocTypeFolder;
 use App\Models\Client;
 use App\Models\ClientContactInfo;
 use App\Models\ClientFolder;
+use App\Models\ClientResponsible;
 use App\Models\ClientsComment;
 use App\Models\DocumentType;
 use App\Models\Employee;
@@ -56,16 +57,9 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
-        if ($request->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Error en los datos enviados',
-                'data' => $request->errors()
-            ], 400);
-        }
+
+
         $validatedData = $request->validated();
-
-
 
         $client = DB::transaction(function () use ($validatedData) {
 
@@ -75,17 +69,76 @@ class ClientController extends Controller
                 'nit' => $validatedData['nit'],
                 'company_name' => $validatedData['company_name'],
                 'address' => $validatedData['address'],
-                'vat_responsible' => $validatedData['vat_responsible'] ?? false,
-                'is_selfretaining' => $validatedData['is_selfretaining'] ?? false,
-                'is_simple_taxation_regime' => $validatedData['is_simple_taxation_regime'] ?? false,
-                'is_ica_withholding_agent' => $validatedData['is_ica_withholding_agent'] ?? false,
-                'municipality_ica_withholding_agent' => $validatedData['municipality_ica_withholding_agent'] ?? null,
-                'is_ica_selfretaining_agent' => $validatedData['is_ica_selfretaining_agent'] ?? false,
-                'municipality_ica_selfretaining_agent' => $validatedData['municipality_ica_selfretaining_agent'] ?? null,
                 'observation' => $validatedData['observation'] ?? null,
                 'email' => $validatedData['email_company'],
                 'category' => $validatedData['category'],
                 'review' => $validatedData['review'],
+            ]);
+
+            ClientResponsible::create([
+                'client_id' =>  $client->id,
+                'is_simple_taxation_regime'       => $validatedData['is_simple_taxation_regime'] == "TRUE" ? true : false,
+                'simple_taxation_regime_advances' => $validatedData['simple_taxation_regime_advances'] ?? null,
+                'simple_taxation_regime_consolidated_annual' => $validatedData['simple_taxation_regime_consolidated_annual'] ?? null,
+                'is_industry_commerce' => $validatedData['is_industry_commerce'] == "TRUE" ? true : false,
+                'industry_commerce_periodicity' => $validatedData['industry_commerce_periodicity'] ?? null,
+                'industry_commerce_places' => isset($validatedData['industry_commerce_places'])
+                    ? json_encode($validatedData['industry_commerce_places'], JSON_UNESCAPED_UNICODE)
+                    : null,
+                'is_industry_commerce_retainer' => $validatedData['is_industry_commerce_retainer'] == "TRUE" ? true : false,
+                'industry_commerce_retainer_periodicity' => $validatedData['industry_commerce_retainer_periodicity'] ?? null,
+                'industry_commerce_retainer_places' => isset($validatedData['industry_commerce_retainer_places'])
+                    ? json_encode($validatedData['industry_commerce_retainer_places'], JSON_UNESCAPED_UNICODE)
+                    : null,
+                'is_industry_commerce_selfretaining' => $validatedData['is_industry_commerce_selfretaining'] == "TRUE" ? true : false,
+                'industry_commerce_selfretaining_periodicity' => $validatedData['industry_commerce_selfretaining_periodicity'] ?? null,
+                'industry_commerce_selfretaining_places' => isset($validatedData['industry_commerce_selfretaining_places'])
+                    ? json_encode($validatedData['industry_commerce_selfretaining_places'], JSON_UNESCAPED_UNICODE)
+                    : null,
+                'vat_responsible' => $validatedData['vat_responsible'] == "TRUE" ? true : false,
+                'vat_responsible_periodicity' => $validatedData['vat_responsible_periodicity'] ?? null,
+                'vat_responsible_observation' => $validatedData['vat_responsible_observation'] ?? null,
+                'is_rent' => $validatedData['is_rent'] == "TRUE" ? true : false,
+                'rent_periodicity' => $validatedData['rent_periodicity'] ?? null,
+                'is_supersociety' => $validatedData['is_supersociety'] == "TRUE" ? true : false,
+                'supersociety_periodicity' => $validatedData['supersociety_periodicity'] ?? null,
+                'is_supertransport' => $validatedData['is_supertransport'] == "TRUE" ? true : false,
+                'supertransport_periodicity' => $validatedData['supertransport_periodicity'] ?? null,
+                'is_superfinancial' => $validatedData['is_superfinancial'] == "TRUE" ? true : false,
+                'superfinancial_periodicity' => $validatedData['superfinancial_periodicity'] ?? null,
+                'is_source_retention' => $validatedData['is_source_retention'] == "TRUE" ? true : false,
+                'source_retention_periodicity' => $validatedData['source_retention_periodicity'] ?? null,
+                'is_dian_exogenous_information' => $validatedData['is_dian_exogenous_information'] == "TRUE" ? true : false,
+                'dian_exogenous_information_periodicity' => $validatedData['dian_exogenous_information_periodicity'] ?? null,
+                'is_municipal_exogenous_information' => $validatedData['is_municipal_exogenous_information'] == "TRUE" ? true : false,
+                'municipal_exogenous_information_periodicity' => $validatedData['municipal_exogenous_information_periodicity'] ?? null,
+                'municipal_exogenous_information_places' => isset($validatedData['municipal_exogenous_information_places'])
+                    ? json_encode($validatedData['municipal_exogenous_information_places'], JSON_UNESCAPED_UNICODE)
+                    : null,
+                'is_wealth_tax' => $validatedData['is_wealth_tax'] == "TRUE" ? true : false,
+                'wealth_tax_periodicity' => $validatedData['wealth_tax_periodicity'] ?? null,
+                'is_radian' => $validatedData['is_radian'] == "TRUE" ? true : false,
+                'radian_periodicity' => $validatedData['radian_periodicity'] ?? null,
+                'is_e_payroll' => $validatedData['is_e_payroll'] == "TRUE" ? true : false,
+                'e_payroll_periodicity' => $validatedData['e_payroll_periodicity'] ?? null,
+                'is_single_registry_final_benefeciaries' => $validatedData['is_single_registry_final_benefeciaries'] == "TRUE" ? true : false,
+                'single_registry_final_benefeciaries_periodicity' => $validatedData['single_registry_final_benefeciaries_periodicity'] ?? null,
+                'is_renovacion_esal' => $validatedData['is_renovacion_esal'] == "TRUE" ? true : false,
+                'renovacion_esal_periodicity' => $validatedData['renovacion_esal_periodicity'] ?? null,
+                'is_assets_abroad' => $validatedData['is_assets_abroad'] == "TRUE" ? true : false,
+                'assets_abroad_periodicity' => $validatedData['assets_abroad_periodicity'] ?? null,
+                'is_single_registry_proposers' => $validatedData['is_single_registry_proposers'] == "TRUE" ? true : false,
+                'single_registry_proposers_periodicity' => $validatedData['single_registry_proposers_periodicity'] ?? null,
+                'single_registry_proposers_places' => isset($validatedData['single_registry_proposers_places'])
+                    ? json_encode($validatedData['single_registry_proposers_places'], JSON_UNESCAPED_UNICODE)
+                    : null,
+                'is_renewal_commercial_registration' => $validatedData['is_renewal_commercial_registration'] == "TRUE" ? true : false,
+                'renewal_commercial_registration_periodicity' => $validatedData['renewal_commercial_registration_periodicity'] ?? null,
+                'is_national_tourism_fund' => $validatedData['is_national_tourism_fund'] == "TRUE" ? true : false,
+                'national_tourism_fund_periodicity' => $validatedData['national_tourism_fund_periodicity'] ?? null,
+                'is_special_tax_regime' => $validatedData['is_special_tax_regime'] == "TRUE" ? true : false,
+                'is_national_tourism_registry' => $validatedData['is_national_tourism_registry'] == "TRUE" ? true : false,
+                'national_tourism_registry_periodicity' => $validatedData['national_tourism_registry_periodicity'] ?? null,
             ]);
 
 

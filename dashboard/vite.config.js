@@ -17,6 +17,7 @@ export default defineConfig({
             'resources/js/applytype/applytype.js',
             'resources/js/employees/employees.js',
             'resources/js/folders/folder.js', // Update the entry module here
+            'resources/js/deparmentsandcities.json',
         ]),
         viteStaticCopy({
             targets: [
