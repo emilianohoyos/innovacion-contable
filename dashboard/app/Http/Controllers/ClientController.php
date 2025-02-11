@@ -248,8 +248,9 @@ class ClientController extends Controller
             'email',
             'address',
             'person_types.name as person_type',
-            'document_types.name as document_type'
-        ])
+            'document_types.name as document_type',
+            'client_responsibles.*'
+        ])->leftJoin('client_responsibles', 'clients.id', 'client_responsibles.client_id')
             ->join(
                 'person_types',
                 'clients.person_type_id',
@@ -467,7 +468,7 @@ class ClientController extends Controller
     }
     public function seeClientData(String $id)
     {
-        $client = Client::with(['contactInfo', 'commentsClient', 'documentType', 'personType', 'employees.employee'])->find($id);
+        $client = Client::with(['contactInfo', 'commentsClient', 'documentType', 'personType', 'employees.employee', 'clientResponsible'])->find($id);
         return response()->json($client);
     }
 }

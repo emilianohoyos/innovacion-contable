@@ -83,4 +83,13 @@ class ClientResponsible extends Model
         'is_national_tourism_registry',
         'national_tourism_registry_periodicity',
     ];
+
+    protected $casts = [
+        'industry_commerce_places' => 'array',
+        'industry_commerce_retainer_places' => 'array',
+        'industry_commerce_selfretaining_places' => 'array',
+        'municipal_exogenous_information_places' => 'array',
+        'single_registry_proposers_places' => 'array',
+
+    ];
 }

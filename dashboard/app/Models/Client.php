@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Client extends Model
 {
     protected $fillable = [
@@ -12,13 +13,6 @@ class Client extends Model
         'nit',
         'company_name',
         'address',
-        'vat_responsible',
-        'is_selfretaining',
-        'is_simple_taxation_regime',
-        'is_ica_withholding_agent',
-        'municipality_ica_withholding_agent',
-        'is_ica_selfretaining_agent',
-        'municipality_ica_selfretaining_agent',
         'observation',
         'email',
         'category',
@@ -48,5 +42,9 @@ class Client extends Model
     public function personType()
     {
         return $this->belongsTo(PersonType::class);
+    }
+    public function clientResponsible()
+    {
+        return $this->hasOne(ClientResponsible::class);
     }
 }

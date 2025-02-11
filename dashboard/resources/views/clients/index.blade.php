@@ -368,19 +368,274 @@
                     document.getElementById('clientReview').textContent = clientData.review ?? 'No hay review';
                     document.getElementById('clientObservation').textContent = clientData.observation ??
                         'No hay Observaciones';
-                    document.getElementById('fiscalIva').textContent = clientData.observation == 1 ? 'Si' : 'No';
-                    document.getElementById('fiscalSelfRetention').textContent = clientData.observation == 1 ? 'Si' :
-                        'No';
-                    document.getElementById('fiscalSimpleRegime').textContent = clientData.observation == 1 ? 'Si' :
-                        'No';
-                    document.getElementById('icaWithholdingAgent').textContent = clientData.observation == 1 ? 'Si' :
-                        'No';
-                    document.getElementById('icaWithholdingMunicipality').textContent = clientData
-                        .municipality_ica_withholding_agent ?? 'No aplica';
-                    document.getElementById('icaSelfRetentionAgent').textContent = clientData.observation == 1 ? 'Si' :
-                        'No';
-                    document.getElementById('icaSelfRetentionMunicipality').textContent = clientData
-                        .municipality_ica_selfretaining_agent ?? 'No aplica';
+                    document.getElementById('is_simple_taxation_regimen').textContent = clientData.client_responsible
+                        .is_simple_taxation_regime ? 'Si' : 'No';
+                    document.getElementById('simple_taxation_regime_advances').textContent = clientData
+                        .client_responsible.simple_taxation_regime_advances ?? 'No aplica';
+                    document.getElementById('simple_taxation_regime_consolidated_annual').textContent = clientData
+                        .client_responsible.simple_taxation_regime_consolidated_annual ?? 'No aplica';
+
+                    document.getElementById('is_industry_commerce').textContent = clientData.client_responsible
+                        .is_industry_commerce ? 'Si' : 'No';
+                    document.getElementById('industry_commerce_periodicity').textContent = clientData
+                        .client_responsible.industry_commerce_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_industry_commerce == '1') {
+                        const table = document.getElementById("industry_commerce_places_table");
+                        const tbody = table.querySelector("tbody");
+                        tbody.innerHTML = "";
+
+                        function addRow(deparment, city) {
+                            let row = document.createElement("tr");
+
+                            row.innerHTML = `
+                            <td>${deparment}</td>
+                            <td>${city}</td>
+                            `;
+
+                            tbody.appendChild(row);
+                            table.style.display = "table"; // Mostrar la tabla si está oculta
+                        }
+                        clientData.client_responsible
+                            .industry_commerce_places.forEach(item => addRow(item.deparment, item.city));
+
+                    } else {
+                        document.getElementById('industry_commerce_periodicity').style.display = 'none'
+                        document.getElementById('industry_commerce_places_table').style.display = 'none'
+                        document.getElementById('industry_commerce_periodicity_lbl').style.display = 'none'
+
+                    }
+
+                    document.getElementById('is_industry_commerce_retainer').textContent = clientData.client_responsible
+                        .is_industry_commerce_retainer ? 'Si' : 'No';
+                    document.getElementById('industry_commerce_retainer_periodicity').textContent = clientData
+                        .client_responsible.industry_commerce_retainer_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_industry_commerce_retainer == '1') {
+                        const table = document.getElementById("industry_commerce_retainer_places_table");
+                        const tbody = table.querySelector("tbody");
+                        tbody.innerHTML = "";
+
+                        function addRow(deparment, city) {
+                            let row = document.createElement("tr");
+
+                            row.innerHTML = `
+                            <td>${deparment}</td>
+                            <td>${city}</td>
+                            `;
+
+                            tbody.appendChild(row);
+                            table.style.display = "table"; // Mostrar la tabla si está oculta
+                        }
+                        clientData.client_responsible
+                            .industry_commerce_retainer_places.forEach(item => addRow(item.deparment, item.city));
+
+                    } else {
+                        document.getElementById('industry_commerce_retainer_periodicity').style.display = 'none'
+                        document.getElementById('industry_commerce_retainer_places_table').style.display = 'none'
+                        document.getElementById('industry_commerce_retainer_periodicity_lbl').style.display = 'none'
+
+                    }
+
+                    document.getElementById('is_industry_commerce_selfretaining').textContent = clientData
+                        .client_responsible
+                        .is_industry_commerce_selfretaining ? 'Si' : 'No';
+                    document.getElementById('industry_commerce_selfretaining_periodicity').textContent = clientData
+                        .client_responsible.industry_commerce_selfretaining_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_industry_commerce_selfretaining == '1') {
+                        const table = document.getElementById("industry_commerce_selfretaining_places_table");
+                        const tbody = table.querySelector("tbody");
+                        tbody.innerHTML = "";
+
+                        function addRow(deparment, city) {
+                            let row = document.createElement("tr");
+
+                            row.innerHTML = `
+                            <td>${deparment}</td>
+                            <td>${city}</td>
+                            `;
+
+                            tbody.appendChild(row);
+                            table.style.display = "table"; // Mostrar la tabla si está oculta
+                        }
+                        clientData.client_responsible
+                            .industry_commerce_retainer_places.forEach(item => addRow(item.deparment, item.city));
+
+                    } else {
+                        document.getElementById('industry_commerce_selfretaining_periodicity').style.display = 'none'
+                        document.getElementById('industry_commerce_selfretaining_places_table').style.display = 'none'
+                        document.getElementById('industry_commerce_selfretaining_periodicity_lbl').style.display =
+                            'none'
+                    }
+
+                    document.getElementById('vat_responsibles').textContent = clientData.client_responsible
+                        .vat_responsible ? 'Si' : 'No';
+                    document.getElementById('vat_responsible_periodicity').textContent = clientData
+                        .client_responsible.vat_responsible_periodicity ?? 'No aplica';
+                    document.getElementById('vat_responsible_observation').textContent = clientData
+                        .client_responsible.vat_responsible_observation ?? 'No aplica';
+
+                    document.getElementById('is_rent').textContent = clientData.client_responsible
+                        .is_rent ? 'Si' : 'No';
+                    document.getElementById('rent_periodicity').textContent = clientData
+                        .client_responsible.rent_periodicity ?? 'No aplica';
+
+                    document.getElementById('is_supersociety').textContent = clientData.client_responsible
+                        .is_supersociety ? 'Si' : 'No';
+                    document.getElementById('supersociety_periodicity').textContent = clientData
+                        .client_responsible.supersociety_periodicity ?? 'No aplica';
+
+                    document.getElementById('is_supertransport').textContent = clientData.client_responsible
+                        .is_supertransport ? 'Si' : 'No';
+                    document.getElementById('supertransport_periodicity').textContent = clientData
+                        .client_responsible.supertransport_periodicity ?? 'No aplica';
+
+                    document.getElementById('is_superfinancial').textContent = clientData.client_responsible
+                        .is_superfinancial ? 'Si' : 'No';
+                    document.getElementById('superfinancial_periodicity').textContent = clientData
+                        .client_responsible.superfinancial_periodicity ?? 'No aplica';
+
+                    document.getElementById('is_source_retention').textContent = clientData.client_responsible
+                        .is_source_retention ? 'Si' : 'No';
+                    document.getElementById('source_retention_periodicity').textContent = clientData
+                        .client_responsible.source_retention_periodicity ?? 'No aplica';
+
+                    document.getElementById('is_dian_exogenous_information').textContent = clientData.client_responsible
+                        .is_dian_exogenous_information ? 'Si' : 'No';
+                    document.getElementById('dian_exogenous_information_periodicity').textContent = clientData
+                        .client_responsible.dian_exogenous_information_periodicity ?? 'No aplica';
+
+
+                    document.getElementById('is_municipal_exogenous_information').textContent = clientData
+                        .client_responsible
+                        .is_municipal_exogenous_information ? 'Si' : 'No';
+                    document.getElementById('municipal_exogenous_information_periodicity').textContent = clientData
+                        .client_responsible.municipal_exogenous_information_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_municipal_exogenous_information == '1') {
+                        const table = document.getElementById("municipal_exogenous_information_places_table");
+                        const tbody = table.querySelector("tbody");
+                        tbody.innerHTML = "";
+
+                        function addRow(deparment, city) {
+                            let row = document.createElement("tr");
+
+                            row.innerHTML = `
+                            <td>${deparment}</td>
+                            <td>${city}</td>
+                            `;
+
+                            tbody.appendChild(row);
+                            table.style.display = "table"; // Mostrar la tabla si está oculta
+                        }
+                        clientData.client_responsible
+                            .industry_commerce_retainer_places.forEach(item => addRow(item.deparment, item.city));
+
+                    } else {
+                        document.getElementById('municipal_exogenous_information_periodicity').style.display = 'none'
+                        document.getElementById('municipal_exogenous_information_places_table').style.display = 'none'
+                        document.getElementById('municipal_exogenous_information_periodicity_lbl').style.display =
+                            'none'
+                    }
+
+                    document.getElementById('is_wealth_tax').textContent = clientData.client_responsible
+                        .is_wealth_tax ? 'Si' : 'No';
+                    document.getElementById('wealth_tax_periodicity').textContent = clientData
+                        .client_responsible.wealth_tax_periodicity ?? 'No aplica';
+
+                    document.getElementById('is_radian').textContent = clientData.client_responsible
+                        .is_radian ? 'Si' : 'No';
+                    document.getElementById('radian_periodicity').textContent = clientData
+                        .client_responsible.radian_periodicity ?? 'No aplica';
+
+
+                    document.getElementById('is_e_payroll').textContent = clientData.client_responsible
+                        .is_e_payroll ? 'Si' : 'No';
+                    document.getElementById('e_payroll_periodicity').textContent = clientData
+                        .client_responsible.e_payroll_periodicity ?? 'No aplica';
+
+                    document.getElementById('is_single_registry_final_benefeciaries').textContent = clientData
+                        .client_responsible
+                        .is_single_registry_final_benefeciaries ? 'Si' : 'No';
+                    document.getElementById('single_registry_final_benefeciaries_periodicity').textContent = clientData
+                        .client_responsible.single_registry_final_benefeciaries_periodicity ?? 'No aplica';
+
+                    document.getElementById('is_renovacion_esal').textContent = clientData
+                        .client_responsible
+                        .is_renovacion_esal ? 'Si' : 'No';
+                    document.getElementById('renovacion_esal_periodicity').textContent = clientData
+                        .client_responsible.renovacion_esal_periodicity ?? 'No aplica';
+
+                    document.getElementById('is_assets_abroad').textContent = clientData
+                        .client_responsible
+                        .is_assets_abroad ? 'Si' : 'No';
+                    document.getElementById('assets_abroad_periodicity').textContent = clientData
+                        .client_responsible.assets_abroad_periodicity ?? 'No aplica';
+
+                    document.getElementById('is_single_registry_proposers').textContent = clientData
+                        .client_responsible
+                        .is_single_registry_proposers ? 'Si' : 'No';
+                    document.getElementById('single_registry_proposers_periodicity').textContent = clientData
+                        .client_responsible.single_registry_proposers_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_single_registry_proposers == '1') {
+                        const table = document.getElementById("single_registry_proposers_places_table");
+                        const tbody = table.querySelector("tbody");
+                        tbody.innerHTML = "";
+
+                        function addRow(deparment, city) {
+                            let row = document.createElement("tr");
+
+                            row.innerHTML = `
+                            <td>${deparment}</td>
+                            <td>${city}</td>
+                            `;
+
+                            tbody.appendChild(row);
+                            table.style.display = "table"; // Mostrar la tabla si está oculta
+                        }
+                        clientData.client_responsible
+                            .industry_commerce_retainer_places.forEach(item => addRow(item.deparment, item.city));
+
+                    } else {
+                        document.getElementById('single_registry_proposers_periodicity').style.display = 'none'
+                        document.getElementById('single_registry_proposers_places').style.display = 'none'
+                        document.getElementById('single_registry_proposers_periodicity_lbl').style.display =
+                            'none'
+                    }
+
+                    document.getElementById('is_renewal_commercial_registration')
+                        .textContent = clientData
+                        .client_responsible
+                        .is_renewal_commercial_registration ? 'Si' : 'No';
+                    document.getElementById('renewal_commercial_registration_periodicity').textContent = clientData
+                        .client_responsible.renewal_commercial_registration_periodicity ?? 'No aplica';
+
+
+                    document.getElementById('is_national_tourism_fund')
+                        .textContent = clientData
+                        .client_responsible
+                        .is_national_tourism_fund ? 'Si' : 'No';
+                    document.getElementById('national_tourism_fund_periodicity').textContent = clientData
+                        .client_responsible.national_tourism_fund_periodicity ?? 'No aplica';
+
+
+                    document.getElementById('is_special_tax_regime')
+                        .textContent = clientData
+                        .client_responsible
+                        .is_special_tax_regime ? 'Si' : 'No';
+
+
+                    document.getElementById('is_national_tourism_registry')
+                        .textContent = clientData
+                        .client_responsible
+                        .is_national_tourism_registry ? 'Si' : 'No';
+                    document.getElementById('national_tourism_registry_periodicity').textContent = clientData
+                        .client_responsible.national_tourism_registry_periodicity ?? 'No aplica';
+
+
+
                     // Actualiza la tabla de contactos
                     const contactTableBody = document.getElementById('contactTableBody');
                     contactTableBody.innerHTML = ''; // Limpia la tabla
@@ -391,7 +646,7 @@
                         <td>${contact.lastname}</td>
                         <td>${contact.birthday}</td>
                         <td>${contact.job_title}</td>
-                        <td>${contact.channel_communication}</td>
+                        <td>${contact.channel_communication.join(', ')}</td>
                         <td>${contact.email}</td>
                         <td>${contact.cellphone}</td>
                         <td>${contact.observation}</td>
