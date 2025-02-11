@@ -677,7 +677,6 @@
                                     <div class="col-md-6">
                                         <label for="is_radian" class="form-label">Radian</label>
                                         <select name="is_radian" id="is_radian" class="form-control">
-                                            <option value="">Seleccione...</option>
                                             <option value="FALSE">NO</option>
                                             <option value="TRUE">SI</option>
                                         </select>
