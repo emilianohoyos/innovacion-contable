@@ -2,32 +2,26 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import ApiService from "../services/apiServices";
-import { getFromLocalStorage } from "../utils/storage";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import jwtAuthConfig from "../auth/services/jwt/jwtAuthConfig";
 
-const BASE_PATH_HTTP = "https://api.ecosistema-allianz.com";
+export const BASE_PATH_HTTP = "https://panel.innovacioncontable.com";
 
 export const useDataFetch = () => {
-  const data = {
-    user: {
-      tokenAuth:
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJwYW5lbC5lY29zaXN0ZW1hLWFsbGlhbnouY29tIiwic3ViIjoxLCJpYXQiOjE3MzE1MTQ0NTYsImV4cCI6MTc2NzUxNDQ1Nn0.zheWsDDumldbU3W43jfhmJ7luiTEwiFyYIfjKzUHHuQ",
-    },
-  };
   const apiService = new ApiService();
   const queryClient = useQueryClient();
 
-  const user = getFromLocalStorage("user") || {};
+  const token = localStorage.getItem(jwtAuthConfig.tokenStorageKey) || null;
 
   const authHeaders = {
-    Authorization: `Bearer ${user?.jwt || ""}`,
+    Authorization: `Bearer ${token || ""}`,
     "Content-Type": "application/json",
   };
 
-  apiService.setHeaders(data.user.tokenAuth);
+  apiService.setHeaders(token);
 
-  const checkIsAuth = () => !!data?.user?.tokenAuth;
+  const checkIsAuth = () => !!token;
 
   // Http Request
   const getData = (queryKey, url, options = {}, params = {}, headers = {}) => {

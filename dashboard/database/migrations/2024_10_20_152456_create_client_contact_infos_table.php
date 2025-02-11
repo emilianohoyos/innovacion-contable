@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('email');
             $table->string('cellphone');
             $table->json('channel_communication');
-            $table->date('birthday');
-            $table->text('observation');
+            $table->date('birthday')->nullable();
+            $table->text('observation')->nullable();
             $table->timestamps();
         });
     }

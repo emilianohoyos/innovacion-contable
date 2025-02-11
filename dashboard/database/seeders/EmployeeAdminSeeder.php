@@ -15,8 +15,8 @@ class EmployeeAdminSeeder extends Seeder
      */
     public function run(): void
     {
-        $firstname = 'CARLOS EMILIO';
-        $lastname = 'HOYOS MEDINA';
+        $firstname = 'ADMIN';
+        $lastname = 'TEST';
         $correo = 'admin@gmail.com';
         $user = User::create([
             'name' => $firstname . ' ' . $lastname,
@@ -33,6 +33,12 @@ class EmployeeAdminSeeder extends Seeder
             'job_title' => 'Administrador',
             'role' => 'ADMIN',
             'cellphone' => '3123456789',
+            'emergency_contact_name' => null,
+            'emergency_contact_phone' => null,
+            'emergency_contact_address' => null,
+            'profession' => null,
+            'profession_description' => null,
+            'observation' => null,
             'user_id' => $user->id,
             'email' => $correo,
             'active' => true,
