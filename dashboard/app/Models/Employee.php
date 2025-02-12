@@ -16,6 +16,12 @@ class Employee extends Model
         'cellphone',
         'user_id',
         'email',
-        'active'
+        'active',
+        'emergency_contact_name',
+        'emergency_contact_phone',
+        'emergency_contact_address',
+        'profession',
+        'profession_description',
+        'observation'
     ];
 }

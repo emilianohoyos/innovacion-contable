@@ -17,6 +17,7 @@
                 <table id="tblEmployees" class="table table-striped table-bordered">
                     <thead>
                         <tr>
+                            <th>Tipo de Documento</th>
                             <th>Identificación</th>
                             <th>Nombres</th>
                             <th>Correo</th>
@@ -48,7 +49,12 @@
                 processing: true,
                 serverSide: true,
                 ajax: '{{ route('employees.data') }}',
-                columns: [{
+                columns: [
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
                         data: 'identification',
                         name: 'identification'
                     }, {
@@ -63,8 +69,6 @@
                         data: 'cellphone',
                         name: 'cellphone'
                     },
-
-
                     {
                         data: 'acciones',
                         name: 'acciones',

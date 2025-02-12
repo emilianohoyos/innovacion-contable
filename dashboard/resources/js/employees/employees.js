@@ -170,10 +170,19 @@ window.editEmployee = function (id) {
             document.getElementById('lastname').value = data.data.lastname;
             $('#job_title').val(data.data.job_title).trigger('change');
             $('#role').val(data.data.role).trigger('change');
+            $('#profession').val(data.data.profession).trigger('change');
             // document.getElementById('job_title').value = data.data.job_title;
             // document.getElementById('role').value = data.data.role;
             document.getElementById('cellphone').value = data.data.cellphone;
             document.getElementById('email').value = data.data.email;
+
+            console.log(data.data);
+
+            document.getElementById('emergency_contact_name').value = data.data.emergency_contact_name;
+            document.getElementById('emergency_contact_phone').value = data.data.emergency_contact_phone;
+            document.getElementById('emergency_contact_address').value = data.data.emergency_contact_address;
+            document.getElementById('profession_description').value = data.data.profession_description;
+            document.getElementById('observation').value = data.data.observation;
         })
         .catch(error => {
             console.error('Error:', error);

@@ -19,6 +19,12 @@ return new class extends Migration
             $table->string('lastname');
             $table->string('cellphone');
             $table->string('email');
+            $table->string('emergency_contact_name')->nullable();
+            $table->string('emergency_contact_phone')->nullable();
+            $table->string('emergency_contact_address')->nullable();
+            $table->string('profession')->nullable();
+            $table->text('profession_description')->nullable();
+            $table->text('observation')->nullable();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('document_type_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

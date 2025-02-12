@@ -150,10 +150,11 @@ class ClientController extends Controller
 
 
             if ($validatedData['person_type_id'] == 1) {
+                $password = 'Innovacion' . Carbon::now()->year;
                 $user = $this->registerController->create([
                     'name' => $validatedData['firstname'] . $validatedData['lastname'],
                     'email' => $validatedData['email'],
-                    'password' => Hash::make('Innovacion' . Carbon::now()->year),
+                    'password' => Hash::make($password),
                 ]);
                 $client->contactInfo()->create([
                     'firstname' => $validatedData['firstname'],
