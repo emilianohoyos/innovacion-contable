@@ -651,7 +651,7 @@
                         <td>${contact.lastname}</td>
                         <td>${contact.birthday}</td>
                         <td>${contact.job_title}</td>
-                        <td>${contact.channel_communication.join(', ')}</td>
+                        <td>${contact.channel_communication?contact.channel_communication.join(', '):'Ninguno'}</td>
                         <td>${contact.email}</td>
                         <td>${contact.cellphone}</td>
                         <td>${contact.observation}</td>
