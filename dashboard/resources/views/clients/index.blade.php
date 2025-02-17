@@ -605,7 +605,7 @@
 
                     } else {
                         document.getElementById('single_registry_proposers_periodicity').style.display = 'none'
-                        document.getElementById('single_registry_proposers_places').style.display = 'none'
+                        document.getElementById('single_registry_proposers_places_table').style.display = 'none'
                         document.getElementById('single_registry_proposers_periodicity_lbl').style.display =
                             'none'
                     }
