@@ -368,12 +368,30 @@
                     document.getElementById('clientReview').textContent = clientData.review ?? 'No hay review';
                     document.getElementById('clientObservation').textContent = clientData.observation ??
                         'No hay Observaciones';
+
                     document.getElementById('is_simple_taxation_regimen').textContent = clientData.client_responsible
                         .is_simple_taxation_regime ? 'Si' : 'No';
-                    document.getElementById('simple_taxation_regime_advances').textContent = clientData
-                        .client_responsible.simple_taxation_regime_advances ?? 'No aplica';
-                    document.getElementById('simple_taxation_regime_consolidated_annual').textContent = clientData
-                        .client_responsible.simple_taxation_regime_consolidated_annual ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_simple_taxation_regimen == 1) {
+                        document.getElementById('simple_taxation_regime_advances').style.display = 'flex'
+                        document.getElementById('simple_taxation_regime_advances_lbl').style.display = 'flex'
+                        document.getElementById('simple_taxation_regime_consolidated_annual').style.display = 'flex'
+                        document.getElementById('simple_taxation_regime_consolidated_annual_lbl').style.display = 'flex'
+
+                        document.getElementById('simple_taxation_regime_advances').textContent = clientData
+                            .client_responsible.simple_taxation_regime_advances ?? 'No aplica';
+                        document.getElementById('simple_taxation_regime_consolidated_annual').textContent = clientData
+                            .client_responsible.simple_taxation_regime_consolidated_annual ?? 'No aplica';
+                    } else {
+                        document.getElementById('simple_taxation_regime_advances').style.display = 'none'
+                        document.getElementById('simple_taxation_regime_advances_lbl').style.display = 'none'
+                        document.getElementById('simple_taxation_regime_consolidated_annual').style.display = 'none'
+                        document.getElementById('simple_taxation_regime_consolidated_annual_lbl').style.display = 'none'
+
+                    }
+
+
+
 
                     document.getElementById('is_industry_commerce').textContent = clientData.client_responsible
                         .is_industry_commerce ? 'Si' : 'No';
@@ -474,40 +492,117 @@
 
                     document.getElementById('vat_responsibles').textContent = clientData.client_responsible
                         .vat_responsible ? 'Si' : 'No';
-                    document.getElementById('vat_responsible_periodicity').textContent = clientData
-                        .client_responsible.vat_responsible_periodicity ?? 'No aplica';
-                    document.getElementById('vat_responsible_observation').textContent = clientData
-                        .client_responsible.vat_responsible_observation ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .vat_responsible == 1) {
+                        document.getElementById('vat_responsible_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('vat_responsible_observation_lbl').style.display = 'flex'
+                        document.getElementById('vat_responsible_periodicity').style.display = 'flex'
+                        document.getElementById('vat_responsible_observation').style.display = 'flex'
+                        document.getElementById('vat_responsible_periodicity').textContent = clientData
+                            .client_responsible.vat_responsible_periodicity ?? 'No aplica';
+                        document.getElementById('vat_responsible_observation').textContent = clientData
+                            .client_responsible.vat_responsible_observation ?? 'No aplica';
+                    } else {
+                        document.getElementById('vat_responsible_periodicity_lbl').style.display = 'none'
+                        document.getElementById('vat_responsible_observation_lbl').style.display = 'none'
+                        document.getElementById('vat_responsible_periodicity').style.display = 'none'
+                        document.getElementById('vat_responsible_observation').style.display = 'none'
+
+                    }
 
                     document.getElementById('is_rent').textContent = clientData.client_responsible
                         .is_rent ? 'Si' : 'No';
-                    document.getElementById('rent_periodicity').textContent = clientData
-                        .client_responsible.rent_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_rent == 1) {
+                        document.getElementById('rent_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('rent_periodicity').style.display = 'flex'
+
+                        document.getElementById('rent_periodicity').textContent = clientData
+                            .client_responsible.rent_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('rent_periodicity_lbl').style.display = 'none'
+                        document.getElementById('rent_periodicity').style.display = 'none'
+
+                    }
 
                     document.getElementById('is_supersociety').textContent = clientData.client_responsible
                         .is_supersociety ? 'Si' : 'No';
-                    document.getElementById('supersociety_periodicity').textContent = clientData
-                        .client_responsible.supersociety_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_supersociety == 1) {
+                        document.getElementById('supersociety_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('supersociety_periodicity').style.display = 'flex'
+
+                        document.getElementById('supersociety_periodicity').textContent = clientData
+                            .client_responsible.supersociety_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('supersociety_periodicity_lbl').style.display = 'none'
+                        document.getElementById('supersociety_periodicity').style.display = 'none'
+                    }
 
                     document.getElementById('is_supertransport').textContent = clientData.client_responsible
                         .is_supertransport ? 'Si' : 'No';
-                    document.getElementById('supertransport_periodicity').textContent = clientData
-                        .client_responsible.supertransport_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_supertransport == 1) {
+                        document.getElementById('supertransport_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('supertransport_periodicity').style.display = 'flex'
+
+                        document.getElementById('supertransport_periodicity').textContent = clientData
+                            .client_responsible.supertransport_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('supertransport_periodicity_lbl').style.display = 'none'
+                        document.getElementById('supertransport_periodicity').style.display = 'none'
+                    }
+
 
                     document.getElementById('is_superfinancial').textContent = clientData.client_responsible
                         .is_superfinancial ? 'Si' : 'No';
-                    document.getElementById('superfinancial_periodicity').textContent = clientData
-                        .client_responsible.superfinancial_periodicity ?? 'No aplica';
+
+                    if (clientData.client_responsible
+                        .is_superfinancial == 1) {
+                        document.getElementById('superfinancial_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('superfinancial_periodicity').style.display = 'flex'
+
+                        document.getElementById('superfinancial_periodicity').textContent = clientData
+                            .client_responsible.superfinancial_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('superfinancial_periodicity_lbl').style.display = 'none'
+                        document.getElementById('superfinancial_periodicity').style.display = 'none'
+                    }
 
                     document.getElementById('is_source_retention').textContent = clientData.client_responsible
                         .is_source_retention ? 'Si' : 'No';
-                    document.getElementById('source_retention_periodicity').textContent = clientData
-                        .client_responsible.source_retention_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_source_retention == 1) {
+                        document.getElementById('source_retention_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('source_retention_periodicity').style.display = 'flex'
 
+                        document.getElementById('source_retention_periodicity').textContent = clientData
+                            .client_responsible.source_retention_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('source_retention_periodicity_lbl').style.display = 'none'
+                        document.getElementById('source_retention_periodicity').style.display = 'none'
+                    }
                     document.getElementById('is_dian_exogenous_information').textContent = clientData.client_responsible
                         .is_dian_exogenous_information ? 'Si' : 'No';
-                    document.getElementById('dian_exogenous_information_periodicity').textContent = clientData
-                        .client_responsible.dian_exogenous_information_periodicity ?? 'No aplica';
+
+                    if (clientData.client_responsible
+                        .is_dian_exogenous_information == 1) {
+                        document.getElementById('dian_exogenous_information_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('dian_exogenous_information_periodicity').style.display = 'flex'
+
+                        document.getElementById('dian_exogenous_information_periodicity').textContent = clientData
+                            .client_responsible.dian_exogenous_information_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('dian_exogenous_information_periodicity_lbl').style.display = 'none'
+                        document.getElementById('dian_exogenous_information_periodicity').style.display = 'none'
+                    }
+
 
 
                     document.getElementById('is_municipal_exogenous_information').textContent = clientData
@@ -545,37 +640,115 @@
 
                     document.getElementById('is_wealth_tax').textContent = clientData.client_responsible
                         .is_wealth_tax ? 'Si' : 'No';
-                    document.getElementById('wealth_tax_periodicity').textContent = clientData
-                        .client_responsible.wealth_tax_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_wealth_tax == 1) {
+                        document.getElementById('wealth_tax_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('wealth_tax_periodicity').style.display = 'flex'
+
+                        document.getElementById('wealth_tax_periodicity').textContent = clientData
+                            .client_responsible.wealth_tax_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('wealth_tax_periodicity_lbl').style.display = 'none'
+                        document.getElementById('wealth_tax_periodicity').style.display = 'none'
+                    }
 
                     document.getElementById('is_radian').textContent = clientData.client_responsible
                         .is_radian ? 'Si' : 'No';
-                    document.getElementById('radian_periodicity').textContent = clientData
-                        .client_responsible.radian_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_radian == 1) {
+                        document.getElementById('radian_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('radian_periodicity').style.display = 'flex'
+
+                        document.getElementById('radian_periodicity').textContent = clientData
+                            .client_responsible.radian_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('radian_periodicity_lbl').style.display = 'none'
+                        document.getElementById('radian_periodicity').style.display = 'none'
+                    }
+
 
 
                     document.getElementById('is_e_payroll').textContent = clientData.client_responsible
                         .is_e_payroll ? 'Si' : 'No';
-                    document.getElementById('e_payroll_periodicity').textContent = clientData
-                        .client_responsible.e_payroll_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_e_payroll == 1) {
+                        document.getElementById('e_payroll_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('e_payroll_periodicity').style.display = 'flex'
+
+                        document.getElementById('e_payroll_periodicity').textContent = clientData
+                            .client_responsible.e_payroll_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('e_payroll_periodicity_lbl').style.display = 'none'
+                        document.getElementById('e_payroll_periodicity').style.display = 'none'
+                    }
+
 
                     document.getElementById('is_single_registry_final_benefeciaries').textContent = clientData
                         .client_responsible
                         .is_single_registry_final_benefeciaries ? 'Si' : 'No';
-                    document.getElementById('single_registry_final_benefeciaries_periodicity').textContent = clientData
-                        .client_responsible.single_registry_final_benefeciaries_periodicity ?? 'No aplica';
+
+                    if (clientData.client_responsible
+                        .is_single_registry_final_benefeciaries == 1) {
+                        document.getElementById('single_registry_final_benefeciaries_periodicity_lbl').style.display =
+                            'flex'
+                        document.getElementById('single_registry_final_benefeciaries_periodicity').style.display =
+                            'flex'
+
+                        document.getElementById('single_registry_final_benefeciaries_periodicity').textContent =
+                            clientData
+                            .client_responsible.single_registry_final_benefeciaries_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('single_registry_final_benefeciaries_periodicity_lbl').style.display =
+                            'none'
+                        document.getElementById('single_registry_final_benefeciaries_periodicity').style.display =
+                            'none'
+                    }
+
 
                     document.getElementById('is_renovacion_esal').textContent = clientData
                         .client_responsible
                         .is_renovacion_esal ? 'Si' : 'No';
-                    document.getElementById('renovacion_esal_periodicity').textContent = clientData
-                        .client_responsible.renovacion_esal_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_renovacion_esal == 1) {
+                        document.getElementById('renovacion_esal_periodicity_lbl').style.display =
+                            'flex'
+                        document.getElementById('renovacion_esal_periodicity').style.display =
+                            'flex'
 
+                        document.getElementById('renovacion_esal_periodicity').textContent =
+                            clientData
+                            .client_responsible.renovacion_esal_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('renovacion_esal_periodicity_lbl').style.display =
+                            'none'
+                        document.getElementById('renovacion_esal_periodicity').style.display =
+                            'none'
+                    }
                     document.getElementById('is_assets_abroad').textContent = clientData
                         .client_responsible
                         .is_assets_abroad ? 'Si' : 'No';
-                    document.getElementById('assets_abroad_periodicity').textContent = clientData
-                        .client_responsible.assets_abroad_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_assets_abroad == 1) {
+                        document.getElementById('assets_abroad_periodicity_lbl').style.display =
+                            'flex'
+                        document.getElementById('assets_abroad_periodicity').style.display =
+                            'flex'
+
+                        document.getElementById('assets_abroad_periodicity').textContent =
+                            clientData
+                            .client_responsible.assets_abroad_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('assets_abroad_periodicity_lbl').style.display =
+                            'none'
+                        document.getElementById('assets_abroad_periodicity').style.display =
+                            'none'
+                    }
 
                     document.getElementById('is_single_registry_proposers').textContent = clientData
                         .client_responsible
@@ -614,17 +787,45 @@
                         .textContent = clientData
                         .client_responsible
                         .is_renewal_commercial_registration ? 'Si' : 'No';
-                    document.getElementById('renewal_commercial_registration_periodicity').textContent = clientData
-                        .client_responsible.renewal_commercial_registration_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_renewal_commercial_registration == 1) {
+                        document.getElementById('renewal_commercial_registration_periodicity_lbl').style.display =
+                            'flex'
+                        document.getElementById('renewal_commercial_registration_periodicity').style.display =
+                            'flex'
 
+                        document.getElementById('renewal_commercial_registration_periodicity').textContent =
+                            clientData
+                            .client_responsible.renewal_commercial_registration_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('renewal_commercial_registration_periodicity_lbl').style.display =
+                            'none'
+                        document.getElementById('renewal_commercial_registration_periodicity').style.display =
+                            'none'
+                    }
 
                     document.getElementById('is_national_tourism_fund')
                         .textContent = clientData
                         .client_responsible
                         .is_national_tourism_fund ? 'Si' : 'No';
-                    document.getElementById('national_tourism_fund_periodicity').textContent = clientData
-                        .client_responsible.national_tourism_fund_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_national_tourism_fund == 1) {
+                        document.getElementById('national_tourism_fund_periodicity_lbl').style.display =
+                            'flex'
+                        document.getElementById('national_tourism_fund_periodicity').style.display =
+                            'flex'
 
+                        document.getElementById('national_tourism_fund_periodicity').textContent =
+                            clientData
+                            .client_responsible.national_tourism_fund_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('national_tourism_fund_periodicity_lbl').style.display =
+                            'none'
+                        document.getElementById('national_tourism_fund_periodicity').style.display =
+                            'none'
+                    }
 
                     document.getElementById('is_special_tax_regime')
                         .textContent = clientData
@@ -636,8 +837,23 @@
                         .textContent = clientData
                         .client_responsible
                         .is_national_tourism_registry ? 'Si' : 'No';
-                    document.getElementById('national_tourism_registry_periodicity').textContent = clientData
-                        .client_responsible.national_tourism_registry_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_national_tourism_registry == 1) {
+                        document.getElementById('national_tourism_registry_periodicity_lbl').style.display =
+                            'flex'
+                        document.getElementById('national_tourism_registry_periodicity').style.display =
+                            'flex'
+
+                        document.getElementById('national_tourism_registry_periodicity').textContent =
+                            clientData
+                            .client_responsible.national_tourism_registry_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('national_tourism_registry_periodicity_lbl').style.display =
+                            'none'
+                        document.getElementById('national_tourism_registry_periodicity').style.display =
+                            'none'
+                    }
 
 
 
@@ -649,9 +865,9 @@
                     <tr>
                         <td>${contact.firstname}</td>
                         <td>${contact.lastname}</td>
-                        <td>${contact.birthday}</td>
+                        <td>${contact.birthday??'-'}</td>
                         <td>${contact.job_title}</td>
-                        <td>${contact.channel_communication?contact.channel_communication:'Ninguno'}</td>
+                        <td>${contact.channel_communication?contact.channel_communication.replace(/^"|"$/g, ''):'Ninguno'}</td>
                         <td>${contact.email}</td>
                         <td>${contact.cellphone}</td>
                         <td>${contact.observation}</td>
