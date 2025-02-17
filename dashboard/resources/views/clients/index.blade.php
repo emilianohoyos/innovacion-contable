@@ -380,7 +380,8 @@
                     document.getElementById('industry_commerce_periodicity').textContent = clientData
                         .client_responsible.industry_commerce_periodicity ?? 'No aplica';
                     if (clientData.client_responsible
-                        .is_industry_commerce == '1') {
+                        .is_industry_commerce == '1' && clientData.client_responsible
+                        .industry_commerce_places) {
                         const table = document.getElementById("industry_commerce_places_table");
                         const tbody = table.querySelector("tbody");
                         tbody.innerHTML = "";
@@ -396,8 +397,8 @@
                             tbody.appendChild(row);
                             table.style.display = "table"; // Mostrar la tabla si está oculta
                         }
-                        clientData.client_responsible
-                            .industry_commerce_places.forEach(item => addRow(item.deparment, item.city));
+                        JSON.parse(clientData.client_responsible
+                            .industry_commerce_places).forEach(item => addRow(item.deparment, item.city));
 
                     } else {
                         document.getElementById('industry_commerce_periodicity').style.display = 'none'
@@ -411,7 +412,8 @@
                     document.getElementById('industry_commerce_retainer_periodicity').textContent = clientData
                         .client_responsible.industry_commerce_retainer_periodicity ?? 'No aplica';
                     if (clientData.client_responsible
-                        .is_industry_commerce_retainer == '1') {
+                        .is_industry_commerce_retainer == '1' && clientData.client_responsible
+                        .industry_commerce_retainer_places) {
                         const table = document.getElementById("industry_commerce_retainer_places_table");
                         const tbody = table.querySelector("tbody");
                         tbody.innerHTML = "";
@@ -427,8 +429,8 @@
                             tbody.appendChild(row);
                             table.style.display = "table"; // Mostrar la tabla si está oculta
                         }
-                        clientData.client_responsible
-                            .industry_commerce_retainer_places.forEach(item => addRow(item.deparment, item.city));
+                        JSON.parse(clientData.client_responsible
+                            .industry_commerce_retainer_places).forEach(item => addRow(item.deparment, item.city));
 
                     } else {
                         document.getElementById('industry_commerce_retainer_periodicity').style.display = 'none'
@@ -443,7 +445,8 @@
                     document.getElementById('industry_commerce_selfretaining_periodicity').textContent = clientData
                         .client_responsible.industry_commerce_selfretaining_periodicity ?? 'No aplica';
                     if (clientData.client_responsible
-                        .is_industry_commerce_selfretaining == '1') {
+                        .is_industry_commerce_selfretaining == '1' && clientData.client_responsible
+                        .industry_commerce_retainer_places) {
                         const table = document.getElementById("industry_commerce_selfretaining_places_table");
                         const tbody = table.querySelector("tbody");
                         tbody.innerHTML = "";
@@ -459,8 +462,8 @@
                             tbody.appendChild(row);
                             table.style.display = "table"; // Mostrar la tabla si está oculta
                         }
-                        clientData.client_responsible
-                            .industry_commerce_retainer_places.forEach(item => addRow(item.deparment, item.city));
+                        JSON.parse(clientData.client_responsible
+                            .industry_commerce_retainer_places).forEach(item => addRow(item.deparment, item.city));
 
                     } else {
                         document.getElementById('industry_commerce_selfretaining_periodicity').style.display = 'none'
@@ -513,7 +516,8 @@
                     document.getElementById('municipal_exogenous_information_periodicity').textContent = clientData
                         .client_responsible.municipal_exogenous_information_periodicity ?? 'No aplica';
                     if (clientData.client_responsible
-                        .is_municipal_exogenous_information == '1') {
+                        .is_municipal_exogenous_information == '1' && clientData.client_responsible
+                        .industry_commerce_retainer_places) {
                         const table = document.getElementById("municipal_exogenous_information_places_table");
                         const tbody = table.querySelector("tbody");
                         tbody.innerHTML = "";
@@ -529,8 +533,8 @@
                             tbody.appendChild(row);
                             table.style.display = "table"; // Mostrar la tabla si está oculta
                         }
-                        clientData.client_responsible
-                            .industry_commerce_retainer_places.forEach(item => addRow(item.deparment, item.city));
+                        JSON.parse(clientData.client_responsible
+                            .industry_commerce_retainer_places).forEach(item => addRow(item.deparment, item.city));
 
                     } else {
                         document.getElementById('municipal_exogenous_information_periodicity').style.display = 'none'
@@ -579,7 +583,8 @@
                     document.getElementById('single_registry_proposers_periodicity').textContent = clientData
                         .client_responsible.single_registry_proposers_periodicity ?? 'No aplica';
                     if (clientData.client_responsible
-                        .is_single_registry_proposers == '1') {
+                        .is_single_registry_proposers == '1' && clientData.client_responsible
+                        .industry_commerce_retainer_places) {
                         const table = document.getElementById("single_registry_proposers_places_table");
                         const tbody = table.querySelector("tbody");
                         tbody.innerHTML = "";
@@ -595,8 +600,8 @@
                             tbody.appendChild(row);
                             table.style.display = "table"; // Mostrar la tabla si está oculta
                         }
-                        clientData.client_responsible
-                            .industry_commerce_retainer_places.forEach(item => addRow(item.deparment, item.city));
+                        JSON.parse(clientData.client_responsible
+                            .industry_commerce_retainer_places).forEach(item => addRow(item.deparment, item.city));
 
                     } else {
                         document.getElementById('single_registry_proposers_periodicity').style.display = 'none'

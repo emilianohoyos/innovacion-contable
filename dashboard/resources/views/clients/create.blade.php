@@ -2116,7 +2116,7 @@
                 }
             });
 
-
+            let editingRow = null; // Para rastrear la fila que se está editando
             $('#add-row').on('click', function(e) {
                 e.preventDefault();
 
@@ -2128,7 +2128,7 @@
                 const cellphone = $('#cellphone').val();
                 const birthday = $('#birthday').val();
                 const observationContact = $('#observationContact').val();
-                console.log(observationContact)
+
                 const channelCommunication = [];
                 $('input[name="channel_communication[]"]:checked').each(function() {
                     channelCommunication.push($(this).val());
@@ -2136,8 +2136,23 @@
 
 
                 if (firstname && lastname && email && cellphone) {
-                    // Agregar fila a la tabla
-                    $('#contact-table tbody').append(`
+                    if (editingRow) {
+                        // Si estamos editando, actualizar la fila existente
+                        editingRow.find('td:eq(0)').text(firstname);
+                        editingRow.find('td:eq(1)').text(lastname);
+                        editingRow.find('td:eq(2)').text(birthday);
+                        editingRow.find('td:eq(3)').text(jobTitle);
+                        editingRow.find('td:eq(4)').text(email);
+                        editingRow.find('td:eq(5)').text(cellphone);
+                        editingRow.find('td:eq(6)').text(channelCommunication.join(', '));
+                        editingRow.find('td:eq(7)').text(observationContact);
+
+                        // Resetear variable de edición
+                        editingRow = null;
+                        $('#add-row').text('Agregar');
+                    } else {
+                        // Agregar fila a la tabla
+                        $('#contact-table tbody').append(`
                         <tr>
                             <td>${firstname}</td>
                             <td>${lastname}</td>
@@ -2147,9 +2162,10 @@
                             <td>${cellphone}</td>
                             <td>${channelCommunication.join(', ')}</td>
                             <td>${observationContact}</td>
-                            <td><button class="btn btn-danger btn-sm remove-row">Eliminar</button></td>
+                            <td>   <button class="btn btn-warning btn-sm edit-row">Editar</button><button class="btn btn-danger btn-sm remove-row">Eliminar</button></td>
                         </tr>
                     `);
+                    }
 
                     // Limpiar campos
                     $('#firstname, #lastname, #job_title, #email, #cellphone,#birthday,#observationContact')
@@ -2162,6 +2178,29 @@
             // Eliminar fila de la tabla
             $('#contact-table').on('click', '.remove-row', function() {
                 $(this).closest('tr').remove();
+            });
+
+            // Editar fila de la tabla
+            $('#contact-table').on('click', '.edit-row', function() {
+                editingRow = $(this).closest('tr'); // Guardamos la fila en edición
+
+                // Cargar valores en el formulario
+                $('#firstname').val(editingRow.find('td:eq(0)').text());
+                $('#lastname').val(editingRow.find('td:eq(1)').text());
+                $('#birthday').val(editingRow.find('td:eq(2)').text());
+                $('#job_title').val(editingRow.find('td:eq(3)').text());
+                $('#email').val(editingRow.find('td:eq(4)').text());
+                $('#cellphone').val(editingRow.find('td:eq(5)').text());
+                $('#observationContact').val(editingRow.find('td:eq(7)').text());
+
+                // Cargar checkboxes de "channel_communication"
+                let selectedChannels = editingRow.find('td:eq(6)').text().split(', ');
+                $('input[name="channel_communication[]"]').each(function() {
+                    $(this).prop('checked', selectedChannels.includes($(this).val()));
+                });
+
+                // Cambiar el texto del botón para indicar que estamos editando
+                $('#add-row').text('Actualizar');
             });
             $('#saveClient').on('click', function(e) {
                 e.preventDefault();
