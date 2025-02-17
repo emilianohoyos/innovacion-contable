@@ -397,8 +397,8 @@
                             tbody.appendChild(row);
                             table.style.display = "table"; // Mostrar la tabla si está oculta
                         }
-                        JSON.parse(clientData.client_responsible
-                            .industry_commerce_places).forEach(item => addRow(item.deparment, item.city));
+                        clientData.client_responsible
+                            .industry_commerce_places.forEach(item => addRow(item.deparment, item.city));
 
                     } else {
                         document.getElementById('industry_commerce_periodicity').style.display = 'none'
@@ -429,8 +429,8 @@
                             tbody.appendChild(row);
                             table.style.display = "table"; // Mostrar la tabla si está oculta
                         }
-                        JSON.parse(clientData.client_responsible
-                            .industry_commerce_retainer_places).forEach(item => addRow(item.deparment, item.city));
+                        clientData.client_responsible
+                            .industry_commerce_retainer_places.forEach(item => addRow(item.deparment, item.city));
 
                     } else {
                         document.getElementById('industry_commerce_retainer_periodicity').style.display = 'none'
@@ -462,8 +462,8 @@
                             tbody.appendChild(row);
                             table.style.display = "table"; // Mostrar la tabla si está oculta
                         }
-                        JSON.parse(clientData.client_responsible
-                            .industry_commerce_retainer_places).forEach(item => addRow(item.deparment, item.city));
+                        clientData.client_responsible
+                            .industry_commerce_retainer_places.forEach(item => addRow(item.deparment, item.city));
 
                     } else {
                         document.getElementById('industry_commerce_selfretaining_periodicity').style.display = 'none'
@@ -533,8 +533,8 @@
                             tbody.appendChild(row);
                             table.style.display = "table"; // Mostrar la tabla si está oculta
                         }
-                        JSON.parse(clientData.client_responsible
-                            .industry_commerce_retainer_places).forEach(item => addRow(item.deparment, item.city));
+                        clientData.client_responsible
+                            .industry_commerce_retainer_places.forEach(item => addRow(item.deparment, item.city));
 
                     } else {
                         document.getElementById('municipal_exogenous_information_periodicity').style.display = 'none'
@@ -600,8 +600,8 @@
                             tbody.appendChild(row);
                             table.style.display = "table"; // Mostrar la tabla si está oculta
                         }
-                        JSON.parse(clientData.client_responsible
-                            .industry_commerce_retainer_places).forEach(item => addRow(item.deparment, item.city));
+                        clientData.client_responsible
+                            .industry_commerce_retainer_places.forEach(item => addRow(item.deparment, item.city));
 
                     } else {
                         document.getElementById('single_registry_proposers_periodicity').style.display = 'none'
