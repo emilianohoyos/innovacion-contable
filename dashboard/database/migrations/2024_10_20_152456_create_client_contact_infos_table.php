@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('client_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('document_type_id')->constrained()->onDelete('cascade');
+            $table->string('identification');
             $table->string('firstname');
             $table->string('lastname');
             $table->string('job_title');
