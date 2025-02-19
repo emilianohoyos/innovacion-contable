@@ -21,7 +21,9 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name',
         'email',
+        'username',
         'password',
+        'rol'
     ];
 
     /**
@@ -33,7 +35,10 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'remember_token',
     ];
-
+    public function getAuthIdentifierName()
+    {
+        return 'username'; // Indicar que el identificador es 'username'
+    }
     /**
      * The attributes that should be cast.
      *

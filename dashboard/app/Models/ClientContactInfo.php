@@ -8,6 +8,8 @@ class ClientContactInfo extends Model
 {
     protected $fillable = [
         'client_id',
+        'document_type_id',
+        'identification',
         'firstname',
         'lastname',
         'job_title',
@@ -29,5 +31,9 @@ class ClientContactInfo extends Model
     public function client()
     {
         return $this->belongsTo(Client::class, 'client_id');
+    }
+    public function documentType()
+    {
+        return $this->belongsTo(DocumentType::class);
     }
 }

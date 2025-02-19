@@ -62,6 +62,8 @@ class EmployeeController extends Controller
             $user = $this->registerController->create([
                 'name' => "{$validatedData['firstname']} {$validatedData['lastname']}",
                 'email' => $validatedData['email'],
+                'username' => $validatedData['identification'],
+                'rol' => 'employee',
                 'password' => Hash::make($validatedData['identification']), // Encriptar la contraseña
             ]);
 

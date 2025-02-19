@@ -150,13 +150,17 @@ class ClientController extends Controller
 
 
             if ($validatedData['person_type_id'] == 1) {
-                $password = 'Innovacion' . Carbon::now()->year;
+                $password = 'Innovacion' . date('Y');
                 $user = $this->registerController->create([
                     'name' => $validatedData['firstname'] . $validatedData['lastname'],
                     'email' => $validatedData['email'],
-                    'password' => Hash::make($password),
+                    'username' => $validatedData['identification'],
+                    'password' => $password,
+                    'rol' => 'client'
                 ]);
                 $client->contactInfo()->create([
+                    'document_type_id' => $validatedData['contact_document_type_id'],
+                    'identification' => $validatedData['identification'],
                     'firstname' => $validatedData['firstname'],
                     'lastname' => $validatedData['lastname'],
                     'job_title' => $validatedData['job_title'],
@@ -179,9 +183,13 @@ class ClientController extends Controller
                     $user = $this->registerController->create([
                         'name' => $contact['firstname'] . $contact['lastname'],
                         'email' => $contact['email'],
-                        'password' => Hash::make('Innovacion' . Carbon::now()->year),
+                        'username' => $contact['identification'],
+                        'password' => 'Innovacion' . date('Y'),
+                        'rol' => 'client'
                     ]);
                     $client->contactInfo()->create([
+                        'document_type_id' => $contact['contact_document_type_id'],
+                        'identification' => $contact['contact_document_type_id'],
                         'firstname' => $contact['firstname'],
                         'lastname' => $contact['lastname'],
                         'job_title' => $contact['job_title'],

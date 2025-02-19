@@ -106,6 +106,8 @@ class StoreClientRequest extends FormRequest
             'national_tourism_registry_periodicity' => 'required_if:is_national_tourism_registry,TRUE',
 
 
+            'contact_document_type_id' => 'required_if:person_type_id,1',
+            'identification' => 'required_if:person_type_id,1',
             'firstname' => 'required_if:person_type_id,1',
             'lastname' => 'required_if:person_type_id,1',
             'birthday' => 'required_if:person_type_id,1',

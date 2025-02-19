@@ -22,10 +22,10 @@
                                 <form class="row g-3" method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="col-12">
-                                        <label for="inputEmailAddress" class="form-label">Correo</label>
-                                        <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                            name="email" id="inputEmailAddress" placeholder="Enter Email">
-                                        @error('email')
+                                        <label for="inputEmailAddress" class="form-label">Usuario</label>
+                                        <input type="username" class="form-control @error('username') is-invalid @enderror"
+                                            name="username" id="inputEmailAddress" placeholder="Ingrese Usuario">
+                                        @error('username')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

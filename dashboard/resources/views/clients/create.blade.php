@@ -979,6 +979,21 @@
 
                             <div class="row g-3">
                                 <div class="col-md-6">
+                                    <label for="contact_document_type_id" class="form-label">Tipo documento</label>
+                                    <select name="contact_document_type_id" id="contact_document_type_id"
+                                        class="form-control">
+                                        <option value="">Seleccione...</option>
+                                        @foreach ($document_type as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="identification" class="form-label">Identificación</label>
+                                    <input type="text" class="form-control" id="identification" name="identification"
+                                        placeholder="Ingrese identificacion">
+                                </div>
+                                <div class="col-md-6">
                                     <label for="firstname" class="form-label">Nombres</label>
                                     <input type="text" class="form-control" id="firstname" name="firstname"
                                         placeholder="Ingrese Nombres">
@@ -1034,13 +1049,15 @@
                                         <table class="table table-bordered table-striped" id="contact-table">
                                             <thead>
                                                 <tr>
+                                                    <th>Tipo Iden.</th>
+                                                    <th>Identificacion</th>
                                                     <th>Nombres</th>
                                                     <th>Apellidos</th>
                                                     <th>Fecha de nacimiento</th>
                                                     <th>Cargo</th>
                                                     <th>Medio de contacto</th>
-                                                    <th>Correo</th>
                                                     <th>Celular</th>
+                                                    <th>Correo</th>
                                                     <th>Observacion</th>
                                                     <th>Eliminar</th>
 
@@ -2121,6 +2138,11 @@
                 e.preventDefault();
 
                 // Obtener valores de los campos
+                const contactDocumentTypeId = $('#contact_document_type_id').val(); // Obtiene el ID
+                const contactDocumentTypeText = $('#contact_document_type_id option:selected')
+                    .text(); // Obtiene el texto
+
+                const identification = $('#identification').val();
                 const firstname = $('#firstname').val();
                 const lastname = $('#lastname').val();
                 const jobTitle = $('#job_title').val();
@@ -2138,14 +2160,17 @@
                 if (firstname && lastname && email && cellphone) {
                     if (editingRow) {
                         // Si estamos editando, actualizar la fila existente
-                        editingRow.find('td:eq(0)').text(firstname);
-                        editingRow.find('td:eq(1)').text(lastname);
-                        editingRow.find('td:eq(2)').text(birthday);
-                        editingRow.find('td:eq(3)').text(jobTitle);
-                        editingRow.find('td:eq(4)').text(email);
-                        editingRow.find('td:eq(5)').text(cellphone);
-                        editingRow.find('td:eq(6)').text(channelCommunication.join(', '));
-                        editingRow.find('td:eq(7)').text(observationContact);
+                        editingRow.find('td:eq(0)').text(contactDocumentTypeId);
+                        editingRow.find('td:eq(1)').text(contactDocumentTypeText);
+                        editingRow.find('td:eq(2)').text(identification);
+                        editingRow.find('td:eq(3)').text(firstname);
+                        editingRow.find('td:eq(4)').text(lastname);
+                        editingRow.find('td:eq(5)').text(birthday);
+                        editingRow.find('td:eq(6)').text(jobTitle);
+                        editingRow.find('td:eq(7)').text(email);
+                        editingRow.find('td:eq(8)').text(cellphone);
+                        editingRow.find('td:eq(9)').text(channelCommunication.join(', '));
+                        editingRow.find('td:eq(10)').text(observationContact);
 
                         // Resetear variable de edición
                         editingRow = null;
@@ -2154,6 +2179,9 @@
                         // Agregar fila a la tabla
                         $('#contact-table tbody').append(`
                         <tr>
+                            <td class="hidden-id" style="display:none;">${contactDocumentTypeId}</td> <!-- ID oculto -->
+                            <td>${$('#contact_document_type_id option:selected').text()}</td>
+                            <td>${identification}</td>
                             <td>${firstname}</td>
                             <td>${lastname}</td>
                             <td>${birthday}</td>
@@ -2166,9 +2194,9 @@
                         </tr>
                     `);
                     }
-
+                    $('#contact_document_type_id').val(null).trigger('change'); // Resetear Select2
                     // Limpiar campos
-                    $('#firstname, #lastname, #job_title, #email, #cellphone,#birthday,#observationContact')
+                    $('#identification,#firstname, #lastname, #job_title, #email, #cellphone,#birthday,#observationContact')
                         .val('');
                     $('input[name="channel_communication[]"]').prop('checked', false);
                 } else {
@@ -2183,18 +2211,23 @@
             // Editar fila de la tabla
             $('#contact-table').on('click', '.edit-row', function() {
                 editingRow = $(this).closest('tr'); // Guardamos la fila en edición
-
+                // Obtener el ID desde el <td> oculto
+                const contactDocumentTypeId = editingRow.find('td.hidden-id').text();
                 // Cargar valores en el formulario
-                $('#firstname').val(editingRow.find('td:eq(0)').text());
-                $('#lastname').val(editingRow.find('td:eq(1)').text());
-                $('#birthday').val(editingRow.find('td:eq(2)').text());
-                $('#job_title').val(editingRow.find('td:eq(3)').text());
-                $('#email').val(editingRow.find('td:eq(4)').text());
-                $('#cellphone').val(editingRow.find('td:eq(5)').text());
-                $('#observationContact').val(editingRow.find('td:eq(7)').text());
+                // Cargar valores en el formulario
+                $('#contact_document_type_id').val(contactDocumentTypeId).trigger(
+                    'change'); // Asigna el ID y actualiza Select2
+                $('#identification').val(editingRow.find('td:eq(2)').text());
+                $('#firstname').val(editingRow.find('td:eq(3)').text());
+                $('#lastname').val(editingRow.find('td:eq(4)').text());
+                $('#birthday').val(editingRow.find('td:eq(5)').text());
+                $('#job_title').val(editingRow.find('td:eq(6)').text());
+                $('#email').val(editingRow.find('td:eq(7)').text());
+                $('#cellphone').val(editingRow.find('td:eq(8)').text());
+                $('#observationContact').val(editingRow.find('td:eq(10)').text());
 
                 // Cargar checkboxes de "channel_communication"
-                let selectedChannels = editingRow.find('td:eq(6)').text().split(', ');
+                let selectedChannels = editingRow.find('td:eq(9)').text().split(', ');
                 $('input[name="channel_communication[]"]').each(function() {
                     $(this).prop('checked', selectedChannels.includes($(this).val()));
                 });
@@ -2227,6 +2260,9 @@
                         data[key] = value; // Otros valores
                     }
                 });
+
+                // 🔹 Agregar el Tipo de Documento (Select2)
+                data['contact_document_type_id'] = $('#contact_document_type_id').val() || null;
                 // Agregar valores múltiples al objeto data
                 const personType = $('#person_type_id').val();
                 // Agregar contactos si el tipo de persona es jurídica
@@ -2235,14 +2271,17 @@
                     $('#contact-table tbody tr').each(function() {
                         const row = $(this).find('td');
                         const contact = {
-                            firstname: row.eq(0).text(),
-                            lastname: row.eq(1).text(),
-                            birthday: row.eq(2).text(),
-                            job_title: row.eq(3).text(),
-                            email: row.eq(4).text(),
-                            cellphone: row.eq(5).text(),
-                            channel_communication: row.eq(6).text(),
-                            observationContact: row.eq(7).text(),
+                            contact_document_type_id: $(this).find('.hidden-id').text()
+                                .trim(), // 🔹 Buscar por clase
+                            identification: row.eq(2).text().trim(),
+                            firstname: row.eq(3).text().trim(),
+                            lastname: row.eq(4).text().trim(),
+                            birthday: row.eq(5).text().trim(),
+                            job_title: row.eq(6).text().trim(),
+                            email: row.eq(7).text().trim(),
+                            cellphone: row.eq(8).text().trim(),
+                            channel_communication: row.eq(9).text().trim(),
+                            observationContact: row.eq(10).text().trim(),
                         };
                         data.contacts.push(contact);
                     });
