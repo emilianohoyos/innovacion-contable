@@ -176,7 +176,8 @@
                                             <p class="fw-bold" id="vat_responsible_periodicity"></p>
                                         </div>
                                         <div class="col-md-4">
-                                            <h6 class="text-muted">Observacion</h6>
+                                            <h6 class="text-muted" id="vat_responsible_observation_lbl">Observacion
+                                            </h6>
                                             <p class="fw-bold" id="vat_responsible_observation"></p>
                                         </div>
 
