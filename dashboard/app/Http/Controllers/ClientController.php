@@ -189,7 +189,7 @@ class ClientController extends Controller
                     ]);
                     $client->contactInfo()->create([
                         'document_type_id' => $contact['contact_document_type_id'],
-                        'identification' => $contact['contact_document_type_id'],
+                        'identification' => $contact['identification'],
                         'firstname' => $contact['firstname'],
                         'lastname' => $contact['lastname'],
                         'job_title' => $contact['job_title'],
