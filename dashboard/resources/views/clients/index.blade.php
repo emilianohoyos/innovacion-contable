@@ -867,7 +867,13 @@
                         <td>${contact.lastname}</td>
                         <td>${contact.birthday??'-'}</td>
                         <td>${contact.job_title}</td>
-                        <td>${contact.channel_communication?contact.channel_communication.replace(/^"|"$/g, ''):'Ninguno'}</td>
+                        <td>${
+    contact.channel_communication
+        ? JSON.parse(contact.channel_communication.replace(/\\"/g, '"')) // 🔹 Convertir JSON si está escapado
+              .toString()
+        : 'Ninguno'
+}</td>
+
                         <td>${contact.email}</td>
                         <td>${contact.cellphone}</td>
                         <td>${contact.observation}</td>
