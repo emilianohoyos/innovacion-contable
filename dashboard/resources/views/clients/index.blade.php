@@ -867,11 +867,15 @@
                         <td>${contact.lastname}</td>
                         <td>${contact.birthday??'-'}</td>
                         <td>${contact.job_title}</td>
-                        <td>${
-    contact.channel_communication
-        ? JSON.parse(contact.channel_communication.replace(/\\"/g, '"')) // 🔹 Convertir JSON si está escapado
-              .toString()
-        : 'Ninguno'
+<td>${
+    (() => {
+        try {
+            let parsed = JSON.parse(contact.channel_communication.replace(/\\"/g, '"'));
+            return Array.isArray(parsed) ? parsed.join(', ') : parsed;
+        } catch (e) {
+            return contact.channel_communication.replace(/[\[\]"]/g, '') || 'Ninguno';
+        }
+    })()
 }</td>
 
                         <td>${contact.email}</td>
