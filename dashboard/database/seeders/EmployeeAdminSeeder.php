@@ -21,7 +21,8 @@ class EmployeeAdminSeeder extends Seeder
         $user = User::create([
             'name' => $firstname . ' ' . $lastname,
             'email' => $correo,
-            'Rol' => 'admin',
+            'username' => 'admin',
+            'rol' => 'admin',
             'password' => Hash::make(12345678),
         ]);
 
