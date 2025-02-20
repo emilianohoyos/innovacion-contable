@@ -21,8 +21,6 @@ class ClientContactInfo extends Model
         'observation'
     ];
 
-    protected $casts = ['channel_communication' => 'array'];
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

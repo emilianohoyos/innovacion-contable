@@ -2315,6 +2315,7 @@
                     data.contacts.push(contact);
                 });
             }
+
             const industryCommerce = $('#is_industry_commerce').val();
             if (industryCommerce == "TRUE") {
                 data.industry_commerce_places = [];
@@ -2382,6 +2383,11 @@
 
 
             console.log('Datos a enviar:', data);
+
+            if(personType == 1){
+                data["channel_communication"] = data["channel_communication"]?.join(", ");
+
+            }
 
             // Enviar los datos al servidor con AJAX
             $.ajax({
