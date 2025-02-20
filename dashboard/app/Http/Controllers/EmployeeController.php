@@ -58,13 +58,14 @@ class EmployeeController extends Controller
                 'email' => 'required|email|max:100',
             ]);
 
+            $password = 'Innovacion' . date('Y');
             // Llamada al método registerUser en RegisterController usando los datos validados
             $user = $this->registerController->create([
                 'name' => "{$validatedData['firstname']} {$validatedData['lastname']}",
                 'email' => $validatedData['email'],
                 'username' => $validatedData['identification'],
                 'rol' => 'employee',
-                'password' => Hash::make($validatedData['identification']), // Encriptar la contraseña
+                'password' => $password, // Encriptar la contraseña
             ]);
 
             // Asignar el `user_id` generado al array validado
