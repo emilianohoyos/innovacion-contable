@@ -197,7 +197,7 @@ class ClientController extends Controller
                         'email' => $contact['email'],
                         'cellphone' => $contact['cellphone'],
                         'user_id' => $user->id,
-                        'channel_communication' => $validatedData['channel_communication'],
+                        'channel_communication' => $contact['channel_communication'],
                         'observation' => $contact['observationContact'],
                         'birthday' => $contact['birthday'],
 

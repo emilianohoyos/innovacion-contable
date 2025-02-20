@@ -55,15 +55,11 @@
                                 <option value="">Seleccione Cargo</option>
                                 <option value="ADMINISTRADOR">ADMINISTRADOR</option>
                                 <option value="CONTADOR">CONTADOR</option>
-                                <<<<<<< HEAD <option value="AUXILIAR">AUXILIAR</option>
-                                    <option value="AUXILIAR ADMINISTRATIVO">AUXILIAR ADMINISTRATIVO</option </select>
-                                    =======
-                                    <option value="AUXILIAR CONTABLE">AUXILIAR CONTABLE</option>
-                                    <option value="AUXILIAR ADMINISTRATIVO">AUXILIAR ADMINISTRATIVO</option>
-                                    <option value="AUDITORIA">AUDITORIA</option>
-                                    <option value="RECURSO HUMANO">RECURSO HUMANO</option>
+                                <option value="AUXILIAR CONTABLE">AUXILIAR CONTABLE</option>
+                                <option value="AUXILIAR ADMINISTRATIVO">AUXILIAR ADMINISTRATIVO</option>
+                                <option value="AUDITORIA">AUDITORIA</option>
+                                <option value="RECURSO HUMANO">RECURSO HUMANO</option>
                             </select>
-                            >>>>>>> 2655146af964e8fccb63a7b08d1be21aac7a252b
                         </div>
                         <div class="col-md-4">
                             <label for="role" class="form-label">Rol <span style="color: red">*</span></label>
