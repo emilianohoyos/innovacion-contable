@@ -104,6 +104,7 @@ class ClientController extends Controller
                 'supersociety_periodicity' => $validatedData['supersociety_periodicity'] ?? null,
                 'is_supertransport' => $validatedData['is_supertransport'] == "TRUE" ? true : false,
                 'supertransport_periodicity' => $validatedData['supertransport_periodicity'] ?? null,
+                'supertransport_observation' => $validatedData['supertransport_observation'] ?? null,
                 'is_superfinancial' => $validatedData['is_superfinancial'] == "TRUE" ? true : false,
                 'superfinancial_periodicity' => $validatedData['superfinancial_periodicity'] ?? null,
                 'is_source_retention' => $validatedData['is_source_retention'] == "TRUE" ? true : false,
@@ -169,7 +170,9 @@ class ClientController extends Controller
                     'user_id' => $user->id,
                     'birthday' => $validatedData['birthday'],
                     'observation' => $validatedData['observationContact'],
-                    'channel_communication' => json_encode($validatedData['channel_communication']),
+                    'channel_communication' => isset($validatedData['channel_communication']) && !empty($validatedData['channel_communication'])
+                        ? json_encode($validatedData['channel_communication'])
+                        : null,
                 ]);
                 $folders = Folder::where('person_type_id', 1)->get();
                 foreach ($folders as $folder) {
@@ -196,7 +199,9 @@ class ClientController extends Controller
                         'email' => $contact['email'],
                         'cellphone' => $contact['cellphone'],
                         'user_id' => $user->id,
-                        'channel_communication' => json_encode($contact['channel_communication']),
+                        'channel_communication' => isset($validatedData['channel_communication']) && !empty($validatedData['channel_communication'])
+                            ? json_encode($validatedData['channel_communication'])
+                            : null,
                         'observation' => $contact['observationContact'],
                         'birthday' => $contact['birthday'],
 

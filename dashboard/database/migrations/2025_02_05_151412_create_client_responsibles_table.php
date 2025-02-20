@@ -43,6 +43,8 @@ return new class extends Migration
 
             $table->boolean('is_supertransport')->default(false);
             $table->string('supertransport_periodicity')->nullable();
+            $table->text('supertransport_observation')->nullable();
+
 
             $table->boolean('is_superfinancial')->default(false);
             $table->string('superfinancial_periodicity')->nullable();

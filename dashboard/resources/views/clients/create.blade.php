@@ -107,7 +107,8 @@
                             @csrf
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label for="person_type_id" class="form-label">Tipo Persona</label>
+                                    <label for="person_type_id" class="form-label">Tipo Persona <span
+                                            style="color: red">*</span></label>
                                     <select name="person_type_id" id="person_type_id" class="form-control">
                                         <option value="">Seleccione...</option>
                                         @foreach ($person_type as $item)
@@ -116,7 +117,8 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="document_type_id" class="form-label">Tipo documento</label>
+                                    <label for="document_type_id" class="form-label">Tipo documento<span
+                                            style="color: red">*</span></label>
                                     <select name="document_type_id" id="document_type_id" class="form-control">
                                         <option value="">Seleccione...</option>
                                         @foreach ($document_type as $item)
@@ -125,29 +127,34 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="nit" class="form-label">NIT/Identificacion</label>
+                                    <label for="nit" class="form-label">NIT/Identificacion<span
+                                            style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="nit" name="nit"
                                         placeholder="Ingrese Nit">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="company_name" class="form-label">Razon social/Nombre</label>
+                                    <label for="company_name" class="form-label">Razon social/Nombre<span
+                                            style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="company_name" name="company_name"
                                         placeholder="Ingrese Razon Social">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="address" class="form-label">Dirección Empresa</label>
+                                    <label for="address" class="form-label">Dirección Empresa<span
+                                            style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="address" name="address"
                                         placeholder="Ingrese Dirección">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="email_company" class="form-label">Email Corporativo</label>
+                                    <label for="email_company" class="form-label">Email Corporativo<span
+                                            style="color: red">*</span></label>
                                     <input type="email_company" class="form-control" id="email_company"
                                         name="email_company" placeholder="Ingrese Dirección">
                                 </div>
                                 <br>
 
                                 <div class="col-md-12">
-                                    <label for="category" class="form-label">Prioridad</label>
+                                    <label for="category" class="form-label">Prioridad<span
+                                            style="color: red">*</span></label>
                                     <select name="category" id="category" class="form-control">
                                         <option value="">Seleccione...</option>
                                         <option value="ALTA">ALTA</option>
@@ -156,7 +163,8 @@
                                     </select>
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="review" class="form-label">Reseña</label>
+                                    <label for="review" class="form-label">Reseña<span
+                                            style="color: red">*</span></label>
                                     <textarea class="form-control" id="review" name="review" placeholder="Ingrese Reseña" rows="3"></textarea>
                                 </div>
 
@@ -183,7 +191,8 @@
                                 <div class="col-md-12 row">
                                     <div class="col-md-4">
                                         <label for="is_simple_taxation_regime" class="form-label">Regimen Simple de
-                                            Tributación</label>
+                                            Tributación<span style="color: red">*</span><span
+                                                style="color: red">*</span></label>
                                         <select name="is_simple_taxation_regime" id="is_simple_taxation_regime"
                                             class="form-control">
                                             <option value="FALSE">NO</option>
@@ -218,7 +227,8 @@
                                 <hr>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
-                                        <label for="is_industry_commerce" class="form-label">Industria y Comercio</label>
+                                        <label for="is_industry_commerce" class="form-label">Industria y Comercio<span
+                                                style="color: red">*</span></label>
                                         <select name="is_industry_commerce" id="is_industry_commerce"
                                             class="form-control" style="display: none">
                                             <option value="FALSE">NO</option>
@@ -282,7 +292,7 @@
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
                                         <label for="is_industry_commerce_retainer" class="form-label">Retenedor Industria
-                                            y Comercio</label>
+                                            y Comercio<span style="color: red">*</span></label>
                                         <select name="is_industry_commerce_retainer" id="is_industry_commerce_retainer"
                                             class="form-control" style="display: none">
                                             <option value="FALSE">NO</option>
@@ -350,7 +360,7 @@
                                     <div class="col-md-6">
                                         <label for="is_industry_commerce_selfretaining" class="form-label">Autrretenedor
                                             Industria
-                                            y Comercio</label>
+                                            y Comercio<span style="color: red">*</span></label>
                                         <select name="is_industry_commerce_selfretaining"
                                             id="is_industry_commerce_selfretaining" class="form-control"
                                             style="display: none">
@@ -419,7 +429,8 @@
                                 <hr>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
-                                        <label for="vat_responsible" class="form-label">IVA</label>
+                                        <label for="vat_responsible" class="form-label">IVA<span
+                                                style="color: red">*</span></label>
                                         <select name="vat_responsible" id="vat_responsible" class="form-control">
                                             <option value="FALSE">NO</option>
                                             <option value="TRUE">SI</option>
@@ -447,7 +458,8 @@
                                 <hr>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
-                                        <label for="is_rent" class="form-label">Renta</label>
+                                        <label for="is_rent" class="form-label">Renta<span
+                                                style="color: red">*</span></label>
                                         <select name="is_rent" id="is_rent" class="form-control">
                                             <option value="FALSE">NO</option>
                                             <option value="TRUE">SI</option>
@@ -469,7 +481,8 @@
                                 <hr>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
-                                        <label for="is_supersociety" class="form-label">Supersociedades</label>
+                                        <label for="is_supersociety" class="form-label">Supersociedades<span
+                                                style="color: red">*</span></label>
                                         <select name="is_supersociety" id="is_supersociety" class="form-control">
                                             <option value="FALSE">NO</option>
                                             <option value="TRUE">SI</option>
@@ -491,7 +504,8 @@
                                 <hr>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
-                                        <label for="is_supertransport" class="form-label">Supertransportes</label>
+                                        <label for="is_supertransport" class="form-label">Supertransportes<span
+                                                style="color: red">*</span></label>
                                         <select name="is_supertransport" id="is_supertransport" class="form-control">
                                             <option value="FALSE">NO</option>
                                             <option value="TRUE">SI</option>
@@ -508,12 +522,19 @@
                                             <option value="ANUAL">ANUAL</option>
                                         </select>
                                     </div>
+                                    <div class="col-md-12 mt-3">
+                                        <label for="supertransport_observation" id="supertransport_observation_lbl"
+                                            class="form-label" style="display: none">Observaciones</label>
+                                        <textarea class="form-control" id="supertransport_observation" name="supertransport_observation"
+                                            style="display: none" placeholder="Ingrese observaciones." rows="3"></textarea>
+                                    </div>
 
                                 </div>
                                 <hr>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
-                                        <label for="is_superfinancial" class="form-label">Superfinanciera</label>
+                                        <label for="is_superfinancial" class="form-label">Superfinanciera<span
+                                                style="color: red">*</span></label>
                                         <select name="is_superfinancial" id="is_superfinancial" class="form-control">
                                             <option value="FALSE">NO</option>
                                             <option value="TRUE">SI</option>
@@ -535,7 +556,8 @@
                                 <hr>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
-                                        <label for="is_source_retention" class="form-label">Retención en la fuente</label>
+                                        <label for="is_source_retention" class="form-label">Retención en la fuente<span
+                                                style="color: red">*</span></label>
                                         <select name="is_source_retention" id="is_source_retention" class="form-control">
                                             <option value="FALSE">NO</option>
                                             <option value="TRUE">SI</option>
@@ -585,7 +607,7 @@
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
                                         <label for="is_municipal_exogenous_information" class="form-label">Información
-                                            Exógena Municipal</label>
+                                            Exógena Municipal<span style="color: red">*</span></label>
                                         <select name="is_municipal_exogenous_information"
                                             id="is_municipal_exogenous_information" class="form-control">
                                             <option value="FALSE">NO</option>
@@ -653,7 +675,8 @@
                                 <hr>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
-                                        <label for="is_wealth_tax" class="form-label">Impuesto al patrimonio</label>
+                                        <label for="is_wealth_tax" class="form-label">Impuesto al patrimonio<span
+                                                style="color: red">*</span></label>
                                         <select name="is_wealth_tax" id="is_wealth_tax" class="form-control">
                                             <option value="FALSE">NO</option>
                                             <option value="TRUE">SI</option>
@@ -675,7 +698,8 @@
                                 <hr>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
-                                        <label for="is_radian" class="form-label">Radian</label>
+                                        <label for="is_radian" class="form-label">Radian<span
+                                                style="color: red">*</span></label>
                                         <select name="is_radian" id="is_radian" class="form-control">
                                             <option value="FALSE">NO</option>
                                             <option value="TRUE">SI</option>
@@ -696,7 +720,8 @@
                                 <hr>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
-                                        <label for="is_e_payroll" class="form-label">Nómina electroníca</label>
+                                        <label for="is_e_payroll" class="form-label">Nómina electroníca<span
+                                                style="color: red">*</span></label>
                                         <select name="is_e_payroll" id="is_e_payroll" class="form-control">
                                             <option value="FALSE">NO</option>
                                             <option value="TRUE">SI</option>
@@ -719,7 +744,7 @@
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
                                         <label for="is_single_registry_final_benefeciaries" class="form-label">Registro
-                                            único de beneficiarios finales</label>
+                                            único de beneficiarios finales<span style="color: red">*</span></label>
                                         <select name="is_single_registry_final_benefeciaries"
                                             id="is_single_registry_final_benefeciaries" class="form-control">
                                             <option value="FALSE">NO</option>
@@ -744,7 +769,8 @@
                                 <hr>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
-                                        <label for="is_renovacion_esal" class="form-label">Renovación ESAL</label>
+                                        <label for="is_renovacion_esal" class="form-label">Renovación ESAL<span
+                                                style="color: red">*</span></label>
                                         <select name="is_renovacion_esal" id="is_renovacion_esal" class="form-control">
                                             <option value="FALSE">NO</option>
                                             <option value="TRUE">SI</option>
@@ -767,7 +793,8 @@
                                 <hr>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
-                                        <label for="is_assets_abroad" class="form-label">Activos en el exterior</label>
+                                        <label for="is_assets_abroad" class="form-label">Activos en el exterior<span
+                                                style="color: red">*</span></label>
                                         <select name="is_assets_abroad" id="is_assets_abroad" class="form-control">
                                             <option value="FALSE">NO</option>
                                             <option value="TRUE">SI</option>
@@ -790,7 +817,7 @@
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
                                         <label for="is_single_registry_proposers" class="form-label">Registro único de
-                                            proponentes</label>
+                                            proponentes<span style="color: red">*</span></label>
                                         <select name="is_single_registry_proposers" id="is_single_registry_proposers"
                                             class="form-control" style="display: none">
                                             <option value="FALSE">NO</option>
@@ -857,7 +884,7 @@
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
                                         <label for="is_renewal_commercial_registration" class="form-label">Renovación de
-                                            registro mercantil</label>
+                                            registro mercantil<span style="color: red">*</span></label>
                                         <select name="is_renewal_commercial_registration"
                                             id="is_renewal_commercial_registration" class="form-control">
 
@@ -884,7 +911,7 @@
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
                                         <label for="is_national_tourism_fund" class="form-label">Fondo nacional de
-                                            turismo</label>
+                                            turismo<span style="color: red">*</span></label>
                                         <select name="is_national_tourism_fund" id="is_national_tourism_fund"
                                             class="form-control">
 
@@ -911,7 +938,7 @@
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
                                         <label for="is_special_tax_regime" class="form-label">Regimen tributario
-                                            especial</label>
+                                            especial<span style="color: red">*</span></label>
                                         <select name="is_special_tax_regime" id="is_special_tax_regime"
                                             class="form-control">
 
@@ -937,7 +964,7 @@
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
                                         <label for="is_national_tourism_registry" class="form-label">Registro nacional de
-                                            turismo</label>
+                                            turismo<span style="color: red">*</span></label>
                                         <select name="is_national_tourism_registry" id="is_national_tourism_registry"
                                             class="form-control">
                                             <option value="FALSE">NO</option>
@@ -979,7 +1006,8 @@
 
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label for="contact_document_type_id" class="form-label">Tipo documento</label>
+                                    <label for="contact_document_type_id" class="form-label">Tipo documento<span
+                                            style="color: red">*</span></label>
                                     <select name="contact_document_type_id" id="contact_document_type_id"
                                         class="form-control">
                                         <option value="">Seleccione...</option>
@@ -989,44 +1017,51 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="identification" class="form-label">Identificación</label>
+                                    <label for="identification" class="form-label">Identificación<span
+                                            style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="identification" name="identification"
                                         placeholder="Ingrese identificacion">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="firstname" class="form-label">Nombres</label>
+                                    <label for="firstname" class="form-label">Nombres<span
+                                            style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="firstname" name="firstname"
                                         placeholder="Ingrese Nombres">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="lastname" class="form-label">Apellidos</label>
+                                    <label for="lastname" class="form-label">Apellidos<span
+                                            style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="lastname" name="lastname"
                                         placeholder="Ingrese Apellidos">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="birthday" class="form-label">Fecha de nacimiento</label>
+                                    <label for="birthday" class="form-label">Fecha de nacimiento<span
+                                            style="color: red">*</span></label>
                                     <input type="date" class="form-control" id="birthday" name="birthday"
                                         placeholder="fecha de nacimiento">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="job_title" class="form-label">Cargo</label>
+                                    <label for="job_title" class="form-label">Cargo<span
+                                            style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="job_title" name="job_title"
                                         placeholder="Ingrese Cargo">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="email" class="form-label">Correo</label>
+                                    <label for="email" class="form-label">Correo<span
+                                            style="color: red">*</span></label>
                                     <input type="email" class="form-control" id="email" name="email"
                                         placeholder="Ingrese Correo">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="cellphone" class="form-label">Celular</label>
+                                    <label for="cellphone" class="form-label">Celular<span
+                                            style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="cellphone" name="cellphone"
                                         placeholder="Ingrese Celular">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="cellphone" class="form-label">Seleccione Medio de comunicacion
-                                        preferido</label>
+                                        preferido<span style="color: red">*</span></label>
                                     <div class="mb-3 form-check">
                                         <input type="checkbox" class="form-check-input" id="emailCheck"
                                             name="channel_communication[]" value="email">
@@ -1039,7 +1074,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="observationContact" class="form-label">Observación</label>
+                                    <label for="observationContact" class="form-label">Observación<span
+                                            style="color: red">*</span></label>
                                     <textarea type="text" class="form-control" id="observationContact" name="observationContact"></textarea>
                                 </div>
                                 <div class="col-md-12 " id="typeJuridic" style="display:none">
@@ -1090,7 +1126,8 @@
                             <p class="mb-4">Agregue los empleados que pueden atender </p>
                             <div class="row g-3">
                                 <div class="col-md-12">
-                                    <label for="employee_id" class="form-label">Empleado que atiende</label>
+                                    <label for="employee_id" class="form-label">Empleado que atiende<span
+                                            style="color: red">*</span></label>
                                     <select name="employee_id" id="employee_id" class="form-control">
                                         <option value="">Seleccione...</option>
                                         @foreach ($employees as $item)
@@ -1639,6 +1676,7 @@
                 if (is_rent === "TRUE") { // Jurídica
                     $('#rent_periodicity').parent().show();
                     rent_periodicityLbl.style.display = 'block'
+
                 } else {
                     $('#rent_periodicity').parent().hide();
                     rent_periodicityLbl.style.display = 'none'
@@ -1665,12 +1703,20 @@
                 const supertransport_periodicity = document.getElementById('supertransport_periodicity');
                 const supertransport_periodicityLbl = document.getElementById(
                     'supertransport_periodicity_lbl');
+                const supertransport_observation = document.getElementById(
+                    'supertransport_observation');
+                const supertransport_observationLbl = document.getElementById(
+                    'supertransport_observation_lbl');
                 if (is_supertransport === "TRUE") { // Jurídica
                     $('#supertransport_periodicity').parent().show();
                     supertransport_periodicityLbl.style.display = 'block';
+                    supertransport_observation.style.display = 'block'
+                    supertransport_observationLbl.style.display = 'block'
                 } else {
                     $('#supertransport_periodicity').parent().hide();
                     supertransport_periodicity.style.display = 'none';
+                    supertransport_observation.style.display = 'none'
+                    supertransport_observationLbl.style.display = 'none'
                 }
             });
 

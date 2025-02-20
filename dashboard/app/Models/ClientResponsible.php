@@ -36,6 +36,7 @@ class ClientResponsible extends Model
 
         'is_supertransport',
         'supertransport_periodicity',
+        'supertransport_observation',
 
         'is_superfinancial',
         'superfinancial_periodicity',

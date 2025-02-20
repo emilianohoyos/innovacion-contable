@@ -27,7 +27,7 @@ return new class extends Migration
             // $table->boolean('is_ica_selfretaining_agent')->default(false);
             // $table->string('municipality_ica_selfretaining_agent')->nullable();
             $table->string('category');
-            $table->text('observation');
+            $table->text('observation')->nullable();
             $table->text('review');
             $table->timestamps();
         });

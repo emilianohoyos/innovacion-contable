@@ -47,7 +47,7 @@ class StoreClientRequest extends FormRequest
 
             'vat_responsible' => 'required',
             'vat_responsible_periodicity' => 'required_if:vat_responsible,TRUE',
-            'vat_responsible_observation' => 'required_if:vat_responsible,TRUE',
+            'vat_responsible_observation' => 'nullable',
 
 
             'is_rent' => 'required',
@@ -58,6 +58,7 @@ class StoreClientRequest extends FormRequest
 
             'is_supertransport' => 'required',
             'supertransport_periodicity' => 'required_if:is_supertransport,TRUE',
+            'supertransport_observation' => 'nullable',
 
             'is_superfinancial' => 'required',
             'superfinancial_periodicity' => 'required_if:is_superfinancial,TRUE',
@@ -111,7 +112,7 @@ class StoreClientRequest extends FormRequest
             'firstname' => 'required_if:person_type_id,1',
             'lastname' => 'required_if:person_type_id,1',
             'birthday' => 'required_if:person_type_id,1',
-            'channel_communication' => 'required_if:person_type_id,1',
+            'channel_communication' => 'nullable',
             'job_title' => 'required_if:person_type_id,1',
             'email' => 'required_if:person_type_id,1',
             'observationContact' => 'required_if:person_type_id,1',

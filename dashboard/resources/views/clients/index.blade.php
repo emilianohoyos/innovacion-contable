@@ -547,13 +547,19 @@
                         .is_supertransport == 1) {
                         document.getElementById('supertransport_periodicity_lbl').style.display = 'flex'
                         document.getElementById('supertransport_periodicity').style.display = 'flex'
+                        document.getElementById('supertransport_observation_lbl').style.display = 'flex'
+                        document.getElementById('supertransport_observation').style.display = 'flex'
 
                         document.getElementById('supertransport_periodicity').textContent = clientData
                             .client_responsible.supertransport_periodicity ?? 'No aplica';
+                        document.getElementById('supertransport_observation').textContent = clientData
+                            .client_responsible.supertransport_observation ?? 'No aplica';
 
                     } else {
                         document.getElementById('supertransport_periodicity_lbl').style.display = 'none'
                         document.getElementById('supertransport_periodicity').style.display = 'none'
+                        document.getElementById('supertransport_observation_lbl').style.display = 'none'
+                        document.getElementById('supertransport_observation').style.display = 'none'
                     }
 
 
@@ -870,6 +876,8 @@
 <td>${
     (() => {
         try {
+            if (!contact.channel_communication) return 'Ninguno'; // Manejo de null o undefined
+
             let parsed = JSON.parse(contact.channel_communication.replace(/\\"/g, '"'));
             return Array.isArray(parsed) ? parsed.join(', ') : parsed;
         } catch (e) {
@@ -877,6 +885,7 @@
         }
     })()
 }</td>
+
 
                         <td>${contact.email}</td>
                         <td>${contact.cellphone}</td>

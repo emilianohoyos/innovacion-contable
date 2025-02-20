@@ -203,13 +203,18 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <h6 class="text-bold">Supertransporte:</h6>
                                             <p class="fw-bold" id="is_supertransport"></p>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <h6 class="text-muted" id="supertransport_periodicity_lbl">Periocidad</h6>
                                             <p class="fw-bold" id="supertransport_periodicity"></p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6 class="text-muted" id="supertransport_observation_lbl">Observacion
+                                            </h6>
+                                            <p class="fw-bold" id="supertransport_observation"></p>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3 row">
