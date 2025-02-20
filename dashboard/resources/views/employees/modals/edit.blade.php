@@ -29,51 +29,44 @@
                                 placeholder="Ingrese Nit">
                         </div>
                         <div class="col-md-6">
-                            <label for="firstname" class="form-label">Nombres <span
-                                    style="color: red">*</span></label>
+                            <label for="firstname" class="form-label">Nombres <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="firstname" name="firstname"
                                 placeholder="Ingrese Nombres">
                         </div>
                         <div class="col-md-6">
-                            <label for="lastname" class="form-label">Apellidos <span
-                                    style="color: red">*</span></label>
+                            <label for="lastname" class="form-label">Apellidos <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="lastname" name="lastname"
                                 placeholder="Ingrese Apellidos">
                         </div>
                         <div class="col-md-6">
-                            <label for="cellphone" class="form-label">Celular <span
-                                    style="color: red">*</span></label>
+                            <label for="cellphone" class="form-label">Celular <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="cellphone" name="cellphone"
                                 placeholder="Ingrese Celular">
                         </div>
                         <div class="col-md-6">
-                            <label for="email" class="form-label">Correo <span
-                                    style="color: red">*</span></label>
+                            <label for="email" class="form-label">Correo <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="email" name="email"
                                 placeholder="Ingrese Correo">
                         </div>
 
                         <div class="col-md-4">
-                            <label for="job_title" class="form-label">Cargo <span
-                                    style="color: red">*</span></label>
+                            <label for="job_title" class="form-label">Cargo <span style="color: red">*</span></label>
                             <select name="job_title" class="form-control" id="job_title">
                                 <option value="">Seleccione Cargo</option>
                                 <option value="ADMINISTRADOR">ADMINISTRADOR</option>
                                 <option value="CONTADOR">CONTADOR</option>
-<<<<<<< HEAD
-                                <option value="AUXILIAR">AUXILIAR</option>
-                                <option value="AUXILIAR ADMINISTRATIVO">AUXILIAR ADMINISTRATIVO</option </select>
-=======
-                                <option value="AUXILIAR CONTABLE">AUXILIAR CONTABLE</option>
-                                <option value="AUXILIAR ADMINISTRATIVO">AUXILIAR ADMINISTRATIVO</option>
-                                <option value="AUDITORIA">AUDITORIA</option>
-                                <option value="RECURSO HUMANO">RECURSO HUMANO</option>
+                                <<<<<<< HEAD <option value="AUXILIAR">AUXILIAR</option>
+                                    <option value="AUXILIAR ADMINISTRATIVO">AUXILIAR ADMINISTRATIVO</option </select>
+                                    =======
+                                    <option value="AUXILIAR CONTABLE">AUXILIAR CONTABLE</option>
+                                    <option value="AUXILIAR ADMINISTRATIVO">AUXILIAR ADMINISTRATIVO</option>
+                                    <option value="AUDITORIA">AUDITORIA</option>
+                                    <option value="RECURSO HUMANO">RECURSO HUMANO</option>
                             </select>
->>>>>>> 2655146af964e8fccb63a7b08d1be21aac7a252b
+                            >>>>>>> 2655146af964e8fccb63a7b08d1be21aac7a252b
                         </div>
                         <div class="col-md-4">
-                            <label for="role" class="form-label">Rol <span
-                                    style="color: red">*</span></label>
+                            <label for="role" class="form-label">Rol <span style="color: red">*</span></label>
                             <select name="role" class="form-control" id="role">
                                 <option value="">Seleccione Rol</option>
                                 <option value="ADMINISTRADOR">ADMINISTRADOR</option>

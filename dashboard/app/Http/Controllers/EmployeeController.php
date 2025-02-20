@@ -149,7 +149,7 @@ class EmployeeController extends Controller
     public function getEmployeesData()
     {
         $employees = Employee::select([
-            'document_type_id',
+            'document_types.name as document_type',
             'employees.identification',
             'employees.id as employee_id',
             'employees.firstname',

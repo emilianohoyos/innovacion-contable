@@ -49,10 +49,9 @@
                 processing: true,
                 serverSide: true,
                 ajax: '{{ route('employees.data') }}',
-                columns: [
-                    {
-                        data: 'name',
-                        name: 'name'
+                columns: [{
+                        data: 'document_type',
+                        name: 'document_type'
                     },
                     {
                         data: 'identification',
