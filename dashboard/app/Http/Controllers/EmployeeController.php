@@ -55,7 +55,7 @@ class EmployeeController extends Controller
                 'user_id' => 'nullable',
                 'job_title' => 'nullable|string|max:50',
                 'role' => 'nullable|string|max:50',
-                'email' => 'required|email|max:100|unique:employees,email',
+                'email' => 'required|email|max:100',
             ]);
 
             // Llamada al método registerUser en RegisterController usando los datos validados
