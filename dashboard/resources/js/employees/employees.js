@@ -76,7 +76,7 @@ $(document).ready(function () {
                 // Agrega el asterisco al label si no está ya
                 const label = $(`label[for="${element.attr('id')}"]`);
                 if (!label.find('.error-asterisk').length) {
-                    label.append('<span class="error-asterisk" style="color: red;"> *</span>');
+                    label.append('<span class="error-asterisk" style="color: red;"></span>');
                 }
             },
             success: function (label, element) {

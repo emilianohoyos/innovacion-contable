@@ -12,7 +12,8 @@
                         @csrf
                         @method('PUT')
                         <div class="col-md-6">
-                            <label for="nit" class="form-label">Tipo Documento</label>
+                            <label for="nit" class="form-label">Tipo Documento <span
+                                    style="color: red">*</span></label>
                             <select name="document_type_id" class="form-control" id="document_type_id">
 
                                 @foreach ($document_type as $item)
@@ -22,45 +23,54 @@
                             <input type="hidden" name="id" id="id">
                         </div>
                         <div class="col-md-6">
-                            <label for="nit" class="form-label">Identificación</label>
+                            <label for="nit" class="form-label">Identificación <span
+                                    style="color: red">*</span></label>
                             <input type="text" class="form-control" id="nit" name="nit"
                                 placeholder="Ingrese Nit">
                         </div>
                         <div class="col-md-6">
-                            <label for="firstname" class="form-label">Nombres</label>
+                            <label for="firstname" class="form-label">Nombres <span
+                                    style="color: red">*</span></label>
                             <input type="text" class="form-control" id="firstname" name="firstname"
                                 placeholder="Ingrese Nombres">
                         </div>
                         <div class="col-md-6">
-                            <label for="lastname" class="form-label">Apellidos</label>
+                            <label for="lastname" class="form-label">Apellidos <span
+                                    style="color: red">*</span></label>
                             <input type="text" class="form-control" id="lastname" name="lastname"
                                 placeholder="Ingrese Apellidos">
                         </div>
                         <div class="col-md-6">
-                            <label for="cellphone" class="form-label">Celular</label>
+                            <label for="cellphone" class="form-label">Celular <span
+                                    style="color: red">*</span></label>
                             <input type="text" class="form-control" id="cellphone" name="cellphone"
                                 placeholder="Ingrese Celular">
                         </div>
                         <div class="col-md-6">
-                            <label for="email" class="form-label">Correo</label>
+                            <label for="email" class="form-label">Correo <span
+                                    style="color: red">*</span></label>
                             <input type="text" class="form-control" id="email" name="email"
                                 placeholder="Ingrese Correo">
                         </div>
 
                         <div class="col-md-4">
-                            <label for="job_title" class="form-label">Cargo</label>
+                            <label for="job_title" class="form-label">Cargo <span
+                                    style="color: red">*</span></label>
                             <select name="job_title" class="form-control" id="job_title">
                                 <option value="">Seleccione Cargo</option>
                                 <option value="ADMINISTRADOR">ADMINISTRADOR</option>
                                 <option value="CONTADOR">CONTADOR</option>
-                                <option value="AUXILIAR">AUXILIAR</option>
+                                <option value="AUXILIAR CONTABLE">AUXILIAR CONTABLE</option>
                                 <option value="AUXILIAR ADMINISTRATIVO">AUXILIAR ADMINISTRATIVO</option>
+                                <option value="AUDITORIA">AUDITORIA</option>
+                                <option value="RECURSO HUMANO">RECURSO HUMANO</option>
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="role" class="form-label">Rol</label>
+                            <label for="role" class="form-label">Rol <span
+                                    style="color: red">*</span></label>
                             <select name="role" class="form-control" id="role">
-                                <option value="">Seleccione Cargo</option>
+                                <option value="">Seleccione Rol</option>
                                 <option value="ADMINISTRADOR">ADMINISTRADOR</option>
                                 <option value="CONTADOR">CONTADOR</option>
                                 <option value="AUXILIAR">AUXILIAR</option>
@@ -69,7 +79,8 @@
 
 
                         <div class="col-md-4">
-                            <label for="profession" class="form-label">Formación</label>
+                            <label for="profession" class="form-label">Formación <span
+                                    style="color: red">*</span></label>
                             <select name="profession" class="form-control" id="profession">
                                 <option value="">Seleccione formación</option>
                                 <option value="PROFESIONAL">PROFESIONAL</option>
