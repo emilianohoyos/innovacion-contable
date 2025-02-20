@@ -170,9 +170,7 @@ class ClientController extends Controller
                     'user_id' => $user->id,
                     'birthday' => $validatedData['birthday'],
                     'observation' => $validatedData['observationContact'],
-                    'channel_communication' => isset($validatedData['channel_communication']) && !empty($validatedData['channel_communication'])
-                        ? json_encode($validatedData['channel_communication'])
-                        : null,
+                    'channel_communication' => $validatedData['channel_communication'],
                 ]);
                 $folders = Folder::where('person_type_id', 1)->get();
                 foreach ($folders as $folder) {
@@ -199,9 +197,7 @@ class ClientController extends Controller
                         'email' => $contact['email'],
                         'cellphone' => $contact['cellphone'],
                         'user_id' => $user->id,
-                        'channel_communication' => isset($validatedData['channel_communication']) && !empty($validatedData['channel_communication'])
-                            ? json_encode($validatedData['channel_communication'])
-                            : null,
+                        'channel_communication' => $validatedData['channel_communication'],
                         'observation' => $contact['observationContact'],
                         'birthday' => $contact['birthday'],
 
