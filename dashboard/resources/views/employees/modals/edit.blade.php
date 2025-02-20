@@ -16,7 +16,7 @@
                             <select name="document_type_id" class="form-control" id="document_type_id">
 
                                 @foreach ($document_type as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
                             <input type="hidden" name="id" id="id">
@@ -54,8 +54,7 @@
                                 <option value="ADMINISTRADOR">ADMINISTRADOR</option>
                                 <option value="CONTADOR">CONTADOR</option>
                                 <option value="AUXILIAR">AUXILIAR</option>
-                                <option value="AUXILIAR ADMINISTRATIVO">AUXILIAR ADMINISTRATIVO</option>
-                            </select>
+                                <option value="AUXILIAR ADMINISTRATIVO">AUXILIAR ADMINISTRATIVO</option </select>
                         </div>
                         <div class="col-md-4">
                             <label for="role" class="form-label">Rol</label>
@@ -80,31 +79,33 @@
 
 
                         <div class="col-md-4">
-                            <label for="emergency_contact_name" class="form-label">Nombre del contacto de emergencia</label>
-                            <input type="emergency_contact_name" class="form-control" id="emergency_contact_name" name="emergency_contact_name"
-                                placeholder="Ingrese nombre">
+                            <label for="emergency_contact_name" class="form-label">Nombre del contacto de
+                                emergencia</label>
+                            <input type="emergency_contact_name" class="form-control" id="emergency_contact_name"
+                                name="emergency_contact_name" placeholder="Ingrese nombre">
                         </div>
                         <div class="col-md-4">
-                            <label for="emergency_contact_phone" class="form-label">Teléfono del contacto de emergencia</label>
-                            <input type="emergency_contact_phone" class="form-control" id="emergency_contact_phone" name="emergency_contact_phone"
-                                placeholder="Ingrese teléfono">
+                            <label for="emergency_contact_phone" class="form-label">Teléfono del contacto de
+                                emergencia</label>
+                            <input type="emergency_contact_phone" class="form-control" id="emergency_contact_phone"
+                                name="emergency_contact_phone" placeholder="Ingrese teléfono">
                         </div>
                         <div class="col-md-4">
-                            <label for="emergency_contact_address" class="form-label">Dirección del contacto de emergencia</label>
-                            <input type="emergency_contact_address" class="form-control" id="emergency_contact_address" name="emergency_contact_address"
+                            <label for="emergency_contact_address" class="form-label">Dirección del contacto de
+                                emergencia</label>
+                            <input type="emergency_contact_address" class="form-control"
+                                id="emergency_contact_address" name="emergency_contact_address"
                                 placeholder="Ingrese dirección">
                         </div>
 
                         <div class="col-md-12">
                             <label for="profession_description" class="form-label">Observaciones de Formación</label>
-                            <textarea class="form-control" id="profession_description" name="profession_description"
-                                rows="3"></textarea>
+                            <textarea class="form-control" id="profession_description" name="profession_description" rows="3"></textarea>
                         </div>
 
                         <div class="col-md-12">
                             <label for="observation" class="form-label">Observaciones Generales</label>
-                            <textarea class="form-control" id="observation" name="observation"
-                                rows="3"></textarea>
+                            <textarea class="form-control" id="observation" name="observation" rows="3"></textarea>
                         </div>
 
 

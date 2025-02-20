@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('job_title');
             $table->string('email');
             $table->string('cellphone');
-            $table->json('channel_communication');
+            $table->json('channel_communication')->nullable();
             $table->date('birthday')->nullable();
             $table->text('observation')->nullable();
             $table->timestamps();
