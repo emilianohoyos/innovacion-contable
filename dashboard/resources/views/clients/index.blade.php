@@ -869,6 +869,8 @@
                     clientData.contact_info.forEach(contact => {
                         const row = `
                     <tr>
+                        <td>${contact.document_type.name}</td>
+                        <td>${contact.identification}</td>
                         <td>${contact.firstname}</td>
                         <td>${contact.lastname}</td>
                         <td>${contact.birthday??'-'}</td>
@@ -889,7 +891,7 @@
 
                         <td>${contact.email}</td>
                         <td>${contact.cellphone}</td>
-                        <td>${contact.observation}</td>
+                        <td>${contact.observation??''}</td>
                     </tr>`;
                         contactTableBody.insertAdjacentHTML('beforeend', row);
                     });

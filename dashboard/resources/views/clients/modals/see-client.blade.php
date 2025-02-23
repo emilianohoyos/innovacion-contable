@@ -423,6 +423,8 @@
                                         <table class="table table-bordered table-striped" id="contactTable">
                                             <thead>
                                                 <tr>
+                                                    <th>Tipo Documento</th>
+                                                    <th>Documento</th>
                                                     <th>Nombres</th>
                                                     <th>Apellidos</th>
                                                     <th>Fecha de nacimiento</th>
