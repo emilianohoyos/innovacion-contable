@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Requests\StoreClientRequest;
+use App\Http\Requests\UpdateClientRequest;
 use App\Models\ApplyDocTypeFolder;
 use App\Models\Client;
 use App\Models\ClientContactInfo;
@@ -19,6 +20,7 @@ use App\Models\MonthlyAccounting;
 use App\Models\MonthlyAccountingFolder;
 use App\Models\MonthlyAccountingFolderApplyDocTypeFolder;
 use App\Models\PersonType;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -230,15 +232,181 @@ class ClientController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $client_id = $id;
+        $person_type = PersonType::all();
+        $document_type = DocumentType::all();
+        $employees = Employee::select('id', 'firstname', 'lastname')->get();
+
+        return view('clients.edit', compact('person_type', 'document_type', 'employees', 'client_id'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateClientRequest $request, Client $client)
     {
-        //
+        $validatedData = $request->validated();
+        $client->update([
+            'person_type_id' => $validatedData['person_type_id'],
+            'document_type_id' => $validatedData['document_type_id'],
+            'nit' => $validatedData['nit'],
+            'company_name' => $validatedData['company_name'],
+            'address' => $validatedData['address'],
+            'observation' => $validatedData['observation'] ?? null,
+            'email' => $validatedData['email_company'],
+            'category' => $validatedData['category'],
+            'review' => $validatedData['review'],
+        ]);
+
+        ClientResponsible::updateOrCreate([
+            'client_id' =>  $client->id,
+            'id' => $validatedData['client_responsible_id'],
+        ], [
+            'is_simple_taxation_regime'       => $validatedData['is_simple_taxation_regime'] == "TRUE" ? true : false,
+            'simple_taxation_regime_advances' => $validatedData['simple_taxation_regime_advances'] ?? null,
+            'simple_taxation_regime_consolidated_annual' => $validatedData['simple_taxation_regime_consolidated_annual'] ?? null,
+            'is_industry_commerce' => $validatedData['is_industry_commerce'] == "TRUE" ? true : false,
+            'industry_commerce_periodicity' => $validatedData['industry_commerce_periodicity'] ?? null,
+            'industry_commerce_places' => isset($validatedData['industry_commerce_places'])
+                ? json_encode($validatedData['industry_commerce_places'], JSON_UNESCAPED_UNICODE)
+                : null,
+            'is_industry_commerce_retainer' => $validatedData['is_industry_commerce_retainer'] == "TRUE" ? true : false,
+            'industry_commerce_retainer_periodicity' => $validatedData['industry_commerce_retainer_periodicity'] ?? null,
+            'industry_commerce_retainer_places' => isset($validatedData['industry_commerce_retainer_places'])
+                ? json_encode($validatedData['industry_commerce_retainer_places'], JSON_UNESCAPED_UNICODE)
+                : null,
+            'is_industry_commerce_selfretaining' => $validatedData['is_industry_commerce_selfretaining'] == "TRUE" ? true : false,
+            'industry_commerce_selfretaining_periodicity' => $validatedData['industry_commerce_selfretaining_periodicity'] ?? null,
+            'industry_commerce_selfretaining_places' => isset($validatedData['industry_commerce_selfretaining_places'])
+                ? json_encode($validatedData['industry_commerce_selfretaining_places'], JSON_UNESCAPED_UNICODE)
+                : null,
+            'vat_responsible' => $validatedData['vat_responsible'] == "TRUE" ? true : false,
+            'vat_responsible_periodicity' => $validatedData['vat_responsible_periodicity'] ?? null,
+            'vat_responsible_observation' => $validatedData['vat_responsible_observation'] ?? null,
+            'is_rent' => $validatedData['is_rent'] == "TRUE" ? true : false,
+            'rent_periodicity' => $validatedData['rent_periodicity'] ?? null,
+            'is_supersociety' => $validatedData['is_supersociety'] == "TRUE" ? true : false,
+            'supersociety_periodicity' => $validatedData['supersociety_periodicity'] ?? null,
+            'is_supertransport' => $validatedData['is_supertransport'] == "TRUE" ? true : false,
+            'supertransport_periodicity' => $validatedData['supertransport_periodicity'] ?? null,
+            'supertransport_observation' => $validatedData['supertransport_observation'] ?? null,
+            'is_superfinancial' => $validatedData['is_superfinancial'] == "TRUE" ? true : false,
+            'superfinancial_periodicity' => $validatedData['superfinancial_periodicity'] ?? null,
+            'is_source_retention' => $validatedData['is_source_retention'] == "TRUE" ? true : false,
+            'source_retention_periodicity' => $validatedData['source_retention_periodicity'] ?? null,
+            'is_dian_exogenous_information' => $validatedData['is_dian_exogenous_information'] == "TRUE" ? true : false,
+            'dian_exogenous_information_periodicity' => $validatedData['dian_exogenous_information_periodicity'] ?? null,
+            'is_municipal_exogenous_information' => $validatedData['is_municipal_exogenous_information'] == "TRUE" ? true : false,
+            'municipal_exogenous_information_periodicity' => $validatedData['municipal_exogenous_information_periodicity'] ?? null,
+            'municipal_exogenous_information_places' => isset($validatedData['municipal_exogenous_information_places'])
+                ? json_encode($validatedData['municipal_exogenous_information_places'], JSON_UNESCAPED_UNICODE)
+                : null,
+            'is_wealth_tax' => $validatedData['is_wealth_tax'] == "TRUE" ? true : false,
+            'wealth_tax_periodicity' => $validatedData['wealth_tax_periodicity'] ?? null,
+            'is_radian' => $validatedData['is_radian'] == "TRUE" ? true : false,
+            'radian_periodicity' => $validatedData['radian_periodicity'] ?? null,
+            'is_e_payroll' => $validatedData['is_e_payroll'] == "TRUE" ? true : false,
+            'e_payroll_periodicity' => $validatedData['e_payroll_periodicity'] ?? null,
+            'is_single_registry_final_benefeciaries' => $validatedData['is_single_registry_final_benefeciaries'] == "TRUE" ? true : false,
+            'single_registry_final_benefeciaries_periodicity' => $validatedData['single_registry_final_benefeciaries_periodicity'] ?? null,
+            'is_renovacion_esal' => $validatedData['is_renovacion_esal'] == "TRUE" ? true : false,
+            'renovacion_esal_periodicity' => $validatedData['renovacion_esal_periodicity'] ?? null,
+            'is_assets_abroad' => $validatedData['is_assets_abroad'] == "TRUE" ? true : false,
+            'assets_abroad_periodicity' => $validatedData['assets_abroad_periodicity'] ?? null,
+            'is_single_registry_proposers' => $validatedData['is_single_registry_proposers'] == "TRUE" ? true : false,
+            'single_registry_proposers_periodicity' => $validatedData['single_registry_proposers_periodicity'] ?? null,
+            'single_registry_proposers_places' => isset($validatedData['single_registry_proposers_places'])
+                ? json_encode($validatedData['single_registry_proposers_places'], JSON_UNESCAPED_UNICODE)
+                : null,
+            'is_renewal_commercial_registration' => $validatedData['is_renewal_commercial_registration'] == "TRUE" ? true : false,
+            'renewal_commercial_registration_periodicity' => $validatedData['renewal_commercial_registration_periodicity'] ?? null,
+            'is_national_tourism_fund' => $validatedData['is_national_tourism_fund'] == "TRUE" ? true : false,
+            'national_tourism_fund_periodicity' => $validatedData['national_tourism_fund_periodicity'] ?? null,
+            'is_special_tax_regime' => $validatedData['is_special_tax_regime'] == "TRUE" ? true : false,
+            'is_national_tourism_registry' => $validatedData['is_national_tourism_registry'] == "TRUE" ? true : false,
+            'national_tourism_registry_periodicity' => $validatedData['national_tourism_registry_periodicity'] ?? null,
+        ]);
+
+        EmployeeClient::find($validatedData['employee_client_id'])->update([
+            'client_id' => $client->id,
+            'employee_id' => $validatedData['employee_id'],
+        ]);
+
+        if ($validatedData['person_type_id'] == 1) {
+            $user = User::where('username', $validatedData['identification'])->first();
+            if ($user) {
+                $user->update([
+                    'username' => $validatedData['identification'],
+                ]);
+            } else {
+                $password = 'Innovacion' . date('Y');
+                $user = $this->registerController->create([
+                    'name' => $validatedData['firstname'] . $validatedData['lastname'],
+                    'email' => $validatedData['email'],
+                    'username' => $validatedData['identification'],
+                    'password' => $password,
+                    'rol' => 'client'
+                ]);
+            }
+
+            $client->contactInfo()->updateOrCreate([
+                'client_id' => $client->id,
+                'id' => $validatedData['contact_info_id'],
+            ], [
+                'document_type_id' => $validatedData['contact_document_type_id'],
+                'identification' => $validatedData['identification'],
+                'firstname' => $validatedData['firstname'],
+                'lastname' => $validatedData['lastname'],
+                'job_title' => $validatedData['job_title'],
+                'email' => $validatedData['email'],
+                'cellphone' => $validatedData['cellphone'],
+                'user_id' => $user->id,
+                'birthday' => $validatedData['birthday'],
+                'observation' => $validatedData['observationContact'],
+                'channel_communication' => $validatedData['channel_communication'],
+            ]);
+        } else {
+            foreach ($validatedData['contacts'] as $contact) {
+                $user = User::where('username', $contact['identification'])->first();
+
+                if ($user) {
+                    $user->update([
+                        'username' => $contact['identification'],
+                    ]);
+                } else {
+                    $user = $this->registerController->create([
+                        'name' => $contact['firstname'] . $contact['lastname'],
+                        'email' => $contact['email'],
+                        'username' => $contact['identification'],
+                        'password' => 'Innovacion' . date('Y'),
+                        'rol' => 'client'
+                    ]);
+                }
+                $client->contactInfo()->updateOrCreate([
+                    'client_id' => $client->id,
+                    'id' => $validatedData['contact_info_id'],
+                ], [
+                    'document_type_id' => $contact['contact_document_type_id'],
+                    'identification' => $contact['identification'],
+                    'firstname' => $contact['firstname'],
+                    'lastname' => $contact['lastname'],
+                    'job_title' => $contact['job_title'],
+                    'email' => $contact['email'],
+                    'cellphone' => $contact['cellphone'],
+                    'user_id' => $user->id,
+                    'channel_communication' => $contact['channel_communication'],
+                    'observation' => $contact['observationContact'],
+                    'birthday' => $contact['birthday'],
+
+                ]);
+            }
+        }
+
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Cliente Editado exitosamente',
+        ], 201);
     }
 
     /**
@@ -280,6 +448,10 @@ class ClientController extends Controller
             onclick="addComment(' . $client->client_id . ', \'' . addslashes($client->company_name) . '\')">
             <i class="material-icons-outlined">comment</i>
         </button>';
+                $btn .= '<a href="' . route("client.edit", ["client" => $client->client_id]) . '"
+        class="btn btn-success raised d-inline-flex align-items-center justify-content-center">
+        <i class="material-icons-outlined">edit</i>
+    </a>';
 
                 // $btn .= '<a href="' . route("client.follow-up", ["client_id" => $client->client_id]) . '" class="btn btn-warning raised d-inline-flex align-items-center justify-content-center ">
                 //     <i class="material-icons-outlined">visibility</i>
@@ -478,7 +650,7 @@ class ClientController extends Controller
     }
     public function seeClientData(String $id)
     {
-        $client = Client::with(['contactInfo', 'commentsClient', 'documentType', 'personType', 'employees.employee', 'clientResponsible'])->find($id);
+        $client = Client::with(['contactInfo', 'contactInfo.documentType', 'commentsClient', 'documentType', 'personType', 'employees.employee', 'clientResponsible'])->find($id);
         return response()->json($client);
     }
 }

@@ -44,8 +44,9 @@
 
 
 @endsection
+@vite('resources/js/client/edit.js')
 @section('content')
-    <x-page-title title="Clientes" pagetitle="Registro de Clientes" />
+    <x-page-title title="Editar Clientes" pagetitle="Edición de Clientes" />
     <!--start stepper one-->
     <div id="stepper1" class="bs-stepper">
         <div class="card">
@@ -56,7 +57,7 @@
                         <div class="step-trigger" role="tab" id="stepper1trigger1" aria-controls="test-l-1">
                             <div class="bs-stepper-circle">1</div>
                             <div class="">
-                                <h5 class="mb-0 steper-title">Informacion cliente</h5>
+                                <h5 class="mb-0 steper-title">Editar Informacion del cliente</h5>
                                 <p class="mb-0 steper-sub-title">Ingrese la informacion del clientes</p>
                             </div>
                         </div>
@@ -101,6 +102,7 @@
 
                 <div class="bs-stepper-content">
                     <form id="formClient" onSubmit="return false">
+                        <input type="hidden" name="client_id" id="client_id" value="{{ $client_id }}">
                         <div id="test-l-1" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger1">
                             <h5 class="mb-1">Informacion cliente</h5>
                             <p class="mb-4">Ingrese la información del cliente</p>
@@ -184,6 +186,7 @@
 
                             <h5 class="mb-1">Responsabilidades del cliente</h5>
                             <p class="mb-4">Seleccione las responsabilidades</p>
+                            <input type="hidden" name="client_responsible_id" id="client_responsible_id">
                             <div class="row g-3">
                                 <br>
                                 <hr>
@@ -987,7 +990,7 @@
 
                             <h5 class="mb-1">Informacion de contacto</h5>
                             <p class="mb-4">Ingrese la información de contacto</p>
-
+                            <input type="hidden" name="contact_info_id" id="contact_info_id">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="contact_document_type_id" class="form-label">Tipo documento <span
@@ -1108,6 +1111,7 @@
                             <h5 class="mb-1">Asociar Empleado que atiende</h5>
                             <p class="mb-4">Agregue los empleados que pueden atender </p>
                             <div class="row g-3">
+                                <input type="hidden" name="employee_client_id" id="employee_client_id">
                                 <div class="col-md-12">
                                     <label for="employee_id" class="form-label">Empleado que atiende<span
                                             style="color: red">*</span></label>
@@ -1129,7 +1133,7 @@
                                         </button>
 
                                         <!-- Botón Guardar o Siguiente alineado a la derecha -->
-                                        <button class="btn btn-success px-4" id="saveClient">Guardar</button>
+                                        <button class="btn btn-success px-4" id="saveClient">Actualizar</button>
                                     </div>
                                 </div>
                             </div><!---end row-->
@@ -1148,6 +1152,7 @@
     <script src="{{ URL::asset('build/plugins/select2/js/select2.full.min.js') }}"></script>
     <script src="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script>
+        var client_id = {{ $client_id }};
         var stepper1
         document.addEventListener('DOMContentLoaded', function() {
 
@@ -1164,63 +1169,63 @@
             var stepperPanList = [].slice.call(stepperFormEl.querySelectorAll('.bs-stepper-pane'));
             var form = stepperFormEl.querySelector('.bs-stepper-content form');
 
-            document.querySelector('#stepper1').addEventListener('show.bs-stepper', function(event) {
-                const currentStepIndex = stepper1._currentIndex;
-                const nextStepIndex = event.detail.indexStep;
+            // document.querySelector('#stepper1').addEventListener('show.bs-stepper', function(event) {
+            //     const currentStepIndex = stepper1._currentIndex;
+            //     const nextStepIndex = event.detail.indexStep;
 
-                const currentPane = document.querySelectorAll('.bs-stepper-pane')[currentStepIndex];
-                const inputs = currentPane.querySelectorAll('input, select, textarea');
+            //     const currentPane = document.querySelectorAll('.bs-stepper-pane')[currentStepIndex];
+            //     const inputs = currentPane.querySelectorAll('input, select, textarea');
 
-                // // Validar los campos
-                let isValid = true;
-                inputs.forEach(input => {
-                    if (!input.checkValidity()) {
-                        isValid = false;
-                        input.classList.add('is-invalid'); // Agregar clase de error
-                    } else {
-                        input.classList.remove('is-invalid'); // Quitar clase de error
-                    }
-                });
+            //     // // Validar los campos
+            //     let isValid = true;
+            //     inputs.forEach(input => {
+            //         if (!input.checkValidity()) {
+            //             isValid = false;
+            //             input.classList.add('is-invalid'); // Agregar clase de error
+            //         } else {
+            //             input.classList.remove('is-invalid'); // Quitar clase de error
+            //         }
+            //     });
 
-                if (!isValid) {
-                    console.log('Hay errores en el formulario. No se puede avanzar.');
-                    event.preventDefault(); // Evita avanzar al siguiente paso
-                } else {
-                    console.log('Validación exitosa. Avanzando al siguiente paso.');
-                }
-            });
-            // Avanzar al siguiente paso del wizard
-            btnNextList.forEach(function(btn) {
-                btn.addEventListener('click', function() {
+            //     if (!isValid) {
+            //         console.log('Hay errores en el formulario. No se puede avanzar.');
+            //         event.preventDefault(); // Evita avanzar al siguiente paso
+            //     } else {
+            //         console.log('Validación exitosa. Avanzando al siguiente paso.');
+            //     }
+            // });
+            // // Avanzar al siguiente paso del wizard
+            // btnNextList.forEach(function(btn) {
+            //     btn.addEventListener('click', function() {
 
-                    stepperForm.next();
-                });
-            });
+            //         stepperForm.next();
+            //     });
+            // });
 
-            // Evento que se ejecuta al mostrar un nuevo paso
-            stepperFormEl.addEventListener('show.bs-stepper', function(event) {
-                console.log(event)
-                form.classList.remove('was-validated');
-                var nextStep = event.detail.indexStep;
+            // // Evento que se ejecuta al mostrar un nuevo paso
+            // stepperFormEl.addEventListener('show.bs-stepper', function(event) {
+            //     console.log(event)
+            //     form.classList.remove('was-validated');
+            //     var nextStep = event.detail.indexStep;
 
-                var currentStep = nextStep;
+            //     var currentStep = nextStep;
 
-                if (currentStep > 0) {
-                    currentStep--;
+            //     if (currentStep > 0) {
+            //         currentStep--;
 
-                }
+            //     }
 
-                var stepperPan = stepperPanList[currentStep];
+            //     var stepperPan = stepperPanList[currentStep];
 
-                // Actualizar el dropdownParent de Select2 al contenedor del paso visible
-                // $('#employee_id').select2({
-                //     theme: 'bootstrap-5',
-                //     placeholder: "Selecciona opciones",
-                //     allowClear: true,
-                //     closeOnSelect: false, // No cierra el menú al seleccionar una opción
-                //     // Contenedor del paso actual
-                // });
-            });
+            //     // Actualizar el dropdownParent de Select2 al contenedor del paso visible
+            //     // $('#employee_id').select2({
+            //     //     theme: 'bootstrap-5',
+            //     //     placeholder: "Selecciona opciones",
+            //     //     allowClear: true,
+            //     //     closeOnSelect: false, // No cierra el menú al seleccionar una opción
+            //     //     // Contenedor del paso actual
+            //     // });
+            // });
             $('#person_type_id').select2();
             // Captura el evento de cambio
             $('#person_type_id').on('change', function() {
@@ -2164,6 +2169,7 @@
                 e.preventDefault();
 
                 // Obtener valores de los campos
+                let contact_info_id = $('#contact_info_id'); // Obtiene el ID
                 const contactDocumentTypeId = $('#contact_document_type_id').val(); // Obtiene el ID
                 const contactDocumentTypeText = $('#contact_document_type_id option:selected')
                     .text(); // Obtiene el texto
@@ -2186,17 +2192,18 @@
                 if (firstname && lastname && email && cellphone) {
                     if (editingRow) {
                         // Si estamos editando, actualizar la fila existente
-                        editingRow.find('td:eq(0)').text(contactDocumentTypeId);
-                        editingRow.find('td:eq(1)').text(contactDocumentTypeText);
-                        editingRow.find('td:eq(2)').text(identification);
-                        editingRow.find('td:eq(3)').text(firstname);
-                        editingRow.find('td:eq(4)').text(lastname);
-                        editingRow.find('td:eq(5)').text(birthday);
-                        editingRow.find('td:eq(6)').text(jobTitle);
-                        editingRow.find('td:eq(7)').text(email);
-                        editingRow.find('td:eq(8)').text(cellphone);
-                        editingRow.find('td:eq(9)').text(channelCommunication.join(', '));
-                        editingRow.find('td:eq(10)').text(observationContact);
+                        editingRow.find('td:eq(0)').text(contact_info_id);
+                        editingRow.find('td:eq(1)').text(contactDocumentTypeId);
+                        editingRow.find('td:eq(2)').text(contactDocumentTypeText);
+                        editingRow.find('td:eq(3)').text(identification);
+                        editingRow.find('td:eq(4)').text(firstname);
+                        editingRow.find('td:eq(5)').text(lastname);
+                        editingRow.find('td:eq(6)').text(birthday);
+                        editingRow.find('td:eq(7)').text(jobTitle);
+                        editingRow.find('td:eq(8)').text(email);
+                        editingRow.find('td:eq(9)').text(cellphone);
+                        editingRow.find('td:eq(10)').text(channelCommunication.join(', '));
+                        editingRow.find('td:eq(11)').text(observationContact);
 
                         // Resetear variable de edición
                         editingRow = null;
@@ -2205,6 +2212,7 @@
                         // Agregar fila a la tabla
                         $('#contact-table tbody').append(`
                         <tr>
+                            <td class="hidden-contact-id" style="display:none;">${contact.id}</td> <!-- ID oculto -->
                             <td class="hidden-id" style="display:none;">${contactDocumentTypeId}</td> <!-- ID oculto -->
                             <td>${$('#contact_document_type_id option:selected').text()}</td>
                             <td>${identification}</td>
@@ -2222,7 +2230,9 @@
                     }
                     $('#contact_document_type_id').val(null).trigger('change'); // Resetear Select2
                     // Limpiar campos
-                    $('#identification,#firstname, #lastname, #job_title, #email, #cellphone,#birthday,#observationContact')
+                    $('#contact_info_id',
+                            '#identification,#firstname, #lastname, #job_title, #email, #cellphone,#birthday,#observationContact'
+                        )
                         .val('');
                     $('input[name="channel_communication[]"]').prop('checked', false);
                 } else {
@@ -2238,22 +2248,23 @@
             $('#contact-table').on('click', '.edit-row', function() {
                 editingRow = $(this).closest('tr'); // Guardamos la fila en edición
                 // Obtener el ID desde el <td> oculto
+                const contact_info_id = editingRow.find('td.hidden-contact-id').text();
                 const contactDocumentTypeId = editingRow.find('td.hidden-id').text();
                 // Cargar valores en el formulario
                 // Cargar valores en el formulario
                 $('#contact_document_type_id').val(contactDocumentTypeId).trigger(
                     'change'); // Asigna el ID y actualiza Select2
-                $('#identification').val(editingRow.find('td:eq(2)').text());
-                $('#firstname').val(editingRow.find('td:eq(3)').text());
-                $('#lastname').val(editingRow.find('td:eq(4)').text());
-                $('#birthday').val(editingRow.find('td:eq(5)').text());
-                $('#job_title').val(editingRow.find('td:eq(6)').text());
-                $('#email').val(editingRow.find('td:eq(7)').text());
-                $('#cellphone').val(editingRow.find('td:eq(8)').text());
-                $('#observationContact').val(editingRow.find('td:eq(10)').text());
+                $('#identification').val(editingRow.find('td:eq(3)').text());
+                $('#firstname').val(editingRow.find('td:eq(4)').text());
+                $('#lastname').val(editingRow.find('td:eq(5)').text());
+                $('#birthday').val(editingRow.find('td:eq(6)').text());
+                $('#job_title').val(editingRow.find('td:eq(7)').text());
+                $('#email').val(editingRow.find('td:eq(8)').text());
+                $('#cellphone').val(editingRow.find('td:eq(9)').text());
+                $('#observationContact').val(editingRow.find('td:eq(11)').text());
 
                 // Cargar checkboxes de "channel_communication"
-                let selectedChannels = editingRow.find('td:eq(9)').text().split(', ');
+                let selectedChannels = editingRow.find('td:eq(10)').text().split(', ');
                 $('input[name="channel_communication[]"]').each(function() {
                     $(this).prop('checked', selectedChannels.includes($(this).val()));
                 });
@@ -2297,17 +2308,19 @@
                     $('#contact-table tbody tr').each(function() {
                         const row = $(this).find('td');
                         const contact = {
+                            contact_info_id: $(this).find('.hidden-contact-id').text()
+                                .trim(),
                             contact_document_type_id: $(this).find('.hidden-id').text()
                                 .trim(), // 🔹 Buscar por clase
-                            identification: row.eq(2).text().trim(),
-                            firstname: row.eq(3).text().trim(),
-                            lastname: row.eq(4).text().trim(),
-                            birthday: row.eq(5).text().trim(),
-                            job_title: row.eq(6).text().trim(),
-                            email: row.eq(7).text().trim(),
-                            cellphone: row.eq(8).text().trim(),
-                            channel_communication: row.eq(9).text().trim(),
-                            observationContact: row.eq(10).text().trim(),
+                            identification: row.eq(3).text().trim(),
+                            firstname: row.eq(4).text().trim(),
+                            lastname: row.eq(5).text().trim(),
+                            birthday: row.eq(6).text().trim(),
+                            job_title: row.eq(7).text().trim(),
+                            email: row.eq(8).text().trim(),
+                            cellphone: row.eq(9).text().trim(),
+                            channel_communication: row.eq(10).text().trim(),
+                            observationContact: row.eq(11).text().trim(),
                         };
                         data.contacts.push(contact);
                     });
@@ -2388,8 +2401,8 @@
 
                 // Enviar los datos al servidor con AJAX
                 $.ajax({
-                    url: "{{ route('client.store') }}", // Cambiar por la URL de tu API
-                    method: 'POST',
+                    url: "{{ route('client.update', ['client' => $client_id]) }}", // Cambiar por la URL de tu API
+                    method: 'PUT',
                     contentType: 'application/json',
                     data: JSON.stringify(data),
                     success: function(response) {
@@ -2397,8 +2410,8 @@
                         isLoading(false);
                         Swal.fire({
                             icon: 'success',
-                            title: 'Se ha creado el Cliente',
-                            text: 'El Cliente se ha registrado exitosamente.',
+                            title: 'Se ha Editado el Cliente',
+                            text: 'El Cliente se ha editado exitosamente.',
                             confirmButtonText: 'Aceptar'
                         }).then(() => {
                             // Redirigir a la página de creación de empleado
