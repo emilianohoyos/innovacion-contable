@@ -245,7 +245,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-12 row">
+                                    <div class="col-md-12 industry_commerce_display row">
                                         <div class="col-md-2 mt-3">
                                             <label for="industry_commerce_department" style="display: none"
                                                 id="industry_commerce_department_lbl"
@@ -310,7 +310,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-12 row">
+                                    <div class="col-md-12 industry_commerce_retainer_display row">
                                         <div class="col-md-2 mt-3">
                                             <label for="industry_commerce_retainer_department" style="display: none"
                                                 id="industry_commerce_retainer_department_lbl"
@@ -355,7 +355,7 @@
                                 <hr>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
-                                        <label for="is_industry_commerce_selfretaining" class="form-label">Autrretenedor
+                                        <label for="is_industry_commerce_selfretaining" class="form-label">Autorretenedor
                                             Industria
                                             y Comercio</label>
                                         <select name="is_industry_commerce_selfretaining"
@@ -379,7 +379,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-12 row">
+                                    <div class="col-md-12 row industry_commerce_selfretaining_display display">
                                         <div class="col-md-2 mt-3">
                                             <label for="industry_commerce_selfretaining_department" style="display: none"
                                                 id="industry_commerce_selfretaining_department_lbl"
@@ -597,7 +597,7 @@
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
                                         <label for="is_municipal_exogenous_information" class="form-label">Información
-                                            Exógena Municipal<span style="color: red">*</span></label>
+                                            Exógena Municipal</label>
                                         <select name="is_municipal_exogenous_information"
                                             id="is_municipal_exogenous_information" class="form-control">
                                             <option value="FALSE">NO</option>
@@ -618,7 +618,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-12 row">
+                                    <div class="col-md-12 municipal_exogenous_information_display row">
                                         <div class="col-md-2 mt-3">
                                             <label for="municipal_exogenous_information_department" style="display: none"
                                                 id="municipal_exogenous_information_department_lbl"
@@ -730,7 +730,7 @@
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
                                         <label for="is_single_registry_final_benefeciaries" class="form-label">Registro
-                                            único de beneficiarios finales<span style="color: red">*</span></label>
+                                            único de beneficiarios finales</label>
                                         <select name="is_single_registry_final_benefeciaries"
                                             id="is_single_registry_final_benefeciaries" class="form-control">
                                             <option value="FALSE">NO</option>
@@ -822,7 +822,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-12 row">
+                                    <div class="col-md-12 single_registry_proposers_display row">
                                         <div class="col-md-2 mt-3">
                                             <label for="single_registry_proposers_department" style="display: none"
                                                 id="single_registry_proposers_department_lbl"
@@ -1148,6 +1148,12 @@
     <script src="{{ URL::asset('build/plugins/select2/js/select2.full.min.js') }}"></script>
     <script src="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script>
+        document.querySelector(".industry_commerce_display").style.display = 'none';
+        document.querySelector(".industry_commerce_retainer_display").style.display = 'none';
+        document.querySelector(".industry_commerce_selfretaining_display").style.display = 'none';
+        document.querySelector(".municipal_exogenous_information_display").style.display = 'none';
+        document.querySelector(".single_registry_proposers_display").style.display = 'none';
+
         var stepper1
         document.addEventListener('DOMContentLoaded', function() {
 
@@ -1331,8 +1337,12 @@
 
                     industry_commerce_places_btn.style.display = 'block'
                     industry_commerce_places_table.style.display = 'table'
+                    document.querySelector(".industry_commerce_display").style.display = 'flex';
+
 
                 } else {
+                    document.querySelector(".industry_commerce_display").style.display = 'none';
+
                     industry_commerce_periocidadLbl.style.display = 'none'
                     $('#industry_commerce_periodicity').parent().hide();
 
@@ -1442,6 +1452,8 @@
                             }
                         });
                     }
+                    document.querySelector(".industry_commerce_retainer_display").style.display = 'flex';
+
                     industry_commerce_retainer_periocidadLbl.style.display = 'block'
                     $('#industry_commerce_retainer_periodicity').parent().show();
 
@@ -1466,6 +1478,9 @@
 
                     industry_commerce_retainer_places_btn.style.display = 'none'
                     industry_commerce_retainer_places_table.style.display = 'none'
+
+                    document.querySelector(".industry_commerce_retainer_display").style.display = 'none';
+
 
                 }
             });
@@ -1526,6 +1541,7 @@
 
 
                 if (is_industry_commerce_selfretaining === "TRUE") { // Jurídica
+
                     var deparments = [];
                     var repet = [];
 
@@ -1578,6 +1594,10 @@
                     industry_commerce_selfretaining_places_btn.style.display = 'block'
                     industry_commerce_selfretaining_places_table.style.display = 'table'
 
+                    document.querySelector(".industry_commerce_selfretaining_display").style.display =
+                        'flex';
+
+
                 } else {
                     industry_commerce_selfretaining_periocidadLbl.style.display = 'none'
                     $('#industry_commerce_selfretaining_periodicity').parent().hide();
@@ -1590,6 +1610,9 @@
 
                     industry_commerce_selfretaining_places_btn.style.display = 'none'
                     industry_commerce_selfretaining_places_table.style.display = 'none'
+                    document.querySelector(".industry_commerce_selfretaining_display").style.display =
+                        'none';
+
 
                 }
             });
@@ -1826,6 +1849,9 @@
 
                     municipal_exogenous_information_places_btn.style.display = 'block'
                     municipal_exogenous_information_places_table.style.display = 'table'
+                    document.querySelector(".municipal_exogenous_information_display").style.display =
+                        'flex';
+
 
                 } else {
                     municipal_exogenous_information_periocidadLbl.style.display = 'none'
@@ -1839,6 +1865,9 @@
 
                     municipal_exogenous_information_places_btn.style.display = 'none'
                     municipal_exogenous_information_places_table.style.display = 'none'
+                    document.querySelector(".municipal_exogenous_information_display").style.display =
+                        'none';
+
 
                 }
             });
@@ -2049,6 +2078,9 @@
                     single_registry_proposers_places_btn.style.display = 'block'
                     single_registry_proposers_places_table.style.display = 'table'
 
+                    document.querySelector(".single_registry_proposers_display").style.display = 'flex';
+
+
                 } else {
                     single_registry_proposers_periocidadLbl.style.display = 'none'
                     $('#single_registry_proposers_periodicity').parent().hide();
@@ -2061,6 +2093,8 @@
 
                     single_registry_proposers_places_btn.style.display = 'none'
                     single_registry_proposers_places_table.style.display = 'none'
+                    document.querySelector(".single_registry_proposers_display").style.display = 'none';
+
 
                 }
             });
