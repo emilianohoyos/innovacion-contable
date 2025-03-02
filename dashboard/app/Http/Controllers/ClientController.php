@@ -49,9 +49,10 @@ class ClientController extends Controller
     {
         $person_type = PersonType::all();
         $document_type = DocumentType::all();
+        $folders = Folder::all();
         $employees = Employee::select('id', 'firstname', 'lastname')->get();
 
-        return view('clients.create', compact('person_type', 'document_type', 'employees'));
+        return view('clients.create', compact('person_type', 'document_type', 'employees', 'folders'));
     }
 
     /**
@@ -150,6 +151,13 @@ class ClientController extends Controller
                 'employee_id' => $validatedData['employee_id'],
             ]);
 
+            foreach ($validatedData['folders'] as $folder) {
+                ClientFolder::create([
+                    'client_id' => $client->id,
+                    'folder_id' => $folder['folder_id'],
+                ]);
+            }
+
 
 
             if ($validatedData['person_type_id'] == 1) {
@@ -174,13 +182,6 @@ class ClientController extends Controller
                     'observation' => $validatedData['observationContact'],
                     'channel_communication' => $validatedData['channel_communication'],
                 ]);
-                $folders = Folder::where('person_type_id', 1)->get();
-                foreach ($folders as $folder) {
-                    ClientFolder::firstOrCreate([
-                        'client_id' => $client->id,
-                        'folder_id' => $folder->id,
-                    ]);
-                }
             } else {
                 foreach ($validatedData['contacts'] as $contact) {
                     $user = $this->registerController->create([
@@ -439,17 +440,17 @@ class ClientController extends Controller
         return DataTables::of($clients)
             ->addColumn('acciones', function ($client) {
                 $btn = '<button type="button"
-                class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
+                class="btn btn-primary btn-sm raised d-inline-flex align-items-center justify-content-center"
                 onclick="addFolder(' . $client->client_id . ', \'' . addslashes($client->company_name) . '\')">
                 <i class="material-icons-outlined">add</i>
             </button>';
                 $btn .= '<button type="button"
-            class="btn btn-info raised d-inline-flex align-items-center justify-content-center"
+            class="btn btn-info btn-sm raised d-inline-flex align-items-center justify-content-center"
             onclick="addComment(' . $client->client_id . ', \'' . addslashes($client->company_name) . '\')">
             <i class="material-icons-outlined">comment</i>
         </button>';
                 $btn .= '<a href="' . route("client.edit", ["client" => $client->client_id]) . '"
-        class="btn btn-success raised d-inline-flex align-items-center justify-content-center">
+        class="btn btn-success btn-sm raised d-inline-flex align-items-center justify-content-center">
         <i class="material-icons-outlined">edit</i>
     </a>';
 
@@ -457,7 +458,7 @@ class ClientController extends Controller
                 //     <i class="material-icons-outlined">visibility</i>
                 // </a>';
                 $btn .= '<button type="button"
-                class="btn btn-warning raised d-inline-flex align-items-center justify-content-center"
+                class="btn btn-sm btn-warning raised d-inline-flex align-items-center justify-content-center"
                 onclick="seeClient(' . $client->client_id . ')">
                 <i class="material-icons-outlined">visibility</i>
             </button>';

@@ -21,7 +21,7 @@
                         <tr>
                             <th>Código</th>
                             <th>Nombre Carpeta</th>
-                            <th>Fecha de creación</th>
+                            <th>Periocidad</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -57,8 +57,8 @@
                         data: 'name',
                         name: 'name'
                     }, {
-                        data: 'created_at',
-                        name: 'created_at'
+                        data: 'periodicity',
+                        name: 'periodicity'
                     },
                     {
                         data: 'acciones',

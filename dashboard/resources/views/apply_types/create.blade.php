@@ -39,6 +39,15 @@
                                 </div>
                             @enderror
                         </div>
+                        <div class="col-md-12">
+                            <label for="priority" class="form-label">Prioridad </label>
+                            <select name="priority" id="priority" class="form-control" required>
+                                <option value="">Seleccione...</option>
+                                <option value="ALTA">ALTA</option>
+                                <option value="MEDIA">MEDIA</option>
+                                <option value="BAJA">BAJA</option>
+                            </select>
+                        </div>
 
                         <div class="col-md-12 mt-3">
                             <div class="d-md-flex d-grid align-items-left gap-3">

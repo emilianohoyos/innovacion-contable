@@ -35,6 +35,7 @@ class ApplyTypeController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'estimated_days' => 'required|numeric',
+            'priority' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -76,6 +77,7 @@ class ApplyTypeController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'estimated_days' => 'required|numeric',
+            'priority' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
@@ -84,6 +86,7 @@ class ApplyTypeController extends Controller
 
         $applyType->name = $validatedData['name'];
         $applyType->estimated_days = $validatedData['estimated_days'];
+        $applyType->priority = $validatedData['priority'];
         $applyType->save();
 
         return response()->json([
@@ -111,7 +114,7 @@ class ApplyTypeController extends Controller
 
     public function getApplyTypeData()
     {
-        $applyTypes = ApplyType::select(['id', 'name', 'estimated_days', 'created_at']);
+        $applyTypes = ApplyType::select(['id', 'name', 'estimated_days', 'priority']);
         return DataTables::of($applyTypes)
             ->addColumn('acciones', function ($applyType) {
                 $btn = '<button type="button"

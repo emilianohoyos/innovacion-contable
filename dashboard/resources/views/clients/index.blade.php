@@ -92,9 +92,10 @@
         let items = [];
 
         function addFolder(id, nameClient) {
-            $('#addFolderModal').modal('show');
-            document.getElementById('nameClient').textContent = `Nombre Cliente ${nameClient}`;
+            console.log('ID:', id, 'Nombre:', nameClient);
+            document.getElementById('nameClientFolder').textContent = `Agregar Carpeta al Cliente ${nameClient}`;
             document.getElementById('client_id').value = id;
+            $('#addFolderModal').modal('show');
         }
 
         function addComment(id, nameClient) {

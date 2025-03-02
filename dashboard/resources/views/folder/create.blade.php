@@ -14,7 +14,7 @@
         <div class="col-12 col-xl-12">
             <div class="card">
                 <div class="card-body p-4">
-                    <h5 class="mb-4">Formulario Carpeta</h5>
+                    <h5 class="mb-4">Nueva Carpeta</h5>
                     <form class="row g-3" id="formFolder">
                         <div class="col-md-6">
                             <label for="name" class="form-label">Nombre</label>
@@ -22,18 +22,17 @@
                                 placeholder="Ingrese Nombre de la carpeta">
                         </div>
                         <div class="col-md-6">
-                            <label for="person_type_id" class="form-label">Tipo Persona</label>
-                            <select name="person_type_id" id="person_type_id" class="form-control">
+                            <label for="periodicity" class="form-label">Periocidad</label>
+                            <select name="periodicity" id="periodicity" class="form-control">
                                 <option value="">Seleccione...</option>
-                                @foreach ($person_type as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                @endforeach
+                                <option value="ANUAL">Anual</option>
+                                <option value="MENSUAL">Mensual</option>
                             </select>
                         </div>
 
                         <div class="col-md-12 mt-3">
                             <div class="d-md-flex d-grid align-items-left gap-3">
-                                <button type="submit" class="btn btn-primary px-4">guardar</button>
+                                <button type="submit" class="btn btn-primary px-4">Guardar</button>
                                 <button type="button" class="btn btn-light px-4">Limpiar</button>
                             </div>
                         </div>

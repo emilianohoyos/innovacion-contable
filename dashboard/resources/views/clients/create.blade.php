@@ -88,8 +88,8 @@
                         <div class="step-trigger" role="tab" id="stepper1trigger3" aria-controls="test-l-2">
                             <div class="bs-stepper-circle">4</div>
                             <div class="">
-                                <h5 class="mb-0 steper-title">Asociar Empleado que atiende</h5>
-                                <p class="mb-0 steper-sub-title">Agrega los empleados que atienden</p>
+                                <h5 class="mb-0 steper-title">Asociar Carpetas y Empleado que atiende</h5>
+                                <p class="mb-0 steper-sub-title">Agrega las carpetas y empleados que atienden</p>
                             </div>
                         </div>
                     </div>
@@ -1102,11 +1102,12 @@
 
                                 </div>
                             </div><!---end row-->
+
                         </div>
                         <div id="test-l-3" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger3">
 
-                            <h5 class="mb-1">Asociar Empleado que atiende</h5>
-                            <p class="mb-4">Agregue los empleados que pueden atender </p>
+                            <h5 class="mb-1">Asociar Carpeta y Empleado que atiende</h5>
+                            <p class="mb-4">Seleccione el empledo y las carpetas</p>
                             <div class="row g-3">
                                 <div class="col-md-12">
                                     <label for="employee_id" class="form-label">Empleado que atiende<span
@@ -1119,6 +1120,40 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label for="folders" class="form-label">Seleccione La carpeta a
+                                                asociar</label>
+                                            <select name="folders" id="folders" class="form-control">
+                                                @foreach ($folders as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 mt-3">
+                                            <button type="button" class="btn btn-primary mt-4"
+                                                id="folder_add_row">Agregar</button>
+                                        </div>
+                                        <div class="col-md-6 mt-4">
+                                            <!-- Tabla para mostrar los elementos agregados -->
+                                            <div class="table-responsive ">
+                                                <table class="table table-bordered" id="itemsFolderTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Folder</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- Aquí se agregarán dinámicamente las filas -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="col-12">
@@ -2295,6 +2330,41 @@
                 // Cambiar el texto del botón para indicar que estamos editando
                 $('#add-row').text('Actualizar');
             });
+
+            $('#folder_add_row').on('click', function(e) {
+                e.preventDefault();
+
+                // Obtener valores de los campos
+                const folders = $(
+                        '#folders')
+                    .val();
+                const foldersText = $('#folders option:selected')
+                    .text(); // Obtiene el texto
+
+                if (folders) {
+                    // Agregar fila a la tabla
+                    $('#itemsFolderTable tbody').append(`
+                        <tr>
+                            <td class="hidden-id" style="display:none;">${folders}</td> <!-- ID oculto -->
+                            <td>${foldersText}</td>
+                            <td><button class="btn btn-danger btn-sm remove-row">Eliminar</button></td>
+                        </tr>
+                    `);
+
+                    // Limpiar campos
+                    $('#folders').val(null).trigger('change');
+
+                } else {
+                    alert('Por favor, complete todos los campos requeridos.');
+                }
+            });
+
+            $('#itemsFolderTable').on('click', '.remove-row', function() {
+                $(this).closest('tr').remove();
+            });
+
+
+
             $('#saveClient').on('click', function(e) {
                 e.preventDefault();
                 isLoading(true)
@@ -2419,6 +2489,17 @@
                     data["channel_communication"] = data["channel_communication"]?.join(", ");
 
                 }
+
+                const folders = $('#folders').val();
+                data.folders = [];
+                $('#itemsFolderTable tbody tr ').each(function() {
+                    const row = $(this).find('td');
+                    const folders = {
+                        folder_id: row.eq(0).text(),
+                    }
+                    data.folders.push(folders);
+                })
+
 
                 // Enviar los datos al servidor con AJAX
                 $.ajax({

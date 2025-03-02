@@ -37,7 +37,7 @@ class FolderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'person_type_id' => 'required',
+            'periodicity' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -86,7 +86,7 @@ class FolderController extends Controller
 
     public function getFolderData()
     {
-        $folders = Folder::select(['id', 'name', 'created_at']);
+        $folders = Folder::select(['id', 'name', 'periodicity']);
         return DataTables::of($folders)
             ->addColumn('acciones', function ($folder) {
                 $btn = '<button type="button"

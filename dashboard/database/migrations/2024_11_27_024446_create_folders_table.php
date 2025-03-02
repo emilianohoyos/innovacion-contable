@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('folders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->foreignId('person_type_id')->constrained()->onDelete('cascade');
+            $table->string('periodicity');
             $table->timestamps();
         });
     }
@@ -24,9 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('folders', function (Blueprint $table) {
-            $table->dropForeign(['person_type_id']);
-        });
+
         Schema::dropIfExists('folders');
     }
 };

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ApplyType extends Model
 {
-    protected $fillable = ['name', 'estimated_days'];
+    protected $fillable = ['name', 'estimated_days', 'priority'];
 
     public function getCreatedAtAttribute($value)
     {

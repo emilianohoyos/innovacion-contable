@@ -118,6 +118,7 @@ class StoreClientRequest extends FormRequest
             'observationContact' => 'nullable',
             'cellphone' => 'required_if:person_type_id,1',
             'employee_id' => 'required',
+            'folders' => 'required|array',
             'contacts' => 'required_if:person_type_id,2|array',
             'industry_commerce_places' => 'nullable|array',
             'industry_commerce_selfretaining_places' => 'nullable|array',
