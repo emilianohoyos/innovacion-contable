@@ -39,13 +39,22 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label for="priority" class="form-label">Prioridad </label>
                             <select name="priority" id="priority" class="form-control" required>
                                 <option value="">Seleccione...</option>
                                 <option value="ALTA">ALTA</option>
                                 <option value="MEDIA">MEDIA</option>
                                 <option value="BAJA">BAJA</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="destiny" class="form-label">Destino</label>
+                            <select name="destiny" id="destiny" class="form-control" required>
+                                <option value="">Seleccione...</option>
+                                <option value="INTERNA">INTERNA</option>
+                                <option value="EXTERNA">EXTERNA</option>
+                                <option value="INTERNA\EXTERNA">INTERNA\EXTERNA</option>
                             </select>
                         </div>
 

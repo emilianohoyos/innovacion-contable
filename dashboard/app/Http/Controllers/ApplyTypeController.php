@@ -36,6 +36,7 @@ class ApplyTypeController extends Controller
             'name' => 'required|string',
             'estimated_days' => 'required|numeric',
             'priority' => 'required',
+            'destiny' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -53,11 +54,12 @@ class ApplyTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ApplyType $applyType)
+    public function show($applyType)
     {
+        $data = ApplyType::find($applyType);
         return response()->json([
             "status" => true,
-            'data' => $applyType
+            'data' => $data
         ], 200);
     }
 
@@ -72,21 +74,25 @@ class ApplyTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ApplyType $applyType)
+    public function update(Request $request, string $id)
     {
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'estimated_days' => 'required|numeric',
             'priority' => 'required',
+            'destiny' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
         $validatedData = $validator->validated();
 
+        $applyType = ApplyType::find($id);
         $applyType->name = $validatedData['name'];
         $applyType->estimated_days = $validatedData['estimated_days'];
         $applyType->priority = $validatedData['priority'];
+        $applyType->destiny = $validatedData['destiny'];
         $applyType->save();
 
         return response()->json([
@@ -114,14 +120,18 @@ class ApplyTypeController extends Controller
 
     public function getApplyTypeData()
     {
-        $applyTypes = ApplyType::select(['id', 'name', 'estimated_days', 'priority']);
+        $applyTypes = ApplyType::select(['id', 'name', 'estimated_days', 'priority', 'destiny']);
         return DataTables::of($applyTypes)
             ->addColumn('acciones', function ($applyType) {
                 $btn = '<button type="button"
-                class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
+                class="btn btn-primary raised btn-sm d-inline-flex align-items-center justify-content-center"
                 onclick="addApplyDocumentType(' . $applyType->id . ', \'' . addslashes($applyType->name) . '\')">
                 <i class="material-icons-outlined">add</i>
             </button>';
+                $btn .= '<button type="button"
+            class="btn btn-warning btn-sm raised d-inline-flex align-items-center justify-content-center"
+            onclick="editApplyType(' . $applyType->id . ')">
+            <i class="material-icons-outlined">edit</i>';
 
                 return  $btn;
             })

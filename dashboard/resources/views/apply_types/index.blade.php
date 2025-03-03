@@ -21,6 +21,7 @@
                                 <th>Tipo Solicitud</th>
                                 <th>Dias Estimados </th>
                                 <th>Prioridad</th>
+                                <th>Destiny</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -36,6 +37,7 @@
         </div>
     </div>
     @include('apply_types.modals.add_document')
+    @include('apply_types.modals.edit')
 
 @endsection
 @section('scripts')
@@ -67,6 +69,10 @@
                     {
                         data: 'priority',
                         name: 'priority'
+                    },
+                    {
+                        data: 'destiny',
+                        name: 'destiny'
                     },
                     {
                         data: 'acciones',
@@ -289,6 +295,87 @@
                     }
                 }
             });
+        }
+
+        function editApplyType(id) {
+
+            fetch(`/applytype/${id}`) // Ruta de la API en Laravel
+                .then(response => response.json())
+                .then(responseData => {
+                    if (responseData.status) {
+                        let data = responseData.data; // Extraer el objeto ApplyType
+
+                        // Llenar los campos del modal
+                        document.getElementById('apply_type_id').value = data.id;
+                        document.getElementById('name').value = data.name;
+                        document.getElementById('estimated_days').value = data.estimated_days;
+
+                        // Seleccionar valores en los select2
+                        $('#priority').val(data.priority).trigger('change');
+                        $('#destiny').val(data.destiny).trigger('change');
+
+                        // Mostrar el modal
+                        let modal = new bootstrap.Modal(document.getElementById('editApplyTypeModal'));
+                        modal.show();
+                    } else {
+                        console.error('Error: La respuesta no es válida.');
+                    }
+                })
+                .catch(error => console.error('Error al cargar los datos:', error));
+
+
+            document.getElementById('apply_type_id').value = id;
+            document.getElementById('nameApplyType').textContent = `Editar tipo solicitud: ${id}`
+            $('#editApplyTypeModal').modal('show');
+
+        }
+
+        function actualizarApplyType() {
+            let applyTypeId = document.getElementById("apply_type_id").value;
+            let formData = {
+                name: document.getElementById("name").value,
+                estimated_days: document.getElementById("estimated_days").value,
+                priority: document.getElementById("priority").value,
+                destiny: document.getElementById("destiny").value
+            };
+
+            fetch(`/applytype/${applyTypeId}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status) {
+                        Swal.fire({
+                            title: "¡Éxito!",
+                            text: "Tipo de solicitud actualizado correctamente.",
+                            icon: "success",
+                            confirmButtonText: "Aceptar"
+                        }).then(() => {
+                            location.reload(); // Recargar la página o cerrar el modal
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Error",
+                            text: "Hubo un problema al actualizar.",
+                            icon: "error",
+                            confirmButtonText: "Cerrar"
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    Swal.fire({
+                        title: "Error",
+                        text: "Ocurrió un error inesperado.",
+                        icon: "error",
+                        confirmButtonText: "Cerrar"
+                    });
+                });
         }
     </script>
 

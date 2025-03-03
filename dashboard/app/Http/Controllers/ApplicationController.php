@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\ApplyType;
 use App\Models\Attachment;
+use App\Models\Client;
+use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,7 +27,11 @@ class ApplicationController extends Controller
      */
     public function create()
     {
-        return view('applications.create');
+        $applyTypes = ApplyType::all();
+        $clients = Client::all();
+        $employees = Employee::all();
+
+        return view('applications.create', compact('applyTypes', 'clients', 'employees'));
     }
 
     /**
@@ -31,14 +39,14 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all(), $request->file('files'));
         $validator = Validator::make($request->all(), [
-            'created_by' => 'required|string',
             'apply_type_id' => 'required|exists:apply_types,id',
+            'client_id' => 'required|exists:clients,id',
+            'employee_id' => 'required|exists:employees,id',
             'observations' => 'required|string',
-            'application_date' => 'required|date',
             'estimated_delevery_date' => 'required|date',
-            'state_id' => 'required|exists:states,id',
-            'priority_type_id' => 'required|exists:priority_types,id',
+            'priority' => 'required|exists:priority_types,id',
             'attachments' => 'required|array'
         ]);
 
@@ -51,7 +59,19 @@ class ApplicationController extends Controller
         unset($validatedData['attachments']);
 
 
-        $apply = Application::create($validatedData);
+        $apply = Application::create(
+            [
+                'created_by' => Auth::user()->id,
+                'apply_type_id' => $validatedData['apply_type_id'],
+                'client_id' => $validatedData['client_id'],
+                'estimated_delevery_date' => $validatedData['estimated_delevery_date'],
+                'priority' => $validatedData['priority'],
+                'employee_id' => $validatedData['employee_id'],
+                'observations' => $validatedData['observations'],
+                'application_date' => now(),
+                'state_id' => 1,
+            ]
+        );
         if ($request->has('attachments')) {
             foreach ($attachments as $attach) {
                 $AtachId = Attachment::create([
