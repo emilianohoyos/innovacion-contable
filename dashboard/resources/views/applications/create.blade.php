@@ -2,9 +2,15 @@
 
 @section('title', 'Alternate')
 @section('css')
-    <link href="{{ URL::asset('build/plugins/fancy-file-uploader/fancy_fileupload.css') }}" rel="stylesheet">
-    {{-- <link href="{{ URL::asset('build/plugins/Drag-And-Drop/build/imageuploadify.min.css') }}" rel="stylesheet"> --}}
+    <link href="{{ URL::asset('build/plugins/dropzonejs/dropzone.min.css') }}" rel="stylesheet">
+    <style>
+        .dz-progress {
+            display: none !important;
+            /* 🔹 Oculta solo la barra de carga */
+        }
+    </style>
 @endsection
+
 @section('content')
     <x-page-title title="Solicitudes" pagetitle="Registro de Solicitudes" />
 
@@ -61,10 +67,10 @@
                             <textarea class="form-control" id="observation" name="observation" placeholder="Ingrese observaciones." rows="3"></textarea>
                         </div>
                         <div class="col-md-12 mt-3">
-                            <label for="observation" class="form-label">Cargar Adjuntos</label>
-                            <input id="fancy-file-upload" type="file" name="files"
-                                accept=".jpg, .png, image/jpeg, image/png" multiple>
+                            <label class="form-label">Cargar Adjuntos</label>
+                            <div class="row" id="adjuntos"></div>
                         </div>
+
 
                         <div class="col-md-12 mt-3">
                             <div class="d-md-flex d-grid align-items-left gap-3">
@@ -75,6 +81,7 @@
 
 
                     </form>
+
                 </div>
             </div>
         </div>
@@ -85,31 +92,12 @@
 @section('scripts')
 
     <script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.ui.widget.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.fileupload.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.iframe-transport.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.fancy-fileupload.js') }}"></script>
-    {{-- <script src="{{ URL::asset('build/plugins/Drag-And-Drop/build/imageuploadify.min.js') }}"></script> --}}
+    <script src="{{ URL::asset('build/plugins/dropzonejs/dropzone.min.js') }}"></script>
     <script src="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
     <script>
-        $('#fancy-file-upload').FancyFileUpload({
-            params: {
-                action: 'fileuploader'
-            },
-            maxfilesize: 1000000, // 1MB por archivo
-
-            added: function(e, data) {
-                // No subir automáticamente, solo agregar archivos a la memoria
-
-                $('.ff_fileupload_start_upload')
-                    .remove(); // 🔹 Elimina el botón de "Start Upload"
-
-                console.log("Archivo agregado:", data.files);
-            }
-        });
-    </script>
-    <script>
         $(document).ready(function() {
+
             $("#apply_type_id").change(function() {
                 let applyTypeId = $(this).val();
 
@@ -133,6 +121,43 @@
                                 $('#estimated_delevery_date').val(formattedDate);
 
                                 $('#priority').val(response.data.priority).trigger('change');
+
+                                const contenedor = document.getElementById("adjuntos");
+
+                                response.data.apply_document_types.forEach(doc => {
+                                    // Crear un div contenedor para cada input
+                                    const div = document.createElement("div");
+                                    div.classList.add("col-md-12", "mb-3");
+
+                                    // Crear una etiqueta
+                                    const label = document.createElement("label");
+                                    label.textContent = `${doc.name}:`;
+                                    label.setAttribute("for", `document_${doc.id}`);
+                                    // label.setAttribute("class", `form-label`);
+                                    label.classList.add("form-label");
+
+
+                                    // Crear el input file
+                                    const input = document.createElement("input");
+                                    input.type = "file";
+                                    input.name =
+                                        `document_${doc.id}[]`; // Permite manejar múltiples archivos
+                                    input.id = `document_${doc.id}`;
+                                    input.multiple =
+                                        true; // Permite seleccionar varios archivos
+                                    input.classList.add("form-control");
+                                    if (doc.pivot.is_required == 1) {
+                                        input.setAttribute("required", "true");
+                                    }
+
+                                    // Agregar al div contenedor
+                                    div.appendChild(label);
+                                    div.appendChild(input);
+
+                                    // Agregar al contenedor principal
+                                    contenedor.appendChild(div);
+                                })
+
                             } else {
                                 console.error("Error:", response.message);
                             }
@@ -148,19 +173,6 @@
                 event.preventDefault(); // Evitar el envío normal
 
                 let formData = new FormData(this); // Crear FormData con los datos del formulario
-                let files = $('#fancy-file-upload').FancyFileUpload('files'); // Obtener archivos
-
-                if (files.length === 0) {
-                    alert('no hay registros ')
-                    console.warn("No hay archivos seleccionados en FancyFileUpload");
-                }
-
-                $.each(files, function(index, file) {
-                    if (file.file) {
-                        console.log("Añadiendo archivo:", file.file.name); // Verificar en consola
-                        formData.append("files[]", file.file, file.file.name);
-                    }
-                });
 
                 $.ajax({
                     url: "/application", // Ruta en el backend

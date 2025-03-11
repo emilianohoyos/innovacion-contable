@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('folders', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('folders', function (Blueprint $table) {
+            $table->string('periodicity')->nullable()->after('name');
         });
     }
 
@@ -23,7 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-
-        Schema::dropIfExists('folders');
+        Schema::table('folders', function (Blueprint $table) {
+            $table->dropColumn('periodicity');
+        });
     }
 };

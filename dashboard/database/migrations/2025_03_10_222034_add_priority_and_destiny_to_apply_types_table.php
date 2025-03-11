@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('folders', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('apply_types', function (Blueprint $table) {
+            $table->string('priority')->nullable();
+            $table->string('destiny')->after('priority')->nullable();
         });
     }
 
@@ -23,7 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-
-        Schema::dropIfExists('folders');
+        Schema::table('apply_types', function (Blueprint $table) {
+            $table->dropColumn(['priority', 'destiny']);
+        });
     }
 };

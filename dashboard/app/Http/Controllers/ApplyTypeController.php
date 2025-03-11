@@ -56,7 +56,7 @@ class ApplyTypeController extends Controller
      */
     public function show($applyType)
     {
-        $data = ApplyType::find($applyType);
+        $data = ApplyType::with('applyDocumentTypes')->find($applyType);
         return response()->json([
             "status" => true,
             'data' => $data

@@ -86,6 +86,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('dashboard', DashboardController::class);
     Route::resource('application', ApplicationController::class);
+    Route::get('/application-datatable', [ApplicationController::class, 'getApplicationDatatable'])->name('application.datatable');
+
+    Route::get('application/comment/{id}', [ApplicationController::class, 'getClientComments']);
+    Route::post('application/comment/{id}', [ApplicationController::class, 'saveClientComment']);
+    Route::post('application/state/{id}', [ApplicationController::class, 'updateStatus']);
+    Route::post('application/employee/{id}', [ApplicationController::class, 'updateEmployee']);
 
     Route::resource('folder', FolderController::class);
     Route::get('/folders-data', [FolderController::class, 'getFolderData'])->name('folders.data');

@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-12">
                         <form onSubmit="return false">
                             <div class="col-md-12 gap-0">
                                 <input type="hidden" name="client_id" id="client_id">
@@ -21,7 +21,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         <div class="container mt-4">
                             <table class="table table-bordered">
                                 <thead class="table-light">
