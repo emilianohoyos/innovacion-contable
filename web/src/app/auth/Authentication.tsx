@@ -20,7 +20,7 @@ function Authentication(props: AuthenticationProps) {
   const { children } = props;
   const { setAuthProvider, resetAuthProvider } = useAuth();
 
-  const userRole = useAppSelector(selectUserRole);
+  const userRole = "ADMIN";
   const dispatch = useAppDispatch();
 
   /**

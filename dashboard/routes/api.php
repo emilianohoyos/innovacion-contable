@@ -27,12 +27,14 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 Route::post('logout', [AuthController::class, 'logout']);
 Route::post('refresh', [AuthController::class, 'refresh']);
-Route::get('me', [AuthController::class, 'me']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-Route::middleware(['auth:api'])->group(function () {
+Route::middleware(['auth.jwt'])->group(function () {
+
+    Route::get('me', [AuthController::class, 'getUser']);
+
     Route::post('create-application', [ApplicationController::class, 'create']);
     Route::post('list-applications', [ApplicationController::class, 'listApplication']);
 

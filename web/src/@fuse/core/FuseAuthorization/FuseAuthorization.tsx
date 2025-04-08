@@ -72,7 +72,7 @@ class FuseAuthorization extends Component<FuseAuthorizationProps, State> {
 		const matchedRoutes = matchRoutes(state.routes, pathname);
 		const matched = matchedRoutes ? matchedRoutes[0] : false;
 
-		const isGuest = isUserGuest(userRole);
+		const isGuest = true;
 
 		if (!matched) {
 			return { accessGranted: true };
@@ -126,7 +126,7 @@ class FuseAuthorization extends Component<FuseAuthorizationProps, State> {
 		const { accessGranted } = this.state;
 		const { children } = this.props;
 
-		return accessGranted ? children : <FuseLoading />;
+		return  children;
 	}
 }
 

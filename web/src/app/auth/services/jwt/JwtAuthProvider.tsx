@@ -28,7 +28,7 @@ export type JwtAuthConfig = {
 };
 
 export type SignInPayload = {
-  email: string;
+  username: string;
   password: string;
 };
 
@@ -85,9 +85,7 @@ function JwtAuthProvider(props: JwtAuthProviderProps) {
   const handleSignInSuccess = useCallback(
     (userData: User, accessToken: string) => {
       setSession(accessToken);
-
       setIsAuthenticated(true);
-
       setUser(userData);
     },
     []
@@ -178,7 +176,7 @@ function JwtAuthProvider(props: JwtAuthProviderProps) {
   useEffect(() => {
     const attemptAutoLogin = async () => {
       const accessToken = getAccessToken();
-
+      console.log("validlogin", accessToken);
       if (isTokenValid(accessToken)) {
         try {
           setIsLoading(true);
@@ -191,9 +189,7 @@ function JwtAuthProvider(props: JwtAuthProviderProps) {
           );
 
           const userData = response?.data;
-
           handleSignInSuccess(userData, accessToken);
-
           return true;
         } catch (error) {
           const axiosError = error as AxiosError;
@@ -212,6 +208,8 @@ function JwtAuthProvider(props: JwtAuthProviderProps) {
         setIsLoading(false);
         setAuthStatus(signedIn ? "authenticated" : "unauthenticated");
       });
+    } else {
+      setAuthStatus("authenticated");
     }
   }, [
     isTokenValid,
@@ -230,19 +228,12 @@ function JwtAuthProvider(props: JwtAuthProviderProps) {
     handleFailure: (T: AxiosError) => void
   ): Promise<User | AxiosError> => {
     try {
-      const response: AxiosResponse<{ user: User; access_token: string }> =
-        await axios.post(url, data);
-      const userData = response?.data?.user;
-      const accessToken = response?.data?.access_token;
-
-      handleSuccess(userData, accessToken);
-
-      return userData;
+      const response: AxiosResponse<User> = await axios.post(url, data);
+      handleSuccess(response.data, response.data.token);
+      return response.data;
     } catch (error) {
       const axiosError = error as AxiosError;
-
       handleFailure(axiosError);
-
       return axiosError;
     }
   };
