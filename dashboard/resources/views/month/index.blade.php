@@ -127,7 +127,7 @@
                                     <td>
                                         <input type="date" class="form-control"
                                                min="${minDate}" max="${maxDateFormatted}"
-                                               data-year="${selectedYear}" data-month="${month}" data-day=5>
+                                               data-year="${selectedYear}" data-month="${month}" data-day="5">
                                     </td>
                                 </tr>`;
                                 tableBody.append(tr);
