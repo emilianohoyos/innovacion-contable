@@ -5,7 +5,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.all.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.min.css') }}">
 @endsection
 @section('content')
     @vite('resources/js/folders/folder.js')

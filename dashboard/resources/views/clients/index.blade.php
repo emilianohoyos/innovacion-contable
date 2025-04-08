@@ -109,7 +109,11 @@
             const clientId = document.getElementById('client_id').value
             const comment = document.getElementById('comment').value
             if (!comment.trim()) {
-                alert('El comentario No puede estar vacio')
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Atención',
+                    text: 'El comentario no puede estar vacío',
+                });
                 return
             }
             try {
@@ -130,7 +134,12 @@
                 }
 
                 const result = await response.json()
-                alert('Comentario guardado exitosamente');
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: 'Comentario guardado exitosamente.',
+                    confirmButtonText: 'Aceptar'
+                });
 
                 // Limpiar el campo de comentario
                 document.getElementById('comment').value = '';
@@ -139,7 +148,11 @@
                 await loadComments(clientId);
             } catch (error) {
                 console.error('Error:', error);
-                alert('Hubo un problema al guardar el comentario');
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Error!',
+                    text: 'Hubo un problema al guardar el comentario',
+                });
             }
 
         }
@@ -174,7 +187,11 @@
                 });
             } catch (error) {
                 console.error('Error:', error);
-                alert('Hubo un problema al cargar los comentarios');
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Error!',
+                    text: 'Hubo un problema al cargar los comentarios',
+                });
             }
         }
 
@@ -182,7 +199,12 @@
         $('#addFolderModal').on('shown.bs.modal', function() {
             const clientId = $('#client_id').val();
             if (!clientId) {
-                alert('El Id del cliente no esta definido.');
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Atención',
+                    text: 'El ID del cliente no está definido.',
+                    confirmButtonText: 'Aceptar'
+                });
                 return;
             }
             $.ajax({
@@ -210,7 +232,11 @@
                     },
                     error: function(xhr, status, error) {
                         console.error('Error al cargar los documentos:', error);
-                        alert('No se pudieron cargar los documentos registrados.');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'No se pudieron cargar los documentos registrados.',
+                        });
                     }
                 }),
                 $('#folders').select2({
@@ -252,11 +278,20 @@
             const folderText = $('#folders option:selected').text()
 
             if (!folder) {
-                alert('Por favor seleccione una carpeta.');
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Atención',
+                    text: 'Por favor seleccione una carpeta.',
+                });
                 return;
             }
             if (items.some(item => item.folder_id == folder)) {
-                alert('El folder ya está agregado en la tabla.');
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Información',
+                    text: 'El folder ya está agregado en la tabla.',
+                    confirmButtonText: 'Aceptar'
+                });
                 return;
             }
             items.push({
@@ -294,18 +329,33 @@
                     },
                     success: function(response) {
                         if (response.status) {
-                            alert('Carpeta eliminada correctamente.');
+                            Swal.fire({
+                                icon: 'success',
+                                title: '¡Éxito!',
+                                text: 'Carpeta eliminada correctamente.',
+                                confirmButtonText: 'Aceptar'
+                            });
 
                             // Eliminar del array y la vista después de confirmar la eliminación en la base de datos
                             $(`#itemsTable tbody tr:has(button[onclick='eliminarItem(${folderId},${dbId})'])`)
                                 .remove();
                         } else {
-                            alert('No se pudo eliminar la carpeta: ' + response.message);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'No se pudo eliminar la carpeta: ' + response.message,
+                                confirmButtonText: 'Aceptar'
+                            });
                         }
                     },
                     error: function(xhr, status, error) {
                         console.error('Error al eliminar la carpeta:', error);
-                        alert('Ocurrió un error al intentar eliminar la carpeta.');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Ocurrió un error al intentar eliminar la carpeta.',
+                            confirmButtonText: 'Aceptar'
+                        });
                     }
                 });
             } else {
@@ -318,7 +368,12 @@
             const clientId = $('#client_id').val();
 
             if (!clientId || items.length === 0) {
-                alert('Por favor complete los datos antes de actualizar.');
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campos incompletos',
+                    text: 'Por favor complete los datos antes de actualizar.',
+                    confirmButtonText: 'Aceptar'
+                });
                 return;
             }
 
@@ -335,11 +390,21 @@
                 },
                 success: function(response) {
                     if (response.status) {
-                        alert('Datos guardados correctamente.');
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Éxito!',
+                            text: 'Datos guardados correctamente.',
+                            confirmButtonText: 'Aceptar'
+                        });
                         $('#addFolderModal').modal('hide');
                         location.reload(); // Recargar la página o actualizar la tabla principal
                     } else {
-                        alert('Hubo un problema al guardar los datos: ' + response.message);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Hubo un problema al guardar los datos: ' + response.message,
+                            confirmButtonText: 'Aceptar'
+                        });
                     }
                 }
             });
@@ -918,7 +983,12 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('No se pudo cargar la información del cliente.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'No se pudo cargar la información del cliente.',
+                        confirmButtonText: 'Aceptar'
+                    });
                 });
 
             var myModal = new bootstrap.Modal(document.getElementById('seeClientModal'));

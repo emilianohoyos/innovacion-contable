@@ -37,9 +37,7 @@ return new class extends Migration
         Schema::table('clients', function (Blueprint $table) {
             $table->dropForeign(['document_type_id']);
         });
-        Schema::table('clients', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-        });
+
 
         Schema::dropIfExists('clients');
     }

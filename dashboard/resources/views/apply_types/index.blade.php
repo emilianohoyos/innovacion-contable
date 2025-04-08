@@ -8,7 +8,7 @@
 @section('content')
     <x-page-title title="Tipo Solicitud" pagetitle="Tipo Solicitud"> <a href="{{ route('applytype.create') }}"
             class="btn btn-primary" type="button">
-            Crear
+            Nuevo
         </a></x-page-title>
     <div class="card">
         <div class="card-body">
@@ -21,7 +21,7 @@
                                 <th>Tipo Solicitud</th>
                                 <th>Dias Estimados </th>
                                 <th>Prioridad</th>
-                                <th>Destiny</th>
+                                <th>Destino</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>

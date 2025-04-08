@@ -15,14 +15,14 @@
                                 <label for="comment" class="form-label">Agregar Comentario</label>
                                 <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
                             </div>
-                            <div class="d-flex justify-content-end">
+                            <div class="d-flex justify-content-end mt-3">
                                 <button type="button" class="btn btn-primary mt-1" onclick="saveComment()">Agregar
                                     Comentario</button>
                             </div>
                         </form>
                     </div>
                     <div class="col-md-12">
-                        <div class="container mt-4">
+                        <div class=" mt-4">
                             <table class="table table-bordered">
                                 <thead class="table-light">
                                     <tr>
