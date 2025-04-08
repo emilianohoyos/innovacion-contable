@@ -16,6 +16,7 @@ export default defineConfig({
             'resources/js/apply_document_type/apply_document_type.js',
             'resources/js/applytype/applytype.js',
             'resources/js/employees/employees.js',
+            'resources/js/client/edit.js',
             'resources/js/folders/folder.js', // Update the entry module here
             'resources/js/deparmentsandcities.json',
         ]),
