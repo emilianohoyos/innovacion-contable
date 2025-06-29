@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\MonthConfig;
-use App\Models\MonthlyAccounting;
+
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -40,7 +40,7 @@ class MonthConfigController extends Controller
             );
         }
         if ($monthConfig->wasRecentlyCreated) {
-            $this->createMonthly($monthConfig->year);
+            // $this->createMonthly($monthConfig->year);
         }
 
         return response()->json([
@@ -49,36 +49,36 @@ class MonthConfigController extends Controller
         ], 201);
     }
 
-    public function createMonthly($year)
-    {
-        $clients = Client::select('id')->get();
-        $months = MonthConfig::where('year', $year)->get();
-        $data = [];
-        foreach ($clients as $client) {
-            $years = MonthlyAccounting::select('year')
-                ->where('client_id', $client->id)
-                ->distinct()
-                ->pluck('year');
-            if ($years->isEmpty() || !$years->contains($year)) {
+    // public function createMonthly($year)
+    // {
+    //     $clients = Client::select('id')->get();
+    //     $months = MonthConfig::where('year', $year)->get();
+    //     $data = [];
+    //     foreach ($clients as $client) {
+    //         $years = MonthlyAccounting::select('year')
+    //             ->where('client_id', $client->id)
+    //             ->distinct()
+    //             ->pluck('year');
+    //         if ($years->isEmpty() || !$years->contains($year)) {
 
-                foreach ($months as $item) {
-                    $data[] = [
-                        'year' => $item->year,
-                        'month' => $item->month,
-                        'client_id' => $client->id,
-                        'employee_id' => null, // Ajusta este campo según tu lógica
-                        'start_date' => Carbon::create($year, $item->month, 1)->startOfMonth(),
-                        'end_date' => $item->end_date,
-                        'state' => 'PENDIENTE ASOCIAR EMPLEADO', // Ajusta este valor según tu lógica
-                        'created_at' => Carbon::now(),
-                        'updated_at' => Carbon::now(),
-                    ];
-                }
-            }
-        }
-        MonthlyAccounting::insert($data);
-        return true;
-    }
+    //             foreach ($months as $item) {
+    //                 $data[] = [
+    //                     'year' => $item->year,
+    //                     'month' => $item->month,
+    //                     'client_id' => $client->id,
+    //                     'employee_id' => null, // Ajusta este campo según tu lógica
+    //                     'start_date' => Carbon::create($year, $item->month, 1)->startOfMonth(),
+    //                     'end_date' => $item->end_date,
+    //                     'state' => 'PENDIENTE ASOCIAR EMPLEADO', // Ajusta este valor según tu lógica
+    //                     'created_at' => Carbon::now(),
+    //                     'updated_at' => Carbon::now(),
+    //                 ];
+    //             }
+    //         }
+    //     }
+    //     MonthlyAccounting::insert($data);
+    //     return true;
+    // }
 
     public function show(string $id)
     {

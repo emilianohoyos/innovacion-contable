@@ -963,13 +963,14 @@
                     });
 
                     // Actualiza la tabla de comentarios
-                    if (Array.isArray(clientData.comments) && clientData.comments.length > 0) {
+                    if (Array.isArray(clientData.comments_client) && clientData.comments_client.length > 0) {
                         clientData.comments_client.forEach(comment => {
                             const row = `
                             <tr>
                                 <td>${comment.description}</td>
-                                <td>${new Date(comment.date).toLocaleString()}</td>
-                                <td>${comment.author}</td>
+                                <td>${new Date(comment.created_at).toLocaleString('es-CO', { 
+    timeZone: 'America/Bogota' })}</td>
+                                <td>${comment.created_by.name}</td>
                             </tr>`;
                             commentsTableBody.insertAdjacentHTML('beforeend', row);
                         });

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('monthly_accounting_folder_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('user_type');
-            $table->string('comment');
+            $table->string('comment', 1000);
             $table->timestamps();
         });
     }

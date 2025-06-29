@@ -30,4 +30,10 @@ class Folder extends Model
     {
         return $this->hasMany(MonthlyAccountingFolder::class, 'folder_id');
     }
+
+    public function clients()
+    {
+        return $this->belongsToMany(Client::class, 'client_folders')
+            ->withTimestamps(); // si tu tabla pivote tiene timestamps
+    }
 }

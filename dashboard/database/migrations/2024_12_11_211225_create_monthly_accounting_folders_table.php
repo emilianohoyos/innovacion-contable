@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('monthly_accounting_folders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('monthly_accounting_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('folder_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('client_folder_id')->constrained()->cascadeOnDelete();
+            $table->integer('month_year');
             $table->boolean('is_new')->default(true);
             $table->string('status');
             $table->timestamps();
@@ -27,8 +27,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('monthly_accounting_folders', function (Blueprint $table) {
-            $table->dropForeign(['monthly_accounting_id']);
-            $table->dropForeign(['folder_id']);
+            $table->dropForeign(['client_folder_id']);
         });
         Schema::dropIfExists('monthly_accounting_folders');
     }

@@ -22,4 +22,8 @@ class ClientsComment extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    // protected $casts = [
+    //     'date' => 'datetime', // Conversión automática a Carbon
+    // ];
 }

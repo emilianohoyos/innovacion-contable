@@ -9,9 +9,8 @@ class MonthlyAccountingFolder extends Model
 
     protected $fillable = ['monthly_accounting_id', 'folder_id', 'is_new', 'status'];
 
-
-    public function monthlyAccounting()
+    public function monthlyAccountingFolderApplyDocTypeFolders()
     {
-        return $this->belongsTo(MonthlyAccounting::class, 'monthly_accounting_id');
+        return $this->hasMany(MonthlyAccountingFolderApplyDocTypeFolder::class, 'monthly_accounting_folder_id');
     }
 }

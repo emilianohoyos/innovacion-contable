@@ -19,4 +19,9 @@ class MonthlyAccountingFolderApplyDocTypeFolder extends Model
     {
         return $this->belongsTo(MonthlyAccountingFolder::class, 'monthly_accounting_folder_id');
     }
+
+    public function applyDocTypeFolders()
+    {
+        return $this->belongsTo(ApplyDocTypeFolder::class, 'apply_doc_type_folder_id');
+    }
 }

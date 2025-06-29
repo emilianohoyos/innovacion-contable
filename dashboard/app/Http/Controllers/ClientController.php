@@ -209,7 +209,7 @@ class ClientController extends Controller
             }
 
             $year = Carbon::now()->year;
-            $this->monthConfigController->createMonthly($year);
+            // $this->monthConfigController->createMonthly($year);
 
             return $client;
         });
@@ -519,36 +519,32 @@ class ClientController extends Controller
     public function getMonthFolders($clientId)
     {
 
-        $current_date = Carbon::now();
-        $current_year = $current_date->year;
-        $current_month = $current_date->month;
+        // $current_date = Carbon::now();
+        // $current_year = $current_date->year;
+        // $current_month = $current_date->month;
 
-        if ($current_month == 1) {
-            $current_month = 12;
-            $current_year -= 1;
-        }
+        // if ($current_month == 1) {
+        //     $current_month = 12;
+        //     $current_year -= 1;
+        // }
 
         $folders = ClientFolder::select(
             'folders.id',
             'folders.name',
-            'monthly_accountings.id as monthly_accounting_id',
-            'monthly_accountings.year',
-            'monthly_accountings.month',
-            'monthly_accountings.state',
-            'monthly_accountings.end_date',
+            // 'monthly_accountings.id as monthly_accounting_id',
+            // 'monthly_accountings.year',
+            // 'monthly_accountings.month',
+            // 'monthly_accountings.state',
+            // 'monthly_accountings.end_date',
             'monthly_accounting_folders.id as monthly_accounting_folder_id',
+            'monthly_accounting_folders.month_year as year',
+            'monthly_accounting_folders.month_year as month',
             'monthly_accounting_folders.status',
             'monthly_accounting_folders.is_new'
         )
             ->join('folders', 'client_folders.folder_id', '=', 'folders.id')
-            ->join('monthly_accountings', function ($join) use ($current_year, $current_month) {
-                $join->on('monthly_accountings.client_id', '=', 'client_folders.client_id')
-                    ->where('monthly_accountings.year', $current_year)
-                    ->where('monthly_accountings.month', $current_month);
-            })
             ->leftJoin('monthly_accounting_folders', function ($join) {
-                $join->on('monthly_accounting_folders.folder_id', '=', 'folders.id')
-                    ->on('monthly_accounting_folders.monthly_accounting_id', '=', 'monthly_accountings.id');
+                $join->on('monthly_accounting_folders.folder_id', '=', 'folders.id');
             })
             ->where('client_folders.client_id', $clientId)
             ->get();
@@ -570,16 +566,10 @@ class ClientController extends Controller
             $result['documents'] = $documents;
 
             foreach ($documents as $key => $document) {
-                $attachDoc = MonthlyAccountingFolderApplyDocTypeFolder::leftJoin(
-                    'users',
-                    'monthly_accounting_folder_apply_doc_type_folders.user_id',
-                    '=',
-                    'users.id'
+                $attachDoc = MonthlyAccountingFolderApplyDocTypeFolder::where(
+                    'monthly_accounting_folder_id',
+                    $folder->monthly_accounting_folder_id
                 )
-                    ->where(
-                        'monthly_accounting_folder_id',
-                        $folder->monthly_accounting_folder_id
-                    )
                     ->where('apply_doc_type_folder_id', $document->apply_doc_type_folders_id)->get();
                 $result['documents'][$key]['attachments'] = $attachDoc;
             }
@@ -651,7 +641,7 @@ class ClientController extends Controller
     }
     public function seeClientData(String $id)
     {
-        $client = Client::with(['contactInfo', 'contactInfo.documentType', 'commentsClient', 'documentType', 'personType', 'employees.employee', 'clientResponsible'])->find($id);
+        $client = Client::with(['contactInfo', 'contactInfo.documentType', 'commentsClient.createdBy', 'documentType', 'personType', 'employees.employee', 'clientResponsible'])->find($id);
         return response()->json($client);
     }
 }

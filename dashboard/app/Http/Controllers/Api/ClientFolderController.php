@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\ApplyDocTypeFolder;
+use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\ClientContactInfo;
 use App\Models\ClientFolder;
@@ -60,7 +61,9 @@ class ClientFolderController extends Controller
                         ];
                     })
                 ];
-            });
+            })
+            ->toArray();
+        $folders = array_values($folders); // Asegura que sea un array indexado
 
         // $results = [];
 

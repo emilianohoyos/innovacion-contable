@@ -160,7 +160,7 @@ fetch(`/client/all/${client_id}`)
         return response.json();
     })
     .then(clientData => {
-        console.log(clientData)
+
         person_type_id.val(clientData.person_type_id).trigger('change')
         document_type_id.val(clientData.document_type_id).trigger('change')
         nit.val(clientData.nit)
@@ -359,16 +359,28 @@ fetch(`/client/all/${client_id}`)
                 identification.val(contact.identification);
                 firstname.val(contact.firstname);
                 lastname.val(contact.lastname);
-                jobTitle.val(contact.jobTitle);
+                console.log(contact.job_title);
+                jobTitle.val(contact.job_title);
                 email.val(contact.email);
                 cellphone.val(contact.cellphone);
                 birthday.val(contact.birthday);
                 observationContact.val(contact.observation);
                 // Cargar checkboxes de "channel_communication"
-                let selectedChannels = contact.channel_communication.text().split(', ');
-                $('input[name="channel_communication[]"]').each(function () {
-                    $(this).prop('checked', selectedChannels.includes($(this).val()));
+                // let selectedChannels = contact.channel_communication.text().split(', ');
+                // if (selectedChannels) {
+                //     $('input[name="channel_communication[]"]').each(function () {
+                //         $(this).prop('checked', selectedChannels.includes($(this).val()));
+                //     });
+                // }
+                const selectedChannels = (contact.channel_communication || '')
+                    .split(',')
+                    .map(item => item.trim())
+                    .filter(Boolean);
+
+                $('input[name="channel_communication[]"]').prop('checked', function () {
+                    return selectedChannels.includes($(this).val().toString().trim());
                 });
+
             });
 
         }

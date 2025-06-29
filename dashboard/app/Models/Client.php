@@ -47,4 +47,10 @@ class Client extends Model
     {
         return $this->hasOne(ClientResponsible::class);
     }
+
+    public function folders()
+    {
+        return $this->belongsToMany(Folder::class, 'client_folders')
+            ->withTimestamps(); // si tu tabla pivote tiene timestamps
+    }
 }
