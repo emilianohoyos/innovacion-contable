@@ -75,21 +75,22 @@ class MonthlyAccountingFolderApplyDocTypeFolderController extends Controller
         $validatedData = $validator->validated();
 
         try {
+            if (!isset($validatedData['monthly_accounting_folder_id'])) {
+                // Si no se proporciona monthly_accounting_folder_id, buscar o crear la carpeta mensual
+                $monthlyAccountingFolder = MonthlyAccountingFolder::firstOrCreate(
+                    [
+                        'client_folder_id' => $validatedData['client_folder_id'],
+                        'month_year' => $validatedData['month_year']
+                    ],
+                    [
+                        'is_new' => true,
+                        'status' => "PENDIENTE"
+                    ]
+                );
+                $validatedData['monthly_accounting_folder_id'] = $monthlyAccountingFolder->id;
+            }
             foreach ($validatedData['attachments'] as $attachment) {
-                if (!isset($validatedData['monthly_accounting_folder_id'])) {
-                    // Si no se proporciona monthly_accounting_folder_id, buscar o crear la carpeta mensual
-                    $monthlyAccountingFolder = MonthlyAccountingFolder::firstOrCreate(
-                        [
-                            'client_folder_id' => $validatedData['client_folder_id'],
-                            'month_year' => $validatedData['month_year']
-                        ],
-                        [
-                            'is_new' => true,
-                            'status' => "PENDIENTE"
-                        ]
-                    );
-                    $validatedData['monthly_accounting_folder_id'] = $monthlyAccountingFolder->id;
-                }
+
                 // Crear registro en la base de datos
                 $montlyData = MonthlyAccountingFolderApplyDocTypeFolder::create([
                     'monthly_accounting_folder_id' => $validatedData['monthly_accounting_folder_id'],
