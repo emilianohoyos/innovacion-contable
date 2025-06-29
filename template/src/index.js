@@ -29,8 +29,8 @@ if (rootElement) {
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <BrowserRouter>
-            <AllRoutes />
             <ToastContainer />
+            <AllRoutes />
           </BrowserRouter>
         </Provider>
       </QueryClientProvider>

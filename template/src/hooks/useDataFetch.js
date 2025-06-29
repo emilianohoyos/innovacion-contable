@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 
 // URL base de la API
-export const BASE_PATH_HTTP = "http://localhost:8000/api";
+export const BASE_PATH_HTTP = "https://panel.innovacioncontable.com/api";
 
 export const useDataFetch = () => {
   const apiService = new ApiService();
