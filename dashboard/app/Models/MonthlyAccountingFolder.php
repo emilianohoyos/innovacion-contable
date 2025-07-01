@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class MonthlyAccountingFolder extends Model
 {
 
-    protected $fillable = ['monthly_accounting_id', 'client_folder_id', 'month_year', 'is_new', 'status'];
+    protected $fillable = ['monthly_accounting_id', 'client_folder_id', 'month_year', 'year', 'is_new', 'status'];
 
     public function monthlyAccountingFolderApplyDocTypeFolders()
     {

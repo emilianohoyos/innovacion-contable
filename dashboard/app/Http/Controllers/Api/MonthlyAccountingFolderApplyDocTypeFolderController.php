@@ -77,12 +77,11 @@ class MonthlyAccountingFolderApplyDocTypeFolderController extends Controller
         try {
             if (!isset($validatedData['monthly_accounting_folder_id'])) {
                 // Si no se proporciona monthly_accounting_folder_id, buscar o crear la carpeta mensual
-                $monthlyAccountingFolder = MonthlyAccountingFolder::firstOrCreate(
+                $monthlyAccountingFolder = MonthlyAccountingFolder::create(
                     [
                         'client_folder_id' => $validatedData['client_folder_id'],
-                        'month_year' => $validatedData['month_year']
-                    ],
-                    [
+                        'month_year' => $validatedData['month_year'],
+                        'year' => date('Y'),
                         'is_new' => true,
                         'status' => "PENDIENTE"
                     ]
