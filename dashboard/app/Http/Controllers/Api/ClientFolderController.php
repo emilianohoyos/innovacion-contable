@@ -56,7 +56,7 @@ class ClientFolderController extends Controller
                 // Buscar la configuración mensual para esta carpeta
                 $monthlyConfig = \App\Models\MonthlyAccountingFolder::with(['monthlyAccountingFolderApplyDocTypeFolders.applyDocTypeFolders.applyDocumentType'])
                     ->where('client_folder_id', $folder->pivot->id) // Usar el ID de la relación pivot
-                    ->where('month', $month)
+                    ->where('month_year', $month)
                     ->where('year', $year)
                     ->first();
                 
