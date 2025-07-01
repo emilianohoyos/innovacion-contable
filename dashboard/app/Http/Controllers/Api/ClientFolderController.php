@@ -44,11 +44,22 @@ class ClientFolderController extends Controller
         //     ->where('client_folders.client_id', $client_id)
         //     ->get();
 
+        // Obtener el mes y año de la solicitud o usar el mes actual si no se proporciona
+        $month = $request->input('month', date('m'));
+        $year = $request->input('year', date('Y'));
+        
         $folders = Client::with(['folders.applyDocTypeFolders.applyDocumentType'])
             ->findOrFail($client_id)
             ->folders
             ->unique('id') // Elimina folders duplicados
-            ->map(function ($folder) {
+            ->map(function ($folder) use ($client_id, $monthYear) {
+                // Buscar la configuración mensual para esta carpeta
+                $monthlyConfig = \App\Models\MonthlyAccountingFolder::with(['monthlyAccountingFolderApplyDocTypeFolders.applyDocTypeFolders.applyDocumentType'])
+                    ->where('client_folder_id', $folder->pivot->id) // Usar el ID de la relación pivot
+                    ->where('month', $month)
+                    ->where('year', $year)
+                    ->first();
+                
                 return [
                     'id' => $folder->id,
                     'name' => $folder->name,
@@ -59,51 +70,30 @@ class ClientFolderController extends Controller
                             'name' => $docType->applyDocumentType->name,
                             'is_required' => $docType->is_required
                         ];
-                    })
+                    }),
+                    'monthly_config' => $monthlyConfig ? [
+                        'id' => $monthlyConfig->id,
+                        'month_year' => $monthlyConfig->month_year,
+                        'status' => $monthlyConfig->status,
+                        'document_types' => $monthlyConfig->monthlyAccountingFolderApplyDocTypeFolders->map(function ($monthlyDocType) {
+                            return [
+                                'id' => $monthlyDocType->id,
+                                'document_type_id' => $monthlyDocType->applyDocTypeFolders->applyDocumentType->id,
+                                'document_type_name' => $monthlyDocType->applyDocTypeFolders->applyDocumentType->name,
+                                'is_required' => $monthlyDocType->applyDocTypeFolders->is_required,
+                                'status' => $monthlyDocType->status
+                            ];
+                        })
+                    ] : null
                 ];
             })
             ->toArray();
         $folders = array_values($folders); // Asegura que sea un array indexado
 
-        // $results = [];
-
-
-        // foreach ($folders as $folder) {
-        //     $result = $folder;
-
-        //     $documents = ApplyDocTypeFolder::select('apply_doc_type_folders.id as apply_doc_type_folders_id', 'apply_document_types.*')
-        //         ->join(
-        //             'apply_document_types',
-        //             'apply_doc_type_folders.apply_document_type_id',
-        //             '=',
-        //             'apply_document_types.id'
-        //         )
-        //         ->where('folder_id', $folder->id)
-        //         ->get();
-
-        //     $result['documents'] = $documents;
-
-        //     foreach ($documents as $key => $document) {
-        //         $attachDoc = MonthlyAccountingFolderApplyDocTypeFolder::leftJoin(
-        //             'users',
-        //             'monthly_accounting_folder_apply_doc_type_folders.user_id',
-        //             '=',
-        //             'users.id'
-        //         )
-        //             ->where(
-        //                 'monthly_accounting_folder_id',
-        //                 $folder->monthly_accounting_folder_id
-        //             )
-        //             ->where('apply_doc_type_folder_id', $document->apply_doc_type_folders_id)->get();
-        //         $result['documents'][$key]['attachments'] = $attachDoc;
-        //     }
-        //     $results[] = $result;
-        // }
 
         if ($client_id) {
             return response()->json([
-                'message' => 'Usuario autenticado',
-                'client' => $client_id,
+                'status' => true,
                 'folders' => $folders
             ]);
         }

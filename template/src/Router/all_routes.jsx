@@ -191,4 +191,6 @@ export const all_routes = {
   warehouses: "/warehouse",
   coupons:"/coupons",
   createApplication: "/create-application",
+  month: "/month",
+  annual: "/annual",
 };

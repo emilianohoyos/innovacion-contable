@@ -449,7 +449,8 @@ class ClientController extends Controller
             onclick="addComment(' . $client->client_id . ', \'' . addslashes($client->company_name) . '\')">
             <i class="material-icons-outlined">comment</i>
         </button>';
-                $btn .= '<a href="/client/'.$client->client_id.'/edit" class="btn btn-success btn-sm raised d-inline-flex align-items-center justify-content-center">
+                $btn .= '<a href="' . route("client.edit", ["client" => $client->client_id]) . '"
+        class="btn btn-success btn-sm raised d-inline-flex align-items-center justify-content-center">
         <i class="material-icons-outlined">edit</i>
     </a>';
 
