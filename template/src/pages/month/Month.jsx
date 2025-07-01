@@ -46,7 +46,7 @@ const Month = () => {
                       <Link
                         to="#"
                         className={selectedMonth === month.id ? 'active' : ''}
-                        style={!month.enabled ? {opacity: 0.5, cursor: 'not-allowed', pointerEvents: 'none'} : {}}
+                        style={!month.enabled ? { opacity: 0.5, cursor: 'not-allowed', pointerEvents: 'none' } : {}}
                         onClick={(e) => {
                           if (month.enabled) {
                             e.preventDefault();
@@ -93,24 +93,23 @@ const Month = () => {
                   ) : (
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5">
                       {filteredFolders.map((folder) => (
-                        <div key={folder.key} className="col mb-4">
-                          <div className="card folder-card" style={styles.folderCard} onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-5px)'} onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0px)'}>
-                            <div className="card-body">
-                              <div className="d-flex align-items-center">
-                                <div style={styles.folderIcon}>
-                                  <Folder size={36} color="#FFC107" />
-                                </div>
-                                <div className="folder-info ms-3">
-                                  <h6 className="mb-1">
-                                    <Link to={`${all_routes.folder.path}/${folder.id}`}>
-                                      {folder.name}
-                                    </Link>
-                                  </h6>
-                                  <p className="mb-0 text-muted small">
-                                    {folder.documentTypesCount} {folder.documentTypesCount === 1 ? 'tipo de documento' : 'tipos de documentos'}
-                                  </p>
-                                </div>
-                              </div>
+                        <div key={folder.key} className="col-sm-6 col-md-3">
+                          <div className="detail">
+                            <Link
+                              to="#"
+                              className="d-flex align-items-center justify-content-center bg-light-orange bg p-4"
+                            >
+                              <span className="d-flex align-items-center justify-content-center">
+                                <Folder size={36} color="#FFC107" />
+                              </span>
+                            </Link>
+                            <div className="d-flex align-items-center justify-content-between info">
+                              <h6>
+                                <Link to={`/folder/${folder.id}`}>
+                                  {folder.name}
+                                </Link>
+                              </h6>
+                              <span>300 Files</span>
                             </div>
                           </div>
                         </div>
