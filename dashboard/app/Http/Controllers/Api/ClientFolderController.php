@@ -18,7 +18,7 @@ class ClientFolderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
 
         // Usar el guard 'api' para obtener el usuario autenticado
