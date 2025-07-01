@@ -3,88 +3,73 @@ import ImageWithBasePath from "../../core/img/imagewithbasebath";
 import { useFoldersData } from "./hooks/useFoldersData";
 import { Link } from "react-router-dom";
 import { all_routes } from "../../Router/all_routes";
-import { Folder, Calendar, ChevronRight } from "react-feather";
+import { Folder, Calendar, ChevronRight, FileText, Star, Send, File, Clock, Target, Trash2, Settings } from "react-feather";
 import { useMonths } from "./hooks/useMonths";
-import "./styles/month.css";
 
 
 const Month = () => {
   // Utilizamos los hooks personalizados para meses y carpetas
   const { months, enabledMonth, currentYear } = useMonths();
-  const { folders, isLoading, isError } = useFoldersData();
   const [selectedMonth, setSelectedMonth] = useState(enabledMonth?.id || null);
 
-  // Filtrar carpetas por el mes seleccionado (en un caso real, esto podría ser una llamada a la API)
-  // Por ahora, simplemente mostramos todas las carpetas cuando se selecciona el mes habilitado
-  const filteredFolders = selectedMonth === enabledMonth?.id ? folders : [];
+  // Pasamos el mes seleccionado al hook para que haga la petición con el mes correcto
+  const { folders, isLoading, isError } = useFoldersData(selectedMonth);
+
+  // Ya no necesitamos filtrar las carpetas aquí, ya que la API nos devuelve las carpetas del mes seleccionado
+  const filteredFolders = folders;
 
   return (
     <div>
-      <div className="page-wrapper">
+      <div className="page-wrapper notes-page-wrapper file-manager">
         <div className="content container-fluid">
           <div className="page-header">
             <div className="row align-items-center">
               <div className="col">
                 <h3 className="page-title">Contabilidad Mensual</h3>
-                <ul className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <Link to="/dashboard">Dashboard</Link>
-                  </li>
-                  <li className="breadcrumb-item active">Contabilidad Mensual</li>
-                </ul>
               </div>
             </div>
           </div>
 
           <div className="row">
-            {/* Sidebar de meses */}
-            <div className="col-xl-3 col-md-4">
-              <div className="card">
-                <div className="card-body">
-                  <div className="file-sidebar">
-                    <div className="file-header">
-                      <div className="file-header-text">
-                        <h5>Meses</h5>
-                      </div>
-                    </div>
-                    <div className="file-pro-list">
-                      <div className="file-scroll">
-                        <ul className="file-menu">
-                          <li className="mb-2">
-                            <h6 className="mb-0">{currentYear}</h6>
-                          </li>
-                          {months.map((month) => (
-                            <li key={month.id} className={`file-submenu ${selectedMonth === month.id ? 'active' : ''}`}>
-                              <Link 
-                                to="#" 
-                                className={`file-list ${!month.enabled ? 'disabled-month' : ''}`}
-                                onClick={(e) => {
-                                  if (month.enabled) {
-                                    e.preventDefault();
-                                    setSelectedMonth(month.id);
-                                  } else {
-                                    e.preventDefault();
-                                  }
-                                }}
-                              >
-                                <div className="file-info">
-                                  <span className="file-icon">
-                                    <Calendar size={18} />
-                                  </span>
-                                  <span className="file-name">{month.name}</span>
-                                </div>
-                                {month.enabled && <ChevronRight size={16} />}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="col-lg-3 col-md-12 sidebars-right theiaStickySidebar section-bulk-widget">
+              <aside className="card file-manager-sidebar mb-0">
+                <h5 className="d-flex align-items-center">
+                  <span className="me-2 d-flex align-items-center">
+                    <Calendar className="feather-20" />
+                  </span>
+                  Meses {currentYear}
+                </h5>
+
+                <ul>
+                  {months.map((month) => (
+                    <li key={month.id} className={!month.enabled ? 'disabled-item' : ''}>
+                      <Link
+                        to="#"
+                        className={selectedMonth === month.id ? 'active' : ''}
+                        style={!month.enabled ? {opacity: 0.5, cursor: 'not-allowed', pointerEvents: 'none'} : {}}
+                        onClick={(e) => {
+                          if (month.enabled) {
+                            e.preventDefault();
+                            setSelectedMonth(month.id);
+                          } else {
+                            e.preventDefault();
+                          }
+                        }}
+                      >
+                        <span className="me-2 btn-icon">
+                          <Calendar className="feather-16" />
+                        </span>
+                        {month.name}
+                        {month.enabled && <ChevronRight className="ms-auto" size={16} />}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
+
+
             </div>
-            
+
             {/* Contenido principal - Carpetas */}
             <div className="col-xl-9 col-md-8">
               <div className="card">
@@ -109,10 +94,10 @@ const Month = () => {
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5">
                       {filteredFolders.map((folder) => (
                         <div key={folder.key} className="col mb-4">
-                          <div className="card folder-card">
+                          <div className="card folder-card" style={styles.folderCard} onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-5px)'} onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0px)'}>
                             <div className="card-body">
                               <div className="d-flex align-items-center">
-                                <div className="folder-icon">
+                                <div style={styles.folderIcon}>
                                   <Folder size={36} color="#FFC107" />
                                 </div>
                                 <div className="folder-info ms-3">

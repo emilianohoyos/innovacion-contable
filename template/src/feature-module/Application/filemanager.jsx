@@ -55,9 +55,8 @@ const FileManager = () => {
   );
   return (
     <div
-      className={`page-wrapper notes-page-wrapper file-manager ${
-        isOpen && "notes-tag-left"
-      }`}
+      className={`page-wrapper notes-page-wrapper file-manager ${isOpen && "notes-tag-left"
+        }`}
     >
       <div className="content">
         <div className="page-header page-add-notes flex-sm-row flex-column">
@@ -123,9 +122,8 @@ const FileManager = () => {
         </div>
         <div className="row">
           <div
-            className={`col-lg-3 col-md-12 sidebars-right theiaStickySidebar section-bulk-widget  ${
-              isOpen && "section-notes-dashboard"
-            }`}
+            className={`col-lg-3 col-md-12 sidebars-right theiaStickySidebar section-bulk-widget  ${isOpen && "section-notes-dashboard"
+              }`}
           >
             <aside className="card file-manager-sidebar mb-0">
               <h5 className="d-flex align-items-center">
@@ -134,39 +132,7 @@ const FileManager = () => {
                 </span>
                 Files
               </h5>
-              <div className="dropdown">
-                <Link
-                  to="#"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  className="dropset btn btn-primary mb-3 btn-icon"
-                >
-                  <span className="me-1 btn-icon">
-                    <PlusCircle className="feather-16" />
-                  </span>
-                  New
-                </Link>
-                <ul className="dropdown-menu">
-                  <li data-bs-toggle="modal" data-bs-target="#upload-file">
-                    <Link to="#" className="dropdown-item">
-                      <UploadCloud className="feather-16 me-2" />
-                      Upload File
-                    </Link>
-                  </li>
-                  <li data-bs-toggle="modal" data-bs-target="#upload-folder">
-                    <Link to="#" className="dropdown-item">
-                      <Folder className="feather-16 me-2" />
-                      Upload Folder
-                    </Link>
-                  </li>
-                  <li data-bs-toggle="modal" data-bs-target="#create-folder">
-                    <Link to="#" className="dropdown-item">
-                      <FolderMinus className="feather-16 me-2" />
-                      Create folder
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+
               <ul className="mb-5">
                 <li>
                   <Link to="file-manager" className="active">
@@ -289,9 +255,8 @@ const FileManager = () => {
           </div>
 
           <div
-            className={`col-lg-9 budget-role-notes  ${
-              isOpen && "budgeted-role-notes"
-            }`}
+            className={`col-lg-9 budget-role-notes  ${isOpen && "budgeted-role-notes"
+              }`}
           >
             {isOpen ? (
               <FileContent />

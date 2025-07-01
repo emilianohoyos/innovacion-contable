@@ -52,7 +52,7 @@ class ClientFolderController extends Controller
             ->findOrFail($client_id)
             ->folders
             ->unique('id') // Elimina folders duplicados
-            ->map(function ($folder) use ($client_id, $monthYear) {
+            ->map(function ($folder) use ($client_id, $month, $year) {
                 // Buscar la configuración mensual para esta carpeta
                 $monthlyConfig = \App\Models\MonthlyAccountingFolder::with(['monthlyAccountingFolderApplyDocTypeFolders.applyDocTypeFolders.applyDocumentType'])
                     ->where('client_folder_id', $folder->pivot->id) // Usar el ID de la relación pivot

@@ -1,11 +1,21 @@
 import { useEffect } from 'react';
 import { useDataFetch } from '../../../hooks/useDataFetch';
+import { useMonths } from './useMonths';
 
-export const useFoldersData = () => {
+export const useFoldersData = (selectedMonthId = null) => {
   const { getData, invalidateQuery } = useDataFetch();
+  const { months, enabledMonth } = useMonths();
   
-  // Definimos la clave para React Query
-  const queryKey = ['client-folders'];
+  // Si se proporciona un ID de mes, usamos ese, de lo contrario usamos el mes habilitado (mes anterior)
+  const monthToUse = selectedMonthId !== null ? months.find(m => m.id === selectedMonthId) : enabledMonth;
+  
+  // Obtener el mes y año actual
+  const currentDate = new Date();
+  const month = monthToUse ? String(monthToUse.id + 1).padStart(2, '0') : String(currentDate.getMonth() + 1).padStart(2, '0');
+  const year = currentDate.getFullYear();
+  
+  // Definimos la clave para React Query incluyendo mes y año para que se actualice cuando cambien
+  const queryKey = ['client-folders', month, year];
   
   // Utilizamos el hook getData para obtener las carpetas del cliente
   const { 
@@ -14,7 +24,7 @@ export const useFoldersData = () => {
     isError, 
     error, 
     refetch 
-  } = getData(queryKey, '/client-folder', {
+  } = getData(queryKey, `/client-folder?month=${month}&year=${year}`, {
     enabled: true, // Habilitamos la consulta automática
     refetchOnWindowFocus: false,
     onSuccess: (data) => {
