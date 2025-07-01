@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Navigate } from "react-router-dom";
 import ProductList from "../feature-module/inventory/productlist";
-import Dashboard from "../feature-module/dashboard/Dashboard";
+import Application from "../pages/request/Application";
+import CreateApplication from "../pages/request/CreateApplication";
 import AddProduct from "../feature-module/inventory/addproduct";
-import SalesDashbaord from "../feature-module/dashboard/salesdashbaord";
 import BrandList from "../feature-module/inventory/brandlist";
 import VariantAttributes from "../feature-module/inventory/variantattributes";
 import Warranty from "../feature-module/inventory/warranty";
@@ -190,7 +190,7 @@ export const privateRoutes = [
     id: 1,
     path: routes.dashboard,
     name: "home",
-    element: <Dashboard />,
+    element: <Application />,
     route: Route,
   },
   {
@@ -205,13 +205,6 @@ export const privateRoutes = [
     path: routes.addproduct,
     name: "products",
     element: <AddProduct />,
-    route: Route,
-  },
-  {
-    id: 4,
-    path: routes.salesdashboard,
-    name: "salesdashboard",
-    element: <SalesDashbaord />,
     route: Route,
   },
   {
@@ -1370,6 +1363,7 @@ export const privateRoutes = [
     element: <Coupons />,
     route: Route,
   },
+
   {
     id: 115,
     path: "/",
@@ -1382,6 +1376,13 @@ export const privateRoutes = [
     path: "*",
     name: "NotFound",
     element: <Navigate to="/" />,
+    route: Route,
+  },
+  {
+    id: 117,
+    path: routes.createApplication,
+    name: "createApplication",
+    element: <CreateApplication />,
     route: Route,
   },
 ];

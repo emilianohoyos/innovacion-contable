@@ -37,7 +37,7 @@ Route::middleware(['auth.jwt'])->group(function () {
 
 
     Route::post('create-application', [ApplicationController::class, 'create']);
-    Route::post('list-applications', [ApplicationController::class, 'listApplication']);
+    Route::get('list-applications', [ApplicationController::class, 'listApplication']);
 
     Route::get('list-apply-types', [ApplyTypeController::class, 'listApplyTypes']);
     Route::post('list-apply-types-apply-document-types', [ApplyTypesApplyDocumentTypeController::class, 'listApplyTypesApplyDocumentTypes']);

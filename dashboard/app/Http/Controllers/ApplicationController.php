@@ -250,7 +250,7 @@ class ApplicationController extends Controller
         }
         $validatedData = $validator->validated();
         //todo joins relations
-        $application = Application::where('created_by', [])->get();
+        $application = Application::where('created_by', $validatedData['user_id'])->get();
         return response()->json([
             "status" => true,
             'data' => $application

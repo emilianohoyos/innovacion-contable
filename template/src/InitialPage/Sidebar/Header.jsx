@@ -2,14 +2,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import FeatherIcon from "feather-icons-react";
+import { all_routes } from "../../Router/all_routes";
 import ImageWithBasePath from "../../core/img/imagewithbasebath";
 import { Search, XCircle } from "react-feather";
-import { all_routes } from "../../Router/all_routes";
+import { useUserInfo } from "../../hooks/useUserInfo";
+import { useAuth } from "../../feature-module/pages/login/hooks/useAuth";
 
 const Header = () => {
   const route = all_routes;
   const [toggle, SetToggle] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  
+  // Obtener información del usuario desde localStorage
+  const { userInfo } = useUserInfo();
+  
+  // Importar el hook de autenticación para el cierre de sesión
+  const { logout } = useAuth();
 
   const isElementVisible = (element) => {
     return element.offsetWidth > 0 || element.offsetHeight > 0;
@@ -65,15 +73,15 @@ const Header = () => {
     return () => {
       document.removeEventListener("mouseover", handleMouseover);
     };
-  }, []); 
-  
+  }, []);
+
   useEffect(() => {
     const handleFullscreenChange = () => {
       setIsFullscreen(
         document.fullscreenElement ||
-          document.mozFullScreenElement ||
-          document.webkitFullscreenElement ||
-          document.msFullscreenElement
+        document.mozFullScreenElement ||
+        document.webkitFullscreenElement ||
+        document.msFullscreenElement
       );
     };
 
@@ -180,8 +188,8 @@ const Header = () => {
               display: pathname.includes("tasks")
                 ? "none"
                 : pathname.includes("compose")
-                ? "none"
-                : "",
+                  ? "none"
+                  : "",
             }}
             onClick={handlesidebar}
           >
@@ -203,235 +211,7 @@ const Header = () => {
         </Link>
         {/* Header Menu */}
         <ul className="nav user-menu">
-          {/* Search */}
-          <li className="nav-item nav-searchinputs">
-            <div className="top-nav-search">
-              <Link to="#" className="responsive-search">
-                <Search />
-              </Link>
-              <form action="#" className="dropdown">
-                <div
-                  className="searchinputs dropdown-toggle"
-                  id="dropdownMenuClickable"
-                  data-bs-toggle="dropdown"
-                  data-bs-auto-close="false"
-                >
-                  <input type="text" placeholder="Search" />
-                  <div className="search-addon">
-                    <span>
-                      <XCircle className="feather-14" />
-                    </span>
-                  </div>
-                </div>
-                <div
-                  className="dropdown-menu search-dropdown"
-                  aria-labelledby="dropdownMenuClickable"
-                >
-                  <div className="search-info">
-                    <h6>
-                      <span>
-                        <i data-feather="search" className="feather-16" />
-                      </span>
-                      Recent Searches
-                    </h6>
-                    <ul className="search-tags">
-                      <li>
-                        <Link to="#">Products</Link>
-                      </li>
-                      <li>
-                        <Link to="#">Sales</Link>
-                      </li>
-                      <li>
-                        <Link to="#">Applications</Link>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="search-info">
-                    <h6>
-                      <span>
-                        <i data-feather="help-circle" className="feather-16" />
-                      </span>
-                      Help
-                    </h6>
-                    <p>
-                      How to Change Product Volume from 0 to 200 on Inventory
-                      management
-                    </p>
-                    <p>Change Product Name</p>
-                  </div>
-                  <div className="search-info">
-                    <h6>
-                      <span>
-                        <i data-feather="user" className="feather-16" />
-                      </span>
-                      Customers
-                    </h6>
-                    <ul className="customers">
-                      <li>
-                        <Link to="#">
-                          Aron Varu
-                          <ImageWithBasePath
-                            src="assets/img/profiles/avator1.jpg"
-                            alt
-                            className="img-fluid"
-                          />
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="#">
-                          Jonita
-                          <ImageWithBasePath
-                            src="assets/img/profiles/avatar-01.jpg"
-                            alt
-                            className="img-fluid"
-                          />
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="#">
-                          Aaron
-                          <ImageWithBasePath
-                            src="assets/img/profiles/avatar-10.jpg"
-                            alt
-                            className="img-fluid"
-                          />
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </li>
-          {/* /Search */}
 
-          {/* Select Store */}
-          <li className="nav-item dropdown has-arrow main-drop select-store-dropdown">
-            <Link
-              to="#"
-              className="dropdown-toggle nav-link select-store"
-              data-bs-toggle="dropdown"
-            >
-              <span className="user-info">
-                <span className="user-letter">
-                  <ImageWithBasePath
-                    src="assets/img/store/store-01.png"
-                    alt="Store Logo"
-                    className="img-fluid"
-                  />
-                </span>
-                <span className="user-detail">
-                  <span className="user-name">Select Store</span>
-                </span>
-              </span>
-            </Link>
-            <div className="dropdown-menu dropdown-menu-right">
-              <Link to="#" className="dropdown-item">
-                <ImageWithBasePath
-                  src="assets/img/store/store-01.png"
-                  alt="Store Logo"
-                  className="img-fluid"
-                />{" "}
-                Grocery Alpha
-              </Link>
-              <Link to="#" className="dropdown-item">
-                <ImageWithBasePath
-                  src="assets/img/store/store-02.png"
-                  alt="Store Logo"
-                  className="img-fluid"
-                />{" "}
-                Grocery Apex
-              </Link>
-              <Link to="#" className="dropdown-item">
-                <ImageWithBasePath
-                  src="assets/img/store/store-03.png"
-                  alt="Store Logo"
-                  className="img-fluid"
-                />{" "}
-                Grocery Bevy
-              </Link>
-              <Link to="#" className="dropdown-item">
-                <ImageWithBasePath
-                  src="assets/img/store/store-04.png"
-                  alt="Store Logo"
-                  className="img-fluid"
-                />{" "}
-                Grocery Eden
-              </Link>
-            </div>
-          </li>
-          {/* /Select Store */}
-
-          {/* Flag */}
-          <li className="nav-item dropdown has-arrow flag-nav nav-item-box">
-            <Link
-              className="nav-link dropdown-toggle"
-              data-bs-toggle="dropdown"
-              to="#"
-              role="button"
-            >
-              {/* <i data-feather="globe" /> */}
-              {/* <FeatherIcon icon="globe" /> */}
-              <ImageWithBasePath
-                src="assets/img/flags/us.png"
-                alt="img"
-                height={16}
-              />
-            </Link>
-            <div className="dropdown-menu dropdown-menu-right">
-              <Link to="#" className="dropdown-item active">
-                <ImageWithBasePath
-                  src="assets/img/flags/us.png"
-                  alt="img"
-                  height={16}
-                />
-                English
-              </Link>
-              <Link to="#" className="dropdown-item">
-                <ImageWithBasePath
-                  src="assets/img/flags/fr.png"
-                  alt="img"
-                  height={16}
-                />{" "}
-                French
-              </Link>
-              <Link to="#" className="dropdown-item">
-                <ImageWithBasePath
-                  src="assets/img/flags/es.png"
-                  alt="img"
-                  height={16}
-                />{" "}
-                Spanish
-              </Link>
-              <Link to="#" className="dropdown-item">
-                <ImageWithBasePath
-                  src="assets/img/flags/de.png"
-                  alt="img"
-                  height={16}
-                />{" "}
-                German
-              </Link>
-            </div>
-          </li>
-          {/* /Flag */}
-          <li className="nav-item nav-item-box">
-            <Link
-              to="#"
-              id="btnFullscreen"
-              onClick={() => toggleFullscreen()}
-              className={isFullscreen ? "Exit Fullscreen" : "Go Fullscreen"}
-            >
-              {/* <i data-feather="maximize" /> */}
-              <FeatherIcon icon="maximize" />
-            </Link>
-          </li>
-          <li className="nav-item nav-item-box">
-            <Link to="/email">
-              {/* <i data-feather="mail" /> */}
-              <FeatherIcon icon="mail" />
-              <span className="badge rounded-pill">1</span>
-            </Link>
-          </li>
           {/* Notifications */}
           <li className="nav-item dropdown nav-item-box">
             <Link
@@ -594,12 +374,6 @@ const Header = () => {
             </div>
           </li>
           {/* /Notifications */}
-          <li className="nav-item nav-item-box">
-            <Link to="/general-settings">
-              {/* <i data-feather="settings" /> */}
-              <FeatherIcon icon="settings" />
-            </Link>
-          </li>
           <li className="nav-item dropdown has-arrow main-drop">
             <Link
               to="#"
@@ -615,8 +389,8 @@ const Header = () => {
                   />
                 </span>
                 <span className="user-detail">
-                  <span className="user-name">John Smilga</span>
-                  <span className="user-role">Super Admin</span>
+                  <span className="user-name">{userInfo.fullname || 'Usuario'}</span>
+                  <span className="user-role">{userInfo.clientname || 'Cliente'}</span>
                 </span>
               </span>
             </Link>
@@ -631,27 +405,27 @@ const Header = () => {
                     <span className="status online" />
                   </span>
                   <div className="profilesets">
-                    <h6>John Smilga</h6>
-                    <h5>Super Admin</h5>
+                    <h6>{userInfo.fullname || 'Usuario'}</h6>
+                    <h5>{userInfo.clientname || 'Cliente'}</h5>
                   </div>
                 </div>
                 <hr className="m-0" />
                 <Link className="dropdown-item" to={route.route}>
                   <i className="me-2" data-feather="user" /> My Profile
                 </Link>
-                <Link className="dropdown-item" to={route.generalsettings}>
-                  <i className="me-2" data-feather="settings" />
-                  Settings
-                </Link>
                 <hr className="m-0" />
-                <Link className="dropdown-item logout pb-0" to="/signin">
+                <button 
+                  className="dropdown-item logout pb-0" 
+                  onClick={logout}
+                  style={{ border: 'none', background: 'none', cursor: 'pointer', textAlign: 'left' }}
+                >
                   <ImageWithBasePath
                     src="assets/img/icons/log-out.svg"
                     alt="img"
                     className="me-2"
                   />
-                  Logout
-                </Link>
+                  Cerrar sesión
+                </button>
               </div>
             </div>
           </li>
@@ -671,12 +445,13 @@ const Header = () => {
             <Link className="dropdown-item" to="profile">
               My Profile
             </Link>
-            <Link className="dropdown-item" to="generalsettings">
-              Settings
-            </Link>
-            <Link className="dropdown-item" to="signin">
-              Logout
-            </Link>
+            <button 
+              className="dropdown-item" 
+              onClick={logout}
+              style={{ border: 'none', background: 'none', cursor: 'pointer', textAlign: 'left' }}
+            >
+              Cerrar sesión
+            </button>
           </div>
         </div>
         {/* /Mobile Menu */}

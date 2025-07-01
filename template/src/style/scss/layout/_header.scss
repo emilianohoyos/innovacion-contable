@@ -54,7 +54,7 @@
             display: inline-block;
             line-height: 0;
             img{
-                width: 140px;
+                width: 200px;
             }
             @include respond-below(custom991) {
                 text-align: center;
@@ -840,8 +840,7 @@ hr{
     align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    justify-content: center;
-    -webkit-justify-content: center;
+    justify-content: end;
     -ms-flex-pack: center;
     margin: 0;
     position: relative;
