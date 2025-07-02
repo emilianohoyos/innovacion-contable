@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ImageWithBasePath from "../../core/img/imagewithbasebath";
 import { useFoldersData } from "./hooks/useFoldersData";
 import { Link } from "react-router-dom";
@@ -8,12 +8,29 @@ import { useMonths } from "./hooks/useMonths";
 
 
 const Month = () => {
+  // Obtenemos el año actual
+  const actualYear = new Date().getFullYear();
+  
+  // Creamos un array con los años desde 2025 hasta el año actual
+  const availableYears = [];
+  for (let year = 2025; year <= actualYear; year++) {
+    availableYears.push(year);
+  }
+  
+  // Estado para el año seleccionado (por defecto el año actual)
+  const [selectedYear, setSelectedYear] = useState(actualYear);
+  
   // Utilizamos los hooks personalizados para meses y carpetas
-  const { months, enabledMonth, currentYear } = useMonths();
+  const { months, enabledMonth } = useMonths(selectedYear);
   const [selectedMonth, setSelectedMonth] = useState(enabledMonth?.id || null);
+  
+  // Cuando cambia el año, resetear el mes seleccionado al mes habilitado para ese año
+  useEffect(() => {
+    setSelectedMonth(enabledMonth?.id || null);
+  }, [selectedYear, enabledMonth]);
 
   // Pasamos el mes seleccionado al hook para que haga la petición con el mes correcto
-  const { folders, isLoading, isError, previousMonth } = useFoldersData(selectedMonth);
+  const { folders, isLoading, isError, previousMonth } = useFoldersData(selectedMonth, selectedYear);
 
   // Ya no necesitamos filtrar las carpetas aquí, ya que la API nos devuelve las carpetas del mes seleccionado
   const filteredFolders = folders;
@@ -33,11 +50,23 @@ const Month = () => {
           <div className="row">
             <div className="col-lg-3 col-md-12 sidebars-right theiaStickySidebar section-bulk-widget">
               <aside className="card file-manager-sidebar mb-0">
-                <h5 className="d-flex align-items-center">
-                  <span className="me-2 d-flex align-items-center">
-                    <Calendar className="feather-20" />
-                  </span>
-                  Meses {currentYear}
+                <h5 className="d-flex align-items-center justify-content-between">
+                  <div className="d-flex align-items-center">
+                    <span className="me-2 d-flex align-items-center">
+                      <Calendar className="feather-20" />
+                    </span>
+                    <span>Meses</span>
+                  </div>
+                  <select 
+                    className="form-select form-select-sm" 
+                    style={{ width: 'auto' }}
+                    value={selectedYear}
+                    onChange={(e) => setSelectedYear(Number(e.target.value))}
+                  >
+                    {availableYears.map(year => (
+                      <option key={year} value={year}>{year}</option>
+                    ))}
+                  </select>
                 </h5>
 
                 <ul>

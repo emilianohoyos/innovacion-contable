@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
 
-export const useMonths = () => {
+export const useMonths = (selectedYear = null) => {
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth();
-  const currentYear = currentDate.getFullYear();
+  const currentYear = selectedYear || currentDate.getFullYear();
+  const isCurrentYear = currentYear === currentDate.getFullYear();
 
   // Crear un array con todos los meses
   const allMonths = useMemo(() => [
@@ -24,9 +25,12 @@ export const useMonths = () => {
   const months = useMemo(() => {
     return allMonths.map(month => ({
       ...month,
-      enabled: currentMonth > 0 ? month.id <= currentMonth : false
+      // Si es el año actual, habilitar solo los meses hasta el mes actual
+      // Si es un año anterior, habilitar todos los meses
+      // Si es un año futuro, no habilitar ningún mes
+      enabled: isCurrentYear ? month.id <= currentMonth : (currentYear < new Date().getFullYear())
     }));
-  }, [allMonths, currentMonth]);
+  }, [allMonths, currentMonth, currentYear, isCurrentYear]);
   
   const enabledMonth = useMemo(() => {
     const enabledMonths = months.filter(month => month.enabled);
