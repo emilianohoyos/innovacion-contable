@@ -62,6 +62,7 @@ export const useFoldersData = (selectedMonthId = null) => {
   return {
     folders: formattedFolders,
     allFolders: data?.folders || [], // Incluimos todas las carpetas por si se necesitan
+    previousMonth: data?.previous_month || null, // Incluimos la información del mes anterior
     isLoading,
     isError,
     error,

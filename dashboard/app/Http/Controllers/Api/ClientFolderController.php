@@ -110,8 +110,8 @@ class ClientFolderController extends Controller
         $isBeforeEndDate = false;
         $endDate = null;
         
-        if ($previousMonthConfig && $previousMonthConfig->endate) {
-            $endDate = $previousMonthConfig->endate;
+        if ($previousMonthConfig && $previousMonthConfig->end_date) {
+            $endDate = $previousMonthConfig->end_date;
             $isBeforeEndDate = $currentDate < $endDate;
         }
         

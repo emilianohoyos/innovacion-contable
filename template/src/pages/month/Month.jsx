@@ -3,7 +3,7 @@ import ImageWithBasePath from "../../core/img/imagewithbasebath";
 import { useFoldersData } from "./hooks/useFoldersData";
 import { Link } from "react-router-dom";
 import { all_routes } from "../../Router/all_routes";
-import { Folder, Calendar, ChevronRight, FileText, Star, Send, File, Clock, Target, Trash2, Settings } from "react-feather";
+import { Folder, Calendar, ChevronRight, FileText, Star, Send, File, Clock, Target, Trash2, Settings, AlertTriangle, CheckCircle } from "react-feather";
 import { useMonths } from "./hooks/useMonths";
 
 
@@ -13,7 +13,7 @@ const Month = () => {
   const [selectedMonth, setSelectedMonth] = useState(enabledMonth?.id || null);
 
   // Pasamos el mes seleccionado al hook para que haga la petición con el mes correcto
-  const { folders, isLoading, isError } = useFoldersData(selectedMonth);
+  const { folders, isLoading, isError, previousMonth } = useFoldersData(selectedMonth);
 
   // Ya no necesitamos filtrar las carpetas aquí, ya que la API nos devuelve las carpetas del mes seleccionado
   const filteredFolders = folders;
@@ -72,6 +72,26 @@ const Month = () => {
 
             {/* Contenido principal - Carpetas */}
             <div className="col-xl-9 col-md-8">
+              {/* Mostrar mensaje de estado del mes anterior */}
+              {previousMonth && (
+                <div className={`alert ${previousMonth.is_before_end_date ? 'alert-success' : 'alert-warning'} mb-3`}>
+                  <div className="d-flex align-items-center">
+                    {previousMonth.is_before_end_date ? (
+                      <CheckCircle className="me-2" size={20} />
+                    ) : (
+                      <AlertTriangle className="me-2" size={20} />
+                    )}
+                    <div>
+                      {previousMonth.is_before_end_date ? (
+                        <span>El plazo para el mes anterior está <strong>activo</strong> hasta {previousMonth.end_date}</span>
+                      ) : (
+                        <span>El plazo para el mes anterior ha <strong>vencido</strong>. La fecha límite era {previousMonth.end_date}</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <div className="card">
                 <div className="card-header">
                   <h5 className="d-flex align-items-center">
@@ -111,14 +131,14 @@ const Month = () => {
                                 <Folder size={36} color="#ffff" />
                               </span>
                             </Link>
-                            <div className="d-flex align-items-center justify-content-between info">
+                            <div className="d-flex flex-direction-column justify-content-between info">
                               <h6>
                                 <Link to={`/folder/${folder.id}`}>
                                   {folder.name}
                                 </Link>
                               </h6>
+                              <span className={previousMonth.is_before_end_date ? 'text-success' : 'text-danger'}>{previousMonth.is_before_end_date ? 'Activo' : 'Inactivo'}</span>
                             </div>
-                            <span>300 Files</span>
                           </div>
                         </div>
                       ))}
