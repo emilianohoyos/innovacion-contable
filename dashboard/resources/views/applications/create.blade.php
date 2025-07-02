@@ -23,6 +23,7 @@
                         <div class="col-md-6">
                             <label for="apply_type_id" class="form-label">Tipo Solicitud</label>
                             <select name="apply_type_id" id="apply_type_id" class="form-control">
+                                <option value="">Seleccione un tipo de solicitud</option>
                                 @foreach ($applyTypes as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
@@ -75,7 +76,7 @@
                         <div class="col-md-12 mt-3">
                             <div class="d-md-flex d-grid align-items-left gap-3">
                                 <button type="submit" class="btn btn-primary px-4">Guardar</button>
-                                <button type="button" class="btn btn-light px-4">Limpiar</button>
+                                {{-- <button type="button" class="btn btn-light px-4">Limpiar</button> --}}
                             </div>
                         </div>
 
@@ -123,7 +124,7 @@
                                 $('#priority').val(response.data.priority).trigger('change');
 
                                 const contenedor = document.getElementById("adjuntos");
-
+                                contenedor.innerHTML = "";
                                 response.data.apply_document_types.forEach(doc => {
                                     // Crear un div contenedor para cada input
                                     const div = document.createElement("div");

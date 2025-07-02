@@ -34,7 +34,7 @@ class ApplyTypesApplyDocumentTypeController extends Controller
         $validator = Validator::make($request->all(), [
             'apply_type_id' => 'required|exists:apply_types,id',
             'items' => 'required|array',
-            'items.*.document_type_id' => 'required|exists:document_types,id',
+            'items.*.document_type_id' => 'required|exists:apply_document_types,id',
             'items.*.is_required' => 'required|boolean',
         ]);
 

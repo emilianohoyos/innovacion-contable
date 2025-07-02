@@ -7,21 +7,21 @@
 @section('content')
     <x-page-title title="Solicitudes" pagetitle="Solicitudes" />
 
-    <div class="product-count d-flex align-items-center gap-3 gap-lg-4 mb-4 fw-medium flex-wrap font-text1">
+    {{-- <div class="product-count d-flex align-items-center gap-3 gap-lg-4 mb-4 fw-medium flex-wrap font-text1">
         <a href="javascript:;"><span class="me-1">Todo</span><span class="text-secondary">(100)</span></a>
         <a href="javascript:;"><span class="me-1">Solicitud incial</span><span class="text-secondary">(10)</span></a>
         <a href="javascript:;"><span class="me-1">Tarea en Ejecucion</span><span class="text-secondary">(17)</span></a>
         <a href="javascript:;"><span class="me-1">Finalizada</span><span class="text-secondary">(88754)</span></a>
-    </div>
+    </div> --}}
 
     <div class="row g-3">
-        <div class="col-auto">
+        {{-- <div class="col-auto">
             <div class="position-relative">
                 <input class="form-control px-5" type="search" placeholder="Buscar Solicitud">
                 <span
                     class="material-icons-outlined position-absolute ms-3 translate-middle-y start-0 top-50 fs-5">search</span>
             </div>
-        </div>
+        </div> --}}
         <div class="col-auto flex-grow-1 overflow-auto">
             <div class="btn-group position-static">
                 <div class="btn-group position-static">
@@ -30,10 +30,12 @@
                         Estado
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="javascript:;">Solicitud Inicial</a></li>
-                        <li><a class="dropdown-item" href="javascript:;">Tarea en Ejecución</a></li>
-                        <li><a class="dropdown-item" href="javascript:;">Finalizada</a></li>
-                    </ul>
+                        @foreach ($status as $statuItem)
+                            <li>
+                                <a class="dropdown-item" href="javascript:;">{{ $statuItem->name }}</a>
+                            </li>
+                        @endforeach
+
                 </div>
                 <div class="btn-group position-static">
                     <button type="button" class="btn btn-filter dropdown-toggle px-4" data-bs-toggle="dropdown"
@@ -51,9 +53,9 @@
                         Prioridad
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="javascript:;">Critica</a></li>
-                        <li><a class="dropdown-item" href="javascript:;">Alta</a></li>
-                        <li><a class="dropdown-item" href="javascript:;">Normal</a></li>
+                        <li><a class="dropdown-item" href="javascript:;">ALTA</a></li>
+                        <li><a class="dropdown-item" href="javascript:;">MEDIA</a></li>
+                        <li><a class="dropdown-item" href="javascript:;">BAJA</a></li>
 
                     </ul>
                 </div>
@@ -77,7 +79,9 @@
                                 <th>id</th>
                                 <th>Tipo Solicitud</th>
                                 <th>Cliente</th>
+                                <th>Fecha creación</th>
                                 <th>Fecha Estimada atención</th>
+                                <th>Dias Transcurridos</th>
                                 <th>Empleado que atiende</th>
                                 <th>Prioridad</th>
                                 <th>Estado</th>
@@ -124,10 +128,34 @@
                         data: 'company_name',
                         name: 'company_name'
                     },
-
+                    {
+                        data: 'created_at',
+                        name: 'created_at',
+                        render: function(data, type, row) {
+                            if (!data) return '';
+                            const fecha = new Date(data);
+                            return fecha.getFullYear() + '-' +
+                                String(fecha.getMonth() + 1).padStart(2, '0') + '-' +
+                                String(fecha.getDate()).padStart(2, '0');
+                        }
+                    },
                     {
                         data: 'estimated_delevery_date',
-                        name: 'estimated_delevery_date'
+                        name: 'estimated_delevery_date',
+                        render: function(data, type, row) {
+                            if (!data) return '';
+                            const fecha = new Date(data);
+                            return fecha.getFullYear() + '-' +
+                                String(fecha.getMonth() + 1).padStart(2, '0') + '-' +
+                                String(fecha.getDate()).padStart(2, '0');
+                        }
+                    },
+                    {
+                        data: 'dias_transcurridos',
+                        name: 'dias_transcurridos',
+                        render: function(data, type, row) {
+                            return parseInt(data, 10);
+                        }
                     },
                     {
                         data: 'employee',
@@ -185,11 +213,21 @@
                         document.getElementById('applyType').textContent = data.data.apply_type_name
                         document.getElementById('nit').textContent = data.data.nit
                         document.getElementById('clientName').textContent = data.data.company_name
-                        document.getElementById('estimated_delevery_date').textContent = data.data.estimated_delevery_date
+                        const fechaEntrega = new Date(data.data.estimated_delevery_date);
+                        document.getElementById('estimated_delevery_date').textContent =
+                            fechaEntrega.getFullYear() + '-' +
+                            String(fechaEntrega.getMonth() + 1).padStart(2, '0') + '-' +
+                            String(fechaEntrega.getDate()).padStart(2, '0');
                         document.getElementById('employee').textContent = data.data.employee
                         document.getElementById('priority').textContent = data.data.priority
                         document.getElementById('state_name').textContent = data.data.state_name
-                        document.getElementById('observation').textContent = data.data.observation
+                        document.getElementById('observation').textContent = data.data.observations
+                        const fecha = new Date(data.data.created_at);
+                        document.getElementById('created_at').textContent =
+                            fecha.getFullYear() + '-' +
+                            String(fecha.getMonth() + 1).padStart(2, '0') + '-' +
+                            String(fecha.getDate()).padStart(2, '0');
+
 
                         let adjuntosContainer = document.getElementById('adjuntos')
                         adjuntosContainer.innerHTML = "";
@@ -198,6 +236,12 @@
                             let div = document.createElement("div");
                             div.className = "col-md-3 mb-2";
 
+                            // Crear el span para el tipo documental
+                            let tipoDoc = document.createElement("span");
+                            tipoDoc.className = "badge bg-info mb-1";
+                            tipoDoc.textContent = attachment.apply_document_type?.name ?? 'Sin tipo';
+
+                            // Crear el botón de descarga
                             let button = document.createElement("a");
                             button.href = `/storage/${attachment.url}`; // Ruta del archivo
                             let nameFile = attachment.url.split('/').pop();
@@ -206,6 +250,8 @@
                             button.innerHTML =
                                 `<i class="material-icons-outlined">download</i> Ver ${nameFile} `;
 
+                            // Agregar el span y el botón al div
+                            div.appendChild(tipoDoc);
                             div.appendChild(button);
                             adjuntosContainer.appendChild(div);
                         })
@@ -214,10 +260,10 @@
         }
 
         function commentsModal(id) {
-            $('#commentsModal').modal('show');
 
             document.getElementById('application_id').value = id;
             loadComments(id)
+            $('#commentsModal').modal('show');
         }
 
         async function saveComment() {
@@ -270,6 +316,11 @@
 
         }
         async function loadComments(applicationId) {
+            // Referencia al cuerpo de la tabla
+            const tableBody = document.querySelector('#commentsModal table tbody');
+
+            // Limpiar las filas existentes
+            tableBody.innerHTML = '';
             try {
                 // Obtener los comentarios desde la API
                 const response = await fetch(`application/comment/${applicationId}`);
@@ -280,11 +331,7 @@
 
                 const comments = await response.json();
 
-                // Referencia al cuerpo de la tabla
-                const tableBody = document.querySelector('#commentsModal table tbody');
 
-                // Limpiar las filas existentes
-                tableBody.innerHTML = '';
 
                 // Insertar las nuevas filas
                 comments.forEach(comment => {

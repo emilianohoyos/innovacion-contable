@@ -28,6 +28,10 @@
                                         <p class="fw-bold" id="clientName">Juan Pérez</p>
                                     </div>
                                     <div class="col-md-4 mb-3">
+                                        <h6 class="text-muted">Fecha creacion:</h6>
+                                        <p class="fw-bold" id="created_at">123456789</p>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
                                         <h6 class="text-muted">Fecha estimada de atencion:</h6>
                                         <p class="fw-bold" id="estimated_delevery_date">123456789</p>
                                     </div>

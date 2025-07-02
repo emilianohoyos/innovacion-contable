@@ -10,6 +10,7 @@ use App\Models\Comment;
 use App\Models\Employee;
 use App\Models\HistoryState;
 use App\Models\State;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -138,7 +139,8 @@ class ApplicationController extends Controller
                     Attachment::create([
                         'application_id' => $apply->id,
                         'apply_document_type_id' => $id,
-                        'url' => $filePath
+                        'url' => $filePath,
+                        'attachment_type' => ''
                     ]);
                 }
             }
@@ -170,6 +172,8 @@ class ApplicationController extends Controller
                 'states.name as state_name',
                 'states.id as state_id',
                 'applications.employee_id',
+                'applications.observations',
+                'applications.created_at',
                 DB::raw("CONCAT(employees.firstname, ' ', employees.lastname) as employee")
             ])
             ->join('apply_types', 'applications.apply_type_id', '=', 'apply_types.id')
@@ -180,7 +184,7 @@ class ApplicationController extends Controller
             ->where('applications.id', $application_id) // En lugar de find()
             ->first(); //
 
-        $attachments = Attachment::where('application_id', $application_id)->get();
+        $attachments = Attachment::with('applyDocumentType')->where('application_id', $application_id)->get();
 
         return response()->json([
             "status" => true,
@@ -283,6 +287,8 @@ class ApplicationController extends Controller
             'applications.priority',
             'states.name as state_name',
             'states.id as state_id',
+            'applications.created_at',
+
             DB::raw("CONCAT(employees.firstname, ' ', employees.lastname) as employee")
         ])
             ->join('apply_types', 'applications.apply_type_id', '=', 'apply_types.id')
@@ -295,6 +301,10 @@ class ApplicationController extends Controller
                 'states.id'
             );
         return DataTables::of($application)
+            ->addColumn('dias_transcurridos', function ($application) {
+                $dias = Carbon::parse($application->estimated_delevery_date)->diffInDays($application->created_at, false);
+                return max(0, $dias);
+            })
             ->addColumn('acciones', function ($application) {
                 $btn = "  <button type='button'
                                             class='btn btn-primary raised d-inline-flex align-items-center justify-content-center'

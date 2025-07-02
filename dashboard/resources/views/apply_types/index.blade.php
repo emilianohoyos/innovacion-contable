@@ -106,7 +106,13 @@
             const applyTypeId = $('#apply_type_id').val();
 
             if (!applyTypeId) {
-                alert('El ID del tipo de aplicación no está definido.');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'El ID del tipo de aplicación no está definido.',
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'Entendido'
+                });
                 return;
             }
 
@@ -140,7 +146,19 @@
                 },
                 error: function(xhr, status, error) {
                     console.error('Error al cargar los documentos:', error);
-                    alert('No se pudieron cargar los documentos registrados.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al cargar documentos',
+                        text: 'No se pudieron cargar los documentos registrados.',
+                        confirmButtonColor: '#d33',
+                        confirmButtonText: 'Entendido',
+                        backdrop: `
+                            rgba(231, 76, 60, 0.4)
+                            url("/img/error-icon.png")
+                            center top
+                            no-repeat
+                        `
+                    });
                 }
             });
             // Inicializar Select2 con AJAX
@@ -197,11 +215,23 @@
 
             // Validar que haya seleccionado un tipo de documento
             if (!documentType) {
-                alert('Por favor seleccione un tipo de documento.');
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo requerido',
+                    text: 'Por favor seleccione un tipo de documento.',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Aceptar'
+                });
                 return;
             }
             if (items.some(item => item.document_type_id == documentType)) {
-                alert('El tipo de documento ya está agregado en la tabla.');
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Documento existente',
+                    text: 'El tipo de documento ya está agregado en la tabla.',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Entendido'
+                });
                 return;
             }
 
@@ -245,18 +275,35 @@
                     },
                     success: function(response) {
                         if (response.success) {
-                            alert('Documento eliminado correctamente.');
+                            Swal.fire(
+                                'Éxito',
+                                'Documento eliminado correctamente.',
+                                'success'
+                            );
 
                             // Eliminar del array y la vista después de confirmar la eliminación en la base de datos
                             $(`#itemsTable tbody tr:has(button[onclick='eliminarItem(${typeId},${dbId})'])`)
                                 .remove();
                         } else {
-                            alert('No se pudo eliminar el documento: ' + response.message);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error al eliminar',
+                                html: `No se pudo eliminar el documento: <strong>${response.message}</strong>`,
+                                confirmButtonColor: '#d33',
+                                confirmButtonText: 'Entendido',
+                                footer: '<a href="/ayuda" target="_blank">¿Necesita ayuda?</a>'
+                            });
                         }
                     },
                     error: function(xhr, status, error) {
                         console.error('Error al eliminar el documento:', error);
-                        alert('Ocurrió un error al intentar eliminar el documento.');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Ocurrió un error al intentar eliminar el documento.',
+                            confirmButtonColor: '#d33',
+                            confirmButtonText: 'Entendido'
+                        });
                     }
                 });
             } else {
@@ -270,7 +317,13 @@
             const applyTypeId = $('#apply_type_id').val();
 
             if (!applyTypeId || items.length === 0) {
-                alert('Por favor complete los datos antes de actualizar.');
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Datos incompletos',
+                    text: 'Por favor complete los datos antes de actualizar.',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Entendido'
+                });
                 return;
             }
 
@@ -287,17 +340,31 @@
                 },
                 success: function(response) {
                     if (response.status) {
-                        alert('Datos guardados correctamente.');
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Éxito!',
+                            text: 'Datos guardados correctamente',
+                            confirmButtonColor: '#3085d6'
+                        });
                         $('#addDocumentModal').modal('hide');
                         location.reload(); // Recargar la página o actualizar la tabla principal
                     } else {
-                        alert('Hubo un problema al guardar los datos: ' + response.message);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error al guardar',
+                            html: `Hubo un problema al guardar los datos: <strong>${response.message}</strong>`,
+                            confirmButtonColor: '#d33',
+                            confirmButtonText: 'Entendido',
+                            footer: '<a href="#" id="report-error">Reportar problema</a>'
+                        });
+
                     }
                 }
             });
         }
 
         function editApplyType(id) {
+            let modal = new bootstrap.Modal(document.getElementById('editApplyTypeModal'));
 
             fetch(`/applytype/${id}`) // Ruta de la API en Laravel
                 .then(response => response.json())
@@ -315,7 +382,7 @@
                         $('#destiny').val(data.destiny).trigger('change');
 
                         // Mostrar el modal
-                        let modal = new bootstrap.Modal(document.getElementById('editApplyTypeModal'));
+                        // let modal = new bootstrap.Modal(document.getElementById('editApplyTypeModal'));
                         modal.show();
                     } else {
                         console.error('Error: La respuesta no es válida.');
@@ -326,7 +393,7 @@
 
             document.getElementById('apply_type_id').value = id;
             document.getElementById('nameApplyType').textContent = `Editar tipo solicitud: ${id}`
-            $('#editApplyTypeModal').modal('show');
+            modal.show();
 
         }
 
