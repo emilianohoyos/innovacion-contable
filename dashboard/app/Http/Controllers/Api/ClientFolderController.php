@@ -43,9 +43,6 @@ class ClientFolderController extends Controller
         // Obtener el mes y año de la solicitud o usar el mes actual si no se proporciona
         $month = $request->input('month', date('m'));
         $year = $request->input('year', date('Y'));
-
-        var_dump($request->input('month'));
-        var_dump($request->input('year'));
         
         $folders = Client::with(['folders.applyDocTypeFolders.applyDocumentType'])
             ->findOrFail($client_id)
@@ -57,7 +54,7 @@ class ClientFolderController extends Controller
                     ->where('client_folder_id', $folder->pivot->id) // Usar el ID de la relación pivot
                     ->where('month_year', $month)
                     ->where('year', $year)
-                    ->get();
+                    ->first();
                 
                 return [
                     'id' => $folder->id,
