@@ -74,9 +74,11 @@ class ClientFolderController extends Controller
                             return [
                                 'id' => $monthlyDocType->id,
                                 'document_type_id' => $monthlyDocType->applyDocTypeFolders->applyDocumentType->id,
-                                'document_type_name' => $monthlyDocType->applyDocTypeFolders->applyDocumentType->name,
-                                'is_required' => $monthlyDocType->applyDocTypeFolders->is_required,
-                                'status' => $monthlyDocType->status
+                                'status' => $monthlyDocType->status,
+                                'is_new' => $monthlyDocType->is_new,
+                                'path' => $monthlyDocType->path,
+                                'created_at' => $monthlyDocType->created_at,
+                                'updated_at' => $monthlyDocType->updated_at
                             ];
                         })
                     ] : null
