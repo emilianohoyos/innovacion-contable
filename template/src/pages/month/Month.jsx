@@ -73,6 +73,14 @@ const Month = () => {
             {/* Contenido principal - Carpetas */}
             <div className="col-xl-9 col-md-8">
               <div className="card">
+                <div className="card-header">
+                  <h5 className="d-flex align-items-center">
+                    <span className="me-2 d-flex align-items-center">
+                      <Folder className="feather-20" />
+                    </span>
+                    Carpetas
+                  </h5>
+                </div>
                 <div className="card-body">
                   {isError ? (
                     <div className="alert alert-danger">Error al cargar las carpetas. Por favor, intente nuevamente.</div>
@@ -96,11 +104,11 @@ const Month = () => {
                         <div key={folder.key} className="col-sm-6 col-md-3">
                           <div className="detail">
                             <Link
-                              to="#"
-                              className="d-flex align-items-center justify-content-center bg-light-orange bg p-4"
+                              to={`/folder/${folder.id}`}
+                              className="d-flex align-items-center justify-content-center bg-light-green bg p-4"
                             >
                               <span className="d-flex align-items-center justify-content-center">
-                                <Folder size={36} color="#FFC107" />
+                                <Folder size={36} color="#ffff" />
                               </span>
                             </Link>
                             <div className="d-flex align-items-center justify-content-between info">
@@ -109,8 +117,8 @@ const Month = () => {
                                   {folder.name}
                                 </Link>
                               </h6>
-                              <span>300 Files</span>
                             </div>
+                            <span>300 Files</span>
                           </div>
                         </div>
                       ))}
