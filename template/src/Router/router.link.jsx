@@ -20,16 +20,16 @@ import Error500 from "../feature-module/pages/errorpages/error500";
 import Blankpage from "../feature-module/pages/blankpage";
 import Comingsoon from "../feature-module/pages/comingsoon";
 import Undermaintainence from "../feature-module/pages/undermaintainence";
-import FileManager from "../feature-module/Application/filemanager";
 
 import { all_routes } from "./all_routes";
 import Month from "../pages/month/Month";
+import FolderDetail from "../pages/month/FolderDetail";
 export const privateRoutes = [
   {
     id: 1,
     path: routes.dashboard,
     name: "home",
-    element: <FileManager />,
+    element: <Application />,
     route: Route,
   },
   {
@@ -44,6 +44,13 @@ export const privateRoutes = [
     path: routes.month,
     name: "month",
     element: <Month />,
+    route: Route,
+  },
+  {
+    id: 4,
+    path: routes.folderDetail,
+    name: "folderDetail",
+    element: <FolderDetail />,
     route: Route,
   },
   {

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\ClientContactInfo;
 use App\Models\ClientFolder;
+use App\Models\MonthConfig;
 use App\Models\MonthlyAccountingFolderApplyDocTypeFolder;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -22,13 +23,8 @@ class ClientFolderController extends Controller
     {
 
         // Usar el guard 'api' para obtener el usuario autenticado
-
-
         $user = auth('api')->user();
-
         $userId = $user->id;
-
-
         // Obtener el ID del cliente desde el usuario autenticado
         if ($userId) {
             $client_id = ClientContactInfo::where('user_id', $userId)
@@ -90,16 +86,36 @@ class ClientFolderController extends Controller
             ->toArray();
         $folders = array_values($folders); // Asegura que sea un array indexado
 
-
+        $currentDate = date('Y-m-d'); // Fecha actual
+        
+        // Consultar la configuración del mes anterior en MonthConfig (sin filtrar por cliente)
+        $previousMonthConfig = MonthConfig::where('month', $month)
+            ->where('year', $year)
+            ->first();
+            
+        // Verificar si la fecha actual es menor que el endate del mes anterior
+        $isBeforeEndDate = false;
+        $endDate = null;
+        
+        if ($previousMonthConfig && $previousMonthConfig->end_date) {
+            $endDate = $previousMonthConfig->end_date;
+            $isBeforeEndDate = $currentDate < $endDate;
+        }
+        
         if ($client_id) {
             return response()->json([
                 'status' => true,
-                'folders' => $folders
+                'folders' => $folders,
+                'previous_month' => [
+                    'end_date' => $endDate,
+                    'is_before_end_date' => $isBeforeEndDate
+                ]
             ]);
         }
 
         return response()->json(['error' => 'No autenticado'], 401);
     }
+    
 
     /**
      * Show the form for creating a new resource.

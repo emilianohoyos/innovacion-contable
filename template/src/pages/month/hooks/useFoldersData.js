@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDataFetch } from '../../../hooks/useDataFetch';
 import { useMonths } from './useMonths';
 
-export const useFoldersData = (selectedMonthId = null) => {
+export const useFoldersData = (selectedMonthId = null, selectedYear = null) => {
   const { getData, invalidateQuery } = useDataFetch();
   const { months, enabledMonth } = useMonths();
   
@@ -11,8 +11,8 @@ export const useFoldersData = (selectedMonthId = null) => {
   
   // Obtener el mes y año actual
   const currentDate = new Date();
-  const month = monthToUse ? String(monthToUse.id + 1).padStart(2, '0') : String(currentDate.getMonth() + 1).padStart(2, '0');
-  const year = currentDate.getFullYear();
+  const month = monthToUse ? String(monthToUse.id).padStart(2, '0') : String(currentDate.getMonth()).padStart(2, '0');
+  const year = selectedYear || currentDate.getFullYear();
   
   // Definimos la clave para React Query incluyendo mes y año para que se actualice cuando cambien
   const queryKey = ['client-folders', month, year];
@@ -62,6 +62,7 @@ export const useFoldersData = (selectedMonthId = null) => {
   return {
     folders: formattedFolders,
     allFolders: data?.folders || [], // Incluimos todas las carpetas por si se necesitan
+    previousMonth: data?.previous_month || null, // Incluimos la información del mes anterior
     isLoading,
     isError,
     error,

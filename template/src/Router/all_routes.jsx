@@ -193,4 +193,5 @@ export const all_routes = {
   createApplication: "/create-application",
   month: "/month",
   annual: "/annual",
+  folderDetail: "/folder/:folderId",
 };
