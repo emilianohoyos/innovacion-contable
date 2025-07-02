@@ -44,23 +44,22 @@ class ClientFolderController extends Controller
         $month = $request->input('month', date('m'));
         $year = $request->input('year', date('Y'));
         
-        $folders = Client::with(['folders.applyDocTypeFolders.applyDocumentType'])
-            ->findOrFail($client_id)
-            ->folders
-            ->unique('id') // Elimina folders duplicados
+        $folders = ClientFolder::where('client_id', $client_id)
+            ->with(['folders.applyDocTypeFolders.applyDocumentType'])
+            ->get()
             ->map(function ($folder) use ($client_id, $month, $year) {
                 // Buscar la configuración mensual para esta carpeta
                 $monthlyConfig = \App\Models\MonthlyAccountingFolder::with(['monthlyAccountingFolderApplyDocTypeFolders.applyDocTypeFolders.applyDocumentType'])
-                    ->where('client_folder_id', $folder->pivot->id) // Usar el ID de la relación pivot
+                    ->where('client_folder_id', $folder->id) 
                     ->where('month_year', $month)
                     ->where('year', $year)
                     ->first();
                 
                 return [
                     'id' => $folder->id,
-                    'name' => $folder->name,
-                    'periodicity' => $folder->periodicity,
-                    'document_types' => $folder->applyDocTypeFolders->map(function ($docType) {
+                    'name' => $folder->folders->name,
+                    'periodicity' => $folder->folders->periodicity,
+                    'document_types' => $folder->folders->applyDocTypeFolders->map(function ($docType) {
                         return [
                             'id' => $docType->applyDocumentType->id,
                             'name' => $docType->applyDocumentType->name,
