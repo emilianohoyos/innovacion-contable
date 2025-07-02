@@ -86,24 +86,11 @@ class ClientFolderController extends Controller
             ->toArray();
         $folders = array_values($folders); // Asegura que sea un array indexado
 
-        // Obtener el mes anterior y año para consultar MonthConfig
-        $currentMonth = date('n'); // Mes actual (1-12)
-        $currentYear = date('Y'); // Año actual
         $currentDate = date('Y-m-d'); // Fecha actual
         
-        // Calcular mes anterior y año
-        $previousMonth = $currentMonth - 1;
-        $previousYear = $currentYear;
-        
-        // Si estamos en enero (mes 1), el mes anterior es diciembre (mes 12) del año anterior
-        if ($previousMonth == 0) {
-            $previousMonth = 12;
-            $previousYear = $currentYear - 1;
-        }
-        
         // Consultar la configuración del mes anterior en MonthConfig (sin filtrar por cliente)
-        $previousMonthConfig = MonthConfig::where('month', $previousMonth)
-            ->where('year', $previousYear)
+        $previousMonthConfig = MonthConfig::where('month', $month)
+            ->where('year', $year)
             ->first();
             
         // Verificar si la fecha actual es menor que el endate del mes anterior
@@ -120,8 +107,6 @@ class ClientFolderController extends Controller
                 'status' => true,
                 'folders' => $folders,
                 'previous_month' => [
-                    'month' => $previousMonth,
-                    'year' => $previousYear,
                     'end_date' => $endDate,
                     'is_before_end_date' => $isBeforeEndDate
                 ]
