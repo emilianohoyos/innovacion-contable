@@ -45,7 +45,7 @@ class ClientFolderController extends Controller
         $year = $request->input('year', date('Y'));
         
         $folders = ClientFolder::where('client_id', $client_id)
-            ->with(['folders.applyDocTypeFolders.applyDocumentType'])
+            ->with(['folder.applyDocTypeFolders.applyDocumentType'])
             ->get()
             ->map(function ($folder) use ($client_id, $month, $year) {
                 // Buscar la configuración mensual para esta carpeta
@@ -57,9 +57,9 @@ class ClientFolderController extends Controller
                 
                 return [
                     'id' => $folder->id,
-                    'name' => $folder->folders->name,
-                    'periodicity' => $folder->folders->periodicity,
-                    'document_types' => $folder->folders->applyDocTypeFolders->map(function ($docType) {
+                    'name' => $folder->folder->name,
+                    'periodicity' => $folder->folder->periodicity,
+                    'document_types' => $folder->folder->applyDocTypeFolders->map(function ($docType) {
                         return [
                             'id' => $docType->applyDocumentType->id,
                             'name' => $docType->applyDocumentType->name,
