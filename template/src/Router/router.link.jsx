@@ -23,6 +23,7 @@ import Undermaintainence from "../feature-module/pages/undermaintainence";
 
 import { all_routes } from "./all_routes";
 import Month from "../pages/month/Month";
+import FolderDetail from "../pages/month/FolderDetail";
 export const privateRoutes = [
   {
     id: 1,
@@ -43,6 +44,13 @@ export const privateRoutes = [
     path: routes.month,
     name: "month",
     element: <Month />,
+    route: Route,
+  },
+  {
+    id: 4,
+    path: routes.folderDetail,
+    name: "folderDetail",
+    element: <FolderDetail />,
     route: Route,
   },
   {

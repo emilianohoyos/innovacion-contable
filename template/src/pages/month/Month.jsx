@@ -153,7 +153,10 @@ const Month = () => {
                         <div key={folder.key} className="col-sm-6 col-md-3">
                           <div className="detail">
                             <Link
-                              to={`/folder/${folder.id}`}
+                              to={{
+                                pathname: `/folder/${folder.id}`,
+                                state: { folderData: folder }
+                              }}
                               className="d-flex align-items-center justify-content-center bg-light-green bg p-4"
                             >
                               <span className="d-flex align-items-center justify-content-center">
@@ -162,7 +165,10 @@ const Month = () => {
                             </Link>
                             <div className="d-flex flex-direction-column justify-content-between info">
                               <h6>
-                                <Link to={`/folder/${folder.id}`}>
+                                <Link to={{
+                                  pathname: `/folder/${folder.id}`,
+                                  state: { folderData: folder }
+                                }}>
                                   {folder.name}
                                 </Link>
                               </h6>
