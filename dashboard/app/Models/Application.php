@@ -19,6 +19,11 @@ class Application extends Model
         'employee_id'
     ];
 
+    public function applyType()
+    {
+        return $this->belongsTo(ApplyType::class, 'apply_type_id');
+    }
+
     public function attachments()
     {
         return $this->hasMany(Attachment::class, 'application_id');

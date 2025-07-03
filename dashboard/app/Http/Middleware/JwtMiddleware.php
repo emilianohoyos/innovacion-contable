@@ -17,8 +17,8 @@ class JwtMiddleware
             $token = JWTAuth::getToken();
             $payload = JWTAuth::getPayload($token);
 
-            // Debug final (opcional)
-            Log::debug('JWT Payload', $payload->toArray());
+            // // Debug final (opcional)
+            // Log::debug('JWT Payload', $payload->toArray());
 
             // SOLUCIÓN CLAVE: Autenticación directa
             $user = \App\Models\User::find($payload['sub']); // Usamos el ID del payload

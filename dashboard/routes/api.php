@@ -3,9 +3,10 @@
 use App\Http\Controllers\Api\ClientFolderController;
 use App\Http\Controllers\Api\MonthlyAccountingCommentController;
 use App\Http\Controllers\Api\MonthlyAccountingFolderController;
-use App\Http\Controllers\ApplicationController;
-use App\Http\Controllers\ApplyTypeController;
-use App\Http\Controllers\ApplyTypesApplyDocumentTypeController;
+use App\Http\Controllers\Api\ApplicationController;
+use App\Http\Controllers\Api\ApplyTypeController;
+use App\Http\Controllers\Api\ApplyTypesApplyDocumentTypeController;
+use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Api\MonthlyAccountingFolderApplyDocTypeFolderController;
 use Illuminate\Support\Facades\Route;
@@ -36,11 +37,17 @@ Route::middleware(['auth.jwt'])->group(function () {
     Route::get('me', [AuthController::class, 'me']);
 
 
-    Route::post('create-application', [ApplicationController::class, 'create']);
+    Route::post('create-application', [ApplicationController::class, 'store']);
     Route::get('list-applications', [ApplicationController::class, 'listApplication']);
+    Route::post('cancel-application', [ApplicationController::class, 'cancelApplication']);
+
+    Route::post('list-comments', [CommentController::class, 'listComments']);
+    Route::post('create-comment', [CommentController::class, 'store']);
 
     Route::get('list-apply-types', [ApplyTypeController::class, 'listApplyTypes']);
     Route::post('list-apply-types-apply-document-types', [ApplyTypesApplyDocumentTypeController::class, 'listApplyTypesApplyDocumentTypes']);
+
+
 
 
     //listar folders del cliente y por cada folder los documentos requeridos, indicar si tiene anexos y la fecha limita
