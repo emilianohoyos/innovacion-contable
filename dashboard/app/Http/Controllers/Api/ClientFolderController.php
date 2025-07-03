@@ -44,23 +44,22 @@ class ClientFolderController extends Controller
         $month = $request->input('month', date('m'));
         $year = $request->input('year', date('Y'));
         
-        $folders = Client::with(['folders.applyDocTypeFolders.applyDocumentType'])
-            ->findOrFail($client_id)
-            ->folders
-            ->unique('id') // Elimina folders duplicados
+        $folders = ClientFolder::where('client_id', $client_id)
+            ->with(['folder.applyDocTypeFolders.applyDocumentType'])
+            ->get()
             ->map(function ($folder) use ($client_id, $month, $year) {
                 // Buscar la configuración mensual para esta carpeta
                 $monthlyConfig = \App\Models\MonthlyAccountingFolder::with(['monthlyAccountingFolderApplyDocTypeFolders.applyDocTypeFolders.applyDocumentType'])
-                    ->where('client_folder_id', $folder->pivot->id) // Usar el ID de la relación pivot
+                    ->where('client_folder_id', $folder->id) 
                     ->where('month_year', $month)
                     ->where('year', $year)
                     ->first();
                 
                 return [
                     'id' => $folder->id,
-                    'name' => $folder->name,
-                    'periodicity' => $folder->periodicity,
-                    'document_types' => $folder->applyDocTypeFolders->map(function ($docType) {
+                    'name' => $folder->folder->name,
+                    'periodicity' => $folder->folder->periodicity,
+                    'document_types' => $folder->folder->applyDocTypeFolders->map(function ($docType) {
                         return [
                             'id' => $docType->applyDocumentType->id,
                             'name' => $docType->applyDocumentType->name,
@@ -75,9 +74,11 @@ class ClientFolderController extends Controller
                             return [
                                 'id' => $monthlyDocType->id,
                                 'document_type_id' => $monthlyDocType->applyDocTypeFolders->applyDocumentType->id,
-                                'document_type_name' => $monthlyDocType->applyDocTypeFolders->applyDocumentType->name,
-                                'is_required' => $monthlyDocType->applyDocTypeFolders->is_required,
-                                'status' => $monthlyDocType->status
+                                'status' => $monthlyDocType->status,
+                                'is_new' => $monthlyDocType->is_new,
+                                'path' => $monthlyDocType->path,
+                                'created_at' => $monthlyDocType->created_at,
+                                'updated_at' => $monthlyDocType->updated_at
                             ];
                         })
                     ] : null
