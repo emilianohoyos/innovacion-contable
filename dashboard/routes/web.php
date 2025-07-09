@@ -45,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
     // Define a GET route for the root URL ('/')
     Route::get('/', function () {
         // Return a view named 'index' when accessing the root URL
-        return view('index');
+        return redirect()->route('dashboard.index');
     });
 
     // Define a GET route with dynamic placeholders for route parameters

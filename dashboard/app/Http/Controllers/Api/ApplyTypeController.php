@@ -153,7 +153,9 @@ class ApplyTypeController extends Controller
 
     public function listApplyTypes()
     {
-        $applyTypes = ApplyType::all();
+        $applyTypes = ApplyType::where('destiny', 'like', '%EXTERNA%')
+
+            ->get();
         return response()->json($applyTypes);
     }
 }

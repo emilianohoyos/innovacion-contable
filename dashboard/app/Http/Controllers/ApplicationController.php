@@ -278,7 +278,10 @@ class ApplicationController extends Controller
 
     public function getApplicationDatatable()
     {
-        // dd('entro');
+
+        $user = auth()->user();
+        $userId = $user->id;
+        $userRol = $user->rol;
         $application = Application::select([
             'applications.id as application_id',
             'apply_types.name as apply_type_name',
@@ -300,6 +303,9 @@ class ApplicationController extends Controller
                 '=',
                 'states.id'
             );
+        if (!$userRol === 'admin') {
+            $application->where('applications.employee_id', $userId);
+        }
         return DataTables::of($application)
             ->addColumn('dias_transcurridos', function ($application) {
                 $dias = Carbon::parse($application->estimated_delevery_date)->diffInDays($application->created_at, false);
@@ -336,6 +342,7 @@ class ApplicationController extends Controller
                                         </button>';
                 return  $btn;
             })
+
             ->rawColumns(['acciones'])
             ->make(true);
     }
