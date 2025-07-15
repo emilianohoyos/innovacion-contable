@@ -941,20 +941,18 @@
                         <td>${contact.lastname}</td>
                         <td>${contact.birthday??'-'}</td>
                         <td>${contact.job_title}</td>
-<td>${
-    (() => {
-        try {
-            if (!contact.channel_communication) return 'Ninguno'; // Manejo de null o undefined
+                        <td>${
+                            (() => {
+                                try {
+                                    if (!contact.channel_communication) return 'Ninguno'; // Manejo de null o undefined
 
-            let parsed = JSON.parse(contact.channel_communication.replace(/\\"/g, '"'));
-            return Array.isArray(parsed) ? parsed.join(', ') : parsed;
-        } catch (e) {
-            return contact.channel_communication.replace(/[\[\]"]/g, '') || 'Ninguno';
-        }
-    })()
-}</td>
-
-
+                                    let parsed = JSON.parse(contact.channel_communication.replace(/\\"/g, '"'));
+                                    return Array.isArray(parsed) ? parsed.join(', ') : parsed;
+                                } catch (e) {
+                                    return contact.channel_communication.replace(/[\[\]"]/g, '') || 'Ninguno';
+                                }
+                            })()
+                        }</td>
                         <td>${contact.email}</td>
                         <td>${contact.cellphone}</td>
                         <td>${contact.observation??''}</td>
@@ -968,8 +966,7 @@
                             const row = `
                             <tr>
                                 <td>${comment.description}</td>
-                                <td>${new Date(comment.created_at).toLocaleString('es-CO', { 
-    timeZone: 'America/Bogota' })}</td>
+                                <td>${new Date(comment.created_at).toLocaleString('es-CO', { timeZone: 'America/Bogota' })}</td>
                                 <td>${comment.created_by.name}</td>
                             </tr>`;
                             commentsTableBody.insertAdjacentHTML('beforeend', row);
@@ -981,6 +978,26 @@
                             <td colspan="3" class="text-center">No hay comentarios disponibles</td>
                         </tr>`;
                     }
+
+                    let foldersTableBody = document.getElementById('foldersTableBody');
+                    // Actualiza la tabla de carpetas del cliente
+                    if (Array.isArray(clientData.folders) && clientData.folders.length > 0) {
+                        clientData.folders.forEach(folder => {
+                            const row = `
+                            <tr>
+                                <td>${folder.name}</td>
+                                <td>${folder.periodicity}</td>
+                            </tr>`;
+                            foldersTableBody.insertAdjacentHTML('beforeend', row);
+                        });
+                    } else {
+                        // Si no hay comentarios, agrega una fila indicando que no hay datos
+                        foldersTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="2" class="text-center">No hay Carpetas asignadas</td>
+                        </tr>`;
+                    }
+
                 })
                 .catch(error => {
                     console.error('Error:', error);

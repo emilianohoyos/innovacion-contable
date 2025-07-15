@@ -27,7 +27,8 @@ class ApplicationController extends Controller
     {
         $status = State::all();
         $employee = Employee::all();
-        return view('applications.index', compact('status', 'employee'));
+        $applyTypes = ApplyType::all();
+        return view('applications.index', compact('status', 'employee', 'applyTypes'));
     }
 
     /**
@@ -161,7 +162,7 @@ class ApplicationController extends Controller
      */
     public function show($application_id)
     {
-        $application = Application::with('attachments')
+        $application = Application::with(['attachments'])
             ->select([
                 'applications.id as application_id',
                 'apply_types.name as apply_type_name',
@@ -185,11 +186,15 @@ class ApplicationController extends Controller
             ->first(); //
 
         $attachments = Attachment::with('applyDocumentType')->where('application_id', $application_id)->get();
-
+        $historyState = HistoryState::with(['state', 'user'])
+            ->where('application_id', $application_id)
+            ->orderBy('changed_at', 'desc') // Opcional: para ordenarlos por fecha
+            ->get();
         return response()->json([
             "status" => true,
             'data' => $application,
-            'attachment' => $attachments
+            'attachment' => $attachments,
+            'historyState' => $historyState
         ], 200);
     }
     /**
@@ -276,9 +281,11 @@ class ApplicationController extends Controller
         return ['file' => $file, 'extension' => $extension];
     }
 
-    public function getApplicationDatatable()
+    public function getApplicationDatatable(Request $request)
     {
-
+        $estado = $request->input('estado');
+        $tipo = $request->input('tipo');
+        $prioridad = $request->input('prioridad');
         $user = auth()->user();
         $userId = $user->id;
         $userRol = $user->rol;
@@ -306,10 +313,46 @@ class ApplicationController extends Controller
         if (!$userRol === 'admin') {
             $application->where('applications.employee_id', $userId);
         }
+        if ($estado) {
+            $application->where('applications.state_id', $estado);
+        }
+        if ($tipo) {
+            $application->where('applications.apply_type_id', $tipo);
+        }
+        if ($prioridad) {
+            $application->where('applications.priority', $prioridad);
+        }
         return DataTables::of($application)
             ->addColumn('dias_transcurridos', function ($application) {
                 $dias = Carbon::parse($application->estimated_delevery_date)->diffInDays($application->created_at, false);
                 return max(0, $dias);
+            })
+            ->editColumn('state_name', function ($row) {
+                // Si el estado es Terminado o Cancelado, solo mostrar el texto
+                $estadoTerminado = State::where('name', 'Terminado')->first();
+                $estadoCancelado = State::where('name', 'Cancelado')->first();
+                if (($estadoTerminado && $row->state_id == $estadoTerminado->id) || ($estadoCancelado && $row->state_id == $estadoCancelado->id)) {
+                    return $row->state_name;
+                }
+                $estadoCreado = State::where('name', 'Creado')->first();
+                $estados = State::all();
+                $select = '<select class="form-select form-select-sm estado-select" data-id="' . $row->application_id . '">';
+                foreach ($estados as $estado) {
+                    if ($estado->name === 'CREADO') {
+                        if ($row->state_id == $estado->id) {
+                            // Solo mostrar 'Creado' si es el estado actual, deshabilitado
+                            $select .= '<option value="' . $estado->id . '" selected disabled>' . $estado->name . '</option>';
+                        }
+                        // En cualquier otro caso, no mostrarlo
+                        continue;
+                    }
+                    $selected = $estado->id == $row->state_id ? 'selected' : '';
+                    $cancelado = ($estado->name === 'CANCELADO') ? 'data-cancelado="1"' : 'data-cancelado="0"';
+                    $select .= '<option value="' . $estado->id . '" ' . $selected . ' ' . $cancelado . '>' . $estado->name . '</option>';
+                }
+                $select .= '</select>';
+                $select .= '<input type="text" class="form-control form-control-sm mt-1 motivo-cancelacion" style="display:none;" placeholder="Motivo de cancelación">';
+                return $select;
             })
             ->addColumn('acciones', function ($application) {
                 $btn = "  <button type='button'
@@ -343,7 +386,7 @@ class ApplicationController extends Controller
                 return  $btn;
             })
 
-            ->rawColumns(['acciones'])
+            ->rawColumns(['acciones', 'state_name'])
             ->make(true);
     }
 
@@ -388,13 +431,20 @@ class ApplicationController extends Controller
     {
         $apply = Application::find($application_id);
         $apply->state_id = $request->state_id;
+        // Si el estado es Cancelado y se envía motivo, guárdalo
+        $estadoCancelado = State::where('name', 'Cancelado')->first();
+        // if ($estadoCancelado && $request->state_id == $estadoCancelado->id && $request->filled('motivo_cancelacion')) {
+        //     $apply->motivo_cancelacion = $request->motivo_cancelacion;
+        // }
         $apply->save();
 
         HistoryState::create([
             'state_id' => $request->state_id,
             'user_id' => Auth::user()->id,
             'application_id' => $apply->id,
-            'changed_at' => now()
+            'changed_at' => now(),
+            // Guarda el motivo en el historial si existe
+            'observation' => $request->motivo_cancelacion ?? null
         ]);
 
         return response()->json(
@@ -410,6 +460,12 @@ class ApplicationController extends Controller
         $apply = Application::find($application_id);
         $apply->employee_id = $request->employee_id;
         $apply->save();
+
+        Comment::create([
+            'application_id' => $application_id,
+            'description' => $request->razon_cambio,
+            'created_by' => auth()->user()->id,
+        ]);
 
         return response()->json(
             [

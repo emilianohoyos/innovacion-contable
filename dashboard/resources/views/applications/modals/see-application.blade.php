@@ -60,6 +60,31 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <!-- Historico de Estados -->
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                <h6 class="mb-3">Historico de estados</h6>
+                                <hr>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped" id="statusTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Fecha</th>
+                                                <th>Estado</th>
+                                                <th>Usuario</th>
+                                                <th>Comentario</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="statusTableBody">
+                                            <!-- Comentarios dinámicos aquí -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>

@@ -13,13 +13,18 @@
 
                             <input type="hidden" name="application_id" id="application_id">
                             <div class="col-md-12">
-                                <label for="employee_id" class="form-label">Cambiar Empleado aignado</label>
+                                <label for="employee_id" class="form-label">Cambiar Empleado asignado</label>
                                 <select name="employee_id" id="employee_id" class="form-control">
                                     @foreach ($employee as $item)
                                         <option value="{{ $item->id }}">{{ $item->firstname }}{{ $item->lastname }}
                                         </option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <label for="razon_cambio" class="form-label">Razón del cambio de empleado</label>
+                                <textarea name="razon_cambio" id="razon_cambio" class="form-control" rows="2"
+                                    placeholder="Ingrese la razón del cambio"></textarea>
                             </div>
                         </div>
                     </div>

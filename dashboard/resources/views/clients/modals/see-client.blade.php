@@ -464,6 +464,29 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                            <!-- Carpetas -->
+                            <div class="card shadow-sm border-0">
+                                <div class="card-body">
+                                    <h6 class="mb-3">Carpetas del Cliente</h6>
+                                    <hr>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="foldersTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Carpeta</th>
+                                                    <th>Periocidad</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody id="foldersTableBody">
+                                                <!-- Comentarios dinámicos aquí -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

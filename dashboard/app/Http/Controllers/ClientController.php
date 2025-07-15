@@ -641,7 +641,7 @@ class ClientController extends Controller
     }
     public function seeClientData(String $id)
     {
-        $client = Client::with(['contactInfo', 'contactInfo.documentType', 'commentsClient.createdBy', 'documentType', 'personType', 'employees.employee', 'clientResponsible'])->find($id);
+        $client = Client::with(['contactInfo', 'contactInfo.documentType', 'commentsClient.createdBy', 'documentType', 'personType', 'employees.employee', 'clientResponsible', 'folders'])->find($id);
         return response()->json($client);
     }
 }

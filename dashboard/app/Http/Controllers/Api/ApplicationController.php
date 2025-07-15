@@ -480,6 +480,7 @@ class ApplicationController extends Controller
             'user_id' => auth('api')->user()->id,
             'application_id' => $application->id,
             'changed_at' => now(),
+            'observation' => $validatedData['reason']
 
         ]);
 

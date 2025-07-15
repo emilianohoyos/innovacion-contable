@@ -138,7 +138,7 @@ $@section('css')
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between">
                         <h3 class="mb-0 fs-6">Solicitudes Pendientes </h3>
-                        <div class="dropdown">
+                        {{-- <div class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle-nocaret options dropdown-toggle"
                                 data-bs-toggle="dropdown">
                                 <span class="material-icons-outlined fs-5">more_vert</span>
@@ -148,7 +148,7 @@ $@section('css')
                                 <li><a class="dropdown-item" href="javascript:;">Another action</a></li>
                                 <li><a class="dropdown-item" href="javascript:;">Something else here</a></li>
                             </ul>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="product-table mt-3">
                         <div class="table-responsive white-space-nowrap">
@@ -200,40 +200,6 @@ $@section('css')
                                             </td>
                                         </tr>
                                     @endforeach
-                                    <tr>
-
-                                        <td>
-                                            Tarea
-                                        </td>
-                                        <td>Identificación</td>
-                                        <td>Carlos Hoyos</td>
-                                        <td>02-02-2024</td>
-                                        <td class="text-danger">
-                                            Alta
-                                        </td>
-                                        <td>
-                                            Solicitud Inicial
-                                        </td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <a href="javascript:;"
-                                                    class="dropdown-toggle-nocaret options dropdown-toggle"
-                                                    data-bs-toggle="dropdown">
-                                                    <span class="material-icons-outlined fs-5">more_vert</span>
-                                                </a>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="javascript:;">Action</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="javascript:;">Something else
-                                                            here</a></li>
-                                                </ul>
-                                            </div>
-
-                                        </td>
-                                    </tr>
-
-
                                 </tbody>
                             </table>
                         </div>

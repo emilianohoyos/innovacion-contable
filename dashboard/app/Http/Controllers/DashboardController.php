@@ -15,10 +15,7 @@ class DashboardController extends Controller
         $user = auth()->user();
         $userId = $user->id;
         $userRol = $user->rol;
-        $total_solicitudes = Application::where('employee_id', $userId)->count();
-        $total_solicitudes_pendientes = Application::where('employee_id', $userId)->whereIn('state_id', [1, 2])->count();
-        $total_solicitudes_atendidas = Application::where('employee_id', $userId)->whereIn('state_id', [4])->count();
-        $total_solicitudes_canceladas = Application::where('employee_id', $userId)->whereIn('state_id', [4])->count();
+
         $applications = Application::select([
             'applications.id as application_id',
             'apply_types.name as apply_type_name',
@@ -42,6 +39,15 @@ class DashboardController extends Controller
             )->whereIn('state_id', [1, 2, 3]);
         if (!$userRol === 'admin') {
             $applications->where('applications.employee_id', $userId);
+            $total_solicitudes = Application::count();
+            $total_solicitudes_pendientes = Application::whereIn('state_id', [1, 2])->count();
+            $total_solicitudes_atendidas = Application::whereIn('state_id', [4])->count();
+            $total_solicitudes_canceladas = Application::whereIn('state_id', [4])->count();
+        } else {
+            $total_solicitudes = Application::where('employee_id', $userId)->count();
+            $total_solicitudes_pendientes = Application::where('employee_id', $userId)->whereIn('state_id', [1, 2])->count();
+            $total_solicitudes_atendidas = Application::where('employee_id', $userId)->whereIn('state_id', [4])->count();
+            $total_solicitudes_canceladas = Application::where('employee_id', $userId)->whereIn('state_id', [4])->count();
         }
 
         $applications = $applications->get();

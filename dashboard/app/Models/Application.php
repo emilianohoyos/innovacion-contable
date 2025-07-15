@@ -28,4 +28,9 @@ class Application extends Model
     {
         return $this->hasMany(Attachment::class, 'application_id');
     }
+
+    public function historyStates(): HasMany
+    {
+        return $this->hasMany(HistoryState::class, 'application_id');
+    }
 }

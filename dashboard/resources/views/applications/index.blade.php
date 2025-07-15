@@ -1,97 +1,92 @@
 @extends('layouts.master')
 
 @section('title', 'Solicitudes')
-@section('css')
 
-@endsection
 @section('content')
     <x-page-title title="Solicitudes" pagetitle="Solicitudes" />
 
-    {{-- <div class="product-count d-flex align-items-center gap-3 gap-lg-4 mb-4 fw-medium flex-wrap font-text1">
-        <a href="javascript:;"><span class="me-1">Todo</span><span class="text-secondary">(100)</span></a>
-        <a href="javascript:;"><span class="me-1">Solicitud incial</span><span class="text-secondary">(10)</span></a>
-        <a href="javascript:;"><span class="me-1">Tarea en Ejecucion</span><span class="text-secondary">(17)</span></a>
-        <a href="javascript:;"><span class="me-1">Finalizada</span><span class="text-secondary">(88754)</span></a>
-    </div> --}}
 
     <div class="row g-3">
-        {{-- <div class="col-auto">
-            <div class="position-relative">
-                <input class="form-control px-5" type="search" placeholder="Buscar Solicitud">
-                <span
-                    class="material-icons-outlined position-absolute ms-3 translate-middle-y start-0 top-50 fs-5">search</span>
-            </div>
-        </div> --}}
         <div class="col-auto flex-grow-1 overflow-auto">
             <div class="btn-group position-static">
                 <div class="btn-group position-static">
-                    <button type="button" class="btn btn-filter dropdown-toggle px-4" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                    <button id="estadoDropdown" type="button" class="btn btn-filter dropdown-toggle px-4"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         Estado
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" id="estadoOptions">
+                        <li><a class="dropdown-item" href="javascript:;" data-value="">Todos</a></li>
                         @foreach ($status as $statuItem)
                             <li>
-                                <a class="dropdown-item" href="javascript:;">{{ $statuItem->name }}</a>
+                                <a class="dropdown-item" href="javascript:;"
+                                    data-value="{{ $statuItem->id }}">{{ $statuItem->name }}</a>
                             </li>
                         @endforeach
-
-                </div>
-                <div class="btn-group position-static">
-                    <button type="button" class="btn btn-filter dropdown-toggle px-4" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Tipo Solicitud
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="javascript:;">Tarea</a></li>
-                        <li><a class="dropdown-item" href="javascript:;">Solicitud Inicial</a></li>
                     </ul>
                 </div>
                 <div class="btn-group position-static">
-                    <button type="button" class="btn btn-filter dropdown-toggle px-4" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                    <button id="tipoDropdown" type="button" class="btn btn-filter dropdown-toggle px-4"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Tipo Solicitud
+                    </button>
+                    <ul class="dropdown-menu" id="tipoOptions">
+                        <li><a class="dropdown-item" href="javascript:;" data-value="">Todos</a></li>
+                        @foreach ($applyTypes as $applyType)
+                            <li>
+                                <a class="dropdown-item" href="javascript:;"
+                                    data-value="{{ $applyType->id }}">{{ $applyType->name }}</a>
+                            </li>
+                        @endforeach
+
+                    </ul>
+                </div>
+                <div class="btn-group position-static">
+                    <button id="prioridadDropdown" type="button" class="btn btn-filter dropdown-toggle px-4"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         Prioridad
                     </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="javascript:;">ALTA</a></li>
-                        <li><a class="dropdown-item" href="javascript:;">MEDIA</a></li>
-                        <li><a class="dropdown-item" href="javascript:;">BAJA</a></li>
-
+                    <ul class="dropdown-menu" id="prioridadOptions">
+                        <li><a class="dropdown-item" href="javascript:;" data-value="">Todos</a></li>
+                        <li><a class="dropdown-item" href="javascript:;" data-value="ALTA">ALTA</a></li>
+                        <li><a class="dropdown-item" href="javascript:;" data-value="MEDIA">MEDIA</a></li>
+                        <li><a class="dropdown-item" href="javascript:;" data-value="BAJA">BAJA</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="col-auto">
             <div class="d-flex align-items-center gap-2 justify-content-lg-end">
+                <button id="clearFilters" class="btn btn-outline-secondary px-4" type="button" style="display:none;">
+                    <i class="bi bi-x-circle me-2"></i>Limpiar filtros
+                </button>
                 <a href="{{ route('application.create') }}" class="btn btn-primary px-4"><i
                         class="bi bi-plus-lg me-2"></i>Realizar Nueva solicitud</a>
             </div>
         </div>
-    </div><!--end row-->
+    </div>
+
 
     <div class="card mt-4">
         <div class="card-body">
-            <div class="product-table">
-                <div class="table-responsive white-space-nowrap">
-                    <table class="table align-middle" id="tbl-application">
-                        <thead class="table-light">
-                            <tr>
-                                <th>id</th>
-                                <th>Tipo Solicitud</th>
-                                <th>Cliente</th>
-                                <th>Fecha creación</th>
-                                <th>Fecha Estimada atención</th>
-                                <th>Dias Transcurridos</th>
-                                <th>Empleado que atiende</th>
-                                <th>Prioridad</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="table-responsive white-space-nowrap">
+                <table id="tbl-application" class="table ">
+                    <thead class="table-light">
+                        <tr>
+                            <th>id</th>
+                            <th>Tipo Solicitud</th>
+                            <th>Cliente</th>
+                            <th>Fecha creación</th>
+                            <th>Fecha Estimada atención</th>
+                            <th>Dias Transcurridos</th>
+                            <th>Empleado que atiende</th>
+                            <th>Prioridad</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -106,15 +101,35 @@
     <script src="{{ URL::asset('build/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
     <script src="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script>
+        var estado = '';
+        var tipo = '';
+        var prioridad = '';
         var applicationDataUrl = "{{ route('application.datatable') }}";
+
+        function updateClearButton() {
+            if (estado || tipo || prioridad) {
+                $('#clearFilters').show();
+            } else {
+                $('#clearFilters').hide();
+            }
+        }
+        // Variable global para guardar el valor anterior del select estado
+        var previousState = {};
         $(document).ready(function() {
-            $('#tbl-application').DataTable({
+            var table = $('#tbl-application').DataTable({
                 language: {
                     url: "{{ URL::asset('build/plugins/datatable/js/es.json') }}"
                 },
                 processing: true,
                 serverSide: true,
-                ajax: applicationDataUrl,
+                ajax: {
+                    url: applicationDataUrl,
+                    data: function(d) {
+                        d.estado = estado;
+                        d.tipo = tipo;
+                        d.prioridad = prioridad;
+                    }
+                },
                 columns: [{
                         data: 'application_id',
                         name: 'application_id'
@@ -177,8 +192,124 @@
                     }
                 ]
             });
-
+            // Filtros personalizados
+            $('#estadoOptions a').on('click', function() {
+                estado = $(this).data('value');
+                // Resalta la opción seleccionada
+                $(this).addClass('active').siblings().removeClass('active');
+                // Actualiza el texto del botón
+                var text = $(this).text();
+                $('#estadoDropdown').text(estado ? 'Estado: ' + text : 'Estado');
+                table.ajax.reload();
+                updateClearButton();
+            });
+            $('#tipoOptions a').on('click', function() {
+                tipo = $(this).data('value');
+                $(this).addClass('active').siblings().removeClass('active');
+                var text = $(this).text();
+                $('#tipoDropdown').text(tipo ? 'Tipo: ' + text : 'Tipo Solicitud');
+                table.ajax.reload();
+                updateClearButton();
+            });
+            $('#prioridadOptions a').on('click', function() {
+                prioridad = $(this).data('value');
+                $(this).addClass('active').siblings().removeClass('active');
+                var text = $(this).text();
+                $('#prioridadDropdown').text(prioridad ? 'Prioridad: ' + text : 'Prioridad');
+                table.ajax.reload();
+                updateClearButton();
+            });
+            // Limpiar filtros
+            $('#clearFilters').on('click', function() {
+                estado = '';
+                tipo = '';
+                prioridad = '';
+                $('#estadoOptions a[data-value=""]').addClass('active').siblings().removeClass('active');
+                $('#tipoOptions a[data-value=""]').addClass('active').siblings().removeClass('active');
+                $('#prioridadOptions a[data-value=""]').addClass('active').siblings().removeClass('active');
+                $('#estadoDropdown').text('Estado');
+                $('#tipoDropdown').text('Tipo Solicitud');
+                $('#prioridadDropdown').text('Prioridad');
+                table.ajax.reload();
+                updateClearButton();
+            });
+            // Inicializa los botones con la opción "Todos"
+            $('#estadoDropdown').text('Estado');
+            $('#tipoDropdown').text('Tipo Solicitud');
+            $('#prioridadDropdown').text('Prioridad');
+            updateClearButton();
         });
+
+        // Evento click para interceptar el cambio antes de que ocurra
+        // Evento change para manejar todos los estados, incluyendo Cancelado
+        $(document).on('focusin', '.estado-select', function() {
+            // Guardar el estado anterior antes del cambio
+            $(this).data('prev', $(this).val());
+        });
+
+        $(document).on('change', '.estado-select', function() {
+            var $select = $(this);
+            var applicationId = $select.data('id');
+            var newState = $select.val();
+            var prevState = $select.data('prev');
+            var isCancelado = $select.find('option:selected').data('cancelado') === 1;
+            if (isCancelado) {
+                // Mostrar SweetAlert para motivo de cancelación
+                Swal.fire({
+                    title: 'Motivo de cancelación',
+                    input: 'text',
+                    inputLabel: 'Por favor ingresa el motivo de la cancelación',
+                    inputPlaceholder: 'Motivo...',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar',
+                    cancelButtonText: 'Cancelar',
+                    inputValidator: (value) => {
+                        if (!value || value.trim() === '') {
+                            return 'El motivo es obligatorio';
+                        }
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var data = {
+                            state_id: newState,
+                            motivo_cancelacion: result.value,
+                            _token: $('meta[name="csrf-token"]').attr('content')
+                        };
+                        $.ajax({
+                            url: '/application/state/' + applicationId,
+                            method: 'POST',
+                            data: data,
+                            success: function(response) {
+                                $('#tbl-application').DataTable().ajax.reload();
+                                previousState[applicationId] = newState;
+                            }
+                        });
+                    } else {
+                        // Revertir el select al estado anterior si se cancela
+                        $select.val(prevState);
+                    }
+                });
+            } else {
+                var data = {
+                    state_id: newState,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                };
+                $.ajax({
+                    url: '/application/state/' + applicationId,
+                    method: 'POST',
+                    data: data,
+                    success: function(response) {
+                        $('#tbl-application').DataTable().ajax.reload();
+                        previousState[applicationId] = newState;
+                    }
+                });
+            }
+        });
+
+        // ...evento change para SweetAlert y revertido ya implementado arriba...
+
 
         function confirmDelete() {
             Swal.fire({
@@ -255,6 +386,30 @@
                             div.appendChild(button);
                             adjuntosContainer.appendChild(div);
                         })
+
+                        let statusTableBody = document.getElementById('statusTableBody');
+
+                        console.log('Estado de la solicitud:', data.historyState);
+                        // Actualiza la tabla de carpetas del cliente
+                        if (Array.isArray(data.historyState) && data.historyState.length > 0) {
+                            data.historyState.forEach(state => {
+                                const row = `
+                            <tr>
+                              
+                                 <td>${new Date(state.created_at).toLocaleString('es-CO', { timeZone: 'America/Bogota' })}</td>
+                                <td>${state.state.name}</td>
+                                <td>${state.user.name}</td>
+                                <td>${state.observation??''}</td>
+                            </tr>`;
+                                statusTableBody.insertAdjacentHTML('beforeend', row);
+                            });
+                        } else {
+                            // Si no hay comentarios, agrega una fila indicando que no hay datos
+                            statusTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="4" class="text-center">No estados</td>
+                        </tr>`;
+                        }
                     })
             $('#seeApplicationModal').modal('show')
         }
@@ -426,8 +581,10 @@
         }
 
         async function updateEmployee() {
-            const applicationId = document.getElementById('application_id').value
-            const employee_id = $('#employee_id').val()
+            const applicationId = document.getElementById('application_id').value;
+            const employee_id = $('#employee_id').val();
+            const razon_cambio = document.getElementById('razon_cambio') ? document.getElementById('razon_cambio')
+                .value : '';
 
             try {
                 const response = await fetch(`application/employee/${applicationId}`, {
@@ -439,24 +596,28 @@
                     },
                     body: JSON.stringify({
                         application_id: applicationId,
-                        employee_id: employee_id
+                        employee_id: employee_id,
+                        razon_cambio: razon_cambio
                     })
-                })
+                });
                 if (!response.ok) {
-                    throw new Error('Error al guardar el comentario')
+                    throw new Error('Error al guardar el comentario');
                 }
 
-                const result = await response.json()
+                const result = await response.json();
                 Swal.fire({
                     icon: 'success',
                     title: 'Éxito',
-                    text: 'Emppleado Actualizado exitosamente',
+                    text: 'Empleado Actualizado exitosamente',
                     confirmButtonText: 'OK'
                 });
-                // Limpiar el campo de comentario
+                // Limpiar el campo de comentario y razón
                 document.getElementById('application_id').value = '';
+                if (document.getElementById('razon_cambio')) {
+                    document.getElementById('razon_cambio').value = '';
+                }
                 $('#tbl-application').DataTable().ajax.reload();
-                $('#employeeModal').modal('hide')
+                $('#employeeModal').modal('hide');
             } catch (error) {
                 console.error('Error:', error);
                 Swal.fire({
@@ -466,7 +627,6 @@
                     confirmButtonText: 'OK'
                 });
             }
-
         }
     </script>
     {{-- <script>
