@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\ApplyAttachment;
 use App\Models\ApplyType;
 use App\Models\Attachment;
 use App\Models\Client;
@@ -10,6 +11,7 @@ use App\Models\Comment;
 use App\Models\Employee;
 use App\Models\HistoryState;
 use App\Models\State;
+use App\Providers\GraphTokenService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +22,18 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ApplicationController extends Controller
 {
+
+    protected $disk;
+
+    public function __construct(GraphTokenService $oneDriveService)
+    {
+        $this->disk = Storage::build([
+            'driver' => config('filesystems.disks.onedrive.driver'),
+            'root' => config('filesystems.disks.onedrive.root'),
+            'directory_type' => config('filesystems.disks.onedrive.directory_type'),
+            'access_token' => $oneDriveService->getAccessToken()
+        ]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -348,7 +362,8 @@ class ApplicationController extends Controller
                     }
                     $selected = $estado->id == $row->state_id ? 'selected' : '';
                     $cancelado = ($estado->name === 'CANCELADO') ? 'data-cancelado="1"' : 'data-cancelado="0"';
-                    $select .= '<option value="' . $estado->id . '" ' . $selected . ' ' . $cancelado . '>' . $estado->name . '</option>';
+                    $terminado = ($estado->name === 'TERMINADO') ? 'data-terminado="1"' : 'data-terminado="0"';
+                    $select .= '<option value="' . $estado->id . '" ' . $selected . ' ' . $cancelado . ' ' . $terminado . '>' . $estado->name . '</option>';
                 }
                 $select .= '</select>';
                 $select .= '<input type="text" class="form-control form-control-sm mt-1 motivo-cancelacion" style="display:none;" placeholder="Motivo de cancelación">';
@@ -473,5 +488,53 @@ class ApplicationController extends Controller
             ],
             200
         );
+    }
+
+    public function finalize(Request $request, $application_id)
+    {
+
+        $request->validate([
+            'comentario' => 'nullable|string',
+            'state_id' => 'required|exists:states,id',
+            'archivos.*' => 'nullable|file|max:10240', // 10MB por archivo
+        ]);
+
+        $application = Application::findOrFail($application_id);
+
+        // Cambiar el estado
+        $application->state_id = $request->state_id;
+        $application->save();
+
+        // Guardar comentario en historial de estados
+        HistoryState::create([
+            'state_id' => $request->state_id,
+            'user_id' => auth()->user()->id,
+            'application_id' => $application->id,
+            'changed_at' => now(),
+            'observation' => $request->comentario,
+        ]);
+
+        // Guardar archivos adjuntos
+        if ($request->hasFile('archivos')) {
+            foreach ($request->file('archivos') as $file) {
+                $fileName = uniqid() . '_' . $file->getClientOriginalName();
+                $filePath = "applications/{$application->id}/finalize/";
+                $fullPath = $filePath . $fileName;
+                $fileContent = file_get_contents($file->getRealPath());
+
+                // Guardar el archivo en OneDrive
+                $this->disk->put($fullPath, $fileContent);
+
+                ApplyAttachment::create([
+                    'application_id' => $application->id,
+                    'path' => $fullPath,
+                    'original_name' => $file->getClientOriginalName(),
+                    'uploaded_by' => auth()->user()->id,
+                ]);
+            }
+        }
+
+
+        return response()->json(['message' => 'Solicitud finalizada correctamente']);
     }
 }

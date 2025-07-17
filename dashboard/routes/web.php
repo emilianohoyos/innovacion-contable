@@ -92,6 +92,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('application/comment/{id}', [ApplicationController::class, 'saveClientComment']);
     Route::post('application/state/{id}', [ApplicationController::class, 'updateStatus']);
     Route::post('application/employee/{id}', [ApplicationController::class, 'updateEmployee']);
+    Route::post('/application/finalize/{id}', [ApplicationController::class, 'finalize']);
 
     Route::resource('folder', FolderController::class);
     Route::get('/folders-data', [FolderController::class, 'getFolderData'])->name('folders.data');

@@ -94,6 +94,7 @@
     @include('applications.modals.status')
     @include('applications.modals.employee')
     @include('applications.modals.comments')
+    @include('applications.modals.finalize')
 @endsection
 @section('scripts')
 
@@ -253,6 +254,7 @@
             var newState = $select.val();
             var prevState = $select.data('prev');
             var isCancelado = $select.find('option:selected').data('cancelado') === 1;
+            var isTerminado = $select.find('option:selected').data('terminado') === 1;
             if (isCancelado) {
                 // Mostrar SweetAlert para motivo de cancelación
                 Swal.fire({
@@ -291,6 +293,17 @@
                         $select.val(prevState);
                     }
                 });
+            } else if (isTerminado) {
+                // Pasar el application_id al input oculto del modal de finalización
+                document.getElementById('application_id').value = applicationId;
+                // Limpiar los campos del modal de finalización
+                if (document.getElementById('comentario_finalizacion')) {
+                    document.getElementById('comentario_finalizacion').value = '';
+                }
+                if (document.getElementById('archivos_finalizacion')) {
+                    document.getElementById('archivos_finalizacion').value = '';
+                }
+                $('#finalizeModal').modal('show');
             } else {
                 var data = {
                     state_id: newState,
@@ -309,6 +322,52 @@
         });
 
         // ...evento change para SweetAlert y revertido ya implementado arriba...
+
+        async function finalizeApplication() {
+
+            const applicationId = document.getElementById('application_id').value;
+            const comentario = document.getElementById('comentario_finalizacion').value;
+            const archivosInput = document.getElementById('archivos_finalizacion');
+            const archivos = archivosInput && archivosInput.files ? archivosInput.files : [];
+            const stateIdTerminado = document.getElementById('state_id_terminado').value;
+
+            const formData = new FormData();
+            formData.append('comentario', comentario);
+            formData.append('state_id', stateIdTerminado);
+            formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+            if (archivos && archivos.length > 0) {
+                for (let i = 0; i < archivos.length; i++) {
+                    if (archivos[i]) {
+                        formData.append('archivos[]', archivos[i], archivos[i].name);
+                    }
+                }
+            }
+
+            try {
+                const response = await fetch(`/application/finalize/${applicationId}`, {
+                    method: 'POST',
+                    body: formData
+                });
+                if (!response.ok) throw new Error('Error al finalizar la solicitud');
+                const result = await response.json();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: 'Solicitud finalizada exitosamente',
+                    confirmButtonText: 'OK'
+                });
+                $('#finalizeModal').modal('hide');
+                $('#tbl-application').DataTable().ajax.reload();
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un problema al finalizar la solicitud',
+                    confirmButtonText: 'OK'
+                });
+            }
+        }
 
 
         function confirmDelete() {

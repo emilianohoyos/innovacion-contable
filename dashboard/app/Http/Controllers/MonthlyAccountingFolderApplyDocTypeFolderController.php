@@ -82,7 +82,7 @@ class MonthlyAccountingFolderApplyDocTypeFolderController extends Controller
                     'apply_doc_type_folder_id' => $attachment['apply_doc_type_folder_id'],
                     'is_new' => true,
                     'status' => "PENDIENTE",
-                    'user_id' => auth()->id()
+                    'user_id' => auth()->user()->id
                 ]);
 
                 $fileData = $attachment["fileBase64"];
