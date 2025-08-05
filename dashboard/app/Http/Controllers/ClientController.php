@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\ApplyDocTypeFolder;
+use App\Models\ApplyType;
 use App\Models\Client;
 use App\Models\ClientContactInfo;
 use App\Models\ClientFolder;
@@ -732,4 +733,37 @@ class ClientController extends Controller
         $client = Client::with(['contactInfo', 'contactInfo.documentType', 'commentsClient.createdBy', 'documentType', 'personType', 'employees.employee', 'clientResponsible', 'folders'])->find($id);
         return response()->json($client);
     }
+
+    /**
+     * Retorna los documentos asociados a un monthly_accounting_folder_id
+     */
+    public function getDocumentsByMonthlyAccountingFolder($monthlyAccountingFolderId)
+    {
+        $query = MonthlyAccountingFolderApplyDocTypeFolder::with(['applyDocTypeFolders.applyDocumentType'])
+            ->where('monthly_accounting_folder_id', $monthlyAccountingFolderId);
+        return DataTables::of($query)
+            ->addColumn('tipo_documento', function ($doc) {
+                return optional($doc->applyDocTypeFolders->applyDocumentType)->name;
+            })
+            ->addColumn('is_new', function ($doc) {
+                return $doc->is_new ? 'Sí' : 'No';
+            })
+            ->addColumn('status', function ($doc) {
+                return $doc->status == 1 ? 'Activo' : 'Inactivo';
+            })
+            ->addColumn('created_at', function ($doc) {
+                return $doc->created_at ? $doc->created_at->format('Y-m-d H:i') : '';
+            })
+            ->addColumn('path', function ($doc) {
+                if ($doc->path) {
+
+                    return  '<a href="' . $doc->path . '" download class="btn btn-sm btn-success ms-1" title="Descargar archivo"><i class="material-icons-outlined">download</i></a>';
+                }
+                return '';
+            })
+            ->rawColumns(['path'])
+            ->make(true);
+    }
+
+    public function documentTypeFolder($monthlyAccountingFolderId) {}
 }

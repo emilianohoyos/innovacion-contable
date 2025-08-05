@@ -81,8 +81,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('monthly-accounting-folder/comment/{id}', [ClientController::class, 'getMonthlyAccountingComments']);
     Route::post('monthly-accounting-folder/comment/{id}', [ClientController::class, 'saveMonthlyAccountingComment']);
 
+    Route::get('monthly-accounting-folder/doctype/{id}', [ClientController::class, 'documentTypeFolder']);
+
+    Route::get('/monthly-accounting-folder/{monthlyAccountingFolderId}/documents', [ClientController::class, 'getDocumentsByMonthlyAccountingFolder']);
+
     Route::get('/clients-follow-up/{client_id}', [ClientFollowUpController::class, 'index'])->name('client.follow-up');
     Route::get('/clients-follow-up/{clientId}/{year}', [ClientFollowUpController::class, 'getClientFollowData']);
+
 
     Route::resource('employee', EmployeeController::class);
     Route::post('employee/disable/{id}', [EmployeeController::class, 'disableEmployee']);

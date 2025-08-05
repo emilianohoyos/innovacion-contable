@@ -68,6 +68,8 @@
         </div>
     </div>
     @include('my_clients.modals.comments-folder')
+    @include('my_clients.modals.documents')
+    @include('my_clients.modals.upload-documents')
 @endsection
 @section('scripts')
     <script src="{{ URL::asset('build/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
@@ -302,6 +304,53 @@
                     text: 'Hubo un problema al cargar los comentarios',
                 });
             }
+        }
+
+
+        function openDocumentsModal(monthlyAccountingFolderId) {
+            $('#documentsModal').modal('show');
+            // Inicializa o recarga el DataTable con AJAX
+            if ($.fn.DataTable.isDataTable('#documentsTable')) {
+                $('#documentsTable').DataTable().destroy();
+            }
+            $('#documentsTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: `/monthly-accounting-folder/${monthlyAccountingFolderId}/documents`,
+
+                },
+                columns: [{
+                        data: 'tipo_documento',
+                        name: 'tipo_documento'
+                    },
+                    {
+                        data: 'is_new',
+                        name: 'is_new'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at',
+                    },
+                    {
+                        data: 'path',
+                        name: 'path',
+                    }
+                ],
+                language: {
+                    url: "{{ URL::asset('build/plugins/datatable/js/es.json') }}"
+                },
+                destroy: true
+            });
+        }
+
+        function openUploadResponseModal(monthlyAccountingFolderId) {
+            $('#uploadDocumentsModal').modal('show');
+            document.getElementById('monthly_accounting_folder_id').value = id;
         }
     </script>
 @endsection
