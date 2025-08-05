@@ -765,5 +765,21 @@ class ClientController extends Controller
             ->make(true);
     }
 
-    public function documentTypeFolder($monthlyAccountingFolderId) {}
+    public function documentTypeFolder($monthlyAccountingFolderId)
+    {
+        $data = MonthlyAccountingFolder::with(['clientFolder.folder.ApplyDocTypeFolders.applyDocumentType'])
+            ->where('id', $monthlyAccountingFolderId)
+            ->get();
+
+        $applyType = optional($data->first()->clientFolder->folder)->ApplyDocTypeFolders ?? collect();
+
+        $applyType = $applyType->map(function ($item) {
+            return [
+                'apply_document_type_id' => $item->id,
+                'name' => optional($item->applyDocumentType)->name,
+
+            ];
+        });
+        return response()->json($applyType);
+    }
 }

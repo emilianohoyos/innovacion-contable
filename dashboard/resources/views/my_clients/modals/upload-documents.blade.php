@@ -7,12 +7,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="uploadDocumentForm" enctype="multipart/form-data">
+                <input type="hidden" name="monthly_accounting_folder_upload_id"
+                    id="monthly_accounting_folder_upload_id" value="">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="documentType" class="form-label">Tipo de documento</label>
-                        <select class="form-select" id="documentType" name="document_type_id" required>
+                        <select class="form-select" id="apply_document_type_id" name="apply_document_type_id" required
+                            style="width:100%">
                             <option value="">Seleccione tipo de documento</option>
-                            <!-- Opciones dinámicas aquí -->
                         </select>
                     </div>
                     <div class="mb-3">
@@ -31,4 +33,8 @@
     </div>
 </div>
 
-<script></script>
+<script>
+    $(document).ready(function() {
+
+    });
+</script>

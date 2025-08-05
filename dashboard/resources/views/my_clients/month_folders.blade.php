@@ -135,6 +135,38 @@
             $('#yearFilter, #monthFilter').on('change', function() {
                 table.ajax.reload();
             });
+
+            $('#apply_document_type_id').select2({
+                theme: 'bootstrap-5',
+                placeholder: 'Seleccione tipo de documento',
+                allowClear: true,
+                ajax: {
+                    url: function(params) {
+                        var folderId = $('#monthly_accounting_folder_upload_id').val();
+
+                        var baseUrl = `/monthly-accounting-folder/doctype/${folderId}`;
+
+                        return baseUrl;
+                    },
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {};
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data.map(function(item) {
+                                return {
+                                    id: item.apply_document_type_id,
+                                    text: item.name
+                                };
+                            })
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 0
+            });
         });
 
 
@@ -350,7 +382,7 @@
 
         function openUploadResponseModal(monthlyAccountingFolderId) {
             $('#uploadDocumentsModal').modal('show');
-            document.getElementById('monthly_accounting_folder_id').value = id;
+            document.getElementById('monthly_accounting_folder_upload_id').value = monthlyAccountingFolderId;
         }
     </script>
 @endsection
