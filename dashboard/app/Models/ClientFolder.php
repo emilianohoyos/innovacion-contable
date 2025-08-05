@@ -20,4 +20,9 @@ class ClientFolder extends Model
     {
         return $this->belongsTo(Folder::class);
     }
+
+    public function monthlyAccountingFolders(): HasMany
+    {
+        return $this->hasMany(MonthlyAccountingFolder::class, 'client_folder_id');
+    }
 }

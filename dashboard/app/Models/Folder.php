@@ -26,10 +26,7 @@ class Folder extends Model
         )->withPivot('is_required');       // Incluir columna adicional (is_required) en el resultado
     }
 
-    public function monthlyAccountingFolders(): HasMany
-    {
-        return $this->hasMany(MonthlyAccountingFolder::class, 'folder_id');
-    }
+
 
     public function clients()
     {

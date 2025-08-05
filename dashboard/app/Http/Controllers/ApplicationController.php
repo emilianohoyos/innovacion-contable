@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Log;
 
 class ApplicationController extends Controller
 {
@@ -536,5 +537,60 @@ class ApplicationController extends Controller
 
 
         return response()->json(['message' => 'Solicitud finalizada correctamente']);
+    }
+
+    /**
+     * Descarga un archivo desde OneDrive usando la url guardada en la base de datos.
+     * @param string $path Ruta relativa del archivo en OneDrive (ejemplo: applications/1/finalize/archivo.pdf)
+     */
+    public function downloadAttachment($path)
+    {
+        //
+        Log::info('Descarga solicitada', ['raw_path' => $path]);
+        $path = urldecode($path);
+        Log::info('Descarga urldecode', ['decoded_path' => $path]);
+        // Reemplazar + por espacio por compatibilidad con rutas URL-encoded
+        $path = str_replace('+', ' ', $path);
+        Log::info('Descarga path final', ['final_path' => $path]);
+        if (!$this->disk->exists($path)) {
+            Log::error('Archivo no encontrado en disco', ['path' => $path]);
+            abort(404, 'Archivo no encontrado');
+        }
+
+        $stream = $this->disk->readStream($path);
+        if ($stream === false) {
+            abort(500, 'No se pudo leer el archivo');
+        }
+        // Si $stream es array con clave 'stream', extraer el recurso real
+        if (is_array($stream) && isset($stream['stream']) && is_resource($stream['stream'])) {
+            $stream = $stream['stream'];
+        }
+
+        // Obtener el mime type usando finfo_file solo si $stream es un recurso
+        $filename = basename($path);
+        $mimeType = 'application/octet-stream';
+        if (is_resource($stream) && get_resource_type($stream) === 'stream' && function_exists('finfo_open')) {
+            $meta = stream_get_meta_data($stream);
+            if (isset($meta['uri']) && strpos($meta['uri'], 'guzzle://') !== 0) {
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $detected = finfo_file($finfo, $meta['uri']);
+                if ($detected) {
+                    $mimeType = $detected;
+                }
+                finfo_close($finfo);
+            }
+        }
+
+        return response()->stream(function () use ($stream) {
+            if (!is_resource($stream) || get_resource_type($stream) !== 'stream') {
+                \Log::error('El stream no es un recurso válido', ['stream' => $stream]);
+                throw new \RuntimeException('No se pudo obtener el recurso de archivo para descarga.');
+            }
+            fpassthru($stream);
+            fclose($stream);
+        }, 200, [
+            'Content-Type' => $mimeType,
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ]);
     }
 }

@@ -61,7 +61,7 @@
                 <a href="{{ route('client-by-employee.index') }}">
                     <div class="parent-icon"><i class="material-icons-outlined">person_outline</i>
                     </div>
-                    <div class="menu-title">Contabilidad Mensual</div>
+                    <div class="menu-title">Contabilidad</div>
                 </a>
             </li>
 

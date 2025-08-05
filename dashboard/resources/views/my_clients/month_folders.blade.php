@@ -4,85 +4,138 @@
 @section('css')
     <link href="{{ URL::asset('build/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
     <link href="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('build/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+
 @endsection
 @section('content')
     <x-page-title title="Carpeta del Cliente" pagetitle="Carpeta del Cliente" />
 
 
-    <div class="row row-cols-1 row-cols-xl-2">
-        {{-- @dump($folders) --}}
-        @foreach ($folders as $item)
-            <div class="col">
-                <div class="card">
-                    <div class="row g-0">
-                        <div class="col-md-4 border-end">
-                            <div class="p-3 text-center d-flex flex-column align-items-center justify-content-center"
-                                style="height: 100%;">
-                                <i class="material-icons-outlined rounded-start p-1 border"
-                                    style="font-size: 90px; color: #ffcc00;">folder</i>
-                                <h5 class="card-title mt-2">{{ $item->name }}</h5>
-                                <h6><strong>Año:</strong>{{ $item->year }}</h6>
-                                <h6><strong>Mes:</strong>{{ \Carbon\Carbon::create()->month($item->month)->locale('es')->monthName }}
-                                </h6>
-                                <button type="button"
-                                    class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
-                                    onclick="addCommentFolder({{ $item->id }})">
-                                    <i class="material-icons-outlined">message</i> Agregar comentario
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Tipo documento</th>
-                                                <th>Es nuevo</th>
-                                                <th>Estado</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($item->documents as $document)
-                                                @foreach ($document->attachments as $attachtment)
-                                                    <tr>
-                                                        <th>{{ $document->name }}</th>
-                                                        <th>{{ $attachtment->is_new == true ? 'SI' : 'NO' }}</th>
-                                                        <th>{{ $attachtment->status }}</th>
-                                                        <th> <button type="button"
-                                                                class="btn btn-primary raised d-inline-flex align-items-center justify-content-center"
-                                                                onclick="downloadFile({{ $attachtment->id }})">
-                                                                <i class="material-icons-outlined">visibility</i>
-                                                            </button> </th>
-                                                    </tr>
-                                                @endforeach
-                                            @endforeach
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Tipo documento</th>
-                                                <th>Es nuevo</th>
-                                                <th>Estado</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
+    <div class="row ">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Carpetas Mensuales</h5>
 
-
-                            </div>
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="yearFilter" class="form-label">Año</label>
+                            <select id="yearFilter" class="form-select">
+                                <option value="">Todos</option>
+                                @foreach ($years as $year)
+                                    <option value="{{ $year }}">{{ $year }}</option>
+                                @endforeach
+                            </select>
                         </div>
+                        <div class="col-md-3">
+                            <label for="monthFilter" class="form-label">Mes</label>
+                            <select id="monthFilter" class="form-select">
+                                <option value="">Todos</option>
+                                <option value="1">Enero</option>
+                                <option value="2">Febrero</option>
+                                <option value="3">Marzo</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Mayo</option>
+                                <option value="6">Junio</option>
+                                <option value="7">Julio</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered" id="monthlyFoldersTable">
+                            <thead>
+                                <tr>
+                                    <th>Carpeta</th>
+                                    <th>Archivos Nuevos?</th>
+                                    <th>Año</th>
+                                    <th>Mes</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-        @endforeach
-
+        </div>
     </div>
 
 @endsection
 @section('scripts')
+    <script src="{{ URL::asset('build/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('build/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ URL::asset('build/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script>
+        $(document).ready(function() {
+            var table = $('#monthlyFoldersTable').DataTable({
+                "language": {
+                    url: "{{ URL::asset('build/plugins/datatable/js/es.json') }}"
+                },
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('client-monthly-accounting-data', ['clientId' => $clientId]) }}",
+                    data: function(d) {
+                        d.year = $('#yearFilter').val();
+                        d.month = $('#monthFilter').val();
+                    }
+                },
+                columns: [{
+                        data: 'client_folder.folder.name',
+                        name: 'client_folder.folder.name'
+                    },
+                    {
+                        data: 'is_new',
+                        name: 'is_new',
+                        render: function(data) {
+                            return data ? 'Sí' : 'No';
+                        }
+                    },
+                    {
+                        data: 'year',
+                        name: 'year'
+                    },
+                    {
+                        data: 'month_year',
+                        name: 'month_year',
+                        render: function(data) {
+                            const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre',
+                                'Diciembre'
+                            ];
+                            let mesNum = parseInt(data, 10);
+                            return meses[mesNum - 1] || data;
+                        }
+                    },
+                    {
+                        data: 'is_active',
+                        name: 'is_active',
+                        render: function(data) {
+                            return data ? 'Activo' : 'Desactivado';
+                        }
+                    },
+                    {
+                        data: 'acciones',
+                        name: 'acciones',
+                        orderable: false,
+                        searchable: false
+                    }
+                ]
+            });
+            $('#yearFilter, #monthFilter').on('change', function() {
+                table.ajax.reload();
+            });
+        });
+
+
         function downloadFile(id) {
             // Define la URL del endpoint
             const url = "{{ route('file.download') }}";
@@ -92,7 +145,8 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content'),
                     },
                     body: JSON.stringify({
                         id: id
@@ -113,6 +167,43 @@
                 })
                 .catch(error => {
                     console.error('Error al descargar el archivo:', error);
+                });
+        }
+
+        // Cambia el estado de la carpeta mensual (activo/desactivado)
+        function toggleFolderStatus(id) {
+            fetch('/monthly-accounting-folder/toggle-status/' + id, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Estado actualizado',
+                            text: data.message,
+                            timer: 1200,
+                            showConfirmButton: false
+                        });
+                        $('#monthlyFoldersTable').DataTable().ajax.reload(null, false);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.message || 'No se pudo cambiar el estado.'
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'No se pudo cambiar el estado.'
+                    });
                 });
         }
     </script>

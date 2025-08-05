@@ -469,6 +469,7 @@ class ClientController extends Controller
             ->make(true);
     }
 
+
     public function indexMyClients()
     {
         return view('my_clients.index');
@@ -501,15 +502,25 @@ class ClientController extends Controller
         return DataTables::of($clients)
             ->addColumn('acciones', function ($client) {
                 $date = Carbon::now();
-                $btn = '<a href="' . route("client-monthly-folders", ["clientId" => $client->client_id]) . '" class="btn btn-warning raised d-inline-flex align-items-center justify-content-center ">
-                    <i class="material-icons-outlined">folder</i>
-                </a>';
+                $btn = '';
                 $btn .= '<button type="button"
-                class="btn btn-info raised d-inline-flex align-items-center justify-content-center"
-                onclick="seeClient(' . $client->client_id . ')">
-                <i class="material-icons-outlined">visibility</i>
-            </button>';
-
+                    class="btn btn-info raised d-inline-flex align-items-center justify-content-center"
+                    onclick="seeClient(' . $client->client_id . ')"
+                    title="Ver cliente"
+                    data-bs-toggle="tooltip" data-bs-placement="top">
+                    <i class="material-icons-outlined">visibility</i>
+                </button>
+                ';
+                $btn .= '<a href="' . route("client-monthly-accounting", ["clientId" => $client->client_id]) . '" class="btn btn-warning raised d-inline-flex align-items-center justify-content-center "
+                    title="Contabilidad anual"
+                    data-bs-toggle="tooltip" data-bs-placement="top">
+                    <i class="material-icons-outlined">event_note</i>
+                </a>';
+                $btn .= '<a href="' . route("client-monthly-accounting", ["clientId" => $client->client_id]) . '" class="btn btn-secondary raised d-inline-flex align-items-center justify-content-center "
+                    title="Contabilidad mensual"
+                    data-bs-toggle="tooltip" data-bs-placement="top">
+                    <i class="material-icons-outlined">calendar_month</i>
+                </a>';
                 return  $btn;
             })
             ->rawColumns(['acciones'])
@@ -518,65 +529,104 @@ class ClientController extends Controller
 
     public function getMonthFolders($clientId)
     {
+        // Obtener años únicos de MonthlyAccountingFolder para este cliente
+        $years = MonthlyAccountingFolder::whereHas('clientFolder', function ($query) use ($clientId) {
+            $query->where('client_id', $clientId);
+        })
+            ->selectRaw('DISTINCT year')
+            ->orderBy('year', 'desc')
+            ->pluck('year');
 
-        // $current_date = Carbon::now();
-        // $current_year = $current_date->year;
-        // $current_month = $current_date->month;
+        return view('my_clients.month_folders', compact('clientId', 'years'));
+    }
 
-        // if ($current_month == 1) {
-        //     $current_month = 12;
-        //     $current_year -= 1;
-        // }
+    public function getMonthFoldersData(Request $request, $clientId)
+    {
+        $year = $request->input('year');
+        $month = $request->input('month');
 
-        $folders = ClientFolder::select(
-            'folders.id',
-            'folders.name',
-            // 'monthly_accountings.id as monthly_accounting_id',
-            // 'monthly_accountings.year',
-            // 'monthly_accountings.month',
-            // 'monthly_accountings.state',
-            // 'monthly_accountings.end_date',
-            'monthly_accounting_folders.id as monthly_accounting_folder_id',
-            'monthly_accounting_folders.month_year as year',
-            'monthly_accounting_folders.month_year as month',
-            'monthly_accounting_folders.status',
-            'monthly_accounting_folders.is_new'
-        )
-            ->join('folders', 'client_folders.folder_id', '=', 'folders.id')
-            ->leftJoin('monthly_accounting_folders', function ($join) {
-                $join->on('monthly_accounting_folders.folder_id', '=', 'folders.id');
-            })
-            ->where('client_folders.client_id', $clientId)
-            ->get();
+        // dd($year, $month);
+        $query = MonthlyAccountingFolder::with(['clientFolder.folder' => function ($q) {
+            $q->where('periodicity', 'MENSUAL');
+        }])
+            ->whereHas('clientFolder', function ($q) use ($clientId) {
+                $q->where('client_id', $clientId);
+            });
 
-        $results = [];
-        foreach ($folders as $folder) {
-            $result = $folder;
-
-            $documents = ApplyDocTypeFolder::select('apply_doc_type_folders.id as apply_doc_type_folders_id', 'apply_document_types.*')
-                ->join(
-                    'apply_document_types',
-                    'apply_doc_type_folders.apply_document_type_id',
-                    '=',
-                    'apply_document_types.id'
-                )
-                ->where('folder_id', $folder->id)
-                ->get();
-
-            $result['documents'] = $documents;
-
-            foreach ($documents as $key => $document) {
-                $attachDoc = MonthlyAccountingFolderApplyDocTypeFolder::where(
-                    'monthly_accounting_folder_id',
-                    $folder->monthly_accounting_folder_id
-                )
-                    ->where('apply_doc_type_folder_id', $document->apply_doc_type_folders_id)->get();
-                $result['documents'][$key]['attachments'] = $attachDoc;
-            }
-            $results[] = $result;
+        if (!empty($year)) {
+            $query->where('year', $year);
         }
-        // dd($folders);
-        return view('my_clients.month_folders', compact('folders'));
+        if (!empty($month)) {
+            // Asegura que el mes sea integer para evitar problemas de tipo
+            $query->where('month_year', (int)$month);
+        }
+
+        $data = $query->get()
+            ->filter(function ($item) {
+                // Omite los que no tengan folder o folder sea null
+                return optional($item->clientFolder->folder)->id !== null;
+            })
+            ->values();
+
+        return DataTables::of($data)
+            ->addColumn('acciones', function ($item) {
+                $btn = '';
+                // 1. Inactivar/activar carpeta
+                $btn .= '<button type="button"
+        class="btn btn-sm ' . ($item->is_active ? 'btn-secondary' : 'btn-light') . ' raised d-inline-flex align-items-center justify-content-center"
+        onclick="toggleFolderStatus(' . $item->id . ')"
+        title="Activar/Inactivar carpeta"
+        data-bs-toggle="tooltip" data-bs-placement="top">
+        <i class="material-icons-outlined">' . ($item->is_active ? 'toggle_on' : 'toggle_off') . '</i>
+    </button>';
+                // 2. Modal de comentarios
+                $btn .= '<button type="button"
+        class="btn btn-sm btn-info raised d-inline-flex align-items-center justify-content-center"
+        onclick="openCommentsModal(' . $item->id . ')"
+        title="Comentarios"
+        data-bs-toggle="tooltip" data-bs-placement="top">
+        <i class="material-icons-outlined">comment</i>
+    </button>';
+                // 3. Modal de documentos
+                $btn .= '<button type="button"
+        class="btn btn-sm btn-primary raised d-inline-flex align-items-center justify-content-center"
+        onclick="openDocumentsModal(' . $item->id . ')"
+        title="Ver documentos"
+        data-bs-toggle="tooltip" data-bs-placement="top">
+        <i class="material-icons-outlined">folder_open</i>
+    </button>';
+                // 4. Modal para cargar documentos de respuesta
+                $btn .= '<button type="button"
+        class="btn btn-sm btn-success raised d-inline-flex align-items-center justify-content-center"
+        onclick="openUploadResponseModal(' . $item->id . ')"
+        title="Cargar respuesta"
+        data-bs-toggle="tooltip" data-bs-placement="top">
+        <i class="material-icons-outlined">upload_file</i>
+    </button>';
+                return $btn;
+            })
+            ->rawColumns(['acciones'])
+            ->make(true);
+    }
+
+    public function toggleMonthFolderStatus($id)
+    {
+        $folder = MonthlyAccountingFolder::find($id);
+        if (!$folder) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Carpeta mensual no encontrada',
+            ], 404);
+        }
+
+        $folder->is_active = !$folder->is_active;
+        $folder->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => $folder->is_active ? 'Carpeta activada' : 'Carpeta desactivada',
+            'is_active' => $folder->is_active,
+        ]);
     }
 
     public function getRegisteredFolders($clientId)

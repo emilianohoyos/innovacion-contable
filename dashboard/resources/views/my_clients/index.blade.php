@@ -364,45 +364,540 @@
                     document.getElementById('clientReview').textContent = clientData.review ?? 'No hay review';
                     document.getElementById('clientObservation').textContent = clientData.observation ??
                         'No hay Observaciones';
-                    document.getElementById('fiscalIva').textContent = clientData.observation == 1 ? 'Si' : 'No';
-                    document.getElementById('fiscalSelfRetention').textContent = clientData.observation == 1 ? 'Si' :
-                        'No';
-                    document.getElementById('fiscalSimpleRegime').textContent = clientData.observation == 1 ? 'Si' :
-                        'No';
-                    document.getElementById('icaWithholdingAgent').textContent = clientData.observation == 1 ? 'Si' :
-                        'No';
-                    document.getElementById('icaWithholdingMunicipality').textContent = clientData
-                        .municipality_ica_withholding_agent ?? 'No aplica';
-                    document.getElementById('icaSelfRetentionAgent').textContent = clientData.observation == 1 ? 'Si' :
-                        'No';
-                    document.getElementById('icaSelfRetentionMunicipality').textContent = clientData
-                        .municipality_ica_selfretaining_agent ?? 'No aplica';
+
+                    document.getElementById('is_simple_taxation_regimen').textContent = clientData.client_responsible
+                        .is_simple_taxation_regime ? 'Si' : 'No';
+                    if (clientData.client_responsible
+                        .is_simple_taxation_regimen == 1) {
+                        document.getElementById('simple_taxation_regime_advances').style.display = 'flex'
+                        document.getElementById('simple_taxation_regime_advances_lbl').style.display = 'flex'
+                        document.getElementById('simple_taxation_regime_consolidated_annual').style.display = 'flex'
+                        document.getElementById('simple_taxation_regime_consolidated_annual_lbl').style.display = 'flex'
+
+                        document.getElementById('simple_taxation_regime_advances').textContent = clientData
+                            .client_responsible.simple_taxation_regime_advances ?? 'No aplica';
+                        document.getElementById('simple_taxation_regime_consolidated_annual').textContent = clientData
+                            .client_responsible.simple_taxation_regime_consolidated_annual ?? 'No aplica';
+                    } else {
+                        document.getElementById('simple_taxation_regime_advances').style.display = 'none'
+                        document.getElementById('simple_taxation_regime_advances_lbl').style.display = 'none'
+                        document.getElementById('simple_taxation_regime_consolidated_annual').style.display = 'none'
+                        document.getElementById('simple_taxation_regime_consolidated_annual_lbl').style.display = 'none'
+
+                    }
+
+
+
+
+                    document.getElementById('is_industry_commerce').textContent = clientData.client_responsible
+                        .is_industry_commerce ? 'Si' : 'No';
+                    document.getElementById('industry_commerce_periodicity').textContent = clientData
+                        .client_responsible.industry_commerce_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_industry_commerce == '1' && clientData.client_responsible
+                        .industry_commerce_places) {
+                        const table = document.getElementById("industry_commerce_places_table");
+                        const tbody = table.querySelector("tbody");
+                        tbody.innerHTML = "";
+
+                        function addRow(deparment, city) {
+                            let row = document.createElement("tr");
+
+                            row.innerHTML = `
+                            <td>${deparment}</td>
+                            <td>${city}</td>
+                            `;
+
+                            tbody.appendChild(row);
+                            table.style.display = "table"; // Mostrar la tabla si está oculta
+                        }
+                        JSON.parse(clientData.client_responsible
+                            .industry_commerce_places).forEach(item => addRow(item.deparment, item.city));
+
+                    } else {
+                        document.getElementById('industry_commerce_periodicity').style.display = 'none'
+                        document.getElementById('industry_commerce_places_table').style.display = 'none'
+                        document.getElementById('industry_commerce_periodicity_lbl').style.display = 'none'
+
+                    }
+
+                    document.getElementById('is_industry_commerce_retainer').textContent = clientData.client_responsible
+                        .is_industry_commerce_retainer ? 'Si' : 'No';
+                    document.getElementById('industry_commerce_retainer_periodicity').textContent = clientData
+                        .client_responsible.industry_commerce_retainer_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_industry_commerce_retainer == '1' && clientData.client_responsible
+                        .industry_commerce_retainer_places) {
+                        const table = document.getElementById("industry_commerce_retainer_places_table");
+                        const tbody = table.querySelector("tbody");
+                        tbody.innerHTML = "";
+
+                        function addRow(deparment, city) {
+                            let row = document.createElement("tr");
+
+                            row.innerHTML = `
+                            <td>${deparment}</td>
+                            <td>${city}</td>
+                            `;
+
+                            tbody.appendChild(row);
+                            table.style.display = "table"; // Mostrar la tabla si está oculta
+                        }
+                        JSON.parse(clientData.client_responsible
+                            .industry_commerce_retainer_places).forEach(item => addRow(item.deparment, item.city));
+
+                    } else {
+                        document.getElementById('industry_commerce_retainer_periodicity').style.display = 'none'
+                        document.getElementById('industry_commerce_retainer_places_table').style.display = 'none'
+                        document.getElementById('industry_commerce_retainer_periodicity_lbl').style.display = 'none'
+
+                    }
+
+                    document.getElementById('is_industry_commerce_selfretaining').textContent = clientData
+                        .client_responsible
+                        .is_industry_commerce_selfretaining ? 'Si' : 'No';
+                    document.getElementById('industry_commerce_selfretaining_periodicity').textContent = clientData
+                        .client_responsible.industry_commerce_selfretaining_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_industry_commerce_selfretaining == '1' && clientData.client_responsible
+                        .industry_commerce_retainer_places) {
+                        const table = document.getElementById("industry_commerce_selfretaining_places_table");
+                        const tbody = table.querySelector("tbody");
+                        tbody.innerHTML = "";
+
+                        function addRow(deparment, city) {
+                            let row = document.createElement("tr");
+
+                            row.innerHTML = `
+                            <td>${deparment}</td>
+                            <td>${city}</td>
+                            `;
+
+                            tbody.appendChild(row);
+                            table.style.display = "table"; // Mostrar la tabla si está oculta
+                        }
+                        JSON.parse(clientData.client_responsible
+                            .industry_commerce_retainer_places).forEach(item => addRow(item.deparment, item.city));
+
+                    } else {
+                        document.getElementById('industry_commerce_selfretaining_periodicity').style.display = 'none'
+                        document.getElementById('industry_commerce_selfretaining_places_table').style.display = 'none'
+                        document.getElementById('industry_commerce_selfretaining_periodicity_lbl').style.display =
+                            'none'
+                    }
+
+                    document.getElementById('vat_responsibles').textContent = clientData.client_responsible
+                        .vat_responsible ? 'Si' : 'No';
+                    if (clientData.client_responsible
+                        .vat_responsible == 1) {
+                        document.getElementById('vat_responsible_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('vat_responsible_observation_lbl').style.display = 'flex'
+                        document.getElementById('vat_responsible_periodicity').style.display = 'flex'
+                        document.getElementById('vat_responsible_observation').style.display = 'flex'
+                        document.getElementById('vat_responsible_periodicity').textContent = clientData
+                            .client_responsible.vat_responsible_periodicity ?? 'No aplica';
+                        document.getElementById('vat_responsible_observation').textContent = clientData
+                            .client_responsible.vat_responsible_observation ?? 'No aplica';
+                    } else {
+                        document.getElementById('vat_responsible_periodicity_lbl').style.display = 'none'
+                        document.getElementById('vat_responsible_observation_lbl').style.display = 'none'
+                        document.getElementById('vat_responsible_periodicity').style.display = 'none'
+                        document.getElementById('vat_responsible_observation').style.display = 'none'
+
+                    }
+
+                    document.getElementById('is_rent').textContent = clientData.client_responsible
+                        .is_rent ? 'Si' : 'No';
+                    if (clientData.client_responsible
+                        .is_rent == 1) {
+                        document.getElementById('rent_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('rent_periodicity').style.display = 'flex'
+
+                        document.getElementById('rent_periodicity').textContent = clientData
+                            .client_responsible.rent_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('rent_periodicity_lbl').style.display = 'none'
+                        document.getElementById('rent_periodicity').style.display = 'none'
+
+                    }
+
+                    document.getElementById('is_supersociety').textContent = clientData.client_responsible
+                        .is_supersociety ? 'Si' : 'No';
+                    if (clientData.client_responsible
+                        .is_supersociety == 1) {
+                        document.getElementById('supersociety_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('supersociety_periodicity').style.display = 'flex'
+
+                        document.getElementById('supersociety_periodicity').textContent = clientData
+                            .client_responsible.supersociety_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('supersociety_periodicity_lbl').style.display = 'none'
+                        document.getElementById('supersociety_periodicity').style.display = 'none'
+                    }
+
+                    document.getElementById('is_supertransport').textContent = clientData.client_responsible
+                        .is_supertransport ? 'Si' : 'No';
+                    if (clientData.client_responsible
+                        .is_supertransport == 1) {
+                        document.getElementById('supertransport_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('supertransport_periodicity').style.display = 'flex'
+                        document.getElementById('supertransport_observation_lbl').style.display = 'flex'
+                        document.getElementById('supertransport_observation').style.display = 'flex'
+
+                        document.getElementById('supertransport_periodicity').textContent = clientData
+                            .client_responsible.supertransport_periodicity ?? 'No aplica';
+                        document.getElementById('supertransport_observation').textContent = clientData
+                            .client_responsible.supertransport_observation ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('supertransport_periodicity_lbl').style.display = 'none'
+                        document.getElementById('supertransport_periodicity').style.display = 'none'
+                        document.getElementById('supertransport_observation_lbl').style.display = 'none'
+                        document.getElementById('supertransport_observation').style.display = 'none'
+                    }
+
+
+                    document.getElementById('is_superfinancial').textContent = clientData.client_responsible
+                        .is_superfinancial ? 'Si' : 'No';
+
+                    if (clientData.client_responsible
+                        .is_superfinancial == 1) {
+                        document.getElementById('superfinancial_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('superfinancial_periodicity').style.display = 'flex'
+
+                        document.getElementById('superfinancial_periodicity').textContent = clientData
+                            .client_responsible.superfinancial_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('superfinancial_periodicity_lbl').style.display = 'none'
+                        document.getElementById('superfinancial_periodicity').style.display = 'none'
+                    }
+
+                    document.getElementById('is_source_retention').textContent = clientData.client_responsible
+                        .is_source_retention ? 'Si' : 'No';
+                    if (clientData.client_responsible
+                        .is_source_retention == 1) {
+                        document.getElementById('source_retention_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('source_retention_periodicity').style.display = 'flex'
+
+                        document.getElementById('source_retention_periodicity').textContent = clientData
+                            .client_responsible.source_retention_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('source_retention_periodicity_lbl').style.display = 'none'
+                        document.getElementById('source_retention_periodicity').style.display = 'none'
+                    }
+                    document.getElementById('is_dian_exogenous_information').textContent = clientData.client_responsible
+                        .is_dian_exogenous_information ? 'Si' : 'No';
+
+                    if (clientData.client_responsible
+                        .is_dian_exogenous_information == 1) {
+                        document.getElementById('dian_exogenous_information_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('dian_exogenous_information_periodicity').style.display = 'flex'
+
+                        document.getElementById('dian_exogenous_information_periodicity').textContent = clientData
+                            .client_responsible.dian_exogenous_information_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('dian_exogenous_information_periodicity_lbl').style.display = 'none'
+                        document.getElementById('dian_exogenous_information_periodicity').style.display = 'none'
+                    }
+
+
+
+                    document.getElementById('is_municipal_exogenous_information').textContent = clientData
+                        .client_responsible
+                        .is_municipal_exogenous_information ? 'Si' : 'No';
+                    document.getElementById('municipal_exogenous_information_periodicity').textContent = clientData
+                        .client_responsible.municipal_exogenous_information_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_municipal_exogenous_information == '1' && clientData.client_responsible
+                        .industry_commerce_retainer_places) {
+                        const table = document.getElementById("municipal_exogenous_information_places_table");
+                        const tbody = table.querySelector("tbody");
+                        tbody.innerHTML = "";
+
+                        function addRow(deparment, city) {
+                            let row = document.createElement("tr");
+
+                            row.innerHTML = `
+                            <td>${deparment}</td>
+                            <td>${city}</td>
+                            `;
+
+                            tbody.appendChild(row);
+                            table.style.display = "table"; // Mostrar la tabla si está oculta
+                        }
+                        JSON.parse(clientData.client_responsible
+                            .industry_commerce_retainer_places).forEach(item => addRow(item.deparment, item.city));
+
+                    } else {
+                        document.getElementById('municipal_exogenous_information_periodicity').style.display = 'none'
+                        document.getElementById('municipal_exogenous_information_places_table').style.display = 'none'
+                        document.getElementById('municipal_exogenous_information_periodicity_lbl').style.display =
+                            'none'
+                    }
+
+                    document.getElementById('is_wealth_tax').textContent = clientData.client_responsible
+                        .is_wealth_tax ? 'Si' : 'No';
+                    if (clientData.client_responsible
+                        .is_wealth_tax == 1) {
+                        document.getElementById('wealth_tax_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('wealth_tax_periodicity').style.display = 'flex'
+
+                        document.getElementById('wealth_tax_periodicity').textContent = clientData
+                            .client_responsible.wealth_tax_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('wealth_tax_periodicity_lbl').style.display = 'none'
+                        document.getElementById('wealth_tax_periodicity').style.display = 'none'
+                    }
+
+                    document.getElementById('is_radian').textContent = clientData.client_responsible
+                        .is_radian ? 'Si' : 'No';
+                    if (clientData.client_responsible
+                        .is_radian == 1) {
+                        document.getElementById('radian_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('radian_periodicity').style.display = 'flex'
+
+                        document.getElementById('radian_periodicity').textContent = clientData
+                            .client_responsible.radian_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('radian_periodicity_lbl').style.display = 'none'
+                        document.getElementById('radian_periodicity').style.display = 'none'
+                    }
+
+
+
+                    document.getElementById('is_e_payroll').textContent = clientData.client_responsible
+                        .is_e_payroll ? 'Si' : 'No';
+                    if (clientData.client_responsible
+                        .is_e_payroll == 1) {
+                        document.getElementById('e_payroll_periodicity_lbl').style.display = 'flex'
+                        document.getElementById('e_payroll_periodicity').style.display = 'flex'
+
+                        document.getElementById('e_payroll_periodicity').textContent = clientData
+                            .client_responsible.e_payroll_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('e_payroll_periodicity_lbl').style.display = 'none'
+                        document.getElementById('e_payroll_periodicity').style.display = 'none'
+                    }
+
+
+                    document.getElementById('is_single_registry_final_benefeciaries').textContent = clientData
+                        .client_responsible
+                        .is_single_registry_final_benefeciaries ? 'Si' : 'No';
+
+                    if (clientData.client_responsible
+                        .is_single_registry_final_benefeciaries == 1) {
+                        document.getElementById('single_registry_final_benefeciaries_periodicity_lbl').style.display =
+                            'flex'
+                        document.getElementById('single_registry_final_benefeciaries_periodicity').style.display =
+                            'flex'
+
+                        document.getElementById('single_registry_final_benefeciaries_periodicity').textContent =
+                            clientData
+                            .client_responsible.single_registry_final_benefeciaries_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('single_registry_final_benefeciaries_periodicity_lbl').style.display =
+                            'none'
+                        document.getElementById('single_registry_final_benefeciaries_periodicity').style.display =
+                            'none'
+                    }
+
+
+                    document.getElementById('is_renovacion_esal').textContent = clientData
+                        .client_responsible
+                        .is_renovacion_esal ? 'Si' : 'No';
+                    if (clientData.client_responsible
+                        .is_renovacion_esal == 1) {
+                        document.getElementById('renovacion_esal_periodicity_lbl').style.display =
+                            'flex'
+                        document.getElementById('renovacion_esal_periodicity').style.display =
+                            'flex'
+
+                        document.getElementById('renovacion_esal_periodicity').textContent =
+                            clientData
+                            .client_responsible.renovacion_esal_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('renovacion_esal_periodicity_lbl').style.display =
+                            'none'
+                        document.getElementById('renovacion_esal_periodicity').style.display =
+                            'none'
+                    }
+                    document.getElementById('is_assets_abroad').textContent = clientData
+                        .client_responsible
+                        .is_assets_abroad ? 'Si' : 'No';
+                    if (clientData.client_responsible
+                        .is_assets_abroad == 1) {
+                        document.getElementById('assets_abroad_periodicity_lbl').style.display =
+                            'flex'
+                        document.getElementById('assets_abroad_periodicity').style.display =
+                            'flex'
+
+                        document.getElementById('assets_abroad_periodicity').textContent =
+                            clientData
+                            .client_responsible.assets_abroad_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('assets_abroad_periodicity_lbl').style.display =
+                            'none'
+                        document.getElementById('assets_abroad_periodicity').style.display =
+                            'none'
+                    }
+
+                    document.getElementById('is_single_registry_proposers').textContent = clientData
+                        .client_responsible
+                        .is_single_registry_proposers ? 'Si' : 'No';
+                    document.getElementById('single_registry_proposers_periodicity').textContent = clientData
+                        .client_responsible.single_registry_proposers_periodicity ?? 'No aplica';
+                    if (clientData.client_responsible
+                        .is_single_registry_proposers == '1' && clientData.client_responsible
+                        .single_registry_proposers_places) {
+                        const table = document.getElementById("single_registry_proposers_places_table");
+                        const tbody = table.querySelector("tbody");
+                        tbody.innerHTML = "";
+
+                        function addRow(deparment, city) {
+                            let row = document.createElement("tr");
+
+                            row.innerHTML = `
+                            <td>${deparment}</td>
+                            <td>${city}</td>
+                            `;
+
+                            tbody.appendChild(row);
+                            table.style.display = "table"; // Mostrar la tabla si está oculta
+                        }
+                        JSON.parse(clientData.client_responsible
+                            .single_registry_proposers_places).forEach(item => addRow(item.deparment, item.city));
+
+                    } else {
+                        document.getElementById('single_registry_proposers_periodicity').style.display = 'none'
+                        document.getElementById('single_registry_proposers_places_table').style.display = 'none'
+                        document.getElementById('single_registry_proposers_periodicity_lbl').style.display =
+                            'none'
+                    }
+
+                    document.getElementById('is_renewal_commercial_registration')
+                        .textContent = clientData
+                        .client_responsible
+                        .is_renewal_commercial_registration ? 'Si' : 'No';
+                    if (clientData.client_responsible
+                        .is_renewal_commercial_registration == 1) {
+                        document.getElementById('renewal_commercial_registration_periodicity_lbl').style.display =
+                            'flex'
+                        document.getElementById('renewal_commercial_registration_periodicity').style.display =
+                            'flex'
+
+                        document.getElementById('renewal_commercial_registration_periodicity').textContent =
+                            clientData
+                            .client_responsible.renewal_commercial_registration_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('renewal_commercial_registration_periodicity_lbl').style.display =
+                            'none'
+                        document.getElementById('renewal_commercial_registration_periodicity').style.display =
+                            'none'
+                    }
+
+                    document.getElementById('is_national_tourism_fund')
+                        .textContent = clientData
+                        .client_responsible
+                        .is_national_tourism_fund ? 'Si' : 'No';
+                    if (clientData.client_responsible
+                        .is_national_tourism_fund == 1) {
+                        document.getElementById('national_tourism_fund_periodicity_lbl').style.display =
+                            'flex'
+                        document.getElementById('national_tourism_fund_periodicity').style.display =
+                            'flex'
+
+                        document.getElementById('national_tourism_fund_periodicity').textContent =
+                            clientData
+                            .client_responsible.national_tourism_fund_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('national_tourism_fund_periodicity_lbl').style.display =
+                            'none'
+                        document.getElementById('national_tourism_fund_periodicity').style.display =
+                            'none'
+                    }
+
+                    document.getElementById('is_special_tax_regime')
+                        .textContent = clientData
+                        .client_responsible
+                        .is_special_tax_regime ? 'Si' : 'No';
+
+
+                    document.getElementById('is_national_tourism_registry')
+                        .textContent = clientData
+                        .client_responsible
+                        .is_national_tourism_registry ? 'Si' : 'No';
+                    if (clientData.client_responsible
+                        .is_national_tourism_registry == 1) {
+                        document.getElementById('national_tourism_registry_periodicity_lbl').style.display =
+                            'flex'
+                        document.getElementById('national_tourism_registry_periodicity').style.display =
+                            'flex'
+
+                        document.getElementById('national_tourism_registry_periodicity').textContent =
+                            clientData
+                            .client_responsible.national_tourism_registry_periodicity ?? 'No aplica';
+
+                    } else {
+                        document.getElementById('national_tourism_registry_periodicity_lbl').style.display =
+                            'none'
+                        document.getElementById('national_tourism_registry_periodicity').style.display =
+                            'none'
+                    }
+
+
+
                     // Actualiza la tabla de contactos
                     const contactTableBody = document.getElementById('contactTableBody');
                     contactTableBody.innerHTML = ''; // Limpia la tabla
                     clientData.contact_info.forEach(contact => {
                         const row = `
                     <tr>
+                        <td>${contact.document_type.name}</td>
+                        <td>${contact.identification}</td>
                         <td>${contact.firstname}</td>
                         <td>${contact.lastname}</td>
-                        <td>${contact.birthday}</td>
+                        <td>${contact.birthday??'-'}</td>
                         <td>${contact.job_title}</td>
-                        <td>${contact.channel_communication}</td>
+                        <td>${
+                            (() => {
+                                try {
+                                    if (!contact.channel_communication) return 'Ninguno'; // Manejo de null o undefined
+
+                                    let parsed = JSON.parse(contact.channel_communication.replace(/\\"/g, '"'));
+                                    return Array.isArray(parsed) ? parsed.join(', ') : parsed;
+                                } catch (e) {
+                                    return contact.channel_communication.replace(/[\[\]"]/g, '') || 'Ninguno';
+                                }
+                            })()
+                        }</td>
                         <td>${contact.email}</td>
                         <td>${contact.cellphone}</td>
-                        <td>${contact.observation}</td>
+                        <td>${contact.observation??''}</td>
                     </tr>`;
                         contactTableBody.insertAdjacentHTML('beforeend', row);
                     });
 
                     // Actualiza la tabla de comentarios
-                    if (Array.isArray(clientData.comments) && clientData.comments.length > 0) {
+                    if (Array.isArray(clientData.comments_client) && clientData.comments_client.length > 0) {
                         clientData.comments_client.forEach(comment => {
                             const row = `
                             <tr>
                                 <td>${comment.description}</td>
-                                <td>${new Date(comment.date).toLocaleString()}</td>
-                                <td>${comment.author}</td>
+                                <td>${new Date(comment.created_at).toLocaleString('es-CO', { timeZone: 'America/Bogota' })}</td>
+                                <td>${comment.created_by.name}</td>
                             </tr>`;
                             commentsTableBody.insertAdjacentHTML('beforeend', row);
                         });
@@ -413,10 +908,35 @@
                             <td colspan="3" class="text-center">No hay comentarios disponibles</td>
                         </tr>`;
                     }
+
+                    let foldersTableBody = document.getElementById('foldersTableBody');
+                    // Actualiza la tabla de carpetas del cliente
+                    if (Array.isArray(clientData.folders) && clientData.folders.length > 0) {
+                        clientData.folders.forEach(folder => {
+                            const row = `
+                            <tr>
+                                <td>${folder.name}</td>
+                                <td>${folder.periodicity}</td>
+                            </tr>`;
+                            foldersTableBody.insertAdjacentHTML('beforeend', row);
+                        });
+                    } else {
+                        // Si no hay comentarios, agrega una fila indicando que no hay datos
+                        foldersTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="2" class="text-center">No hay Carpetas asignadas</td>
+                        </tr>`;
+                    }
+
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('No se pudo cargar la información del cliente.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'No se pudo cargar la información del cliente.',
+                        confirmButtonText: 'Aceptar'
+                    });
                 });
 
             var myModal = new bootstrap.Modal(document.getElementById('seeClientModal'));

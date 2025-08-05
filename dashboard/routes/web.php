@@ -73,7 +73,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/clients-by-employee-data', [ClientController::class, 'getClientByEmployeeData'])->name('client-by-employee.data');
     Route::get('/clients/{clientId}/folders', [ClientController::class, 'getRegisteredFolders']);
 
-    Route::get('/client-montly-folders/{clientId}', [ClientController::class, 'getMonthFolders'])->name('client-monthly-folders');
+    Route::get('/client-montly-accounting/{clientId}', [ClientController::class, 'getMonthFolders'])->name('client-monthly-accounting');
+    Route::get('/client-montly-accounting-data/{clientId}', [ClientController::class, 'getMonthFoldersData'])->name('client-monthly-accounting-data');
+
+    // Ruta para activar/desactivar carpeta mensual
+    Route::post('/monthly-accounting-folder/toggle-status/{id}', [ClientController::class, 'toggleMonthFolderStatus'])->name('monthly-accounting-folder.toggle-status');
 
 
     Route::get('/clients-follow-up/{client_id}', [ClientFollowUpController::class, 'index'])->name('client.follow-up');
@@ -108,4 +112,9 @@ Route::middleware(['auth'])->group(function () {
 
     //descarga de archivos
     Route::post('monthly-accounting-folder-file', [MonthlyAccountingFolderApplyDocTypeFolderController::class, 'downloadFromOneDrive'])->name('file.download');
+
+    // Descarga de archivos adjuntos de solicitudes
+    Route::get('/application/download/{path}', [ApplicationController::class, 'downloadAttachment'])
+        ->where('path', '.*')
+        ->name('application.download');
 });

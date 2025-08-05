@@ -13,4 +13,9 @@ class MonthlyAccountingFolder extends Model
     {
         return $this->hasMany(MonthlyAccountingFolderApplyDocTypeFolder::class, 'monthly_accounting_folder_id');
     }
+
+    public function clientFolder()
+    {
+        return $this->belongsTo(ClientFolder::class, 'client_folder_id');
+    }
 }
