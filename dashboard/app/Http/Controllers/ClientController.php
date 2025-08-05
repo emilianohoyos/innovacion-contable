@@ -17,6 +17,7 @@ use App\Models\EmployeeClient;
 use App\Models\Folder;
 use App\Models\MonthConfig;
 use App\Models\MonthlyAccounting;
+use App\Models\MonthlyAccountingComment;
 use App\Models\MonthlyAccountingFolder;
 use App\Models\MonthlyAccountingFolderApplyDocTypeFolder;
 use App\Models\PersonType;
@@ -570,6 +571,7 @@ class ClientController extends Controller
 
         return DataTables::of($data)
             ->addColumn('acciones', function ($item) {
+                $folderName = isset($item->clientFolder) && isset($item->clientFolder->folder) ? addslashes($item->clientFolder->folder->name) : '';
                 $btn = '';
                 // 1. Inactivar/activar carpeta
                 $btn .= '<button type="button"
@@ -582,7 +584,7 @@ class ClientController extends Controller
                 // 2. Modal de comentarios
                 $btn .= '<button type="button"
         class="btn btn-sm btn-info raised d-inline-flex align-items-center justify-content-center"
-        onclick="openCommentsModal(' . $item->id . ')"
+        onclick="openCommentsModal(' . $item->id . ',\'' . $folderName . '\')"
         title="Comentarios"
         data-bs-toggle="tooltip" data-bs-placement="top">
         <i class="material-icons-outlined">comment</i>
@@ -590,7 +592,7 @@ class ClientController extends Controller
                 // 3. Modal de documentos
                 $btn .= '<button type="button"
         class="btn btn-sm btn-primary raised d-inline-flex align-items-center justify-content-center"
-        onclick="openDocumentsModal(' . $item->id . ')"
+        onclick="openDocumentsModal(' . $item->id . "," . ')"
         title="Ver documentos"
         data-bs-toggle="tooltip" data-bs-placement="top">
         <i class="material-icons-outlined">folder_open</i>
@@ -627,6 +629,42 @@ class ClientController extends Controller
             'message' => $folder->is_active ? 'Carpeta activada' : 'Carpeta desactivada',
             'is_active' => $folder->is_active,
         ]);
+    }
+
+    public function getMonthlyAccountingComments($monthlyAccountingFolderId)
+    {
+        $comments = MonthlyAccountingComment::where('monthly_accounting_folder_id', $monthlyAccountingFolderId)
+            ->with('user:id,name') // Incluye solo el ID y nombre del autor
+            ->get();
+
+        // Formatea los datos para incluir "author"
+        $formattedComments = $comments->map(function ($comment) {
+            return [
+                'id' => $comment->id,
+                'description' => $comment->comment,
+                'created_at' => $comment->created_at,
+                'author' => $comment->user ? $comment->user->name : null, // Obtén el nombre del autor
+            ];
+        });
+
+        return response()->json($formattedComments);
+    }
+
+    public function saveMonthlyAccountingComment($monthlyAccountingFolderId)
+    {
+
+        $comments = MonthlyAccountingComment::create([
+            'monthly_accounting_folder_id' => $monthlyAccountingFolderId,
+            'comment' => request('comment'),
+            'user_id' => auth()->user()->id,
+            'user_type' => 'Employee'
+        ]);
+
+
+        return response()->json([
+            'status' => 'true',
+            'message' => 'Comentario guardado exitosamente',
+        ], 200);
     }
 
     public function getRegisteredFolders($clientId)

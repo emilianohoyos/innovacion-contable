@@ -78,7 +78,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Ruta para activar/desactivar carpeta mensual
     Route::post('/monthly-accounting-folder/toggle-status/{id}', [ClientController::class, 'toggleMonthFolderStatus'])->name('monthly-accounting-folder.toggle-status');
-
+    Route::get('monthly-accounting-folder/comment/{id}', [ClientController::class, 'getMonthlyAccountingComments']);
+    Route::post('monthly-accounting-folder/comment/{id}', [ClientController::class, 'saveMonthlyAccountingComment']);
 
     Route::get('/clients-follow-up/{client_id}', [ClientFollowUpController::class, 'index'])->name('client.follow-up');
     Route::get('/clients-follow-up/{clientId}/{year}', [ClientFollowUpController::class, 'getClientFollowData']);
