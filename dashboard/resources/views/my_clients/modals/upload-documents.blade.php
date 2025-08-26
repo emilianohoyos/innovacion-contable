@@ -84,7 +84,11 @@
         const file = fileInput.files[0];
 
         if (!typeId || !file) {
-            alert('Seleccione tipo de documento y archivo.');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Atención',
+                text: 'Seleccione tipo de documento y archivo.'
+            });
             return;
         }
 
@@ -122,7 +126,11 @@
     function submitMultipleDocuments(event) {
         event.preventDefault();
         if (documentsToUpload.length === 0) {
-            alert('Agregue al menos un documento.');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Atención',
+                text: 'Agregue al menos un documento.'
+            });
             return false;
         }
         const folderId = document.getElementById('monthly_accounting_folder_upload_id').value;
@@ -143,7 +151,11 @@
             .then(response => response.json())
             .then(data => {
                 if (data.status) {
-                    alert('Documentos cargados exitosamente');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'Documentos cargados exitosamente'
+                    });
                     documentsToUpload = [];
                     renderDocumentsTable();
                     document.getElementById('uploadDocumentsModal').classList.remove('show');
@@ -152,11 +164,19 @@
                     var modal = bootstrap.Modal.getInstance(document.getElementById('uploadDocumentsModal'));
                     if (modal) modal.hide();
                 } else {
-                    alert(data.message || 'Error al cargar documentos');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message || 'Error al cargar documentos'
+                    });
                 }
             })
             .catch(() => {
-                alert('Error al cargar documentos');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error al cargar documentos'
+                });
             });
         return false;
     }
