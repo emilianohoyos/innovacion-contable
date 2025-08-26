@@ -7,13 +7,27 @@ use App\Models\Client;
 use App\Models\ClientContactInfo;
 use App\Models\ClientFolder;
 use App\Models\MonthlyAccountingFolderApplyDocTypeFolder;
+use App\Providers\GraphTokenService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ClientFolderController extends Controller
 {
+
+    protected $disk;
+
+    public function __construct(GraphTokenService $oneDriveService)
+    {
+        $this->disk = Storage::build([
+            'driver' => config('filesystems.disks.onedrive.driver'),
+            'root' => config('filesystems.disks.onedrive.root'),
+            'directory_type' => config('filesystems.disks.onedrive.directory_type'),
+            'access_token' => $oneDriveService->getAccessToken()
+        ]);
+    }
     /**
      * Display a listing of the resource.
      */

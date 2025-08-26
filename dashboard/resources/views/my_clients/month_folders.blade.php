@@ -357,6 +357,10 @@
                         name: 'tipo_documento'
                     },
                     {
+                        data: 'answer',
+                        name: 'answer'
+                    },
+                    {
                         data: 'is_new',
                         name: 'is_new'
                     },

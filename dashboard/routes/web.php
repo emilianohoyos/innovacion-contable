@@ -76,6 +76,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/client-montly-accounting/{clientId}', [ClientController::class, 'getMonthFolders'])->name('client-monthly-accounting');
     Route::get('/client-montly-accounting-data/{clientId}', [ClientController::class, 'getMonthFoldersData'])->name('client-monthly-accounting-data');
 
+    Route::post('/client-montly-accounting-data-upload', [ClientController::class, 'storeMultipleDocuments'])->name('client-monthly-accounting-data-upload');
+
     // Ruta para activar/desactivar carpeta mensual
     Route::post('/monthly-accounting-folder/toggle-status/{id}', [ClientController::class, 'toggleMonthFolderStatus'])->name('monthly-accounting-folder.toggle-status');
     Route::get('monthly-accounting-folder/comment/{id}', [ClientController::class, 'getMonthlyAccountingComments']);

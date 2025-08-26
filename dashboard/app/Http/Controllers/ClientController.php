@@ -23,22 +23,35 @@ use App\Models\MonthlyAccountingFolder;
 use App\Models\MonthlyAccountingFolderApplyDocTypeFolder;
 use App\Models\PersonType;
 use App\Models\User;
+use App\Providers\GraphTokenService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class ClientController extends Controller
 {
+    protected $disk;
     /**
      * Display a listing of the resource.
      */
     public function __construct(
         protected RegisterController $registerController,
         protected MonthConfigController $monthConfigController,
-    ) {}
+        GraphTokenService $oneDriveService
+    ) {
+
+        $this->disk = Storage::build([
+            'driver' => config('filesystems.disks.onedrive.driver'),
+            'root' => config('filesystems.disks.onedrive.root'),
+            'directory_type' => config('filesystems.disks.onedrive.directory_type'),
+            'access_token' => $oneDriveService->getAccessToken()
+        ]);
+    }
+
     public function index()
     {
         return view('clients.index');
@@ -745,6 +758,9 @@ class ClientController extends Controller
             ->addColumn('tipo_documento', function ($doc) {
                 return optional($doc->applyDocTypeFolders->applyDocumentType)->name;
             })
+            ->addColumn('answer', function ($doc) {
+                return $doc->is_new ? 'Sí' : 'No';
+            })
             ->addColumn('is_new', function ($doc) {
                 return $doc->is_new ? 'Sí' : 'No';
             })
@@ -781,5 +797,68 @@ class ClientController extends Controller
             ];
         });
         return response()->json($applyType);
+    }
+
+    public function storeMultipleDocuments(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'monthly_accounting_folder_upload_id' => 'required|exists:monthly_accounting_folders,id',
+            'documents' => 'required|array|min:1',
+            'documents.*.apply_document_type_id' => 'required|exists:apply_doc_type_folders,id',
+            'documents.*.file' => 'required|file',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Error en la validación.',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $monthlyAccountingFolderId = $request->input('monthly_accounting_folder_upload_id');
+
+        $documents = $request->input('documents');
+        $saved = [];
+
+        foreach ($documents as $idx => $doc) {
+            // if (!isset($doc['apply_document_type_id']) || !$request->file("documents.$idx.file")) continue;
+
+            $typeId = $doc['apply_document_type_id'];
+            $file = $request->file("documents.$idx.file");
+
+            // Guardar archivo en storage/app/monthly_accounting/{monthlyAccountingFolderId}/{monthYear}/
+            $filePath = "monthly_accounting/{$monthlyAccountingFolderId}/";
+            $fileName = uniqid() . '_' . $file->getClientOriginalName();
+            // Usar el disco personalizado (OneDrive) para guardar el archivo
+            $path = $this->disk->putFileAs($filePath, $file, $fileName);
+
+            // Guardar registro en la base de datos
+            $record = MonthlyAccountingFolderApplyDocTypeFolder::create([
+                'monthly_accounting_folder_id' => $monthlyAccountingFolderId,
+                'apply_doc_type_folder_id' => $typeId,
+                'answer' => true,
+                'is_new' => true,
+                'status' => 'PENDIENTE',
+                'path' => $filePath . $fileName,
+            ]);
+
+            // Actualizar is_new de la carpeta mensual
+            MonthlyAccountingFolder::where('id', $monthlyAccountingFolderId)->update(['is_new' => true]);
+
+            $saved[] = [
+                'type_id' => $typeId,
+                'file' => $file->getClientOriginalName(),
+                'path' => $filePath . $fileName,
+            ];
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Documentos guardados correctamente',
+            'monthly_accounting_folder_id' => $monthlyAccountingFolderId,
+            'saved' => $saved,
+        ]);
     }
 }

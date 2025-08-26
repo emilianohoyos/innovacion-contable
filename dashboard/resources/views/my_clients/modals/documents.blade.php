@@ -12,6 +12,7 @@
                         <tr>
                             <th>Tipo documento</th>
                             <th>Nuevo</th>
+                            <th>Respuesta</th>
                             <th>Estado</th>
                             <th>Fecha Creación</th>
                             <th>Ver Archivo</th>
@@ -25,7 +26,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
-                <button type="button" class="btn btn-primary">Actualizar</button>
+
             </div>
 
         </div>
