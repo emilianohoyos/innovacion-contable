@@ -291,7 +291,7 @@ class ApplicationController extends Controller
             return response()->json(['error' => 'No autenticado'], 401);
         }
 
-        $application = Application::with(['applyType', 'attachments.applyDocumentType'])->where('client_id', $client_id)->get();
+        $application = Application::with(['applyType', 'attachments.applyDocumentType', 'state'])->where('client_id', $client_id)->get();
         return response()->json([
             "status" => true,
             'data' => $application

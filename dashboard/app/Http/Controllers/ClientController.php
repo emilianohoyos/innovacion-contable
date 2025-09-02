@@ -173,10 +173,8 @@ class ClientController extends Controller
                 ]);
             }
 
-
-
+            $password = 'Innovacion' . date('Y');
             if ($validatedData['person_type_id'] == 1) {
-                $password = 'Innovacion' . date('Y');
                 $user = $this->registerController->create([
                     'name' => $validatedData['firstname'] . $validatedData['lastname'],
                     'email' => $validatedData['email'],
@@ -203,7 +201,7 @@ class ClientController extends Controller
                         'name' => $contact['firstname'] . $contact['lastname'],
                         'email' => $contact['email'],
                         'username' => $contact['identification'],
-                        'password' => 'Innovacion' . date('Y'),
+                        'password' => $password,
                         'rol' => 'client'
                     ]);
                     $client->contactInfo()->create([

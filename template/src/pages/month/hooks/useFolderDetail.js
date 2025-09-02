@@ -1,11 +1,11 @@
 import { useMemo, useEffect } from 'react';
 import { useDataFetch } from '../../../hooks/useDataFetch';
 
-export const useFolderDetail = (folderId) => {
+export const useFolderDetail = (folderId, month, year) => {
   const { getData } = useDataFetch();
   
   // Definimos la clave para React Query
-  const queryKey = ['client-folder', folderId];
+  const queryKey = ['client-folder', folderId, month, year];
   
   // Utilizamos el hook getData para obtener los detalles de la carpeta
   const { 
@@ -14,7 +14,7 @@ export const useFolderDetail = (folderId) => {
     isError, 
     error, 
     refetch 
-  } = getData(queryKey, '/client-folder', {
+  } = getData(queryKey, `/client-folder?month=${month}&year=${year}`, {
     enabled: !!folderId, // Solo habilitamos la consulta si tenemos un folderId
     refetchOnWindowFocus: false,
     onSuccess: (data) => {
@@ -38,49 +38,27 @@ export const useFolderDetail = (folderId) => {
     return data.folders.find(f => f.id === parseInt(folderId));
   }, [data, folderId]);
 
-  // Definimos las columnas para la tabla de tipos de documentos
-  const columns = useMemo(() => [
-    {
-      title: "ID",
-      dataIndex: "id",
-      sorter: (a, b) => a.id - b.id,
-    },
-    {
-      title: "Nombre del Documento",
-      dataIndex: "name",
-      sorter: (a, b) => a.name.localeCompare(b.name),
-    },
-    {
-      title: "Requerido",
-      dataIndex: "is_required",
-      render: (value) => (
-        <span className={`badge ${value === 1 ? 'bg-success' : 'bg-warning'}`}>
-          {value === 1 ? 'Sí' : 'No'}
-        </span>
-      ),
-      sorter: (a, b) => a.is_required - b.is_required,
-    },
-    {
-      title: "Acción",
-      dataIndex: "action",
-      render: (_, record) => (
-        <div className="edit-delete-action">
-          <button 
-            className="btn btn-sm btn-primary"
-            onClick={() => console.log('Cargar documento:', record.id)}
-          >
-            Cargar Documento
-          </button>
-        </div>
-      ),
-    },
-  ], []);
+  // Función para encontrar los documentos registrados para un tipo de documento
+  const findRegisteredDocuments = (folder, documentTypeId) => {
+    if (!folder?.monthly_config?.document_types) return [];
+    return folder.monthly_config.document_types.filter(doc => doc.document_type_id === documentTypeId);
+  };
+
+  // Función para encontrar el documento registrado para un tipo de documento (mantener compatibilidad)
+  const findRegisteredDocument = (folder, documentTypeId) => {
+    const documents = findRegisteredDocuments(folder, documentTypeId);
+    return documents.length > 0 ? documents[0] : null;
+  };
+
 
   return {
+    data,
     folder,
     isLoading,
     isError,
     error,
-    columns
+    findRegisteredDocument,
+    findRegisteredDocuments,
+    refetch
   };
 };

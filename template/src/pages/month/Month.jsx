@@ -154,8 +154,7 @@ const Month = () => {
                           <div className="detail">
                             <Link
                               to={{
-                                pathname: `/folder/${folder.id}`,
-                                state: { folderData: folder }
+                                pathname: `/folder/${folder.id}/${selectedYear}/${selectedMonth}`,
                               }}
                               className="d-flex align-items-center justify-content-center bg-light-green bg p-4"
                             >
@@ -166,8 +165,7 @@ const Month = () => {
                             <div className="d-flex flex-direction-column justify-content-between info">
                               <h6>
                                 <Link to={{
-                                  pathname: `/folder/${folder.id}`,
-                                  state: { folderData: folder }
+                                  pathname: `/folder/${folder.id}/${selectedYear}/${selectedMonth}`,
                                 }}>
                                   {folder.name}
                                 </Link>

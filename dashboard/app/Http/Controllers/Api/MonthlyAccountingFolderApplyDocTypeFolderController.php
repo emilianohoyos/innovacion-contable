@@ -83,7 +83,7 @@ class MonthlyAccountingFolderApplyDocTypeFolderController extends Controller
                         'month_year' => $validatedData['month_year'],
                         'year' => date('Y'),
                         'is_new' => true,
-                        'status' => "PENDIENTE"
+                        // 'status' => "PENDIENTE"
                     ]
                 );
                 $validatedData['monthly_accounting_folder_id'] = $monthlyAccountingFolder->id;

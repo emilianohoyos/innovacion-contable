@@ -1,21 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useDataFetch } from '../../../hooks/useDataFetch';
+import { getFormattedEstimatedDate } from '../../../utils/dateUtils';
 
 export const useApplyTypes = () => {
   const { getData, invalidateQuery } = useDataFetch();
-  
-  // Definimos la clave para React Query
-  const queryKey = ['apply-types'];
-  
+
   // Utilizamos el hook getData para obtener los tipos de solicitud
-  const { 
-    data, 
-    isLoading, 
-    isError, 
-    error, 
-    refetch 
-  } = getData(queryKey, '/list-apply-types', {
-    enabled: true, // Habilitamos la consulta automática
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+    refetch
+  } = getData(['apply-types'], '/list-apply-types', {
+    enabled: true,
     refetchOnWindowFocus: false,
     onSuccess: (data) => {
       console.log('Tipos de solicitud cargados:', data);
@@ -25,19 +23,23 @@ export const useApplyTypes = () => {
     }
   });
 
-  // Ejecutamos la consulta al montar el componente
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
-
-  // Transformamos los datos para que sean compatibles con react-select
-  const applyTypesOptions = data?.data?.map(type => ({
-    value: type.id,
-    label: type.name
-  })) || [];
+  const applyTypesOptions = useMemo(() => {
+    console.log("data", data);
+    return data?.map(type => {
+      const estimatedDate = getFormattedEstimatedDate(type.estimated_days);
+      return {
+        value: type.id,
+        label: `${type.name}`,
+        estimatedDays: type.estimated_days,
+        estimatedDate: estimatedDate,
+        priority: type.priority,
+        destiny: type.destiny
+      };
+    }) || [];
+  }, [data]);
 
   return {
-    applyTypes: data?.data || [],
+    applyTypes: data || [],
     applyTypesOptions,
     isLoading,
     isError,

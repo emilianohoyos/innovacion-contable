@@ -6,12 +6,12 @@ import Cookies from "js-cookie";
 
 const PrivateRoute = () => {
   const token = Cookies.get("token");
-  const { getData } = useDataFetch();
+  const { getData, handleApiError } = useDataFetch();
 
   const { isLoading, data, error } = getData(
     ["valid-token"],
     "/me",
-    { enabled: true },
+    { enabled: true, onError: (error) => handleApiError(error) },
   );
 
   if (isLoading) return <LoadingSpinner />;

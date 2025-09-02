@@ -6,6 +6,8 @@ import { useApplicationTable } from "./hooks/useApplicationTable";
 import { Link } from "react-router-dom";
 import { all_routes } from "../../Router/all_routes";
 import { PlusCircle } from "feather-icons-react/build/IconComponents";
+import ViewApplicationModal from "./components/ViewApplicationModal";
+import CommentsModal from "./components/CommentsModal";
 
 const Application = () => {
   // Utilizamos el hook personalizado que contiene toda la lógica
@@ -14,7 +16,12 @@ const Application = () => {
     isLoading,
     isError,
     columns,
-    dashboardStats
+    dashboardStats,
+    viewModalOpen,
+    setViewModalOpen,
+    commentsModalOpen,
+    setCommentsModalOpen,
+    selectedApplication
   } = useApplicationTable();
   return (
     <div>
@@ -77,6 +84,19 @@ const Application = () => {
             </div>
           </div>
         </div>
+        
+        {/* Modales */}
+        <ViewApplicationModal 
+          show={viewModalOpen}
+          onHide={() => setViewModalOpen(false)}
+          application={selectedApplication}
+        />
+        
+        <CommentsModal 
+          show={commentsModalOpen}
+          onHide={() => setCommentsModalOpen(false)}
+          application={selectedApplication}
+        />
       </div>
     </div>
   );

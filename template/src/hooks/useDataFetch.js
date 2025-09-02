@@ -3,13 +3,17 @@ import ApiService from "../services/apiServices";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // URL base de la API
-export const BASE_PATH_HTTP = "https://panel.innovacioncontable.com/api";
+// export const BASE_PATH_HTTP = "https://panel.innovacioncontable.com/api";
+export const BASE_PATH_HTTP = "http://localhost:8000/api";
 
 export const useDataFetch = () => {
   const apiService = new ApiService();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const token = Cookies.get("token") || null;
 
@@ -20,6 +24,30 @@ export const useDataFetch = () => {
 
   apiService.setHeaders(token);
   const checkIsAuth = () => !!token;
+  
+  // Función para cerrar sesión
+  const logout = () => {
+    // Eliminar token y cualquier otra información de sesión
+    Cookies.remove("token");
+    // Limpiar el caché de React Query
+    queryClient.clear();
+    // Mostrar mensaje
+    toast.info("Su sesión ha expirado. Por favor inicie sesión nuevamente.");
+    // Redirigir al login
+    navigate("/signin");
+  };
+  
+  // Función para verificar si el error es 401 y manejar el cierre de sesión
+  const handleApiError = (error) => {
+    console.error("API Error:", error);
+    
+    // Verificar si es un error 401 (Unauthorized)
+    if (error && (error.status === 401 || error.response?.status === 401)) {
+      logout();
+      return true; // Indica que se manejó como error de autorización
+    }
+    return false; // No era un error de autorización
+  };
 
   // Http Request - GET
   const getData = (queryKey, url, options = {}, params = {}, headers = {}) => {
@@ -38,7 +66,11 @@ export const useDataFetch = () => {
       enabled: false,
       refetchOnWindowFocus: false,
       onError: (error) => {
-        console.error("Query Error", error);
+        console.log(error);
+        if (!handleApiError(error)) {
+          // Si no es un error de autorización, mostrar mensaje genérico
+          toast.error("Error al obtener datos. Intente nuevamente.");
+        }
       },
       ...options,
     });
@@ -60,7 +92,10 @@ export const useDataFetch = () => {
         toast.success("Se completó la acción correctamente.");
       },
       onError: (error) => {
-        console.log(error);
+        if (!handleApiError(error)) {
+          // Si no es un error de autorización, mostrar mensaje genérico
+          toast.error("Error al obtener datos. Intente nuevamente.");
+        }
       },
       ...options,
     });
@@ -84,7 +119,10 @@ export const useDataFetch = () => {
         toast.success("Se completó la acción correctamente.");
       },
       onError: (error) => {
-        console.error("Error en multipart:", error);
+        if (!handleApiError(error)) {
+          // Si no es un error de autorización, mostrar mensaje genérico
+          toast.error("Error al subir el archivo.");
+        }
       },
       ...options,
     });
@@ -112,7 +150,11 @@ export const useDataFetch = () => {
         }
       },
       onSuccess: () => toast.success("Registro eliminado correctamente."),
-      onError: (error) => console.error(error),
+      onError: (error) => {
+        if (!handleApiError(error)) {
+          toast.error("Error al eliminar el registro.");
+        }
+      },
       ...options,
     });
   };
@@ -133,7 +175,10 @@ export const useDataFetch = () => {
         toast.success("Se completó la acción correctamente.");
       },
       onError: (error) => {
-        console.log(error);
+        if (!handleApiError(error)) {
+          // Si no es un error de autorización, mostrar mensaje genérico
+          toast.error("Error al procesar la solicitud.");
+        }
       },
       ...options,
     });
@@ -151,5 +196,6 @@ export const useDataFetch = () => {
     deleteData,
     patchData,
     invalidateQuery,
+    handleApiError,
   };
 };

@@ -322,7 +322,7 @@ $@section('css')
                         document.getElementById('employee').textContent = data.data.employee
                         document.getElementById('priority').textContent = data.data.priority
                         document.getElementById('state_name').textContent = data.data.state_name
-                        document.getElementById('observation').textContent = data.data.observations
+                        document.getElementById('observation').innerHTML = data.data.observations
                         const fecha = new Date(data.data.created_at);
                         document.getElementById('created_at').textContent =
                             fecha.getFullYear() + '-' +

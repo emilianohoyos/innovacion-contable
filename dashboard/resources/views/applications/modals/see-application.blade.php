@@ -47,7 +47,7 @@
                                         <h6 class="text-muted">Estado:</h6>
                                         <p class="fw-bold" id="state_name">juan.perez@example.com</p>
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-12 mb-3">
                                         <h6 class="text-muted">Observaciones:</h6>
                                         <p class="fw-bold" id="observation">Alta</p>
                                     </div>

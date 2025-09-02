@@ -24,6 +24,12 @@ class Application extends Model
         return $this->belongsTo(ApplyType::class, 'apply_type_id');
     }
 
+    public function state()
+    {
+        return $this->belongsTo(State::class, 'state_id');
+    }
+
+
     public function attachments()
     {
         return $this->hasMany(Attachment::class, 'application_id');

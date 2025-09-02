@@ -32,10 +32,11 @@ class ApiService {
         headers: this.buildHeaders(),
       });
       const result = await response.json();
-
+      if(result.message == "Error de autenticación: Token has expired"){
+        throw {status: 401, message: "Unauthorized"};
+      }
       return result;
     } catch (error) {
-      this.handleError(error);
       throw error;
     }
   }
@@ -50,9 +51,11 @@ class ApiService {
       });
 
       const result = await response.json();
+      if(result.message == "Error de autenticación: Token has expired"){
+        throw {status: 401, message: "Unauthorized"};
+      }
       return result;
     } catch (error) {
-      this.handleError(error);
       throw error;
     }
   }
@@ -65,9 +68,12 @@ class ApiService {
         body: formData,
       });
 
-      return await this.handleResponse(response);
+      const result = await response.json();
+      if(result.message == "Error de autenticación: Token has expired"){
+        throw {status: 401, message: "Unauthorized"};
+      }
+      return result;
     } catch (error) {
-      this.handleError(error);
       throw error;
     }
   }
@@ -80,9 +86,12 @@ class ApiService {
         headers: this.buildHeaders(),
         body: JSON.stringify(data),
       });
-      return await this.handleResponse(response);
+      const result = await response.json();
+      if(result.message == "Error de autenticación: Token has expired"){
+        throw {status: 401, message: "Unauthorized"};
+      }
+      return result;
     } catch (error) {
-      this.handleError(error);
       throw error;
     }
   }
@@ -95,9 +104,12 @@ class ApiService {
         headers: this.buildHeaders(),
         body: JSON.stringify(data),
       });
-      return await this.handleResponse(response);
+      const result = await response.json();
+      if(result.message == "Error de autenticación: Token has expired"){
+        throw {status: 401, message: "Unauthorized"};
+      }
+      return result;
     } catch (error) {
-      this.handleError(error);
       throw error;
     }
   }
@@ -109,9 +121,12 @@ class ApiService {
         method: "DELETE",
         headers: this.buildHeaders(),
       });
-      return await this.handleResponse(response);
+      const result = await response.json();
+      if(result.message == "Error de autenticación: Token has expired"){
+        throw {status: 401, message: "Unauthorized"};
+      }
+      return result;
     } catch (error) {
-      this.handleError(error);
       throw error;
     }
   }
@@ -119,16 +134,21 @@ class ApiService {
   // Método para manejar la respuesta
   async handleResponse(response) {
     if (!response.ok) {
-      const error = await response.json();
-      console.error("Error en la respuesta:", error);
-      throw new Error(error.message || "Error en la solicitud");
+      // Si el status es 401 Unauthorized, devolvemos un objeto especial
+      if (response.status === 401) {
+        throw { status: 401, message: "Unauthorized: Sesión expirada o credenciales inválidas" };
+      }
+      
+      try {
+        const error = await response.json();
+        console.error("Error en la respuesta:", error);
+        throw { status: response.status, message: error.message || "Error en la solicitud", data: error };
+      } catch (e) {
+        // Si no se puede parsear como JSON
+        throw { status: response.status, message: "Error en la solicitud" };
+      }
     }
     return response.json();
-  }
-
-  // Método para manejar errores
-  handleError(error) {
-    console.error("Error en la solicitud:", error);
   }
 }
 

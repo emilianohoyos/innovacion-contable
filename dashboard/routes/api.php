@@ -24,7 +24,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AuthController::class, 'login']);
 
-
+Route::get('/application/download/{path}', [\App\Http\Controllers\ApplicationController::class, 'downloadAttachment'])
+->where('path', '.*')
+->name('application.download');
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
@@ -45,7 +47,7 @@ Route::middleware(['auth.jwt'])->group(function () {
     Route::post('create-comment', [CommentController::class, 'store']);
 
     Route::get('list-apply-types', [ApplyTypeController::class, 'listApplyTypes']);
-    Route::post('list-apply-types-apply-document-types', [ApplyTypesApplyDocumentTypeController::class, 'listApplyTypesApplyDocumentTypes']);
+    Route::post('list-apply-types-apply-document-types', [ApplyTypesApplyDocumentTypeController::class, 'listApplyTypesApplyDocumentTypes']); 
 
 
 

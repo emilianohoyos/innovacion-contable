@@ -15,11 +15,15 @@ const CreateApplication = () => {
         errors,
         isSubmitting,
         isLoadingApplyTypes,
+        isLoadingDocumentTypes,
         applyTypesOptions,
+        documentTypes,
         handleChange,
         handleSelectChange,
         handleFileChange,
         handleRemoveFile,
+        handleDocumentFileChange,
+        handleRemoveDocumentFile,
         handleSubmit,
         resetForm
     } = useCreateApplication();
@@ -61,60 +65,103 @@ const CreateApplication = () => {
                                         {errors.apply_type_id && (
                                             <div className="invalid-feedback">{errors.apply_type_id}</div>
                                         )}
-                                    </div>
-                                </div>
 
-                                <div className="col-lg-12">
-                                    <div className="form-group">
-                                        <label>Observaciones</label>
-                                        <DefaultEditor value={formData.observation} onChange={handleChange} />
-                                    </div>
-                                </div>
+                                        {/* Mostrar información del tipo de solicitud seleccionado */}
+                                        {formData.apply_type_id && (
+                                            <div className="mt-3 p-3 bg-light border rounded">
+                                                {(() => {
+                                                    const selectedType = applyTypesOptions.find(option => option.value === formData.apply_type_id);
+                                                    if (!selectedType) return null;
 
-                                <div className="col-lg-12">
-                                    <div className="form-group">
-                                        <label>Archivos Adjuntos</label>
-                                        <div className="custom-file-container">
-                                            <label className="custom-file-upload d-flex align-items-center">
-                                                <input
-                                                    type="file"
-                                                    className="custom-file-input"
-                                                    multiple
-                                                    onChange={handleFileChange}
-                                                />
-
-                                            </label>
-                                        </div>
-
-                                        {formData.files.length > 0 && (
-                                            <div className="file-preview mt-3">
-                                                <h6>Archivos seleccionados:</h6>
-                                                <div className="file-list">
-                                                    {formData.files.map((file, index) => (
-                                                        <div key={index} className="file-item d-flex align-items-center justify-content-between p-2 border rounded mb-2">
-                                                            <div className="file-info">
-                                                                <span className="file-name">{file.name}</span>
-                                                                <span className="file-size text-muted ms-2">({(file.size / 1024).toFixed(2)} KB)</span>
+                                                    return (
+                                                        <div className="row">
+                                                            <div className="col-md-6">
+                                                                <small className="text-muted">Fecha estimada de finalización:</small>
+                                                                <div className="fw-bold text-primary">{selectedType.estimatedDate}</div>
                                                             </div>
-                                                            <OverlayTrigger
-                                                                placement="top"
-                                                                overlay={(props) => renderTooltip(props, "Eliminar archivo")}
-                                                            >
-                                                                <button
-                                                                    type="button"
-                                                                    className="btn btn-sm btn-danger"
-                                                                    onClick={() => handleRemoveFile(index)}
-                                                                >
-                                                                    <Trash2 size={16} />
-                                                                </button>
-                                                            </OverlayTrigger>
                                                         </div>
-                                                    ))}
-                                                </div>
+                                                    );
+                                                })()}
                                             </div>
                                         )}
                                     </div>
                                 </div>
+
+                                <div className="col-lg-12 mt-3">
+                                    <div className="form-group">
+                                        <label>Observaciones</label>
+                                        <DefaultEditor name="observation" value={formData.observation} onChange={handleChange} />
+                                    </div>
+                                </div>
+
+                                {/* Sección de documentos requeridos */}
+                                {formData.apply_type_id && documentTypes.length > 0 && (
+                                    <div className="col-lg-12 mt-3">
+                                        <div className="form-group">
+                                            <label>Documentos Requeridos</label>
+                                            {isLoadingDocumentTypes && (
+                                                <div className="text-center p-3">
+                                                    <div className="spinner-border text-primary" role="status">
+                                                        <span className="visually-hidden">Cargando...</span>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {!isLoadingDocumentTypes && documentTypes.map((docType) => (
+                                                <div key={docType.id} className="document-type-section mb-4 p-3 border rounded">
+                                                    <h6 className="mb-3">
+                                                        <span className="badge bg-primary me-2">{docType.name}</span>
+                                                        <span className="text-muted small">Requerido</span>
+                                                    </h6>
+
+                                                    <div className="custom-file-container">
+                                                        <label className="custom-file-upload d-flex align-items-center">
+                                                            <input
+                                                                type="file"
+                                                                className="custom-file-input"
+                                                                multiple
+                                                                onChange={(e) => {
+                                                                    const files = Array.from(e.target.files);
+                                                                    const existingFiles = formData.documentFiles[docType.id] || [];
+                                                                    handleDocumentFileChange(docType.id, [...existingFiles, ...files]);
+                                                                }}
+                                                            />
+                                                            <PlusCircle size={16} className="me-2" />
+                                                            Seleccionar archivos para {docType.name}
+                                                        </label>
+                                                    </div>
+
+                                                    {formData.documentFiles[docType.id] && formData.documentFiles[docType.id].length > 0 && (
+                                                        <div className="file-preview mt-3">
+                                                            <div className="file-list">
+                                                                {formData.documentFiles[docType.id].map((file, index) => (
+                                                                    <div key={index} className="file-item d-flex align-items-center justify-content-between p-2 border rounded mb-2 bg-light">
+                                                                        <div className="file-info">
+                                                                            <span className="file-name">{file.name}</span>
+                                                                            <span className="file-size text-muted ms-2">({(file.size / 1024).toFixed(2)} KB)</span>
+                                                                        </div>
+                                                                        <OverlayTrigger
+                                                                            placement="top"
+                                                                            overlay={(props) => renderTooltip(props, "Eliminar archivo")}
+                                                                        >
+                                                                            <button
+                                                                                type="button"
+                                                                                className="btn btn-sm btn-danger"
+                                                                                onClick={() => handleRemoveDocumentFile(docType.id, index)}
+                                                                            >
+                                                                                <Trash2 size={16} />
+                                                                            </button>
+                                                                        </OverlayTrigger>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
