@@ -192,6 +192,7 @@ export const all_routes = {
   coupons:"/coupons",
   createApplication: "/create-application",
   month: "/month",
-  annual: "/annual",
+  monthlyPeriodicity: "/periodicity/:periodicity",
+  annualPeriodicity: "/periodicity/:periodicity",
   folderDetail: "/folder/:folderId/:year/:month",
 };

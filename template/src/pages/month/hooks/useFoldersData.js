@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDataFetch } from '../../../hooks/useDataFetch';
 import { useMonths } from './useMonths';
 
-export const useFoldersData = (selectedMonthId = null, selectedYear = null) => {
+export const useFoldersData = (selectedMonthId = null, selectedYear = null, periodicity = 'MENSUAL') => {
   const { getData, invalidateQuery } = useDataFetch();
   const { months, enabledMonth } = useMonths();
   
@@ -46,9 +46,9 @@ export const useFoldersData = (selectedMonthId = null, selectedYear = null) => {
   };
 
   // Transformamos los datos para que sean compatibles con la tabla
-  // Filtramos solo las carpetas con periodicidad MENSUAL según el requerimiento
+  // Filtramos las carpetas según la periodicidad especificada
   const formattedFolders = data?.folders
-    ?.filter(folder => folder.periodicity === 'MENSUAL')
+    ?.filter(folder => folder.periodicity === periodicity)
     ?.map(folder => ({
       key: folder.id,
       id: folder.id,

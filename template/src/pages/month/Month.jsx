@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import ImageWithBasePath from "../../core/img/imagewithbasebath";
 import { useFoldersData } from "./hooks/useFoldersData";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { all_routes } from "../../Router/all_routes";
 import { Folder, Calendar, ChevronRight, FileText, Star, Send, File, Clock, Target, Trash2, Settings, AlertTriangle, CheckCircle } from "react-feather";
 import { useMonths } from "./hooks/useMonths";
 
 
 const Month = () => {
+  // Obtener el parámetro de periodicidad de la URL
+  const { periodicity } = useParams();
   // Obtenemos el año actual
   const actualYear = new Date().getFullYear();
   
@@ -29,8 +31,11 @@ const Month = () => {
     setSelectedMonth(enabledMonth?.id || null);
   }, [selectedYear, enabledMonth]);
 
+  // Determinar la periodicidad basada en la URL (por defecto MENSUAL)
+  const currentPeriodicity = periodicity?.toUpperCase() || 'MENSUAL';
+  
   // Pasamos el mes seleccionado al hook para que haga la petición con el mes correcto
-  const { folders, isLoading, isError, previousMonth } = useFoldersData(selectedMonth, selectedYear);
+  const { folders, isLoading, isError, previousMonth } = useFoldersData(selectedMonth, selectedYear, currentPeriodicity);
 
   // Ya no necesitamos filtrar las carpetas aquí, ya que la API nos devuelve las carpetas del mes seleccionado
   const filteredFolders = folders;
@@ -42,67 +47,93 @@ const Month = () => {
           <div className="page-header">
             <div className="row align-items-center">
               <div className="col">
-                <h3 className="page-title">Contabilidad Mensual</h3>
+                <h3 className="page-title">Contabilidad {currentPeriodicity === 'MENSUAL' ? 'Mensual' : 'Anual'}</h3>
               </div>
             </div>
           </div>
 
           <div className="row">
-            <div className="col-lg-3 col-md-12 sidebars-right theiaStickySidebar section-bulk-widget">
-              <aside className="card file-manager-sidebar mb-0">
-                <h5 className="d-flex align-items-center justify-content-between">
-                  <div className="d-flex align-items-center">
-                    <span className="me-2 d-flex align-items-center">
-                      <Calendar className="feather-20" />
-                    </span>
-                    <span>Meses</span>
-                  </div>
-                  <select 
-                    className="form-select form-select-sm" 
-                    style={{ width: 'auto' }}
-                    value={selectedYear}
-                    onChange={(e) => setSelectedYear(Number(e.target.value))}
-                  >
-                    {availableYears.map(year => (
-                      <option key={year} value={year}>{year}</option>
+            {currentPeriodicity === 'MENSUAL' && (
+              <div className="col-lg-3 col-md-12 sidebars-right theiaStickySidebar section-bulk-widget">
+                <aside className="card file-manager-sidebar mb-0">
+                  <h5 className="d-flex align-items-center justify-content-between">
+                    <div className="d-flex align-items-center">
+                      <span className="me-2 d-flex align-items-center">
+                        <Calendar className="feather-20" />
+                      </span>
+                      <span>Meses</span>
+                    </div>
+                    <select 
+                      className="form-select form-select-sm" 
+                      style={{ width: 'auto' }}
+                      value={selectedYear}
+                      onChange={(e) => setSelectedYear(Number(e.target.value))}
+                    >
+                      {availableYears.map(year => (
+                        <option key={year} value={year}>{year}</option>
+                      ))}
+                    </select>
+                  </h5>
+
+                  <ul>
+                    {months.map((month) => (
+                      <li key={month.id} className={!month.enabled ? 'disabled-item' : ''}>
+                        <Link
+                          to="#"
+                          className={selectedMonth === month.id ? 'active' : ''}
+                          style={!month.enabled ? { opacity: 0.5, cursor: 'not-allowed', pointerEvents: 'none' } : {}}
+                          onClick={(e) => {
+                            if (month.enabled) {
+                              e.preventDefault();
+                              setSelectedMonth(month.id);
+                            } else {
+                              e.preventDefault();
+                            }
+                          }}
+                        >
+                          <span className="me-2 btn-icon">
+                            <Calendar className="feather-16" />
+                          </span>
+                          {month.name}
+                          {month.enabled && <ChevronRight className="ms-auto" size={16} />}
+                        </Link>
+                      </li>
                     ))}
-                  </select>
-                </h5>
+                  </ul>
+                </aside>
+              </div>
+            )}
 
-                <ul>
-                  {months.map((month) => (
-                    <li key={month.id} className={!month.enabled ? 'disabled-item' : ''}>
-                      <Link
-                        to="#"
-                        className={selectedMonth === month.id ? 'active' : ''}
-                        style={!month.enabled ? { opacity: 0.5, cursor: 'not-allowed', pointerEvents: 'none' } : {}}
-                        onClick={(e) => {
-                          if (month.enabled) {
-                            e.preventDefault();
-                            setSelectedMonth(month.id);
-                          } else {
-                            e.preventDefault();
-                          }
-                        }}
-                      >
-                        <span className="me-2 btn-icon">
-                          <Calendar className="feather-16" />
-                        </span>
-                        {month.name}
-                        {month.enabled && <ChevronRight className="ms-auto" size={16} />}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </aside>
-
-
-            </div>
+            {currentPeriodicity === 'ANUAL' && (
+              <div className="col-lg-3 col-md-12 sidebars-right theiaStickySidebar section-bulk-widget">
+                <aside className="card file-manager-sidebar mb-0">
+                  <h5 className="d-flex align-items-center justify-content-between">
+                    <div className="d-flex align-items-center">
+                      <span className="me-2 d-flex align-items-center">
+                        <Calendar className="feather-20" />
+                      </span>
+                      <span>Año</span>
+                    </div>
+                  </h5>
+                  <div className="p-3">
+                    <select 
+                      className="form-select" 
+                      value={selectedYear}
+                      onChange={(e) => setSelectedYear(Number(e.target.value))}
+                    >
+                      {availableYears.map(year => (
+                        <option key={year} value={year}>{year}</option>
+                      ))}
+                    </select>
+                  </div>
+                </aside>
+              </div>
+            )}
 
             {/* Contenido principal - Carpetas */}
-            <div className="col-xl-9 col-md-8">
+            <div className={`${currentPeriodicity === 'MENSUAL' ? 'col-xl-9 col-md-8' : 'col-xl-9 col-md-9'}`}>
               {/* Mostrar mensaje de estado del mes anterior */}
-              {previousMonth && (
+              {previousMonth && currentPeriodicity === 'MENSUAL' && (
                 <div className={`alert ${previousMonth.is_before_end_date ? 'alert-success' : 'alert-warning'} mb-3`}>
                   <div className="d-flex align-items-center">
                     {previousMonth.is_before_end_date ? (

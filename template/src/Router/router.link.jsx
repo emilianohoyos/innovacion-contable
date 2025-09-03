@@ -54,6 +54,13 @@ export const privateRoutes = [
     route: Route,
   },
   {
+    id: 5,
+    path: "/periodicity/:periodicity",
+    name: "periodicity",
+    element: <Month />,
+    route: Route,
+  },
+  {
     id: 10,
     path: "/",
     name: "Root",

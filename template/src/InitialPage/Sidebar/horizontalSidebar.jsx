@@ -19,7 +19,7 @@ const HorizontalSidebar = () => {
 
           <li >
             <Link
-              to="/month"
+              to="/periodicity/mensual"
             >
               <Calendar />
               <span> Contabilidad Mensual</span>
@@ -28,7 +28,7 @@ const HorizontalSidebar = () => {
 
           <li >
             <Link
-              to="/"
+              to="/periodicity/anual"
             >
               <BarChart2 />
               <span> Contabilidad Anual</span>
