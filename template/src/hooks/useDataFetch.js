@@ -7,8 +7,8 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // URL base de la API
-// export const BASE_PATH_HTTP = "https://panel.innovacioncontable.com/api";
-export const BASE_PATH_HTTP = "http://localhost:8000/api";
+export const BASE_PATH_HTTP = "https://panel.innovacioncontable.com/api";
+// export const BASE_PATH_HTTP = "http://localhost:8000/api";
 
 export const useDataFetch = () => {
   const apiService = new ApiService();
